@@ -1,0 +1,229 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Color Code Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Company
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Company
+                <span class="c1">*</span>
+                  <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="ddlcompany"
+                  [data]="companyMaster" [settings]="dropdownSettings_Company" [placeholder]="'Select'" [(ngModel)]="selectedComItems">
+                </ng-multiselect-dropdown>
+                <!-- <select formControlName="ddlcompany" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.ddlcompany.valid,
+                          'is-invalid':myform.controls.ddlcompany.invalid && myform.controls.ddlcompany.touched
+                        }">
+                  <option value="" disabled selected>Select</option>
+                  <option *ngFor="let item of companyMaster" value="{{item.Company_Id}}">{{item.Company_Name}}</option>
+                </select> -->
+                <div *ngIf="myform.controls.ddlcompany.errors && (myform.controls.ddlcompany.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlcompany.errors.required">
+                    Company is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Color Description
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Color Description
+                <span class="c1">*</span>
+                <input type="text" formControlName="colordescription" class="form-control" (change)="checkColorDesc()" [ngClass]="{
+                  'is-valid':myform.controls.colordescription.valid,
+                  'is-invalid':myform.controls.colordescription.invalid && myform.controls.colordescription.touched
+                }">
+                <div *ngIf="myform.controls.colordescription.errors && (myform.controls.colordescription.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.colordescription.errors.required">
+                    Color Description is required.
+                  </div>
+                  <div *ngIf="myform.controls.colordescription.errors.maxlength">
+                    Color Description cannot be more than 75 characters long.
+                   </div>
+                   <div *ngIf="myform.controls.colordescription.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                   </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                Color Code
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                Color Code
+                <span class="c1">*</span>
+                <input  [value]="color2" [style.background]="color2"
+                  class="form-control" formControlName="colorcode" placeholder="Choose Color" readonly/>
+              </div>
+              <div class="col-sm-1 col-md-1 col-lg-1">
+                <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;z-index: auto;margin-top: 4%;cursor: pointer;">
+                    <ul class="navbar-nav ml-auto" style="padding-top: 10px">
+                      <li class="nav-item dropdown">
+                          <button class="nav-link" data-toggle="dropdown" 
+                          (click)="showHideToggle('.test')" style="background-color: white;border: none;">
+                              <img src="./assets/images/color_wheel.png" >
+                              <span class="badge badge-warning navbar-badge"></span>
+                          </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:999">
+                          <span class="dropdown-item dropdown-header">Color Codes</span>
+                          <div class="dropdown-divider"></div>
+                          <div class="dropdown-divider" style="display: none"></div>
+                          <div class="dropdown-divider"></div>
+                          <div class="dropdown-item">
+                              <color-github [colors]="colors" (onChange)="handleBlockChange($event)"></color-github>
+                          </div>
+                          <div class="dropdown-divider"></div>
+                          <div class="dropdown-item">
+                              <div style="text-align: right">
+                            <input type="button" class="btn btn-danger1" value="Close" (click)="close('.test')"> 
+                          </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="Status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']" (click)="insertColor()" [disabled]="myform.invalid"
+                class="btn btn-success" /> &nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Color Picker View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-5">
+                  <span>
+                    <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                      (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+                  <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive Color Codes</b></label></span>
+    
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-4"></div>
+                <div class="col-sm-2 col-md-2 col-lg-3">
+                            <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateColorPickerStatus()" [disabled]="UpdateStatus"
+                              class="btn btn-danger" />
+                          </div>
+              </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table id="tblcolorcodes" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                        <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll' (change)="onCheckAll($event.target.checked?true:false)"></th>
+                      <th>Company Name</th>
+                      <th>Color Description</th>
+                      <th>Color</th>
+                     <!--  <th>Status</th>
+                      <th>Created By</th>
+                      <th>Created Date</th> -->
+                      <th *ngIf="pageConfig['AccessWrite']"></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of colorList |gridFilter:searchText:'ResidentColor'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                    <td> <input type="checkbox" [checked]="CheckAll" value="{{item.PatientType_Id}}" name="{{ item.PatientType_Id }}"
+                          id="{{item.PatientType_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                    <td>{{item.Company_Name}}</td>
+                    <td>{{item.Color_Description}}</td>
+                    <td [style.background]="item.Color_Code"></td>
+                    <!-- <td *ngIf="item.PatientType_Status==1">Active</td>
+                    <td *ngIf="item.PatientType_Status==0">InActive</td>
+                    <td>{{item.PatientType_CreatedBy}}</td>
+                    <td>{{item.PatientType_CreatedDate |date :'MM/dd/yyyy'}}</td> -->
+                    <td *ngIf="pageConfig['AccessWrite']">
+                      <a class="btn editicon" (click)="getpatientTypeByID(item.PatientType_Id)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                      </a>
+                    </td>
+                    <td>
+                      <a class="btn editicon" (click)="getHistoryById(item.PatientType_Id)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-history iconColor" title="History"></span>
+                      </a>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls (pageChange)="p = $event" *ngIf="PatientTypeData.length > 0"></pagination-controls>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+  [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 80%;">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header " style="height: 50px ">
+        <h5>Resident Color Configurartion History Details</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+      </div>
+      <div class="modal-body bodystyle">
+        <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+          <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

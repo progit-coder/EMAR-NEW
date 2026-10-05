@@ -1,0 +1,906 @@
+2022-02-01 19:16:28,144 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 19:16:28,262 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2022-02-01 19:16:31,542 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 19:16:32,027 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2022-02-01 19:16:32,041 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2022-02-01 19:16:32,097 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2022-02-01 19:16:36,392 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2022-02-01 19:16:36,583 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2022-02-01 19:16:36,838 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2022-02-01 19:16:37,222 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2022-02-01 19:16:37,325 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:16:37,348 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2022-02-01 19:16:37,393 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:16:37,415 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 19:16:37,429 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 19:16:37,539 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,547 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,547 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,595 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,622 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,634 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 19:16:37,634 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 19:16:37,635 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 19:16:37,635 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 19:16:37,650 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 19:16:37,651 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 19:16:37,651 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 19:16:37,652 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 19:16:37,658 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 19:16:37,675 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,702 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2022-02-01 19:16:37,709 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 19:16:37,709 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 19:16:37,737 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 19:16:37,743 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,752 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 19:16:37,752 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 19:16:37,762 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 19:16:37,772 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,781 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:16:37,782 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 19:16:37,818 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 19:16:37,837 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,857 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 19:16:37,857 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2022-02-01 19:16:37,877 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:16:37,878 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:16:37,884 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 19:16:37,896 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:16:37,899 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:37,907 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:16:37,908 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 19:16:37,942 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:16:37,981 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 19:16:38,001 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:16:38,011 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 19:16:38,349 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 19:16:57,100 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:16:57,104 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:16:57,104 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:16:57,105 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:16:57,105 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:16:57,115 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:16:57,115 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:16:57,132 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:16:57,136 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:16:57,140 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:29:48,298 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:48,298 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:48,298 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:48,298 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:48,298 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:48,298 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:51,973 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 19:29:51,981 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 19:29:51,981 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 19:29:52,005 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 19:29:52,005 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 19:29:52,005 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 19:29:52,031 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 19:29:52,032 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 19:29:52,085 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 19:29:52,086 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 19:29:52,086 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 19:29:52,127 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:29:52,148 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:29:52,195 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:52,205 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:29:52,205 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 19:29:52,206 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 19:29:52,339 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 19:29:52,343 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:52,386 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 19:29:52,387 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 19:29:52,420 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:29:52,472 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 19:29:52,565 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:29:52,565 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:29:52,604 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:29:52,604 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:29:52,645 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:29:52,693 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:29:52,703 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 19:29:52,705 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:29:52,824 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 19:29:53,011 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:29:53,036 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:29:53,062 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 19:29:53,223 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:33:31,014 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:33:31,014 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:33:31,040 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:33:31,046 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:33:31,047 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:33:31,092 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:33:53,723 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:33:53,723 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:33:53,738 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:33:58,860 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:33:58,860 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:33:58,860 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:33:58,860 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:33:58,907 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:33:58,916 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:35:07,522 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:35:07,522 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:35:07,537 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:35:21,838 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:35:21,838 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:35:21,839 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:35:21,839 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:35:21,850 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:35:21,852 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:35:24,525 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:35:24,526 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:35:24,628 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:35:56,201 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:35:56,202 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:35:56,214 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:36:14,511 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByID() in RoleController----
+2022-02-01 19:36:14,512 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByID() in RoleService----
+2022-02-01 19:36:14,582 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByID() in RoleController----
+2022-02-01 19:36:14,597 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:36:14,597 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:36:14,610 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:36:46,979 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:36:46,981 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleController----
+2022-02-01 19:36:46,982 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleService----
+2022-02-01 19:36:46,982 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:36:46,982 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:36:46,993 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:36:46,994 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:36:46,994 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:36:47,015 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:36:47,036 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleDetailsAll() in RoleController----
+2022-02-01 19:36:51,746 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:36:51,749 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:36:51,749 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:36:51,756 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:36:51,756 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:36:51,761 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:36:51,761 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:36:51,761 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:36:51,772 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:36:51,773 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:37:17,787 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:37:17,787 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:37:17,787 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:37:17,787 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:37:17,804 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:37:17,804 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:37:26,112 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:37:26,112 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:37:26,126 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:37:29,986 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:37:29,986 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:37:30,003 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:37:35,930 [15] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2022-02-01 19:37:36,119 [15] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2022-02-01 19:37:36,119 [15] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at System.IO.File.Create(String path)
+   at LTCPro.ServiceLayer.AngularLogs.ErrorLogging(String errorMessage) in D:\old system Data 04042021\Emar Service Latest 1\BusinessLayer\AngularLogs.cs:line 25
+   at LTCPro.WebApi.Controllers.AngularLogController.LogError(String errorMessage) in D:\old system Data 04042021\Emar Service Latest 1\WebApi\Controllers\AngularLogController.cs:line 29
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2022-02-01 19:37:36,119 [15] ERROR LTCPro.ServiceLayer.Log4net -  Exception Message : = The process cannot access the file 'D:\old system Data 04042021\Emar Service Latest 1\WebApi\app_data\AngularLog\20220201.log' because it is being used by another process.
+2022-02-01 19:37:36,119 [15] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace  ===========
+2022-02-01 19:38:14,723 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 19:38:14,753 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2022-02-01 19:38:14,841 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 19:38:14,859 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2022-02-01 19:38:14,860 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2022-02-01 19:38:14,980 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2022-02-01 19:38:18,807 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2022-02-01 19:38:19,402 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2022-02-01 19:38:19,690 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2022-02-01 19:38:19,786 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2022-02-01 19:38:20,033 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:38:20,034 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2022-02-01 19:38:20,085 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:38:20,124 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 19:38:20,124 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 19:38:20,163 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2022-02-01 19:38:20,236 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,248 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,257 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,257 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 19:38:20,257 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 19:38:20,261 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 19:38:20,264 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,270 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 19:38:20,271 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 19:38:20,274 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 19:38:20,274 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 19:38:20,278 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 19:38:20,280 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,280 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,289 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 19:38:20,289 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 19:38:20,293 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 19:38:20,298 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 19:38:20,298 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 19:38:20,302 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 19:38:20,305 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,322 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:38:20,322 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:38:20,325 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,328 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,330 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 19:38:20,330 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 19:38:20,334 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:38:20,336 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 19:38:20,338 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2022-02-01 19:38:20,341 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 19:38:20,349 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:38:20,349 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 19:38:20,358 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:20,362 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:38:20,362 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 19:38:20,372 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:38:20,429 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:38:20,623 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 19:38:20,786 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 19:38:20,885 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 19:38:27,755 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:38:27,759 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:38:27,759 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:38:27,759 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:38:27,759 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:38:27,762 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:38:27,762 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:38:27,765 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:38:27,777 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:38:27,780 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:38:45,621 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:38:45,621 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:38:45,621 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:38:45,621 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:38:45,633 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:38:45,640 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:39:01,945 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByID() in RoleController----
+2022-02-01 19:39:01,945 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByID() in RoleService----
+2022-02-01 19:39:01,960 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByID() in RoleController----
+2022-02-01 19:39:03,561 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:39:03,561 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:39:03,578 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:39:59,917 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:39:59,918 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleController----
+2022-02-01 19:39:59,919 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleService----
+2022-02-01 19:39:59,919 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:39:59,919 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:39:59,984 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:39:59,984 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:39:59,984 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:39:59,985 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleDetailsAll() in RoleController----
+2022-02-01 19:39:59,992 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:40:20,633 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:40:20,633 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:40:20,633 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:40:20,637 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:40:20,637 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:40:20,642 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:40:20,642 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:40:20,644 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:40:21,142 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:40:21,169 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:40:24,514 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:40:24,514 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:40:24,514 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:40:24,514 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:40:24,533 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:40:24,538 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:40:46,506 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:40:46,509 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:40:46,509 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:40:46,509 [28] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleController----
+2022-02-01 19:40:46,509 [28] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleService----
+2022-02-01 19:40:46,515 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:40:46,515 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:40:46,516 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:40:46,520 [28] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleDetailsAll() in RoleController----
+2022-02-01 19:40:46,526 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:41:26,649 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:41:26,649 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:41:26,675 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:41:31,626 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 19:41:31,627 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRole() in RoleService----
+2022-02-01 19:41:32,014 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 19:41:32,058 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleController----
+2022-02-01 19:41:32,058 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleDetailsAll() in RoleService----
+2022-02-01 19:41:32,069 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleDetailsAll() in RoleController----
+2022-02-01 19:41:34,893 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:41:34,897 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:41:34,897 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:41:34,897 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:41:34,897 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:41:34,921 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:41:34,921 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:41:34,921 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:41:34,947 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:41:34,948 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:41:40,646 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:41:40,646 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:41:40,647 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:41:40,647 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:41:40,666 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:41:40,666 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:42:14,060 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:14,061 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:42:14,076 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:18,869 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:18,869 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:42:18,869 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:42:18,869 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:42:18,882 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:18,883 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:42:41,181 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:41,181 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:42:41,196 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:46,475 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:42:46,475 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:42:46,476 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:46,476 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:42:46,503 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:42:46,503 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:42:54,560 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:42:54,560 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:42:54,569 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:42:58,749 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:42:58,749 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:42:58,757 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:07,616 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:07,616 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:43:07,625 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:11,068 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:11,069 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:43:11,081 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:11,804 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:11,804 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:43:11,813 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:43:19,104 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 19:43:19,105 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 19:43:40,126 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 19:43:40,180 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:43:40,180 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:43:40,191 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:43:56,019 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:43:56,019 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:43:56,037 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:00,465 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:00,466 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:44:00,467 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:44:00,467 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:44:00,475 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:00,478 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:44:46,499 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:46,499 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:44:46,527 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:50,603 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:50,603 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:44:50,603 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:44:50,603 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:44:50,614 [29] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:44:50,614 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:45:03,631 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:45:03,631 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:45:03,752 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:45:09,346 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:45:09,346 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:45:09,360 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:45:48,819 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:48,933 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:45:48,933 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 19:45:49,095 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:49,416 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:49,556 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:49,918 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 19:45:49,918 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 19:45:49,918 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 19:45:49,918 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 19:45:49,919 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 19:45:49,919 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 19:45:49,919 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 19:45:49,979 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 19:45:50,319 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 19:45:50,320 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:50,366 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 19:45:50,366 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 19:45:50,373 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:50,380 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 19:45:50,388 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 19:45:50,388 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 19:45:50,399 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 19:45:50,452 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 19:45:50,452 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 19:45:50,456 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:45:50,456 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:45:50,467 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 19:45:50,468 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 19:45:50,468 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:50,479 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:45:50,541 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 19:45:50,541 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 19:45:50,602 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 19:45:50,670 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:50,677 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:45:50,677 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 19:45:50,686 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 19:45:51,903 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 19:45:51,917 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:45:51,917 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 19:45:51,933 [36] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 19:47:22,662 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:47:22,662 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:47:26,760 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:47:27,559 [33] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:47:29,837 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:48:11,948 [39] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:48:55,554 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:48:55,554 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:48:55,574 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:59:44,364 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 19:59:44,364 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 19:59:45,822 [43] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:59:45,823 [43] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 19:59:45,865 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 19:59:45,880 [43] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 19:59:53,291 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 19:59:53,291 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 19:59:53,304 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:00:01,247 [43] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 20:00:01,247 [43] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 20:00:22,643 [43] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 20:00:24,512 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:00:24,512 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 20:00:24,525 [42] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:49:07,010 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 20:49:07,017 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2022-02-01 20:49:08,134 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 20:49:08,298 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2022-02-01 20:49:08,299 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2022-02-01 20:49:08,328 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2022-02-01 20:49:11,775 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2022-02-01 20:49:12,005 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2022-02-01 20:49:12,077 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2022-02-01 20:49:12,244 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2022-02-01 20:49:12,345 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 20:49:12,346 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2022-02-01 20:49:12,351 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 20:49:12,352 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 20:49:12,367 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 20:49:12,555 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,560 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,569 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,569 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 20:49:12,569 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,570 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 20:49:12,574 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2022-02-01 20:49:12,575 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 20:49:12,576 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 20:49:12,585 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 20:49:12,586 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 20:49:12,586 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 20:49:12,601 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 20:49:12,601 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 20:49:12,609 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,646 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 20:49:12,648 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 20:49:12,651 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 20:49:12,652 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 20:49:12,661 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,661 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,670 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 20:49:12,670 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 20:49:12,681 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 20:49:12,692 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 20:49:12,694 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,701 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 20:49:12,702 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2022-02-01 20:49:12,703 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,712 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 20:49:12,713 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 20:49:12,751 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 20:49:12,751 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 20:49:12,784 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 20:49:12,788 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 20:49:12,827 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:12,837 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 20:49:12,837 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 20:49:12,860 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 20:49:12,871 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 20:49:12,919 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 20:49:13,066 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 20:49:16,572 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 20:49:16,584 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 20:49:16,584 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 20:49:16,588 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 20:49:16,589 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 20:49:18,864 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:49:18,864 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 20:49:18,865 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 20:49:18,922 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 20:49:18,923 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:49:26,647 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:49:26,647 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 20:49:26,650 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 20:49:26,652 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 20:49:26,686 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:49:26,699 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 20:49:33,832 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:49:33,833 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:49:33,871 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:49:40,133 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 20:49:40,134 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 20:49:48,974 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 20:49:50,791 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:49:50,791 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 20:49:50,806 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:50:19,452 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByID() in RoleController----
+2022-02-01 20:50:19,453 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByID() in RoleService----
+2022-02-01 20:50:19,513 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByID() in RoleController----
+2022-02-01 20:50:19,533 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 20:50:19,533 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 20:50:19,545 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 20:50:41,666 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 20:50:41,666 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 20:51:40,572 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 20:51:43,049 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:51:43,049 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 20:51:43,064 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 20:51:50,689 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:51:50,689 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:51:50,701 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:25,295 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:25,295 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:52:25,304 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:25,643 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:25,643 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:52:25,657 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:26,132 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:26,133 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:52:26,152 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:26,709 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:26,710 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:52:26,721 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:27,323 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 20:52:27,323 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 20:52:27,337 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 21:13:16,586 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserController----
+2022-02-01 21:13:16,587 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserService----
+2022-02-01 21:13:17,324 [27] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2022-02-01 21:13:17,329 [27] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2022-02-01 21:13:17,330 [27] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at WebApi.Controllers.UserController.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\WebApi\Controllers\UserController.cs:line 72
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2022-02-01 21:13:17,330 [27] ERROR LTCPro.ServiceLayer.Log4net -  Exception Message : = One or more errors occurred.
+2022-02-01 21:13:17,330 [27] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace  ===========
+2022-02-01 21:13:17,503 [27] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception  Stack Trace : =    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at LTCPro.Repositories.UserActivityRepository.InsertUserActivityDetails(UserActivityDetailEntity entity) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserActivityRepository.cs:line 53
+   at LTCPro.Repositories.UserRepository.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserRepository.cs:line 446
+   at LTCPro.ServiceLayer.UserService.<LogoutUser>d__13.MoveNext() in D:\old system Data 04042021\Emar Service Latest 1\BusinessLayer\Services\UserService.cs:line 76
+2022-02-01 21:13:17,504 [27] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace End  ===========
+2022-02-01 21:13:17,504 [27] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message  ===========
+2022-02-01 21:13:17,504 [27] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception Message : = An error occurred while updating the entries. See the inner exception for details.
+2022-02-01 21:13:17,504 [27] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message End  ===========
+2022-02-01 23:25:30,578 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 23:25:30,630 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2022-02-01 23:25:32,760 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 23:25:33,058 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2022-02-01 23:25:33,079 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2022-02-01 23:25:33,143 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2022-02-01 23:25:37,811 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2022-02-01 23:25:38,162 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2022-02-01 23:25:38,307 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2022-02-01 23:25:38,389 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2022-02-01 23:25:38,551 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 23:25:38,616 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2022-02-01 23:25:38,621 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 23:25:38,657 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 23:25:38,663 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 23:25:38,804 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2022-02-01 23:25:38,816 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:38,891 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 23:25:38,941 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:25:38,942 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 23:25:38,956 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:25:39,022 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,024 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,024 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,044 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,044 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,051 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 23:25:39,052 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 23:25:39,060 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 23:25:39,069 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 23:25:39,076 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 23:25:39,085 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 23:25:39,099 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 23:25:39,104 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 23:25:39,104 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 23:25:39,114 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 23:25:39,114 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 23:25:39,114 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 23:25:39,123 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,131 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 23:25:39,132 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 23:25:39,182 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 23:25:39,194 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,210 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 23:25:39,211 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 23:25:39,282 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 23:25:39,295 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,300 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 23:25:39,301 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2022-02-01 23:25:39,413 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 23:25:39,414 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 23:25:39,472 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:39,503 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 23:25:39,504 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 23:25:39,511 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 23:25:39,569 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 23:25:39,614 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 23:25:46,529 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:25:46,535 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:25:46,535 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 23:25:46,543 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:25:46,626 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 23:25:46,627 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 23:25:49,491 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:25:49,494 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:25:49,533 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 23:25:49,535 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:25:59,728 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:25:59,728 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:25:59,729 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 23:25:59,730 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 23:25:59,740 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:25:59,774 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 23:26:05,490 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:05,490 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:26:05,550 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:06,008 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:06,008 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:26:06,017 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:06,667 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:06,667 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:26:06,679 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:08,636 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:08,637 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:26:08,648 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:09,170 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:09,170 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:26:09,184 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:10,714 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:10,714 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:26:10,724 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:26:42,524 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 23:26:42,524 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 23:29:01,495 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 23:29:01,537 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2022-02-01 23:29:03,066 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2022-02-01 23:29:03,251 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2022-02-01 23:29:03,269 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2022-02-01 23:29:03,312 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2022-02-01 23:29:06,770 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2022-02-01 23:29:07,032 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2022-02-01 23:29:07,291 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2022-02-01 23:29:07,344 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2022-02-01 23:29:07,441 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 23:29:07,498 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2022-02-01 23:29:07,532 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 23:29:07,564 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 23:29:07,579 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 23:29:07,740 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,740 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,741 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,778 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-02-01 23:29:07,778 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-02-01 23:29:07,779 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2022-02-01 23:29:07,779 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-02-01 23:29:07,779 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-02-01 23:29:07,787 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-02-01 23:29:07,796 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-02-01 23:29:07,807 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2022-02-01 23:29:07,814 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,817 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,820 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-02-01 23:29:07,823 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-02-01 23:29:07,827 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-02-01 23:29:07,834 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-02-01 23:29:07,842 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-02-01 23:29:07,882 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-02-01 23:29:07,893 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,928 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-02-01 23:29:07,938 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,960 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-02-01 23:29:07,965 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 23:29:07,966 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2022-02-01 23:29:07,967 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:07,978 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-02-01 23:29:07,979 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-02-01 23:29:08,001 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:29:08,002 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 23:29:08,091 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:29:08,123 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:08,128 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-02-01 23:29:08,128 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-02-01 23:29:08,132 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-02-01 23:29:08,201 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-02-01 23:29:08,223 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:08,223 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2022-02-01 23:29:08,233 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 23:29:08,234 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-02-01 23:29:08,283 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-02-01 23:29:08,364 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-02-01 23:29:12,938 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-02-01 23:29:12,944 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleController----
+2022-02-01 23:29:12,953 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesList() in RoleService----
+2022-02-01 23:29:12,959 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:29:12,959 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-02-01 23:29:12,967 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-02-01 23:29:15,478 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:29:15,480 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:29:15,514 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:29:15,531 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSubRolesList() in RoleController----
+2022-02-01 23:29:24,252 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:29:24,252 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:29:24,258 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleController----
+2022-02-01 23:29:24,259 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSubRolesScreenList() in RoleService----
+2022-02-01 23:29:24,263 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:29:24,299 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-02-01 23:29:28,374 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:28,375 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:29:28,436 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:29,165 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:29,165 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:29:29,179 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:29,739 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:29,740 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:29:29,753 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:30,220 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:30,220 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:29:30,230 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:30,735 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:30,735 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:29:30,749 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:32,035 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:32,036 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:29:32,046 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:29:38,142 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 23:29:38,143 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 23:30:47,487 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 23:30:49,480 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:30:49,480 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:30:49,492 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:42:29,618 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:29,660 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:42:30,828 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:33,899 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:33,899 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:42:33,909 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:34,917 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:34,917 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:42:34,933 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:35,509 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:35,509 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:42:35,518 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:36,078 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:36,078 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:42:36,090 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:36,824 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:36,824 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:42:36,834 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:42:43,319 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 23:42:43,328 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 23:45:20,075 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 23:45:21,239 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:45:21,240 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:45:21,302 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:45:27,494 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:27,495 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:45:27,509 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:28,265 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:28,265 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:45:28,274 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:28,963 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:28,963 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:45:28,975 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:29,522 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:29,522 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:45:29,531 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:29,982 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:29,982 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:45:29,991 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:30,567 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:30,567 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:45:30,576 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:45:37,090 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 23:45:37,090 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 23:46:12,109 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 23:46:14,398 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:46:14,398 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:46:14,418 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:49:49,280 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:49,288 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:49:50,223 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:53,013 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:53,013 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:49:53,023 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:53,876 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:53,876 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:49:53,889 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:54,587 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:54,587 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:49:54,629 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:55,061 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:55,061 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:49:55,070 [10] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:55,554 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:55,554 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:49:55,568 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:49:59,873 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 23:49:59,874 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----
+2022-02-01 23:50:19,130 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully Insert/Update() in RoleController----
+2022-02-01 23:50:21,304 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:50:21,305 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigsGrid() in RoleService----
+2022-02-01 23:50:21,347 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigsGrid() in RoleController----
+2022-02-01 23:58:41,510 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:41,558 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:58:42,715 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:45,815 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:45,815 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:58:45,829 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:46,395 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:46,395 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:58:46,407 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:47,388 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:47,388 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:58:47,397 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:47,982 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:47,982 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:58:47,994 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:48,657 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:58:48,657 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetRoleConfigDetailsByScreenID() in RoleService----
+2022-02-01 23:58:48,670 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetRoleConfigDetailsByScreenID() in RoleController----
+2022-02-01 23:59:13,928 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing Insert/Update() in RoleController----
+2022-02-01 23:59:13,939 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertRoleConfigMaster() in RoleService----

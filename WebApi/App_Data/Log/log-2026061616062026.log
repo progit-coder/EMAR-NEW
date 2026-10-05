@@ -1,0 +1,453 @@
+2026-06-16 12:17:03,849 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2026-06-16 12:17:03,889 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2026-06-16 12:17:26,198 [9] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2026-06-16 12:17:26,210 [9] ERROR LTCPro.ServiceLayer.Log4net -  Source : = System.Web.Http
+2026-06-16 12:17:26,228 [9] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2026-06-16 12:17:26,229 [9] ERROR LTCPro.ServiceLayer.Log4net -  Exception Message : = A null value was returned where an instance of IHttpActionResult was expected.
+2026-06-16 12:17:26,229 [9] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace  ===========
+2026-06-16 12:17:26,229 [9] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception  Stack Trace : =    at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2026-06-16 12:17:26,229 [9] ERROR LTCPro.ServiceLayer.Log4net - =============  Exception  Stack Trace End  ===========
+2026-06-16 12:22:50,801 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2026-06-16 12:22:50,801 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2026-06-16 12:22:54,783 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2026-06-16 12:22:55,149 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:22:55,150 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2026-06-16 12:22:55,386 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:23:01,089 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:23:01,089 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2026-06-16 12:23:01,298 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:23:02,540 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2026-06-16 12:23:03,587 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2026-06-16 12:23:03,938 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2026-06-16 12:23:05,330 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2026-06-16 12:23:06,594 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2026-06-16 12:23:06,611 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2026-06-16 12:23:06,906 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2026-06-16 12:23:29,831 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2026-06-16 12:23:29,920 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:23:29,975 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:30,182 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:30,186 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:30,204 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:30,283 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:30,564 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2026-06-16 12:23:30,739 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2026-06-16 12:23:30,747 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2026-06-16 12:23:30,820 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2026-06-16 12:23:30,931 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2026-06-16 12:23:30,932 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2026-06-16 12:23:31,188 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2026-06-16 12:23:31,479 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:23:31,479 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:23:31,727 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2026-06-16 12:23:31,766 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:32,144 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2026-06-16 12:23:32,146 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2026-06-16 12:23:32,780 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2026-06-16 12:23:32,808 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:32,918 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2026-06-16 12:23:32,950 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:33,050 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2026-06-16 12:23:33,120 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:33,124 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2026-06-16 12:23:33,125 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2026-06-16 12:23:33,271 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:23:33,271 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:23:33,555 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2026-06-16 12:23:33,556 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2026-06-16 12:23:33,770 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:23:34,281 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:23:34,363 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:34,685 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2026-06-16 12:23:34,686 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2026-06-16 12:23:35,159 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:23:35,160 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:23:35,381 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2026-06-16 12:23:35,590 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:23:36,072 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2026-06-16 12:23:36,425 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2026-06-16 12:23:40,440 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:40,445 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:40,646 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:23:40,646 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:23:40,656 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:23:40,656 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:23:40,742 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:40,971 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:23:40,972 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2026-06-16 12:23:41,056 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:23:41,083 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:41,293 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:23:41,295 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:23:41,295 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:23:41,487 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:23:41,707 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:23:41,741 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:41,948 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:23:41,949 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:23:42,166 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:23:42,280 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:42,283 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:42,474 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:42,569 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:42,586 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:42,792 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EMARController----
+2026-06-16 12:23:42,792 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EMARController----
+2026-06-16 12:23:42,794 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:23:42,794 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2026-06-16 12:23:42,795 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersController----
+2026-06-16 12:23:42,795 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersController----
+2026-06-16 12:23:42,797 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersService----
+2026-06-16 12:23:42,798 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersService----
+2026-06-16 12:23:42,808 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EmarService----
+2026-06-16 12:23:42,808 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EmarService----
+2026-06-16 12:23:43,345 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:23:43,348 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersEndingSoon() in OrdersController----
+2026-06-16 12:23:43,366 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:43,581 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:23:43,582 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:23:45,065 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:23:45,121 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:45,335 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:23:45,336 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:23:45,655 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:23:47,311 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersGridData() in OrdersController----
+2026-06-16 12:23:47,326 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2026-06-16 12:23:47,926 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:23:48,137 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersController----
+2026-06-16 12:23:48,138 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersService----
+2026-06-16 12:23:50,939 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingOrdersGridData() in OrdersController----
+2026-06-16 12:24:01,744 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPRNDetailsByfilter() in EMARController----
+2026-06-16 12:24:01,744 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSeventyTwoHourDetailsByfilter() in EMARController----
+2026-06-16 12:24:51,285 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:24:51,294 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:24:51,578 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:24:51,578 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:24:51,578 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:24:51,578 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:24:52,017 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:24:52,342 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:24:52,363 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:24:52,590 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:24:52,590 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:24:53,021 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:24:53,289 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:24:53,508 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:24:53,508 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:24:53,717 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:24:53,859 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:24:54,027 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:24:54,068 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:24:54,068 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:25:01,906 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:25:01,911 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[3081],"NurseStations":[3107],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:25:01,911 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:25:01,945 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:25:01,945 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:25:04,692 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:25:04,818 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:25:05,034 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:25:05,034 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:25:05,240 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:26:38,129 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:26:38,361 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:26:38,361 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:26:38,580 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:26:38,637 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:26:38,844 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:26:38,844 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:26:38,879 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:26:41,701 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:26:41,701 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[1],"NurseStations":[3120],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:26:41,701 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:26:41,701 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:26:41,701 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:26:41,705 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:26:42,304 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:26:42,511 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:26:42,511 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:26:42,718 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:26:49,763 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:26:49,964 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:26:49,970 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:26:49,970 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:26:59,263 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:26:59,263 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[1],"NurseStations":[3122],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:26:59,263 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:26:59,263 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:26:59,265 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:27:03,728 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:27:03,782 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:27:03,989 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:27:03,989 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:27:04,204 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:28:40,950 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:29:13,329 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:29:13,549 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:29:13,549 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:29:13,563 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:29:16,106 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:29:16,106 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[1],"NurseStations":[3122],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:29:16,106 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:29:16,109 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:29:16,109 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:29:17,835 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:29:17,876 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:29:18,084 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:29:18,084 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:29:18,291 [17] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:34:28,590 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:34:52,430 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:34:52,688 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:34:52,713 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing AutoLogoutUser() in UserService----
+2026-06-16 12:34:52,911 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing AutoLogoutUser() in UserService----
+2026-06-16 12:35:15,643 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2026-06-16 12:35:15,643 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2026-06-16 12:35:16,077 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2026-06-16 12:35:16,302 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:35:16,302 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2026-06-16 12:35:16,529 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:35:19,835 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:35:19,835 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2026-06-16 12:35:20,041 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2026-06-16 12:35:21,041 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2026-06-16 12:35:23,121 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2026-06-16 12:35:23,330 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2026-06-16 12:35:23,960 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2026-06-16 12:35:24,940 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2026-06-16 12:35:24,940 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2026-06-16 12:35:25,147 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2026-06-16 12:35:29,541 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2026-06-16 12:35:29,541 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:35:29,712 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:29,728 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:29,735 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:29,923 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2026-06-16 12:35:29,923 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2026-06-16 12:35:29,933 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2026-06-16 12:35:29,933 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2026-06-16 12:35:29,974 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2026-06-16 12:35:30,184 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2026-06-16 12:35:30,211 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:30,577 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2026-06-16 12:35:30,577 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2026-06-16 12:35:30,623 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2026-06-16 12:35:30,642 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:30,806 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2026-06-16 12:35:30,826 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:30,853 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2026-06-16 12:35:30,882 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2026-06-16 12:35:30,882 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2026-06-16 12:35:30,882 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2026-06-16 12:35:31,030 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2026-06-16 12:35:31,030 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2026-06-16 12:35:31,217 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2026-06-16 12:35:31,243 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:31,449 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:35:31,449 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:35:31,865 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:35:31,883 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:32,093 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:35:32,093 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:35:32,714 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:35:32,771 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:32,977 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2026-06-16 12:35:32,977 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2026-06-16 12:35:33,863 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2026-06-16 12:35:33,942 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:34,148 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:35:34,148 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:35:34,227 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2026-06-16 12:35:34,648 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2026-06-16 12:35:34,654 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:35:38,681 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:38,892 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:35:38,892 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:35:39,343 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:35:39,356 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:39,566 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:35:39,567 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:35:40,232 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:35:40,260 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:40,351 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:40,480 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:35:40,480 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:35:40,560 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:35:40,560 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2026-06-16 12:35:40,910 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:35:40,956 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:41,093 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:35:41,167 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:35:41,167 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:35:41,385 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:35:41,650 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:41,856 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:35:41,856 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2026-06-16 12:35:42,166 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:42,371 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:35:42,380 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:35:42,380 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:35:42,457 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2026-06-16 12:35:42,613 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:42,659 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:42,820 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:35:42,823 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EMARController----
+2026-06-16 12:35:42,823 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EmarService----
+2026-06-16 12:35:42,866 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersController----
+2026-06-16 12:35:42,867 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersService----
+2026-06-16 12:35:42,869 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:43,291 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EMARController----
+2026-06-16 12:35:43,291 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EmarService----
+2026-06-16 12:35:43,325 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:43,521 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersEndingSoon() in OrdersController----
+2026-06-16 12:35:43,532 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersController----
+2026-06-16 12:35:43,532 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersService----
+2026-06-16 12:35:45,493 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:45,731 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:35:45,731 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:35:45,828 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersGridData() in OrdersController----
+2026-06-16 12:35:45,936 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:35:46,227 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:46,440 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersController----
+2026-06-16 12:35:46,440 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersService----
+2026-06-16 12:35:47,715 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:47,923 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:35:47,923 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:35:48,339 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:35:48,362 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:48,569 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:35:48,569 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:35:48,787 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingOrdersGridData() in OrdersController----
+2026-06-16 12:35:48,950 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:49,157 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:35:49,157 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:35:49,193 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:35:49,578 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:35:49,702 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:50,002 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:35:50,002 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:35:50,213 [25] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:35:50,334 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:50,547 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:35:50,547 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:35:50,638 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:35:59,917 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:35:59,918 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[1],"NurseStations":[3122],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:35:59,918 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:35:59,918 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:35:59,918 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:35:59,921 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:36:02,381 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:36:02,587 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:36:02,587 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:36:02,843 [26] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:36:11,533 [24] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSeventyTwoHourDetailsByfilter() in EMARController----
+2026-06-16 12:36:11,842 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPRNDetailsByfilter() in EMARController----
+2026-06-16 12:37:49,287 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:38:42,035 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:40:43,181 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:43,183 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:43,390 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:43,394 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:40:43,394 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:40:43,394 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:40:43,394 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:40:43,595 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:40:43,595 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2026-06-16 12:40:43,848 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:40:43,958 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:44,067 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:40:44,092 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:40:44,222 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:40:44,222 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:40:44,638 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:40:44,667 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:44,873 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:40:44,873 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:40:45,083 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:40:45,275 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:45,382 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:45,412 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:45,461 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:45,482 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EMARController----
+2026-06-16 12:40:45,482 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EmarService----
+2026-06-16 12:40:45,550 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:45,590 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:40:45,590 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:40:45,618 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:40:45,618 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2026-06-16 12:40:45,667 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersController----
+2026-06-16 12:40:45,667 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersService----
+2026-06-16 12:40:45,757 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersController----
+2026-06-16 12:40:45,757 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersService----
+2026-06-16 12:40:46,018 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:40:46,045 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:46,120 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersEndingSoon() in OrdersController----
+2026-06-16 12:40:46,132 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2026-06-16 12:40:46,256 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EMARController----
+2026-06-16 12:40:46,256 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EmarService----
+2026-06-16 12:40:47,179 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:47,414 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:40:47,414 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:40:47,620 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:40:48,143 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersGridData() in OrdersController----
+2026-06-16 12:40:48,424 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:48,645 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersController----
+2026-06-16 12:40:48,645 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersService----
+2026-06-16 12:40:49,681 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:49,689 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:49,888 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:40:49,888 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2026-06-16 12:40:49,946 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2026-06-16 12:40:49,946 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2026-06-16 12:40:50,369 [30] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2026-06-16 12:40:50,519 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:50,524 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2026-06-16 12:40:50,748 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:40:50,748 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2026-06-16 12:40:50,888 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingOrdersGridData() in OrdersController----
+2026-06-16 12:40:51,207 [32] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2026-06-16 12:40:51,252 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:51,992 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2026-06-16 12:40:51,992 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2026-06-16 12:40:52,208 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2026-06-16 12:40:52,309 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:52,518 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:40:52,518 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2026-06-16 12:40:52,613 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:55,450 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:40:55,450 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[1],"NurseStations":[3122],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:40:55,450 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:40:55,450 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:40:55,450 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:40:57,293 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2026-06-16 12:40:57,341 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2026-06-16 12:40:57,550 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:40:57,550 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2026-06-16 12:40:57,759 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2026-06-16 12:41:07,902 [27] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPRNDetailsByfilter() in EMARController----
+2026-06-16 12:41:08,340 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSeventyTwoHourDetailsByfilter() in EMARController----
+2026-06-16 12:46:16,875 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:46:41,632 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:46:41,632 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController input data----{"Company_Id":0,"Facilities":[1],"NurseStations":[3122],"Floors":[],"Wings":[],"Rooms":[],"Beds":[],"History":0,"UserName":"","Password":"","User_Id":304,"CompanyToBedFlag":0,"ResidentId":0}
+2026-06-16 12:46:41,632 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersController Input data----
+2026-06-16 12:46:41,632 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService 1----
+2026-06-16 12:46:41,632 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetControlSubstanceGridData() in OrdersService----
+2026-06-16 12:51:09,511 [31] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----
+2026-06-16 12:57:34,378 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetControlSubstanceGridData() in OrdersController----

@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LTCPro.Entities
+{
+  public  class HLDirectionEntity
+    {
+        public int HLDirectionalWay_Id { get; set; }
+        public string HLDirectionalWaysDesc { get; set; }
+    }
+}

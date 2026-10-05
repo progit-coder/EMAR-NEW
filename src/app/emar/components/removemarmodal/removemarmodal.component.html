@@ -1,0 +1,164 @@
+<app-commonmodal title="Administered Orders">
+
+  <div class="modal-body bodystyle">
+
+    <div class="row form-group" *ngIf="demographicInfoData">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <strong class="iconColor">{{demographicInfoData.PatientLastName+", "+demographicInfoData.PatientFirstName+" "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}
+          ({{demographicInfoData.DOB |  date: 'MM/dd/yyyy '}})</strong></div>
+    </div>
+    <div class="row form-group">
+    <form [formGroup]="myform">
+      <div class="row">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+          <div class="right">
+            <label>Start Date</label>
+          </div>
+          <div class="right">
+            <input type="date" id="startDate" formControlName="startDate" class="form-control" maxlength="10" />
+          </div>
+        </div>
+        <div class="col-sm-5 col-md-5 col-lg-5">
+          <div class="right" style="align-content:right;">
+            <label>End Date</label>
+          </div>
+          <div class="right">
+            <input type="date" id="endDate" formControlName="endDate" class="form-control" maxlength="10" />
+
+
+          </div>
+        </div>
+        <div class="col-sm-2 col-dm-2 col-lg-2" style="align-content:right;margin-top: 5px;">
+          <br/>
+        
+          <input type="button" id="btnRemoveDrugs" value="Show" class="btn btn-primary btn-xs"
+            (click)="getDrugsToRemove()">
+        </div>
+      </div>
+    </form>
+    </div>
+    <div class="row form-group">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="tableFixHead">
+      <table id="tbltable" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <!-- <th><input type="checkbox" id="chkselectall" 
+                   [ngModelOptions]="{standalone: true}">
+                </th> -->
+            <!-- <th>Administered On</th> -->
+            <th></th>
+            <th>Drug Name</th>
+            <th>Pass Time</th>
+            <th>AdministeredOn</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of DrugList">
+            <td> <input type="checkbox" [checked]="CheckAll" value="{{item.POrder_Id}}" name="{{ item.POrder_Id }}"
+                id="{{item.DrugAdminister_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+            <td>{{item.Order}}</td>
+            <td>{{item.Pass_Time}}</td>
+            <td>{{item.AdminsterOn|date :'MM/dd/yyyy hh:mm a'}}</td>
+  
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" id="btnRemove" [disabled]="RemoveStatus==true || selectedRecords.length==0"
+      class="btn btn-primary" (click)="modalUnlockopen()">Remove Checked Passes</button>
+    <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button>
+  </div>
+</app-commonmodal>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" id="exampleModal" tabindex="-1" role="dialog"
+    [ngStyle]="{'display': modalUnlockIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div #DemoHandle1 class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+          <!-- <button type="button" class="close" (click)="closeUnlockModel()">&times;</button> -->
+        </div>
+        <div class="modal-body">
+          <strong>Do you want to remove all checked passes?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="Remove()">Yes</button>
+          <button type="button" class="btn btn-danger" (click)="closeUnlockModel()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" id="mdlundo" role="dialog" [ngStyle]="{'display': modalUndoIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <form [formGroup]="medicationForm" name="Undo">
+            <div class="modal-content">
+                <div #DemoHandle2 class="modal-header ">
+                    <h5>Remove MAR Entries</h5>
+                    <button type="button" class="close" (click)="closeUndoModel()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col-sm-5 col-md-4 col-lg-4">
+                            Medication Reason <span class="c1">*</span></div>
+                        <div class="col-sm-5 col-md-7 col-lg-7">
+                            <ng-multiselect-dropdown formControlName="medicationReason" [data]="medicationReasonList" [settings]="dropdownSettings_MedicationReason" (onSelect)="onMedicationReasonSelect($event)" (onDeSelect)="onMedicationReasonDeSelect($event)" [placeholder]="'Medication Reason'"
+                                class="form-control" [ngClass]="{
+                  'is-valid':medicationForm.controls.medicationReason.valid && medicationForm.controls.medicationReason.dirty,
+                  'is-invalid':medicationForm.controls.medicationReason.invalid && medicationForm.controls.medicationReason.touched
+                }"></ng-multiselect-dropdown>
+                            <div *ngIf="medicationForm.controls.medicationReason.errors && (medicationForm.controls.medicationReason.touched)" class="errorMessage">
+                                <div *ngIf="medicationForm.controls.medicationReason.errors.required">
+                                    Medication Reason is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-5 col-md-4 col-lg-4">
+                            Note <span *ngIf="notestatus == 1" class="c1">*</span></div>
+                        <div class="col-sm-5 col-md-7 col-lg-7">
+                            <input type="text" class="form-control" formControlName="note" [ngClass]="{
+                'is-valid':medicationForm.controls.note.valid && medicationForm.controls.note.dirty,
+                'is-invalid':medicationForm.controls.note.invalid && medicationForm.controls.note.touched
+              }" />
+                            <div *ngIf="medicationForm.controls.note.errors && (medicationForm.controls.note.touched)" class="errorMessage">
+                                <div *ngIf="medicationForm.controls.note.errors.required">
+                                    Note is required.
+                                </div>
+                                <div *ngIf="medicationForm.controls.note.errors.maxlength">
+                                    Note cannot be more than 50 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-5 col-md-4 col-lg-4">Undo Drug Quantity <span class="c1">*</span>
+                        </div>
+                        <div class="col-sm-5 col-md-7 col-lg-7">
+                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" pattern="[0-9.]+" class="form-control" pattern="[0-9.]+" formControlName="undoQuantity" />
+                            <div class="valid-feedback feedback-icon">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="invalid-feedback feedback-icon">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div style="text-align: right">
+                        <input type="button" value="Submit" class="btn btn-success btn-xs" [disabled]="medicationForm.invalid" (click)="undoReasonSave()"
+                        />&nbsp;
+                        <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeUndoModel()">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

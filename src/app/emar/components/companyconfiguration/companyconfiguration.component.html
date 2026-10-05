@@ -1,0 +1,294 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Company Configuration Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Company Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Company Name
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="company"
+                  [(ngModel)]="selectedCompanyItem" [data]="companies" [settings]="dropdownSettings_Company" [ngClass]="{
+                  'is-valid':myform.controls.company.valid ,
+                  'is-invalid':myform.controls.company.invalid && myform.controls.company.touched
+                }">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.company.errors && (myform.controls.company.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.company.errors.required">
+                    Company Name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Biometric Finger
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Biometric Finger
+                <select id="ddlcity" formControlName="fingerDesc" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.fingerDesc.valid && myform.controls.fingerDesc.dirty,
+                          'is-invalid':myform.controls.fingerDesc.invalid && myform.controls.fingerDesc.touched
+                        }">
+                  <option value="" selected>Select</option>
+                  <option *ngFor="let item of fingerDescData" value="{{item.Fingersdesc_Id}}">{{item.FingersDesc1}}
+                  </option>
+                </select>
+                <!-- <div *ngIf="myform.controls.fingerDesc.errors && (myform.controls.fingerDesc.touched)"
+                class="errorMessage">
+                <div *ngIf="myform.controls.fingerDesc.errors.required">
+                  Biometric Finger is required.
+                </div>
+              </div>
+              <div class="valid-feedback feedback-icon">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="invalid-feedback feedback-icon customFeedback">
+                <i class="fa fa-times"></i>
+              </div> -->
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Admin Approval
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Admin Approval
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <input type="checkbox" id="chkadminapprove" formControlName="approval">
+                    </span>
+                  </div>
+                  <span class="form-control" style="height: max-content;">Is Admin Approval Required for generating outbound files?</span>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Stock Report For
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Stock Report For
+                <span class="c1">*</span>
+                <select id="ddlstock" class="form-control" formControlName="stockreport" [ngClass]="{
+                        'is-valid':myform.controls.stockreport.valid,
+                        'is-invalid':myform.controls.stockreport.invalid && myform.controls.stockreport.touched
+                      }">
+                  <option value="" disabled selected>Select</option>
+                  <option *ngFor="let item of stockReportFor" value="{{item.StockReport_Id}}">{{item.StockReportFor}}
+                  </option>
+                </select>
+                <div *ngIf="myform.controls.stockreport.errors && (myform.controls.stockreport.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.stockreport.errors.required">
+                    Stock Report is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">DrFirst Required
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                DrFirst Required
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <input type="checkbox" id="chkdrfirst" formControlName="drfirst">
+                    </span>
+                  </div>
+                  <span class="form-control">Is DrFirst Required ?</span>
+                </div>
+              </div>
+                  <!-- <div class="col-sm-2 col-md-2 col-lg-2">Hl7 Configuration
+                  </div> -->
+                  <div class="col-sm-4 col-md-4 col-lg-4">
+                    Hl7 Configuration
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <input type="checkbox" id="chkHl7Configuration" formControlName="hl7configure"
+                            (change)="hlCongifigureDrop()">
+                        </span>
+                      </div>
+                      <span class="form-control"  style="height: max-content;">Hl7 Configuration is Required?</span>
+                    </div>
+                  </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Default Physician
+                  <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown formControlName="defaultphysician" class="form-control"
+                  [(ngModel)]="selectedPhtsicianItem" [data]="physiciansdrop" [settings]="dropdownSettings_Physician"
+                  [ngClass]="{
+                          'is-valid':myform.controls.defaultphysician.valid,
+                          'is-invalid':myform.controls.defaultphysician.invalid && myform.controls.defaultphysician.touched
+                        }">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.defaultphysician.errors && (myform.controls.defaultphysician.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.defaultphysician.errors.required">
+                      Default Physician is required.
+                    </div>
+                </div>
+              </div> -->
+            </div>
+            <div class="row form-group" *ngIf="HLFlag==1">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2" *ngIf="HLFlag==1">HL7 Directional Way
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="HLFlag==1">
+                HL7 Directional Way  <span class="c1">*</span>
+                <select id="ddlhldirection" class="form-control" formControlName="hldirection"
+                  (change)="getCatageryDrop($event.target.value)">
+                  <option value="0" disabled selected>Select</option>
+                  <option *ngFor="let item of direction" value="{{item.HLDirectionalWay_Id}}">
+                    {{item.HLDirectionalWaysDesc}}</option>
+                </select>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2" *ngIf="HLFlag==1">Category
+                  <span class="c1">*</span>
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="HLFlag==1">
+                  Category
+                  <span class="c1">*</span>
+                  <ng-multiselect-dropdown formControlName="categoryid" class="form-control" [(ngModel)]="selectedItems"
+                    (onSelect)="onCategorySelect($event)" (onSelectAll)="onCategorySelectAll($event)"
+                    (onDeSelect)="onCategoryDeSelect($event)" (onDeSelectAll)="onCategoryDeSelectAll($event)"
+                    [data]="columnsList" [settings]="dropdownSettings_UID">
+                  </ng-multiselect-dropdown>
+                </div>
+                <!-- <div class="col-sm-2 col-md-2 col-lg-2" *ngIf="HLFlag==1">Event Desc
+                  <span class="c1">*</span>
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="HLFlag==1">
+                  Event Desc
+                  <span class="c1">*</span>
+                  <ng-multiselect-dropdown formControlName="eventid" class="form-control" [(ngModel)]="descItems"
+                    [data]="descList" [settings]="eventdropdownSettings_UID" (onSelect)="onEventSelect($event)"
+                    (onSelectAll)="onEventSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Time Format
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Time Format
+                  <div class="iconed-input">
+                    <label class="switch">
+                      <input type="checkbox" id="chktimeformat" formControlName="timeformat">
+                      <div class="slider round">
+                        <span class="on">Military</span>
+                        <span class="off">Regular</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <div style="text-align: right">
+              <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Save" [disabled]="myform.invalid" (click)="insertCompany()"
+                class="btn btn-success" /> &nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Company Configuration View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Biometric Finger</th>
+                  <th>Approval</th>
+                  <th>Stock Report For</th>
+                  <th>DrFirst</th>
+                  <!-- <th>Physician Name</th> -->
+                  <th>Time Format</th>
+                  <th>Hl7 Configure</th>
+                  <th>HL7 Directional Way</th>
+                  <th> Category</th>
+                  <th>Event</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of gridData|gridFilter:searchText:'CompanyConfiguration'|  paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                  <td>{{item.Company_Name}}</td>
+                  <td>{{item.FingersDesc1}}</td>
+                  <td *ngIf="item.ApprovalFlag==1">Require</td>
+                  <td *ngIf="item.ApprovalFlag==0">Not Require</td>
+                  <td>{{item.StockReportFor}}</td>
+                  <!-- <td></td> -->
+                  <td *ngIf="item.DrFirstRequired==1">Require</td>
+                  <td *ngIf="item.DrFirstRequired==0">Not Require</td>
+                  <!-- <td> {{item.PhysicianFullFName}}</td> -->
+                  <td *ngIf="item.TimeFormat==1">Military</td>
+                  <td *ngIf="item.TimeFormat==0">Regular</td>
+                  <td *ngIf="item.Hl7Configured==1">Configured</td>
+                  <td *ngIf="item.Hl7Configured==0">Not Configured</td>
+                  <td>{{item.HLDirectionalWaysDesc}}</td>
+                  <td>{{item.FteCategory_Desc}}</td>
+                  <td>{{item.EventCat_Desc}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon"
+                      (click)="getCompanyConfigById(item.CompanyConfig_Id,item.Hl7Configured,item.FteCategory_Id,item.Company_Status)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="btn editicon"(click)="getHistoryById(item.CompanyConfig_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="gridData.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+  [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 80%;">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header " style="height: 50px ">
+        <h5 >Company Configuration History Details</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+          <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

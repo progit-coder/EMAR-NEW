@@ -1,0 +1,351 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <!-- Content Header (Page header) -->
+    <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Resident Grid</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Resident Grid</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+    <section class="content">
+        <div class="container-fluid">
+            <!-- <div class="row"  >
+        <div class="col-lg-2 col-6"  >
+          <div class="small-box bg-primary" style="background-color: rgba(4, 0, 255, 0.986) !important">
+            <div class="inner" >
+              <h3 id="totalpending">{{residentsCount_Admit}}</h3>
+              <p>Admit</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="javascript:void(0)" (click)="getResidentGridData('Admit')" class="small-box-footer" id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6" >
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3 id="totalsuccess">{{residentsCount_Inactive}}</h3>
+              <p>In Active</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-loop-strong"></i>
+            </div>
+            <a href="javascript:void(0)" (click)="getResidentGridData('Inactive')" class="small-box-footer" id="btntotal">More info
+              <i class="fa fa-arrow-circle-right" > </i>
+            </a>
+          </div>
+
+        </div>
+        <div class="col-lg-2 col-6">
+          <div class="small-box bg-aqua" style="background-color: #00c0ef !important">
+            <div class="inner">
+              <h3 id="totalsuccess">{{residentsCount_Transfer}}</h3>
+              <p>Transfer</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-android-share"></i>
+            </div>
+            <a href="javascript:void(0)" (click)="getResidentGridData('Transfer')" class="small-box-footer" id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+
+        </div>
+        <div class="col-lg-2 col-6">
+          <div class="small-box bg-aqua" style="background-color: rgba(255, 174, 0, 0.911) !important">
+            <div class="inner">
+              <h3 id="totalsuccess">{{residentsCount_Readmit}}</h3>
+              <p>Re-Admit</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="javascript:void(0)" (click)="getResidentGridData('Readmit')" class="small-box-footer" id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+
+        </div>
+        <div class="col-lg-2 col-6">
+          <div class="small-box bg-aqua" style="background-color: rgba(0, 247, 255, 0.911) !important">
+            <div class="inner">
+              <h3 id="totalsuccess">{{residentsCount_Discharge}}</h3>
+              <p>DisCharge</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-home"></i>
+            </div>
+            <a href="javascript:void(0)" (click)="getResidentGridData('Discharge')" class="small-box-footer" id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+
+        </div>
+      </div> -->
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <form [formGroup]="myform" name="residentGridForm">
+                <div class="row form-group clearfix">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Facility</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Nursing Station</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                            (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3 form-group" [formGroup]="form" *ngFor="let field of fields">
+                        <label>{{field.label}}</label>
+                        <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data" [settings]="field.settings" [(ngModel)]="field.ngModel" [placeholder]="field.placeholder" (onSelect)="onCommonSelectItems($event)" (onSelectAll)="onCommonSelectAllItems($event)"
+                            (onDeSelect)="onCommonDeSelectItems($event)" (onDeSelectAll)="onCommonDeSelectAllItems(field.name)">
+                        </ng-multiselect-dropdown>
+                    </div>
+
+                    <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Wing</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlwings" [data]="wings" [settings]="dropdownSettings_Wings"
+              [(ngModel)]="selectedwItems" [placeholder]="'Wings'" (onSelect)="onWingSelect($event)"
+              (onSelectAll)="onWingSelectAll($event)" (onDeSelect)="onWingDeSelect($event)"
+              (onDeSelectAll)="onWingDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Room</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlrooms" [data]="rooms" [settings]="dropdownSettings_Rooms"
+              [(ngModel)]="selectedrItems" [placeholder]="'Rooms'" (onSelect)="onRoomSelect($event)"
+              (onSelectAll)="onRoomSelectAll($event)" (onDeSelect)="onRoomDeSelect($event)"
+              (onDeSelectAll)="onRoomDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Bed</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlbeds" [data]="beds" [settings]="dropdownSettings_Beds"
+              [(ngModel)]="selectedbItems" [placeholder]="'Beds'" (onSelect)="onBedSelect($event)"
+              (onSelectAll)="onBedSelectAll($event)" (onDeSelect)="onBedDeSelect($event)"
+              (onDeSelectAll)="onBedDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+                </div>
+            </form>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h3 class="card-title">All Residents</h3>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="ddlresidenttype" [(ngModel)]="residentTypeFlag" (change)="getFiltersDataBySelection()">
+                <option value="" disabled selected>Select</option>
+                <option value="1">Active</option>
+                <option value="2">Discharged</option>
+                <option value="3">Temporary Absent</option>
+                <option value="10">Merged</option>
+              </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" (input)="onSearchChange($event.target.value)" placeholder="Search">
+                        </div>
+                        <div class="col-sm-1">
+                            <a class="btn iconstyle" *ngIf="NewResidentpageConfig['AccessRead']" (click)="insertnewResident()">
+                                <i class="icon"></i>
+                                <span class="fa fa-2x fa-plus-circle iconColor" id="addIcon" style="cursor: pointer;" title="Add New Resident"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- <div class="table-responsive">
+            <table id="tblAllResidents" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 10px">Picture</th>
+                  <th>Resident Name</th>
+                  <th>DOB</th>
+                  <th>Gender</th>
+                  <th>Nursing Station Name</th>
+                  <th>Floor Name</th>
+                  <th>Wing Name</th>
+                  <th>Room</th>
+                  <th>Bed</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="residentTypeFlag!=10">
+                <tr
+                  *ngFor="let item of resident|paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };"
+                  style="cursor:pointer" (click)="onRowSelect(item.Patient_Id)">
+                  <td>
+                    <img [src]="sanitize(item.ImageLocation)" class="zoom" />
+                  </td>
+                  <td>{{item.PatientLastName+", "+item.PatientFirstName+"
+                    "+(item.PatientMiddleInitial==null?'':item.PatientMiddleInitial)+" "+(item.AliasName==null?'':item.AliasName)}}</td>
+                  <td>{{item.PatientDOB}}</td>
+                  <td>{{item.PatientGender}}</td>
+                  <td>{{item.NurseStationName}}</td>
+                  <td>{{item.FloorName}}</td>
+                  <td>{{item.WingName}}</td>
+                  <td>{{item.RoomName}}</td>
+                  <td>{{item.BedName}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="residentTypeFlag==10">
+                  <tr
+                    *ngFor="let item of resident|paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };">
+                    <td>
+                      <img [src]="sanitize(item.ImageLocation)" class="zoom"/>
+                    </td>
+                    <td>{{item.PatientLastName+", "+item.PatientFirstName+"
+                      "+(item.PatientMiddleInitial==null?'':item.PatientMiddleInitial)+" "+(item.AliasName==null?'':item.AliasName)}}</td>
+                    <td>{{item.PatientDOB}}</td>
+                    <td>{{item.PatientGender}}</td>
+                    <td>{{item.NurseStationName}}</td>
+                    <td>{{item.FloorName}}</td>
+                    <td>{{item.WingName}}</td>
+                    <td>{{item.RoomName}}</td>
+                    <td>{{item.BedName}}</td>
+                  </tr>
+                </tbody>
+            </table>
+          </div> -->
+                    <div class="row" *ngIf="residentTypeFlag!=10">
+                        <div class="col-sm-4 col-md-6 col-lg-4" *ngFor="let item of resident|paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };">
+                            <div style="cursor:pointer" (click)="onRowSelect(item.Patient_Id)" class="card card-primary">
+                                <div class="card-header">
+                                    <b class="card-title">{{item.PatientLastName+", "+item.PatientFirstName+"
+                    "+(item.PatientMiddleInitial==null?'':item.PatientMiddleInitial)}}</b>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                      
+                                        <div class="col-sm-4">
+                                            <img container="body"  (mouseenter) ="mouseEnter(item.Patient_Id)"  (mouseleave) ="mouseLeave()"   [ngbTooltip]="this.tipContent" src="assets/img/Defavatar.png" class="zoom" />
+                                        </div>
+                                        <div class="col-sm-8">
+                                       
+                                            <div class="row form-group">
+                                                <div class="col-sm-12">DOB: {{item.PatientDOB|date :'MM/dd/yyyy'}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-sm-12">Gender: {{item.PatientGender}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">Nursing Station: <span>&nbsp; {{item.NurseStationName}}</span></div>
+                                        <!-- <div class="col-sm-7">{{item.NurseStationName}}</div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">Floor Name: <span>&nbsp; {{item.FloorName}}</span></div>
+                                        <!-- <div class="col-sm-8">{{item.FloorName}}</div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">Wing Name: <span>&nbsp; {{item.WingName}}</span></div>
+                                        <!-- <div class="col-sm-8">{{item.WingName}}</div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">Room: <span>&nbsp; {{item.RoomName}}</span></div>
+                                        <!-- <div class="col-sm-8">{{item.RoomName}}</div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">Bed: <span>&nbsp; {{item.BedName}}</span></div>
+                                        <!-- <div class="col-sm-8">{{item.BedName}}</div> -->
+                                    </div>
+                                    <div class="row">
+
+                                      
+                                      <div class="col-sm-12" [ngStyle]="{'color':item.imgchk == 'Yes'?'black':'Red'}" >Image On File: {{item.imgchk}}</div>
+                                  </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer" style="padding: 5px;">
+                                    <!-- <input type="button" value="Edit" class="btn btn-sm btn-success" style="float: right;" /> -->
+                                </div>
+                                <!-- /.card-footer-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="residentTypeFlag==10">
+                        <div class="col-sm-4 col-md-6 col-lg-4" *ngFor="let item of resident|paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <b class="card-title">{{item.PatientLastName+", "+item.PatientFirstName+"
+                  "+(item.PatientMiddleInitial==null?'':item.PatientMiddleInitial)}}</b>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <img container="body"  (mouseenter) ="mouseEnter(item.Patient_Id)"  (mouseleave) ="mouseLeave()"   [ngbTooltip]="this.tipContent" src="assets/img/Defavatar.png" class="zoom" />
+                                    </div>
+                                        <div class="col-sm-8">
+                                         
+                                            <div class="row form-group">
+                                                <div class="col-sm-12">DOB: {{item.PatientDOB|date :'MM/dd/yyyy'}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-sm-12">Gender: {{item.PatientGender}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">Nursing Station: <span>&nbsp; {{item.NurseStationName}}</span></div>
+                                      <!-- <div class="col-sm-7">{{item.NurseStationName}}</div> -->
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12">Floor Name: <span>&nbsp; {{item.FloorName}}</span></div>
+                                      <!-- <div class="col-sm-8">{{item.FloorName}}</div> -->
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12">Wing Name: <span>&nbsp; {{item.WingName}}</span></div>
+                                      <!-- <div class="col-sm-8">{{item.WingName}}</div> -->
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12">Room: <span>&nbsp; {{item.RoomName}}</span></div>
+                                      <!-- <div class="col-sm-8">{{item.RoomName}}</div> -->
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-12">Bed: <span>&nbsp; {{item.BedName}}</span></div>
+                                      <!-- <div class="col-sm-8">{{item.BedName}}</div> -->
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-12" [ngStyle]="{'color':item.imgchk == 'Yes'?'black':'Red'}" >Image On File: {{item.imgchk}}</div>
+                                  
+                                </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer" style="padding: 5px;">
+                                    <!-- <input type="button" value="Edit" class="btn btn-sm btn-success" style="float: right;" /> -->
+                                </div>
+                                <!-- /.card-footer-->
+                            </div>
+                        </div>
+                    </div>
+                    <pagination-controls (pageChange)="loadGrid($event)" *ngIf="resident.length > 0"></pagination-controls>
+                </div>
+            </div>
+        </div>
+        <ng4-loading-spinner [template]="template" [timeout]="99000" [loadingText]="'Please wait...'"></ng4-loading-spinner>
+    </section>
+</div>

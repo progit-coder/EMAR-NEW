@@ -1,0 +1,865 @@
+<app-commonmodal title="{{modalTitle}}" style="width: 100%;">
+  <div class="modal-body bodystyle">
+      <form [formGroup]="myform" autocomplete="off">
+        <div class="row form-group">
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Physician
+              <span class="c1">*</span>
+              <ng-multiselect-dropdown formControlName="physician" [disabled]="isReadOnly" [data]="physiciansdrop" [(ngModel)]="selectedphyItems" [settings]="dropdownSettings_Physician" class="form-control" [ngClass]="{
+'is-valid':myform.controls.physician.valid ,
+'is-invalid':myform.controls.physician.invalid && myform.controls.physician.touched}">
+              </ng-multiselect-dropdown>
+              <div *ngIf="myform.controls.physician.errors" class="errorMessage">
+                  <div *ngIf="myform.controls.physician.errors.required">
+                      Physician Name is required.
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Route
+              <span class="c1" *ngIf="this.myform.value.orderTypeId != 4">*</span>
+              <ng-multiselect-dropdown formControlName="route" [disabled]="isReadOnly" [data]="routes" [(ngModel)]="selectedroItems" [settings]="dropdownSettings_Route" class="form-control" [ngClass]="{
+'is-valid':myform.controls.route.valid ,
+'is-invalid':myform.controls.route.invalid && myform.controls.route.touched}">
+              </ng-multiselect-dropdown>
+              <div *ngIf="myform.controls.route.errors " class="errorMessage">
+                  <div *ngIf="myform.controls.route.errors.required">
+                      Route Name is required.
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-3 col-md-6 col-lg-3">
+              Drug/Literal
+              <span class="c1" *ngIf="this.myform.value.orderTypeId != 4">*</span>
+              <input type="text" id="txtdrug" [attr.disabled]="isReadOnly ? '' : null" formControlName="drug" class="form-control" [(ngModel)]="DrugName" [ngClass]="{
+'is-valid':myform.controls.drug.valid,
+'is-invalid':myform.controls.drug.invalid && myform.controls.drug.touched}" (keyup)="onDrugNameChange(DrugName)" />
+              <div *ngIf="myform.controls.drug.errors " class="errorMessage">
+                  <div *ngIf="myform.controls.drug.errors.required">
+                      Drug Name is required.
+                  </div>
+                  <div *ngIf="myform.controls.drug.errors.maxlength">
+                      Drug name must not exceed 120 characters.
+                  </div>
+              </div>
+              <div class="search-result" *ngIf="flag">
+                  <ul>
+                      <li (click)="onselectDrugbyBoth(item)" *ngFor="let item of drugList | async">
+                          {{item.DrugName}}
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div style="vertical-align: middle;" *ngIf="myform.value.orderTypeId!=4">
+              <a class="btn" style="padding: 0px !important;" (click)="searchDrugNames(DrugName)">
+                  <i title="Search Drug Names" class="fa fa-search" style="color:#4fb633;font-size: 25px;padding-top: 23px;
+padding-left: 8%;"></i>
+              </a>
+              <!-- <div class="search-result" *ngIf="flag">
+  <ul>
+    <li (click)="onselectDrug(item)" *ngFor="let item of drugList | async">
+      {{item.DrugName}}
+    </li>
+  </ul>
+</div>  -->
+              <!-- <input type="text" class="form-control" formControlName="drug" [readonly]="isReadOnly" /> -->
+          </div>
+      </div>
+      <div class="row form-group clearfix">
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Qty on Hand
+              <input type="text" class="form-control" formControlName="qtyHand" [attr.disabled]="isReadOnlyforControl ? '' : null" />
+              <div *ngIf="myform.controls.qtyHand.errors && (myform.controls.qtyHand.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.qtyHand.errors.maxlength">
+                      Quantity on Hand must not exceed 9 characters.
+                  </div>
+                  <div *ngIf="myform.controls.qtyHand.errors.pattern">
+                      {{config.decimalMessage}}
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Qty / Dose
+              <span class="c1" *ngIf="this.myform.value.orderTypeId != 4">*</span>
+              <input type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              (change)="isDoseValid($event.target.value)" class="form-control" formControlName="dose" [ngClass]="{
+'is-valid':myform.controls.dose.valid,
+'is-invalid':myform.controls.dose.invalid && myform.controls.dose.touched}" [readonly]="isReadOnly" />
+              <div *ngIf="myform.controls.dose.errors" class="errorMessage">
+                  <div *ngIf="myform.controls.dose.errors.required">
+                      Qty / Dose is required.
+                  </div>
+                  <div *ngIf="myform.controls.dose.errors.maxlength">
+                      Qty / Dose cannot be more than 9 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.dose.errors.pattern">
+                      {{config.decimalMessage}}
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Refill
+              <input type="text" class="form-control" formControlName="refill" />
+              <div *ngIf="myform.controls.refill.errors && (myform.controls.refill.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.refill.errors.maxlength">
+                      Refill cannot be more than 3 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.refill.errors.pattern">
+                      {{config.numericMessage}}
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Directions
+              <span class="c1">*</span>
+              <textarea cols="3" class="form-control" formControlName="addInst" [ngClass]="{
+'is-valid':myform.controls.addInst.valid,
+'is-invalid':myform.controls.addInst.invalid && myform.controls.addInst.touched}"></textarea>
+              <div *ngIf="myform.controls.addInst.errors " class="errorMessage">
+                  <div *ngIf="myform.controls.addInst.errors.required">
+                      Directions is required.
+                  </div>
+                  <div *ngIf="myform.controls.addInst.errors.maxlength">
+                      Directions cannot exceed 250 characters long.
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Start Date
+              <span class="c1">*</span>
+              <input type="date" class="form-control" formControlName="startDate" [ngClass]="{
+'is-valid':myform.controls.startDate.valid,
+'is-invalid':myform.controls.startDate.invalid && myform.controls.startDate.touched}" [readonly]="isReadOnly" maxlength="10" />
+              <div *ngIf="myform.controls.startDate.errors " class="errorMessage">
+                  <div *ngIf="myform.controls.startDate.errors.required">
+                      Start Date is required.
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Max Per Day
+              <span class="c1" *ngIf="this.myform.value.prn == true">*</span>
+              <input type="text" class="form-control" formControlName="maxPerDay" (blur)="appendZero()" (input)="isInteger()" [ngClass]="{
+'is-valid':myform.controls.maxPerDay.valid,
+'is-invalid':myform.controls.maxPerDay.invalid && myform.controls.maxPerDay.touched}" />
+        
+              <div *ngIf="myform.controls.maxPerDay.invalid && myform.controls.maxPerDay.touched" class="errorMessage">
+                <div *ngIf="myform.controls.maxPerDay.errors.maxlength">
+                  Max Per Day cannot be more than 7 characters long.
+                </div>
+
+                <div *ngIf="myform.controls.maxPerDay.errors.integerError">
+                  Please enter 3 digits only.
+                </div>
+                <div *ngIf="myform.controls.maxPerDay.errors.decimalError">
+                  Please enter up to 3 decimal places only.
+                </div>
+                <div *ngIf="myform.controls.maxPerDay.errors.required &&(myform.value.prn == true)">
+                  Max Per Day is required.
+                </div>
+                <div *ngIf="myform.controls.maxPerDay.errors.dotOnly || myform.controls.maxPerDay.errors.data">
+                  Please enter a valid number.
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              Alert Text
+              <input type="text" class="form-control" formControlName="alertText" />
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              End Date
+              <input type="date" class="form-control" formControlName="endDate" maxlength="10" />
+              <!-- [min]="minStartDate" -->
+          </div>
+          <div style="height: 10px;width:118px">
+              <label class="switch" style="margin-top: 20px;">
+<input type="checkbox" formControlName="type" style="margin-top: 23px;" [attr.disabled]="isReadOnly ? '' : null"
+(change)="onOrderTypeChange()">
+<div class="slider round">
+<span class="on">Order</span>
+<span class="off">Stock</span>
+</div>
+</label>
+          </div>
+
+
+          <div>
+              <div style="padding-left: 17px; height: 13px; margin-top: 20px;margin-bottom: 20px;">
+                  <a class="btn" style="padding: 0px !important;" *ngIf="favstatus == 1" (click)="modalfav()">
+                      <i title="User Inputs" class="fa fa-pencil-square-o" style="color: red;font-size: 18px"></i>
+                  </a>
+                  <a class="btn" style="padding: 0px !important;" *ngIf="favstatus == 0" (click)="modalfav()">
+                      <i title="User Inputs" class="fa fa-pencil-square-o" style="font-size: 18px"></i>
+                  </a>
+                  <a class="btn" style="padding: 0px !important;" (click)="insulinOpen()">
+                      <i title="Insulin Data" class="fa   fa-sellsy" style="color: #4fb633;font-size: 18px"></i>
+                  </a>
+                  <a class="btn" style="padding: 0px !important;" *ngIf="splits == 0">
+                      <i title="No Splits" class="fa  fa-navicon (alias)" style="font-size: 18px"></i>
+                  </a>
+                  <a class="btn" style="padding: 0px !important;" *ngIf="splits == 1">
+                      <i title="Split Order" class="fa  fa-navicon (alias)" style="color: #4fb633;font-size: 18px"></i>
+                  </a>&nbsp;&nbsp;
+                  <a class="btn" style="padding: 0px !important;" *ngIf="notesFlag ==0" (click)="modalnote()">
+                      <i title="Note" class="fa fa-sticky-note" style="font-size: 18px"></i>
+                  </a>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-3">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+<input type="checkbox" formControlName="self">
+</span>
+                  </div>
+                  <span class="form-control">&nbsp; Self Administered</span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-2">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+<input type="checkbox" [attr.disabled]="isDrugOrder == true? '':null"  (change)="checkLiteral($event.target.checked?true:false)"  formControlName="literal">
+</span>
+                  </div>
+                  <span class="form-control">&nbsp; Literal</span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-2">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+<input type="checkbox" [attr.disabled]="isDrugOrder == true? '':null" (change)="checkTreatment($event.target.checked?true:false)"  formControlName="treatment">
+</span>
+                  </div>
+                  <span class="form-control">&nbsp; Treatment</span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-2">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+<input type="checkbox" formControlName="prn" [attr.disabled]="this.myform.value.orderTypeId == 4?'':null"
+  (change)="checkPRN($event.target.checked?true:false)">
+</span>
+                  </div>
+                  <span class="form-control">&nbsp; PRN</span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-3">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+<input type="checkbox" [attr.disabled]="isControlSubstanceReadOnly == true? '':null"
+  formControlName="controlSubstance">
+</span>
+                  </div>
+                  <span class="form-control">&nbsp; Controlled Substance</span>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-6 col-lg-6">
+              Scheduled Time
+              <span class="c1" *ngIf="this.myform.value.orderTypeId != 4">*</span>
+              <textarea rows="2" class="form-control" formControlName="schduleText" readonly [ngClass]="{
+'is-valid':myform.controls.schduleText.valid,
+'is-invalid':myform.controls.schduleText.invalid && myform.controls.schduleText.touched}"></textarea>
+              <div *ngIf="myform.controls.schduleText.errors" class="errorMessage">
+                  <div *ngIf="myform.controls.schduleText.errors.required">
+                      Scheduled Time is required.
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-1" style="padding-top: 15px;">
+              <!-- <a class="btn" title="Add Schedule Time"> -->
+                  <i class="icon"></i>
+                  <span style="color: #4fb633;font-size: 34px" class="fa fa-calendar-times-o "></span>
+              <!-- </a> -->
+          </div>
+          <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+<a class="btn col-sm-2" (click)="barcodeModalOpen()" title="Add Barcode" style="cursor: pointer;">
+<i class="icon"></i>
+<span style="color: blue;" class="fa fa-2x fa-barcode"></span>
+<span class="c1" *ngIf="barCodeFlag === 1 || (myform.value.orderTypeId!=4 && barcodear.length==0)">Barcode is required </span>
+</a>
+<div class="row form-group">
+<div *ngIf="barcodear.length>0" style="margin-top : 5px;">
+<span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+<span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+<a class="btn editicon" style="color:red" (click)="removeBarcode(i)">
+  <i class="icon"></i>
+  <span class=" fa fa-times " title="Delete"></span>
+</a>
+</span>
+</div>
+</div>
+</div> -->
+          <div class="col-sm-4 col-md-6 col-lg-4">
+              <div class="row form-group">
+                  <div class="col-sm-10 col-md-10 col-lg-10">
+                      BarCode
+                      <span class="c1" *ngIf="this.myform.value.orderTypeId != 4">*</span>
+                      <input type="text" maxlength="20" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');" id="txtbarcode" formControlName="barcode" [ngClass]="{
+'is-valid':myform.controls.barcode.valid && barcodear.length > 0,
+'is-invalid':myform.controls.barcode.invalid && myform.controls.barcode.touched && barcodear.length == 0}" class="form-control" />
+                      <div *ngIf="myform.controls.barcode.errors  && barcodear.length == 0" class="errorMessage">
+                          <div *ngIf="myform.controls.barcode.errors.required && barcodear.length == 0">
+                              BarCode is required.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-1 col-md-1 col-lg-1" style="padding-top: 14px;">
+                      <input type="button" id="btnok" value="Add" class="bt-lg btn btn-success" [disabled]="myform.value.barcode=='' || myform.value.barcode==null" (click)="addBarcode(myform.value.barcode)" />
+                  </div>
+              </div>
+
+            <div class="row form group">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div *ngIf="barcodear.length>0" >
+                                      <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                    <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                                      <a class="btn editicon" style="color:red" (click)="removeBarcode(i)">
+                                          <i class="icon"></i>
+                                          <span class=" fa fa-times " title="Delete"></span>
+                                      </a>
+                                      </span>
+                                    </div>
+                                  </div>
+            </div>
+          </div>
+
+          <div class="row form-group" style="margin-top: -27px;">
+
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                  <a class="btn" (click)="hoaOpen()">
+                     <u style="color: red">Click here to confirm or update schedule times</u>
+                  </a>
+              </div>
+          </div>
+
+
+      </div>
+          </form>
+        </div>
+      <div class="modal-footer">
+      <input type="button" id="btnsave" [disabled]="(myform.invalid|| barCodeFlag === 1) || clicked" *ngIf="pageConfig['AccessWrite']" value="Review" (click)="CompletedReviewClick(1);clicked = true" class="btn btn-success"/>
+      <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button>
+    </div>
+
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" style="padding-top:15px" id="modalshu" role="dialog"
+  [ngStyle]="{'display': modalHOAIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header" style="height: 35px;padding:7px !important;">
+        <h5>HOA</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+
+      <div class="modal-body bodystyle">
+        <form [formGroup]="scheduleform">
+          <div class="row form-group">
+            <!-- <div class="col-sm-2">Frequency</div> -->
+            <div class="col-sm-6 col-md-6 col-lg-6">Frequency
+              <ng-multiselect-dropdown class="form-control" formControlName="frequency" [data]="frequencyList"
+                [(ngModel)]="selectedfrequencyItems" (onSelect)="onFrequencyChange($event)"
+                (onDeSelect)="onFrequencyChange($event)" [settings]="dropdownSettings_Frequency">
+              </ng-multiselect-dropdown>
+            </div>
+            <!-- <div class="col-sm-2">Start Time</div> -->
+            <div class="col-sm-3 col-md-5 col-lg-5">Start Time
+              <ng-multiselect-dropdown formControlName="either" [data]="hoursList" [(ngModel)]="selectedstItems"
+                [settings]="dropdownSettings_StartTime" (onSelect)="addstartTime()" (onDeSelect)="addstartTime()"
+                class="form-control" [disabled]="isShiftSchedule==true">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1" *ngIf="!isShiftSchedule">
+              <a class="btn" style="margin-top: 10px;" (click)="timemodalopen()">
+                <i class="icon"></i>
+                <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Time"></span>
+              </a>
+            </div>
+          </div>
+          <div class="row form-group">
+            <!-- <div class="col-sm-2">Every Hours</div> -->
+            <div class="col-sm-46 col-md-6 col-lg-6">
+              Every Hours
+              <input type="text" class="form-control" formControlName="hours"
+                [attr.disabled]="isHoursReadOnly ? '' : null" [ngClass]="{
+                'is-valid':scheduleform.controls.hours.valid && scheduleform.controls.hours.dirty,
+                'is-invalid':scheduleform.controls.hours.invalid && scheduleform.controls.hours.touched}" />
+
+              <div *ngIf="scheduleform.controls.hours.errors && (scheduleform.controls.hours.touched)"
+                class="errorMessage">
+                <div *ngIf="scheduleform.controls.hours.errors.maxlength">
+                  Hours must be 2 characters long.
+                </div>
+                <div *ngIf="scheduleform.controls.hours.errors.pattern">
+                  {{config.numericMessage}}
+                </div>
+                <div *ngIf="scheduleform.controls.hours.errors.min">
+                  Hours allow 1 to 23 values only.
+                </div>
+                <div *ngIf="scheduleform.controls.hours.errors.max">
+                  Hours allow 1 to 23 values only.
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-12 col-lg-6">
+              Only administration on these days
+              <div>
+                <label class="customcontainer">Mon
+                  <input type="checkbox" formControlName="mon">
+                  <span class="checkmark"></span>
+                </label> &nbsp;
+                <label class="customcontainer">Tue
+                  <input type="checkbox" formControlName="tue">
+                  <span class="checkmark"></span>
+                </label>&nbsp;
+                <label class="customcontainer">Wed
+                  <input type="checkbox" formControlName="wed">
+                  <span class="checkmark"></span>
+                </label> &nbsp;
+                <label class="customcontainer">Thu
+                  <input type="checkbox" formControlName="thu">
+                  <span class="checkmark"></span>
+                </label> &nbsp;
+                <label class="customcontainer">Fri
+                  <input type="checkbox" formControlName="fri">
+                  <span class="checkmark"></span>
+                </label> &nbsp;
+                <label class="customcontainer">Sat
+                  <input type="checkbox" formControlName="sat">
+                  <span class="checkmark"></span>
+                </label>&nbsp;
+                <label class="customcontainer">Sun
+                  <input type="checkbox" formControlName="sun">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h5>Month Filters</h5>
+          </div>
+          <div class="row form-group">
+            <!-- <div class="col-sm-2">Week</div> -->
+            <div class="col-sm-4 col-md-6 col-lg-6">
+              Months
+              <ng-multiselect-dropdown class="form-control" formControlName="month" (onSelect)="onMonthSelect($event)" (onDeSelect)="onMonthDeSelect($event)" [data]="monthsList" [settings]="dropdownSettings_Month">
+              </ng-multiselect-dropdown>
+              <!-- <select class="form-control" formControlName="month">
+                <option value="0">Select</option>
+                <option *ngFor="let item of monthsList" value="{{item.Month_Id}}">{{item.Month_Name}}</option>
+              </select> -->
+
+            </div>
+            <!-- <div class="col-sm-2">Months</div> -->
+            <div class="col-sm-4 col-md-6 col-lg-6">
+              Week
+              <ng-multiselect-dropdown class="form-control" [disabled]="isWeeksDisabled==true" formControlName="week" (onSelect)="onWeekSelect($event)" (onDeSelect)="onWeekDeSelect($event)" [data]="weeksList" [settings]="dropdownSettings_Week">
+              </ng-multiselect-dropdown>
+              <!-- <select class="form-control" formControlName="week">
+                <option value="0">Select</option>
+                <option *ngFor="let item of weeksList" value="{{item.Week_Id}}">{{item.Week_Desc}}</option>
+              </select> -->
+
+            </div>
+          </div>
+          <div class="row form-group">
+            <!-- <div class="col-sm-2">Days</div> -->
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Days
+              <ng-multiselect-dropdown class="form-control" formControlName="days" [disabled]="isdaysDisabled==true" (onSelect)="onDaysSelect($event)"
+                (onDeSelect)="onDaysDeSelect($event)" [data]="monthDays" [settings]="dropdownSettings_Days">
+              </ng-multiselect-dropdown>
+            </div>
+          <!-- <div class="col-sm-2">Active For Days</div> -->
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            Active For Days
+            <input type="text" class="form-control" formControlName="aDay" [ngClass]="{
+              'is-valid':scheduleform.controls.aDay.valid && scheduleform.controls.aDay.dirty,
+              'is-invalid':scheduleform.controls.aDay.invalid && scheduleform.controls.aDay.touched}" />
+            <div *ngIf="scheduleform.controls.aDay.errors && (scheduleform.controls.aDay.touched)" class="errorMessage">
+              <div *ngIf="scheduleform.controls.aDay.errors.maxlength">
+                Active For Days must be 3 characters long.
+              </div>
+              <div *ngIf="scheduleform.controls.aDay.errors.pattern">
+                {{config.numericMessage}}
+              </div>
+              <div *ngIf="scheduleform.controls.aDay.errors.min">
+                Minimum 1 Active for day allowed.
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="row form-group">
+            <!-- <div class="col-sm-2">Hold For Days</div> -->
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Hold For Days
+              <input type="text" class="form-control" formControlName="hDay" [ngClass]="{
+                'is-valid':scheduleform.controls.hDay.valid && scheduleform.controls.hDay.dirty,
+                'is-invalid':scheduleform.controls.hDay.invalid && scheduleform.controls.hDay.touched}" />
+              <div *ngIf="scheduleform.controls.hDay.errors && (scheduleform.controls.hDay.touched)"
+                class="errorMessage">
+                <div *ngIf="scheduleform.controls.hDay.errors.maxlength">
+                  Active For Days must be 3 characters long.
+                </div>
+                <div *ngIf="scheduleform.controls.hDay.errors.pattern">
+                  {{config.numericMessage}}
+                </div>
+                <div *ngIf="scheduleform.controls.hDay.errors.min">
+                  Minimum 1 Hold for day allowed.
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="button" class="btn btn-success" value="Save and Close" *ngIf="pageConfig['AccessWrite']"
+          (click)="insertHoa()" [disabled]="scheduleform.invalid" />
+        <button type="button" class="btn btn-danger" (click)="cancelHOAChanges()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 35px" id="modalfavs" role="dialog"
+  [ngStyle]="{'display': modalfavIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-dialog-scrollable customHeight">
+    <div class="modal-content">
+      <div #DemoHandle2 class="modal-header" style="height: 35px;padding:7px !important ">
+        <h5>Measurements and other checks</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <form [formGroup]="favForm">
+          <div class="card card-primary">
+            <div class="card-body">
+              <div *ngFor="let item of favouriteMasterList">
+                <label>
+                  <input type="checkbox" formControlName="favchecks" [checked]="item.check!=0"
+                    (change)="FavouriteChange(item.OrderFavMaster_ID,$event.target.checked,item.OrderFavourite_ID)" />{{item.OrderFavDesc}}
+                </label>
+                <br />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']" class="btn btn-success"
+          (click)="InsertOrderFavourities()" />
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle3" style="padding-top: 35px" id="modalinsulis" role="dialog"
+  [ngStyle]="{'display': modalInsuliIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-dialog-scrollable customHeight">
+    <div class="modal-content">
+      <div #DemoHandle3 class="modal-header" style="height: 35px;padding:7px !important ">
+        <h5>Insulin Comments</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="card card-primary">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="card-body">
+              Insulin Comments
+              <input type="text" class="form-control" formControlName="insulincomments" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle4" style="padding-top: 35px" id="modalnote" role="dialog"
+  [ngStyle]="{'display': modalnoteIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-dialog-scrollable customHeight">
+    <div class="modal-content">
+      <div #DemoHandle4 class="modal-header" style="height: 35px;padding:7px !important ">
+        <h5>Nurse Comments</h5>
+        <button type="button" class="close" (click)="closeNotesModel()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <form [formGroup]="noteform" autocomplete="off">
+          <div class="row form-group">
+            <div class="col-sm-4">
+              Note
+            </div>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" formControlName="notes" [ngClass]="{
+                        'is-valid':noteform.controls.notes.valid && noteform.controls.notes.dirty,
+                        'is-invalid':noteform.controls.notes.invalid && noteform.controls.notes.touched}" />
+              <div *ngIf="noteform.controls.notes.errors && (noteform.controls.notes.touched)" class="errorMessage">
+                <div *ngIf="noteform.controls.notes.errors.required">
+                  Notes is Required.
+                </div>
+                <div *ngIf="noteform.controls.notes.errors.maxlength">
+                  Notes cannot be more than 500 characters long.
+                </div>
+                <!-- <div *ngIf="noteform.controls.notes.errors.pattern">
+                  {{config.alphaNumericFewSpecialCharactersMessage1}}
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div calss="table table-responsive" style="overflow: scroll !important;">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Notes</th>
+                      <th>Added Date</th>
+                      <th>Added By</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of nurseNotes">
+                      <td>{{item.Comment}}</td>
+                      <td>{{item.Comment_CreatedOn|date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                      <td>{{item.UserName}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" *ngIf="pageConfig['AccessWrite']" [disabled]="noteform.invalid"
+          (click)="nurseCommentsSave()">Save</button>
+        <button type="button" class="btn btn-danger" (click)="closeNotesModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle5" style="padding-top: 35px" id="modaldes" role="dialog"
+  [ngStyle]="{'display': modalTimeIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-dialog-scrollable customHeight">
+    <div class="modal-content">
+      <div #DemoHandle5 class="modal-header" style="height: 35px;">
+        <h5>Add Time</h5>
+        <button type="button" class="close" (click)="modalTimeIsClose()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <form [formGroup]="timeform">
+          <div class="row form-group">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+              Next Time
+            </div>
+            <div class="col-sm-4 col-md-8 col-lg-6">
+              <ng-multiselect-dropdown formControlName="starttime" [data]="hoursList" [(ngModel)]="selectedntItems"
+                [settings]="dropdownSettings_NextTime" class="form-control">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+              <a class="btn" (click)="addTimes()">
+                <i class="icon"></i>
+                <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Time"></span>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="timesArray.length>0">
+            <div class="row" *ngFor="let item of timesArray;index as i" style="margin-top : 5px;">
+              <span>
+                <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">
+                  <span *ngIf="i==0">
+                    <strong>Start Time - </strong>
+                  </span>{{item.Hour_Desc}}</span>
+                <a class="btn editicon" style="color:red" (click)="removeTime(i)">
+                  <i class="icon"></i>
+                  <span class=" fa fa-times " title="Delete"></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="modalTimeIsClose()" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle6" id="exampleModal" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': modalControlIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-dialog-scrollable customHeight">
+    <div class="modal-content">
+      <div #DemoHandle6 class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:red;">Warning!</h5>
+        <!-- <button type="button" class="close" (click)="closeModel()">&times;</button> -->
+      </div>
+      <div class="modal-body">
+        <strong> {{controlledSubstancemessage}}</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveOrder(1)">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="saveOrder(0)">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle7" style="padding-top: 35px" id="modaldes" role="dialog"
+  [ngStyle]="{'display': modalBarcodeIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div #DemoHandle7 class="modal-header" style="height: 35px;padding:7px !important;">
+        <h5>Add Barcode</h5>
+        <button type="button" class="close" (click)="modalBarcodeIsClose()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <form [formGroup]="myform">
+          <div class="row form-group">
+            <div class="col-sm-2"> BarCode
+              <span class="c1" *ngIf="this.myform.value.orderTypeId != 4">*</span>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <input type="text" maxlength="20"
+                oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                id="txtbarcode" formControlName="barcode"
+                [ngClass]="{
+                'is-valid':myform.controls.barcode.valid && barcodear.length > 0,
+                'is-invalid':myform.controls.barcode.invalid && myform.controls.barcode.touched && barcodear.length == 0}" class="form-control"
+                />
+              <div *ngIf="myform.controls.barcode.errors  && barcodear.length == 0" class="errorMessage">
+                <div *ngIf="myform.controls.barcode.errors.required && barcodear.length == 0">
+                  BarCode is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+              <input type="button" id="btnok" value="Add" class="btn btn-success"  [disabled]="myform.value.barcode==''" (click)="addBarcode(myform.value.barcode)" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div *ngIf="barcodear.length>0" style="margin-top : 5px;">
+              <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                <a class="btn editicon" style="color:red" (click)="removeBarcode(i)">
+                  <i class="icon"></i>
+                  <span class=" fa fa-times " title="Delete"></span>
+                </a>
+              </span>
+            </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <input type="button" id="btnok" value="Ok" class="btn btn-success"  [disabled]="barCodeFlag === 1" (click)="modalBarcodeIsClose()" /> -->
+        <input type="button" id="btnclose" value="Close"  class="btn btn-danger" (click)="modalBarcodeIsClose()" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle8" id="exampleModal" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': prnSchedleCheckModal ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="width: 50%;">
+    <div class="modal-content">
+      <div #DemoHandle8 class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">PRN Alert</h5>
+        <button type="button" class="close" (click)="closePRNModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <strong> Are you sure you want to Complete Review this PRN Without HOA?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']"  (click)="CompletePRNReview()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="OpenHOAForPRN()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle9" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': modalFieldsChangesDcConfirmation ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="width: 50%;">
+      <div class="modal-content">
+          <div #DemoHandle9 class="modal-header" style="background-color: #ffdf62;">
+              <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+              <!-- <button type="button" class="close" (click)="fileldsChangesDcOrder(0)">&times;</button> -->
+          </div>
+          <div class="modal-body">
+              <strong>Changing this information requires a new order. If you select OK, this order will be discontinued.</strong>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="fileldsChangesDcOrder(0)">Cancel</button>
+              <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="fileldsChangesDcOrder(1)">OK</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle10" id="exampleModal" role="dialog" [ngStyle]="{'display': modalDcConfirmationIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="width: 50%;">
+      <div class="modal-content">
+          <div #DemoHandle10 class="modal-header" style="background-color: #cccccc;">
+              <h5 class="modal-title" id="exampleModalLabel" style="color:#000000">Discontinue Order</h5>
+              <button type="button" class="close" *ngIf="fieldsChangesDcFlag!='YES'" (click)="closeDcModel()">&times;</button>
+          </div>
+
+          <div class="modal-body">
+              <form *ngIf="residentId!=0" [formGroup]="DcForm" autocomplete="off">
+                  <div class="row form-group">
+                      <div class="col-sm-6 col-md-6 col-lg-6">Discontinue Reason</div>
+                      <div class="col-sm-6 col-md-6 col-lg-6">
+                          <input type="text" id="txtreason" formControlName="DcReason" class="form-control" [ngClass]="{
+              'is-valid':DcForm.controls.DcReason.valid,
+              'is-invalid':DcForm.controls.DcReason.invalid && DcForm.controls.DcReason.touched}" />
+                          <div *ngIf="DcForm.controls.DcReason.errors && (DcForm.controls.DcReason.touched)" class="errorMessage">
+                              <div *ngIf="DcForm.controls.DcReason.errors.required">
+                                  Reason is required.
+                              </div>
+                              <div *ngIf="DcForm.controls.DcReason.errors.maxlength">
+                                  Reason cannot be more than 500 characters long.
+                              </div>
+                              <!-- <div *ngIf="DcForm.controls.DcReason.errors.pattern">
+                {{config.alphaNumericFewSpecialCharactersMessage7}}
+              </div> -->
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row form-group" *ngIf="splits == 1">
+                      <div class="col-sm-5 col-md-5 col-lg-5">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <input type="checkbox" formControlName="dcSplits">
+                                  </span>
+                              </div>
+                              <span class="form-control">&nbsp; Discontinue all splits?</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row form-group" style="display: none;" *ngIf="multipleOrdersplits == 1">
+                      <div class="col-sm-5 col-md-5 col-lg-5">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <input type="checkbox" formControlName="multipledcSplits">
+                                  </span>
+                              </div>
+                              <span class="form-control">&nbsp; Discontinue all splits?</span>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="orderDiscontinue()">Ok</button>
+              <button type="button" class="btn btn-danger" *ngIf="fieldsChangesDcFlag!='YES'" (click)="closeDcModel()">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
+</app-commonmodal>

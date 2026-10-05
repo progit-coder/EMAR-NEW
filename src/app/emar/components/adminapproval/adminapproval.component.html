@@ -1,0 +1,208 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- <div class="card-body"> -->
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Acknowledgements</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="adminApprovalForm">
+            <div class="row form-group clearfix">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Select Resident
+              </div> -->
+              <div class="col-sm-4 col-md-5 col-lg-4">
+                <strong>Select Resident</strong>
+                <!-- <select class="form-control" id="ddlresident" formControlName="ddlresidents" (change)="changeResident()">
+                  <option value="0">Select</option>
+                  <option *ngFor="let item of residents" value="{{item.Patient_Id}}">{{item.PatientLastName}}, {{item.PatientFirstName}} {{item.PatientMiddleInitial}}</option>
+                </select> -->
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlresidents" [placeholder]="'Resident'"
+                  [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                  (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+          </form>
+          <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+            [ngStyle]="{'display': modalApprovalIsOpen ? 'block' : 'none', 'opacity': 1}">
+            <div class="modal-dialog" style="max-width: 80%;">
+              <div class="modal-content">
+                <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                  <h5>Awaiting Approval Changes</h5>
+                  <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+                </div>
+                <div class="modal-body bodystyle">
+                  <div class="tableFixHead">
+                    <table id="tbladmitdocu" class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Field Name</th>
+                          <th>Old Value</th>
+                          <th>New Value</th>
+                          <th>Updated By</th>
+                          <th>Updated Date/Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of approvalChanges;index as i">
+                          <td>{{i+1}}</td>
+                          <td>{{item.ColumnName}}</td>
+                          <td>{{item.OldValue}}</td>
+                          <td>{{item.NewValue}}</td>
+                          <td> {{item.UpdatedBy}}</td>
+                          <td>{{item.UpdatedOn |date :'medium'}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" id="Allergy" role="dialog"
+            [ngStyle]="{'display': modalApprovalIsOpenAllergy ? 'block' : 'none', 'opacity': 1}">
+            <div class="modal-dialog" style="max-width: 80%;">
+              <div class="modal-content">
+                <div #DemoHandle2 class="modal-header " style="height: 50px ">
+                  <h5>Awaiting Approval Changes</h5>
+                  <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+                </div>
+                <div class="modal-body bodystyle">
+                  <div class="tableFixHead">
+                    <table id="tbladmitdocu" class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Allergy Code Type</th>
+                          <th>Allergy Type </th>
+                          <th>Allergy </th>
+                          <th>Name of Code</th>
+                          <th>Reaction</th>
+                          <th>Allergy Identification Date</th>
+                          <th>Created By</th>
+                          <th>Created Date/Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle3" id="Diagnosis" role="dialog"
+            [ngStyle]="{'display': modalApprovalIsOpenDiagnosis ? 'block' : 'none', 'opacity': 1}">
+            <div class="modal-dialog" style="max-width: 80%;">
+              <div class="modal-content">
+                <div #DemoHandle3 class="modal-header " style="height: 50px ">
+                  <h5>Awaiting Approval Changes</h5>
+                  <button type="button" class="close" (click)="closeModel()">&times;</button>
+                </div>
+                <div class="modal-body bodystyle">
+                  <div class="tableFixHead">
+                    <table id="tbladmitdocu" class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Coding Type</th>
+                          <th>Diagnosis</th>
+                          <th>Diagnosis Description </th>
+                          <th>Alternate Coding Id</th>
+                          <th>Alternate Coding Text</th>
+                          <th>Alternate Coding Method</th>
+                          <th>Diagnosis Date</th>
+                          <th>Created By</th>
+                          <th>Created Date/Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="tbladmitdocu" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" id="chkselectall" (change)="onCheckAll($event.target.checked?true:false)">
+                  </th>
+                  <th></th>
+                  <th>Resident Name</th>
+                  <th>Category</th>
+                  <!-- <th>Created By</th>
+                  <th>Created Date/Time</th> -->
+                  <th>View</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of approvalData|gridFilter:searchText:'Approval'| paginate: { itemsPerPage: gridPagination, currentPage: p };index as i">
+                  <td> <input type="checkbox" [checked]="CheckAll" value="{{item.Record_Id}}"
+                      name="{{ item.Record_Id }}" id="{{item.Record_Id}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                  <td>{{i+1}}</td>
+                  <td>{{item.Patient_Name}}</td>
+                  <td>{{item.Category}}</td>
+                  <!-- <td>{{item.UserName}}</td>
+                  <td>{{item.CreatedDate | date:'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                  <!-- <td ></td> -->
+                  <td><a href="javscript:void(0)" class="iconColor" (click)="viewChanges(item)"><u>View</u></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="approvalData.length > 0"></pagination-controls>
+          <div style="text-align: right" *ngIf="approvalData.length > 0">
+            <input type="button" value="Approve" (click)="approvecheck()" class="btn btn-success"
+              [disabled]="ApproveButton" *ngIf="pageConfig['AccessWrite']" />&nbsp;
+            <input type="button" value="Reject" (click)="rejectcheck()" class="btn btn-danger" [disabled]="RejectButton"
+              *ngIf="pageConfig['AccessWrite']" />
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+  </section>
+</div>
+<ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

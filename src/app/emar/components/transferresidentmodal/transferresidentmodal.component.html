@@ -1,0 +1,197 @@
+<app-commonmodal title="Resident Transfer">
+    <div class="modal-body bodystyle">
+        <form [formGroup]="myform" name="census">
+            <h5 class="iocnColor"><u>Current Location Details</u></h5>
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right">
+                        Admit Date
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{AdmitDate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right">
+                        Prescriber Name
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{PhysicianName}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right">
+                        Facility Name
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{Facilityname}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right" style="margin-top : 20px">
+                        Nursing Station Name
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{NursingStationName}}</label>
+                    </div>
+                </div>
+                <div class="form-group" [formGroup]="fetchform" *ngFor="let field of fetchfields">
+                    <div class="col-sm-12 col-lg-12" style="width: 204px">
+                        <div class="right" style="margin-top : 20px">
+                            {{field.label}}
+                        </div>
+                        <div class="left" style="margin-top : 5px">
+                            <label>{{field.label =='Floor'? FloorName:field.label =='Wing'?WingName:field.label =='Room'?RoomName:field.label =='Bed'?BedName:''}}</label>
+                        </div>
+                      </div>
+                  </div>
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Floor
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{FloorName}}</label>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf=" fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Wing
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{WingName}}</label>
+                    </div>
+                </div> -->
+
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Room
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{RoomName}}</label>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Bed
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{BedName}}</label>
+                    </div>
+                </div> -->
+            </div>
+            <h5 class="iocnColor"><u *ngIf="allFields===1">To be Transferred to</u></h5>
+            <div class="row form-group" *ngIf="Hlsevenconfig">
+                <div class="col-sm-3 col-md-6 col-lg-4"
+                    *ngIf="(displayfield.FacilityId == 1 || displayfield.FacilityId == 2) ">
+                    <div class="right">
+                        <label>Facility Name <span class="c1">*</span></label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown class="form-control" id="ddlfacilityid"
+                            [disabled]="displayfield.FacilityId == 2" formControlName="FacilityId"
+                            [(ngModel)]="selectedfalItems" [data]="userfacilitydrop"
+                            [settings]="dropdownSettings_Facility" [placeholder]="'Facility'"
+                            (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                                'is-valid':myform.controls.FacilityId.valid && myform.controls.FacilityId.dirty,
+                                'is-invalid':myform.controls.FacilityId.invalid && myform.controls.FacilityId.touched
+                              }">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-md-6 col-lg-4"
+                    *ngIf="(displayfield.NursingStationId == 1 || displayfield.NursingStationId == 2) ">
+                    <div class="right">
+                        <label>Nursing Station Name <span class="c1">*</span></label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown class="form-control" formControlName="NursingStationId"
+                            [disabled]="displayfield.NursingStationId == 2" [data]="nurseStation"
+                            [(ngModel)]="selectednItems" (onSelect)="onNurseStationSelect($event)"
+                            (onDeSelect)="onNurseStationSelect($event)" [settings]="dropdownSettings_NurseStations"
+                            [placeholder]="'Nursing Stations'" [ngClass]="{
+                        'is-valid':myform.controls.NursingStationId.valid && myform.controls.NursingStationId.dirty,
+                        'is-invalid':myform.controls.NursingStationId.invalid && myform.controls.NursingStationId.touched
+                      }">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-6 col-lg-4 form-group" [formGroup]="form" *ngFor="let field of fields">
+                    <div *ngIf="(field.label=='Floor' && (displayfield.Floor == 1 || displayfield.Floor == 2)) || (field.label=='Wing' && field.index!=0) || (field.label=='Room' && (displayfield.Room == 1 || displayfield.Room == 2)) || (field.label=='Bed' && (displayfield.Bed == 1 || displayfield.Bed == 2))">
+                        <label>{{field.label}}</label>
+                         <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data" [settings]="field.settings"
+                          [(ngModel)]="field.ngModel" [disabled]="(field.label=='Floor' && displayfield.Floor == 2) || (field.label=='Wing' && residentTransfer === false) || (field.label=='Room' && displayfield.Room == 2) || (field.label=='Bed' && displayfield.Bed == 2)" [placeholder]="field.placeholder" >
+                        </ng-multiselect-dropdown>
+                      </div>
+                  </div>
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4"
+                    *ngIf="(displayfield.Floor == 1 || displayfield.Floor == 2) && companyToBed==1">
+                    <div class="right">
+                        <label>Floor</label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown class="form-control" formControlName="Floor"
+                            [disabled]="displayfield.Floor == 2" [data]="floors" [settings]="dropdownSettings_Floors"
+                            [(ngModel)]="selectedflItems" [placeholder]="'Floors'">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="companyToBed==1">
+                    <div class="right">
+                        <label>Wing</label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown class="form-control" formControlName="Wing" [data]="wings"
+                            [settings]="dropdownSettings_Wings" [(ngModel)]="selectedwItems" [placeholder]="'Wings'"
+                            [disabled]="residentTransfer === false">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4"
+                    *ngIf="(displayfield.Room == 1 || displayfield.Room == 2) && companyToBed==1">
+                    <div class="right">
+                        <label>Room</label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown class="form-control" formControlName="Room" [data]="rooms"
+                            [disabled]="displayfield.Room == 2" [settings]="dropdownSettings_Rooms"
+                            [(ngModel)]="selectedrItems" [placeholder]="'Rooms'">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div> -->
+
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4"
+                    *ngIf="(displayfield.Bed == 1 || displayfield.Bed == 2) && companyToBed==1">
+                    <div class="right">
+                        <label>Bed</label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown class="form-control" formControlName="Bed"
+                            [disabled]="displayfield.Bed == 2" [data]="beds" [settings]="dropdownSettings_Beds"
+                            [(ngModel)]="selectedbItems" [placeholder]="'Beds'">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-8 col-md-8 col-lg-8" *ngIf="errormessage != ''" style="color:red">
+                    <div class="right">
+                        <label>{{errormessage}}</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="Approval==0" style="color:red">
+            <div style="text-align:center">
+                <label>{{approvalerrormessage}}</label>
+            </div>
+
+        </div>
+        <button type="button" id="btnsave"
+            *ngIf="pageConfig['AccessWrite'] && Approval!=0 && visitStatus === 1 && allFields===1"
+            [disabled]="myform.invalid" (click)="transferResident()" class="btn btn-success">Save</button> &nbsp;
+        <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button>
+    </div>
+</app-commonmodal>

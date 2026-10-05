@@ -1,0 +1,415 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header" style="height: max-content;">
+          <div class="row">
+            <div class="col-sm-9 col-md-9 col-lg-9">
+              <h3 class="card-title">E-kit Details</h3>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1" *ngIf="StockpageConfig['AccessRead']">
+              <div class="iconed-input">
+                <label class="switch">
+                  <input type="checkbox" id="chkstatus" [(ngModel)]="switch" (change)="changeSwitch()">
+                  <div class="slider round">
+                    <!--ADDED HTML -->
+                    <span class="on">Stock</span>
+                    <span class="off">E-kit</span>
+                    <!--END-->
+                  </div>
+                </label>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+                    <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                      <span>Facility Name<span class="c1">*</span></span>
+                    </div> -->
+                    <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                      <span>Facility Name<span class="c1">*</span></span>
+                        <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="facilityName" [disabled]="isReadOnly"
+                        [data]="facilities" [settings]="dropdownSettings_FacID" [(ngModel)]="selectedFacItems"
+                        [placeholder]="'Select'" (onSelect)="onFacilitySelect($event)"
+                        (onDeSelect)="onFacilityDeSelect($event)">
+                      </ng-multiselect-dropdown>
+                      <div *ngIf="myform.controls.facilityName.errors && (myform.controls.facilityName.touched)"
+                        class="errorMessage">
+                        <div *ngIf="myform.controls.facilityName.errors.required">
+                          Facility Name is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+                  <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                    <span>Nursing Station Name<span class="c1" *ngIf="this.myform.value.sharedekit == false">*</span></span>
+                  </div> -->
+                  <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                    <span>Nursing Station Name<span class="c1" *ngIf="this.myform.value.sharedekit == false">*</span></span>
+                      <ng-multiselect-dropdown formControlName="nurseStation" class="form-control" [(ngModel)]="selectedItems" [disabled]="isReadOnly"
+                      [data]="nurseStations" [settings]="dropdownSettings_NurseStations"
+                      (onSelect)="onNurseStationSelect($event)" (onDeSelect)="onNurseStationDeSelect($event)" [ngClass]="{
+                                  'is-valid':myform.controls.nurseStation.valid ,
+                                  'is-invalid':myform.controls.nurseStation.invalid && myform.controls.nurseStation.touched
+                                }">
+                    </ng-multiselect-dropdown>
+                    <div *ngIf="myform.controls.nurseStation.errors && (myform.controls.nurseStation.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.nurseStation.errors.required">
+                        Nursing Station is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+                    <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                      <span>Drug Name<span class="c1">*</span></span>
+                    </div> -->
+                    <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                      <span>Drug Name<span class="c1">*</span></span>
+                        <input type="text" id="txtdrug" formControlName="drugName"  [attr.disabled]="isReadOnly ? '' : null" class="form-control" [(ngModel)]="DrugName"
+                        (keyup)="searchDrug(DrugName)" [ngClass]="{
+                                'is-valid':myform.controls.drugName.valid  && myform.controls.drugName.dirty,
+                                'is-invalid':myform.controls.drugName.invalid && myform.controls.drugName.touched && drugFlag==true
+                              }" />
+                      <div *ngIf="myform.controls.drugName.errors && (myform.controls.drugName.touched) && drugFlag==true" class="errorMessage">
+                        <div *ngIf="myform.controls.drugName.errors.required">
+                          DrugName is required.
+                        </div>
+                      </div>
+      
+                      <div class="search-result" *ngIf="flag" style="width: 67%;">
+                        <ul>
+                          <li (click)="onselectDrug(item)" *ngFor="let item of drugList | async">
+                            {{item.DrugName}}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+              <div class="col-sm-4 col-md-4 col-lg-6" style="margin-bottom: 8px;" *ngIf="isUserAdmin==true">
+                  <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                    <span>GPI Code<span class="c1">*</span></span>
+                  </div> -->
+                  <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                    <span>GPI Code<span class="c1">*</span></span>
+                <input type="text" id="txtdrug" formControlName="gpicode" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.gpicode.valid  && myform.controls.gpicode.dirty,
+                        'is-invalid':myform.controls.gpicode.invalid && myform.controls.gpicode.touched
+                      }" />
+                <div *ngIf="myform.controls.gpicode.errors && (myform.controls.gpicode.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.gpicode.errors.pattern">
+                    {{config.alphaNumericMessage}}
+                  </div>
+                  <div *ngIf="myform.controls.gpicode.errors.maxlength">
+                    GPI Code should be 14 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.gpicode.errors.minlength">
+                    GPI Code should be 14 characters long.
+                </div>
+                </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-6" *ngIf="isUserAdmin==true" style="margin-bottom: 8px;">
+                  <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                    <span>Trackable</span>
+                  </div> -->
+                  <div class="left" style=" display: table-cell;width: 100%; float:left; margin: 0px;">
+                    <span>Trackable</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <input type="checkbox" id="chktrackable" formControlName="trackable">
+                        </span>
+                      </div>
+                      <span class="form-control">Trackable?</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+                    <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                      <span>On Hand</span>
+                    </div>
+                    <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                      <span>On Hand</span>
+                        <input type="text" [attr.disabled]="ekitId!=0 && myform.value.controlsubstance==1? '' : null" id="txtdrug" formControlName="inhand" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.inhand.valid  && myform.controls.inhand.dirty,
+                          'is-invalid':myform.controls.inhand.invalid && myform.controls.inhand.touched
+                        }" />
+              <div *ngIf="myform.controls.inhand.errors && (myform.controls.inhand.touched)" class="errorMessage">
+                <div *ngIf="myform.controls.inhand.errors.pattern">
+                  Invalid On Hand.
+                </div>
+              </div>
+                    </div>
+                  </div> -->
+              <!-- <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+              
+                  <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                    <span>Lot#</span>
+                      <input type="text" id="txtdrug" formControlName="lotnumber" class="form-control" [attr.disabled]="isReadOnly ? '' : null"/>
+                  </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+               
+                    <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                      <span>Expiration  Date<span class="c1">*</span></span>
+                        <input type="date" class="form-control" min="{{today|date:'yyyy-MM-dd'}}" formControlName="expirydate" maxlength="10" [attr.disabled]="isReadOnly ? '' : null" [ngClass]="{
+                          'is-valid':myform.controls.expirydate.valid  && myform.controls.expirydate.dirty,
+                          'is-invalid':myform.controls.expirydate.invalid && myform.controls.expirydate.touched
+                        }" />
+              <div *ngIf="myform.controls.expirydate.errors && (myform.controls.expirydate.touched)" class="errorMessage">
+                <div *ngIf="myform.controls.expirydate.errors.required">
+                  Expiration Date required
+                </div>
+              </div>
+                    </div>
+                  </div> -->
+                  <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="row">
+                    
+                      <div class="left" style=" display: table-cell;width: 70%; float:left; margin: 0px;margin-left: 3%;">
+                        <span>Barcode</span>
+                        <input type="text" id="txtbarcode" formControlName="barcode"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                          class="form-control" [ngClass]="{
+                                          'is-valid':myform.controls.barcode.valid  && myform.controls.barcode.dirty,
+                                          'is-invalid':myform.controls.barcode.invalid && myform.controls.barcode.touched
+                                        }" />
+                        <div *ngIf="myform.controls.barcode.errors && (myform.controls.barcode.touched)"
+                          class="errorMessage">
+                        
+                          <div *ngIf="(myform.controls.barcode.errors.maxlength)  || barcode">
+                            Barcode cannot be more than 150 characters long.
+                          </div>
+                        </div>
+                      </div>&nbsp;&nbsp;
+                      <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;margin-top: 3%;margin-left: 3%;">
+                        <input type="button" id="btnok" value="Add" class="btn btn-success btn-sm"  [disabled]="myform.value.barcode=='' || myform.value.barcode==null" (click)="addBarcode(myform.value.barcode)" />
+                      </div>
+                    </div>
+                    <div class="row" style="margin-bottom : 8px;">
+                   
+                      <div class="left" style=" display: table-cell;width: 100%; float:left; margin: 0px;">
+                        <div *ngIf="barcodear.length>0" style="margin-top : 5px;">
+                          <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                            <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                            <a class="btn editicon" style="color:red" (click)="removeBarcode(i)">
+                              <i class="icon"></i>
+                              <span class=" fa fa-times " title="Delete"></span>
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="isUserAdmin==true" style="margin-bottom: 8px;">
+                  <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                    <span>Share</span>
+                  </div> -->
+                  <div class="left" style=" display: table-cell;width: 100%; float:left; margin: 0px;">
+                    <span>Share</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <input type="checkbox" id="chkshareekit" formControlName="sharedekit" (change)="checkSharedeKit($event.target.checked?true:false)">
+                        </span>
+                      </div>
+                      <span style="height: max-content;" class="form-control">Share with other Nursing Stations?</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+                  <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                    <span>Control Substance</span>
+                  </div> -->
+                  <div class="left" style=" display: table-cell;width: 100%; float:left; margin: 0px;">
+                    <span>Control Substance</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <input type="checkbox" id="chkcontrolsubstance" formControlName="controlsubstance" (change)="checkControlSubstance($event.target.checked?true:false)">
+                        </span>
+                      </div>
+                      <span class="form-control">Is ControlSubstance?</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 8px;">
+                    <!-- <div class="right" style=" display: table-cell;width: 30%; float:left; margin: 0px;">
+                      <span>Status</span>
+                    </div> -->
+                    <div class="left" style="display: table-cell;width: 100%; float:left; margin: 0px;">
+                      <span>Status</span>
+                        <div class="iconed-input">
+                            <label class="switch">
+                              <input type="checkbox" id="chkstatus" formControlName="status">
+                              <div class="slider round">
+                                <span class="on">Active</span>
+                                <span class="off">InActive</span>
+                              </div>
+                            </label>
+                          </div>
+                    </div>
+                  </div>
+                  </div>
+            <div style="text-align: right">
+                <input type="button" value="Clone" class="btn btn-danger" *ngIf="cloneFlag!=0" (click)="OpenCloneModel()"/>&nbsp;
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Save"
+                [disabled]="myform.invalid" class="btn btn-success" (click)="insertEkit()" /> &nbsp;
+              <input type="button" id="btnreset" value="Reset" class="btn btn-danger" (click)="resetScreen()" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">E-kit View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                (input)="onSearchChange($event.target.value)" placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group">
+            <div class="col-sm-5 col-md-6 col-lg-5">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive
+                    E-kit</b></label></span>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4"></div>
+            <div class="col-sm-2 col-md-3 col-lg-3">
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status"
+                (click)="updateekitStatus()" [disabled]="UpdateStatus" class="btn btn-danger" />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                      (change)="onCheckAll($event.target.checked?true:false)"></th>
+                  <th>Facility Name</th>
+                  <th>Nursing Station Name</th>
+                  <th>Drug Name</th>
+                  <th>Secondary DrugName</th>
+                  <th *ngIf="isUserAdmin==true">GPI Code</th>
+                  <th *ngIf="isUserAdmin==true">Trackable?</th>
+                  <th>Shared?</th>
+                  <th>Is Control Substance?</th>
+                  <th>Qty Available for Administration</th>
+                  <!-- <th>Lot#</th>
+                  <th>Expiration  Date</th>
+                  <th>Barcode</th> -->
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of ekitList| paginate: { itemsPerPage: gridPagination, currentPage: p ,totalItems: totalRecords};">
+                  <td> <input type="checkbox" [checked]="CheckAll" value="{{item.Ekit_Id}}" name="{{ item.Ekit_Id }}"
+                      id="{{item.Ekit_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                  <td>{{item.FacilityName}}</td>
+                  <td>{{item.NurseStationName}}</td>
+                  <td>{{item.DrugName}}</td>
+                  <td>{{item.MergedDrugNames}}</td>
+                  <td *ngIf="isUserAdmin==true">{{item.GPICode}}</td>
+                  <td *ngIf="isUserAdmin==true">{{item.Trackable}}</td>
+                  <td>{{item.Shared}}</td>
+                  <td>{{item.ControlSubstance}}</td>
+                  <td>{{item.InHand}}</td>
+                  <!-- <td>{{item.LotNumber}}</td>
+                  <td>{{item.ExpiryDate|date :'MM/dd/yyyy'}}</td>
+                  <td>{{item.Barcode}}</td>                   -->
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon"
+                      (click)="getEkitDetailsID(item.Ekit_Id,item.FacilityStatus,item.NurseStatioStatus)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="getAllEkitData($event,1,1)" *ngIf="ekitList.length > 0">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+
+  <div class="modal fade bodystyle" ngDraggable [handle]="DemoHandle1" id="exampleModal" tabindex="-1" style="padding-top: 35px;" role="dialog"
+  [ngStyle]="{'display': modalClone ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header" style="height: 43px;">
+        <h5 class="modal-title" id="exampleModalLabel">Clone</h5>
+        <button type="button" class="close" (click)="closeClone()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- <div class="col-sm-2">Facility Name</div> -->
+<div class="col-sm-6 col-md-6 col-lg-6">
+  Facility Name
+    <ng-multiselect-dropdown class="form-control multiselectdropdown" *ngIf="selectedItems.length>0" [disabled]="isReadOnly"
+    [data]="facilities" [settings]="dropdownSettings_FacID" [placeholder]="'Select'" [(ngModel)]="selectedCloneFacItems"
+    (onSelect)="onCloneFacilitySelect($event)" (onDeSelect)="onCloneFacilityDeSelect($event)">
+  </ng-multiselect-dropdown>
+    <ng-multiselect-dropdown class="form-control multiselectdropdown" *ngIf="selectedItems.length==0" [disabled]="isReadOnly"
+    [data]="CloneFacilities" [settings]="dropdownSettings_CloneFacID" [placeholder]="'Select'" [(ngModel)]="selectedCloneFacItems"
+    (onSelect)="onCloneFacilitySelect($event)" (onDeSelect)="onCloneFacilityDeSelect($event)">
+  </ng-multiselect-dropdown>
+</div>
+<!-- <div class="col-sm-2" *ngIf="selectedItems.length>0">NurseStation Name</div> -->
+<div class="col-sm-6 col-md-6 col-lg-6" *ngIf="selectedItems.length>0">
+  NurseStation Name
+    <ng-multiselect-dropdown class="form-control" *ngIf="selectedItems.length>0" [disabled]="isReadOnly" [(ngModel)]="selectedCloneNurItems"
+    [data]="ClonenurseStations" [settings]="dropdownSettings_CloneNurseStations">
+  </ng-multiselect-dropdown>
+</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="button" value="Clone" *ngIf="pageConfig['AccessWrite']" [disabled]="(sharedstockFlag==0 && (selectedCloneFacItems.length==0 || selectedCloneNurItems.length==0)) || (sharedstockFlag==1 && selectedCloneFacItems.length==0)" (click)="CloneConfiguration()" class="btn btn-success"/>
+        <button type="button" class="btn btn-danger" (click)="closeClone()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" id="exampleModal" tabindex="-1" role="dialog"
+    [ngStyle]="{'display': modalControlsubstanceConfirmationIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div #DemoHandle2 class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+        </div>
+        <div class="modal-body">
+          <strong>You have unchecked controlled substance checbox. Are you sure this is not a controlled eKit?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="controlSubtanceConfirm(1)">Yes</button>
+          <button type="button" class="btn btn-danger" (click)="controlSubtanceConfirm(0)">No</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,92 @@
+<!-- <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Room Details</h3>
+      </div> -->
+      <div class="modal-content" ngDraggable [handle]="DemoHandle1">
+          <div #DemoHandle1 class="modal-header " style="height: 50px ">
+            <h5>Room Details</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+
+          </div> 
+      <div class="modal-body bodystyle">
+        <form [formGroup]="myform">
+          <div class="row form-group">
+
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Room Name<span class="c1">*</span></div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Room Name<span class="c1">*</span>
+              <div class="iconed-input">
+                <input type="text" id="txtroomname" formControlName="roomname" (change)="checkRoomMaster()" class="form-control"
+                  [ngClass]="{
+                  'is-valid':myform.controls.roomname.valid,
+                  'is-invalid':myform.controls.roomname.invalid && myform.controls.roomname.touched
+                }" />
+                <div *ngIf="myform.controls.roomname.errors && (myform.controls.roomname.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.roomname.errors.required">
+                    Room Name is required.
+                  </div>
+                  <div *ngIf="myform.controls.roomname.errors.maxlength">
+                    Room Name cannot be more than 50 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.roomname.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Room Code<span class="c1">*</span></div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Room Code<span class="c1">*</span>
+              <div class="iconed-input">
+                <input type="text" id="txtroomname" formControlName="roomcode" class="form-control" [ngClass]="{
+                  'is-valid':myform.controls.roomcode.valid,
+                  'is-invalid':myform.controls.roomcode.invalid && myform.controls.roomcode.touched
+                }" />
+                <div *ngIf="myform.controls.roomcode.errors && (myform.controls.roomcode.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.roomcode.errors.required">
+                    Room Code is required.
+                  </div>
+                  <div *ngIf="myform.controls.roomcode.errors.maxlength">
+                    Room Code cannot be more than 20 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.roomcode.errors.minlength">
+                    Room Code cannot be less than 4 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.roomcode.errors.pattern">
+                    Room Code {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+            
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Status
+              <div class="iconed-input">
+                <label class="switch">
+                  <input type="checkbox" id="chkstatus" formControlName="status">
+                  <div class="slider round">
+                    <!--ADDED HTML -->
+                    <span class="on">Active</span>
+                    <span class="off">Inactive</span>
+                    <!--END-->
+                  </div>
+                </label>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <div style="text-align: right">
+            <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']"  (click)="insertRoom()" [disabled]="myform.invalid" class="btn btn-success" />&nbsp;
+            <input type="button" id="btnclose" value="Close" (click)="resetScreen()" data-dismiss="modal" class="btn btn-danger" #closeAddRoomModal/>
+          </div>
+        </div>
+        </form>
+
+      <!-- </div> -->
+    </div>
+  </div>
+  

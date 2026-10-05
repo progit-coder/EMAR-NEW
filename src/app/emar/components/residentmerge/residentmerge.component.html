@@ -1,0 +1,406 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<app-commonmodal ngDraggable  title="Resident Merge">
+    <div class="modal-body bodystyle">
+        <form [formGroup]="censusform">
+<div class="card card-primary">
+  <div class="card-header">Resident Details</div>
+  <div class="card-body" *ngIf="residentDetails">
+    <div class="row form-group">
+      <div class="col-sm-2"><b>Name</b></div>
+      <div class="col-sm-2">{{residentDetails.ResidentName}}</div>
+      <div class="col-sm-2"><b>DOB</b></div>
+      <div class="col-sm-2">{{residentDetails.DOB|date:'MM/dd/yyyy'}}</div>
+      <div class="col-sm-2"><b>Gender</b></div>
+      <div class="col-sm-2">{{residentDetails.Gender}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2"><b>External PID</b></div>
+      <div class="col-sm-2">{{residentDetails. ExternalFacPatientId}}</div>
+      <div class="col-sm-2"><b>Internal PID</b></div>
+      <div class="col-sm-2">{{residentDetails.ExternalPatientId}}</div>
+      <!-- <div class="col-sm-2" *ngIf="residentDetails.Facilityname=='DEPARTMENT OF JUVENILE JUSTICE'"><b>MR Number</b></div>
+      <div class="col-sm-2" *ngIf="residentDetails.Facilityname=='DEPARTMENT OF JUVENILE JUSTICE'">{{residentDetails.PatientMRNumber}}</div> -->
+      <div class="col-sm-2"><b>Admit Date</b></div>
+      <div class="col-sm-2">{{residentDetails.AdmitDate|date:'MM/dd/yyyy'}}</div>
+    </div>
+  </div>
+</div>
+
+            <div class="row form-group">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="right">
+                  <label>Facility Name</label>
+                </div>
+                <div class="left">
+                  <ng-multiselect-dropdown  class="form-control"  formControlName="FacilityId" [data]="userfacilitydrop"
+                    [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities"
+                    (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="right">
+                  <label>Nursing Station Name</label>
+                </div>
+                <div class="left">
+                  <ng-multiselect-dropdown  class="form-control"  formControlName="NursingStationId" [data]="nurseStations"
+                    [(ngModel)]="selectednItems" (onSelect)="onNurseStationSelect($event)" 
+                    (onDeSelect)="onNurseStationDeSelect($event)"[settings]="dropdownSettings_NurseStations">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-sm-4"style="padding-top: 26px;">
+                  <input  type="search" class="form-control input-sm" (input)="onSearchChange($event.target.value)"
+                    placeholder="Search">
+                </div>
+            </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h3 class="card-title">Residents List</h3>
+                    </div>                   
+                  </div>
+                </div>
+            <div class="card-body">
+
+                <div class="tableFixHead">
+                  <table id="tblAllResidents" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">Picture</th>
+                        <th>Resident Name</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>Nursing Station Name</th>
+                        <th>Floor Name</th>
+                        <th>Wing Name</th>
+                        <th>Room</th>
+                        <th>Bed</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let item of residentslist|paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };"
+                        style="cursor:pointer">
+                        <td>
+                          <img  container="body"  (mouseenter) ="mouseEnter(item.ImageLocation)"  (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" [src]="sanitize(item.ImageLocation)" class="zoom" />
+                        </td>
+                        <td>{{item.PatientLastName+", "+item.PatientFirstName+"
+                          "+(item.PatientMiddleInitial==null?'':item.PatientMiddleInitial)}}</td>
+                        <td>{{item.PatientDOB}}</td>
+                        <td>{{item.PatientGender}}</td>
+                        <td>{{item.NurseStationName}}</td>
+                        <td>{{item.FloorName}}</td>
+                        <td>{{item.WingName}}</td>
+                        <td>{{item.RoomName}}</td>
+                        <td>{{item.BedName}}</td>
+                        <td><a class="btn btn-success btn-sm" (click)="aliasNameOpen(item.Patient_Id)">Merge</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <pagination-controls (pageChange)="getResidentList($event)" *ngIf="residentslist.length > 0"></pagination-controls>
+              </div>
+              </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+        <div class="col-sm-10 col-md-10 col-lg-10" style="color:red">
+            <div style="text-align:left">
+              <label>{{warningMessage}}</label>
+            </div>
+          </div>
+      <button type="button" class="btn btn-danger" style="border-radius: 10px;" (click)="closeresidentModel()" >Close</button>
+    </div>
+    <ng4-loading-spinner [template]="template" [timeout]="99000" [loadingText]="'Please wait...'"></ng4-loading-spinner>
+  </app-commonmodal>
+  <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" id="exampleModal" role="dialog"
+  [ngStyle]="{'display': modalControlIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="width: 100%;">
+    <div class="modal-content">
+        <div #DemoHandle1 class="modal-header" style="height: 35px;padding:7px !important ">
+            <h5>Merge With Alias Name</h5>
+            <button type="button" class="close" (click)="closeModel()">&times;</button>
+        </div>
+      <div class="modal-body" style="height: 400px; overflow-y: scroll !important;">
+          <form [formGroup]="aliasForm">
+            <div class="row form-group" *ngIf="mergeDetails">
+              <div class="col-sm-6">
+                <h5>Resident Details</h5>
+                  <div class="card card-primary">
+                      <div class="card-header">Demographic</div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-sm-6"><b>Resident Name</b></div>
+                              <div class="col-sm-6">{{mergeDetails.Merge1.ResidentName}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6"><b>DOB</b></div>
+                                <div class="col-sm-6">{{mergeDetails.Merge1.DOB|date:'MM/dd/yyyy'}}</div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-6"><b>Gender</b></div>
+                                  <div class="col-sm-6">{{mergeDetails.Merge1.Gender}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6"><b>Address1</b></div>
+                                    <div class="col-sm-6">{{mergeDetails.Merge1.Addr1}}</div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-6"><b>Address2</b></div>
+                                      <div class="col-sm-6">{{mergeDetails.Merge1.Addr2}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6"><b>City, State</b></div>
+                                        <div class="col-sm-6">{{mergeDetails.Merge1.City==null?'':mergeDetails.Merge1.City+', '+mergeDetails.Merge1.State==null?'':mergeDetails.Merge1.State}}</div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-sm-6"><b>External PID</b></div>
+                                        <div class="col-sm-6">{{mergeDetails.Merge1.ExternalFacPatientId}}</div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-sm-6"><b>Internal PID</b></div>
+                                        <div class="col-sm-6">{{mergeDetails.Merge1.ExternalPatientId}}</div>
+                                      </div>
+                                      <!-- <div class="row" *ngIf="mergeDetails.Merge1.Facilityname=='DEPARTMENT OF JUVENILE JUSTICE'">
+                                        <div class="col-sm-6"><b>MR Number</b></div>
+                                        <div class="col-sm-6">{{mergeDetails.Merge1.PatientMRNumber}}</div>
+                                      </div> -->
+                                <table id="tblRes1Visit" class="table table-bordered table-hover">
+                                    <thead>
+                                      <th>
+                                        Admit Date
+                                      </th>
+                                      <th>Discharge Date</th>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of mergeDetails.Visit1">
+                                        <td>{{item.AdmitDate|date:'MM/dd/yyyy'}}</td>
+                                        <td>{{item.DischargeDate|date:'MM/dd/yyyy'}}</td>
+                                      </tr>
+                                    </tbody>
+                                    </table>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-sm-6">
+                  <h5>Merge Resident Details</h5>
+                  <div class="card card-primary">
+                      <div class="card-header">
+                        <div class="row">
+                          <div class="col-sm-4">Demographic</div>
+                          <div class="col-sm-8">
+                              <div class="iconed-input">
+                                  <label class="switch">
+                                    <input type="checkbox" formControlName="addresscheck">
+                                    <div class="slider round">
+                                      <span class="on">Keep</span>
+                                      <span class="off">No</span>
+                                    </div>
+                                  </label>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-sm-6"><b>Resident Name</b></div>
+                              <div class="col-sm-6">{{mergeDetails.Merge2.ResidentName}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6"><b>DOB</b></div>
+                                <div class="col-sm-6">{{mergeDetails.Merge2.DOB|date:'MM/dd/yyyy'}}</div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-6"><b>Gender</b></div>
+                                  <div class="col-sm-6">{{mergeDetails.Merge2.Gender}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6"><b>Address1</b></div>
+                                    <div class="col-sm-6">{{mergeDetails.Merge2.Addr1}}</div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-sm-6"><b>Address2</b></div>
+                                      <div class="col-sm-6">{{mergeDetails.Merge2.Addr2}}</div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-6"><b>City, State</b></div>
+                                      <div class="col-sm-6">{{mergeDetails.Merge2.City==null?'':mergeDetails.Merge2.City+', '+mergeDetails.Merge2.State==null?'':mergeDetails.Merge2.State}}</div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-6"><b>External PID</b></div>
+                                      <div class="col-sm-6">{{mergeDetails.Merge2.ExternalFacPatientId}}</div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-6"><b>Internal PID</b></div>
+                                      <div class="col-sm-6">{{mergeDetails.Merge2.ExternalPatientId}}</div>
+                                    </div>
+                                    <!-- <div class="row" *ngIf="mergeDetails.Merge2.Facilityname=='DEPARTMENT OF JUVENILE JUSTICE'">
+                                      <div class="col-sm-6"><b>MR Number</b></div>
+                                      <div class="col-sm-6">{{mergeDetails.Merge2.PatientMRNumber}}</div>
+                                    </div> -->
+                                <table id="tblRes2Visit" class="table table-bordered table-hover">
+                                    <thead>
+                                      <th>
+                                        Admit Date
+                                      </th>
+                                      <th>Discharge Date</th>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of mergeDetails.Visit2">
+                                        <td>{{item.AdmitDate|date:'MM/dd/yyyy'}}</td>
+                                        <td>{{item.DischargeDate|date:'MM/dd/yyyy'}}</td>
+                                      </tr>
+                                    </tbody>
+                                    </table>
+                        </div>
+                </div>
+            </div>
+            </div>
+            <div class="row form-group" *ngIf="mergeDetails">
+              <div class="col-sm-6">
+                  <div class="card card-primary">
+                      <div class="card-header">Allergies</div>
+                      <div class="card-body">
+                          <table id="tblRes1Allergy" class="table table-bordered table-hover">
+                              <thead>
+                                <th>
+                                  Allergy
+                                </th>
+                                <th>Reaction</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of mergeDetails.Allergy1">
+                                  <td>{{item.Allergy}}</td>
+                                  <td>{{item.Reaction}}</td>
+                                </tr>
+                              </tbody>
+                              </table>
+                        </div>
+              </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="card card-primary">
+                      <div class="card-header">
+                          <div class="row">
+                              <div class="col-sm-4">Allergies</div>
+                              <!-- <div class="col-sm-8">
+                                  <div class="iconed-input" *ngIf="mergeDetails.Allergy2.length>0">
+                                      <label class="switch">
+                                        <input type="checkbox" formControlName="allergycheck">
+                                        <div class="slider round">
+                                          <span class="on">Keep</span>
+                                          <span class="off">No</span>
+                                        </div>
+                                      </label>
+                                    </div>
+                              </div> -->
+                            </div>
+                      </div>
+                      <div class="card-body">
+                          <table id="tblRes2Allergy" class="table table-bordered table-hover">
+                              <thead>
+                                <th>
+                                  Allergy
+                                </th>
+                                <th>Reaction</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of mergeDetails.Allergy2">
+                                  <td>{{item.Allergy}}</td>
+                                  <td>{{item.Reaction}}</td>
+                                </tr>
+                              </tbody>
+                              </table>
+                        </div>
+              </div>
+              </div>
+            </div>
+            <div class="row form-group" *ngIf="mergeDetails">
+                <div class="col-sm-6">
+                    <div class="card card-primary">
+                        <div class="card-header">Diagnosis</div>
+                        <div class="card-body">
+                            <table id="tblRes1Dia" class="table table-bordered table-hover">
+                                <thead>
+                                  <th>
+                                    Diagnosis
+                                  </th>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of mergeDetails.Diagnosis1">
+                                    <td>{{item.DiagnosisDesc}}</td>
+                                  </tr>
+                                </tbody>
+                                </table>
+                          </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-sm-5">Diagnosis</div>
+                                <!-- <div class="col-sm-7" *ngIf="mergeDetails.Diagnosis2.length>0">
+                                    <div class="iconed-input">
+                                        <label class="switch">
+                                          <input type="checkbox" formControlName="diagnosischeck">
+                                          <div class="slider round">
+                                            <span class="on">Keep</span>
+                                            <span class="off">No</span>
+                                          </div>
+                                        </label>
+                                      </div>
+                                </div> -->
+                              </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="tblRes2Dia" class="table table-bordered table-hover">
+                                <thead>
+                                  <th>
+                                      Diagnosis
+                                  </th>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of mergeDetails.Diagnosis2">
+                                    <td>{{item.DiagnosisDesc}}</td>
+                                  </tr>
+                                </tbody>
+                                </table>
+                          </div>
+                </div>
+                </div>
+              </div>
+          <div class="row form-group">
+              <div class="col-sm-2">
+                <label>Alias Name</label>
+              </div>
+              <div class="col-sm-6">
+                  <input type="text" id="txtaliasname" formControlName="aliasName" class="form-control"  [ngClass]="{
+                    'is-valid':aliasForm.controls.aliasName.valid,
+                    'is-invalid':aliasForm.controls.aliasName.invalid && aliasForm.controls.aliasName.touched
+                  }">
+                  <div *ngIf="aliasForm.controls.aliasName.errors && (aliasForm.controls.aliasName.touched)"
+                class="errorMessage">
+                <div *ngIf="aliasForm.controls.aliasName.errors.required">
+                  Alias Name is required.
+                </div>
+                <div *ngIf="aliasForm.controls.aliasName.errors.maxlength">
+                  Alias Name cannot be more than 150 characters long.
+                </div>            
+              </div>
+              </div>
+            </div> 
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="Reset()">Reset</button>
+        <button type="button" class="btn btn-primary"  [disabled]="aliasForm.invalid"  (click)="saveMergeResident()">Save</button>
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

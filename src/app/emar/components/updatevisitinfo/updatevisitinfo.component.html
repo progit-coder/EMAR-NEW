@@ -1,0 +1,48 @@
+<app-commonmodal title="Update Resident Info">
+  <div class="modal-body bodystyle">
+    <form [formGroup]="myform">
+      <div class="row form-group">
+        <div class="col-sm-1">Wing</div>
+        <div class="col-sm-4">
+          <select class="form-control" id="ddlwing" formControlName="Wing">
+            <option value="0" disabled selected>Select Wing</option>
+            <option *ngFor="let item of wing" value="{{item.Wing_Id}}">
+              {{item. Wing_Desc}}</option>
+          </select>
+        </div>
+        <div class="col-sm-1">Floor</div>
+        <div class="col-sm-4">
+          <select class="form-control" id="ddlfloor" formControlName="Floor">
+            <option value="0" disabled selected>Select Floor</option>
+            <option *ngFor="let item of floors" value="{{item. Floor_Id}}">
+              {{item.Floor_Name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-1">Room</div>
+        <div class="col-sm-4">
+          <select class="form-control" id="ddlroom" formControlName="Room">
+            <option value="0" disabled selected>Select Room</option>
+            <option *ngFor="let item of room" value="{{item.Room_Id}}">
+              {{item.Room_Name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-1">Bed</div>
+        <div class="col-sm-4">
+          <select class="form-control" id="ddlbed" formControlName="Bed">
+            <option value="0" disabled selected>Select Bed</option>
+            <option *ngFor="let item of bed" value="{{item.Bed_Id}}">
+              {{item.Bed_Name}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-success" data-dismiss="modal" *ngIf="demographicInfoData.PVisit_Status === 1"
+      (click)="insertResidentAdmitvisitinfodetails()">save</button>
+      <button type="button"class="btn btn-danger"  (click)="activeDefaultModal.close('Close click')">Close</button>
+  </div>
+</app-commonmodal>
+

@@ -1,0 +1,268 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
+        <div class="container-fluid">
+            <form [formGroup]="myform" autocomplete="off">
+                <div class="row form-group clearfix">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Facility</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Nursing Station</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                            (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <!-- <div class="col-sm-6 col-lg-2">
+            <label>Resident</label>
+            <ng-multiselect-dropdown formControlName="ddlresidents" [data]="residents"
+              [settings]="dropdownSettings_Residents" [placeholder]="'Residents'" (onSelect)="onResidentSelect($event)"
+              (onDeSelect)="onResidentDeSelect($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+                </div>
+            </form>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row clearfix">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <h3 class="card-title">Pharmacy Medication Check-in</h3>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6"></div>
+                        <!-- <div class="col-sm-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-3 col-md-2 col-lg-2">
+                            <span>Scan the Barcode:</span>
+                        </div> -->
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <strong>Scan the Barcode</strong>
+                            <form [formGroup]="myform" autocomplete="off">
+                                <input type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');" id="txtbarcode" formControlName="barcode" class="form-control" (change)="scanBarcode($event.target.value)" />
+                            </form>
+                        </div>
+                        <div class="col-sm-1 col-md-2 col-lg-3"></div>
+                        <div class="col-sm-3 col-md-6 col-lg-4" *ngIf="ordersList.length>0" style="margin-top: 10px;">
+                            <form [formGroup]="myform" autocomplete="off">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                      <input type="checkbox"  formControlName="showOrders">
+                    </span>
+                                    </div>
+                                    <span class="form-control">&nbsp; Show other orders for this resident</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row form-group" style="text-align: right;" *ngIf="ordersList.length>0">
+                        <div class="col-sm-6"></div>
+                        <strong>Note: Enter actual drug expiration date if it is shorter than populated by default</strong></div>
+                    <div class="row form-group">
+                        <div class="table-responsive">
+                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Drug Name</th>
+                                        <th>Resident Name</th>
+                                        <!-- <th>Dosage Form</th> -->
+                                        <th>Quantity Received</th>
+                                        <th>New Barcode (Optional)</th>
+                                        <th>Lot# (Optional)</th>
+                                        <th>Expiration Date</th>
+                                        <th></th>
+                                        <!-- <th></th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of ordersList;index as i" [style.background-color]="(item.OrderStatus == 2 || item.ResidentStatus===2 || item.ResidentStatus===3)? '#ffdf62':''" data-toggle="tooltip" data-placement="top" title="{{item.Directions}}">
+                                        <!-- |paginate: { itemsPerPage: gridPagination, currentPage: currentPageNo, totalItems: totalRecords };"> -->
+                                        <!-- <td><i style="cursor: pointer" title="No Schedule Times"
+                      [ngClass]="item.ScheduleTimeFlag == 1?'fa fa-exclamation-triangle iconColor':''"></i>
+                    {{item.Date|date:'MM/dd/yyyy'}}
+                  </td> -->
+                                        <ng-container *ngIf="item.barcodeCheck==1">
+                                            <td style="color: red;">
+                                                <div *ngIf="item.ResidentNSFlag===0 && item.ResidentStatus===1">Resident is active at {{item.NSName}}</div>
+                                                <div *ngIf="item.ResidentNSFlag===0 && (item.ResidentStatus===2 || item.ResidentStatus===3)">Resident is inactive at {{item.NSName}}</div>
+                                                <div *ngIf="item.OrderStatus===2">Order is Inactive</div>
+                                                <div *ngIf="item.ResidentNSFlag===1 && (item.ResidentStatus===2 || item.ResidentStatus===3)">Resident is Inactive</div>
+                                                <div *ngIf="item.ControlledMed===1">Controlled Med</div>
+                                            </td>
+                                            <td>{{item.DrugName}}</td>
+                                            <td>{{item.ResidentName}}</td>
+                                            <!-- <td>{{item.Dosage_Form}}</td> -->
+                                            <td>
+                                                <form [formGroup]="textform" autocomplete="off">
+                                                    <input id="{{item.PQuantity_Id}}" type="number" pattern="^[0-9]+(\.[0-9]{1,2})?$" min="0" onKeyPress="if(this.value.length==10) return false;" step=".01" formControlName="quantity" [value]="item.OnHand" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,$event.target.value,null,'qty',null,null)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form [formGroup]="textform1" autocomplete="off">
+                                                    <input type="text" id="{{'br'+item.PQuantity_Id}}" maxlength="150" [value]="item.NewBarcode" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');" formControlName="barcode" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,null,$event.target.value,'barcode',null,null)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form [formGroup]="textform2" autocomplete="off">
+                                                    <input type="text" id="{{'lot'+item.PQuantity_Id}}" [value]="item.LotNumber" formControlName="lotnumber" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,null,null,'lot',$event.target.value,null)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form [formGroup]="textform2" autocomplete="off">
+                                                    <input type="date" [min]="minDate" id="{{'exp'+item.PQuantity_Id}}" [value]="item.ExpirationDate===''?(yearDate|date:'yyyy-MM-dd'):(item.ExpirationDate|date:'yyyy-MM-dd')" style="height: 10px;" formControlName="expdate" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,null,null,'exp',null,$event.target.value)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a class="btn editicon" (click)="getCheckinHistoryById(item.PQuantity_Id)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-history iconColor" title="History"></span>
+                                                </a>
+                                            </td>
+                                            <!-- <td>
+                                                <a class="btn editicon" *ngIf="pageConfig['AccessWrite']" style="color: red;height: 8px;" (click)="removeCheckInMed(item.PQuantity_Id)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-close (alias)" title="Delete"></span>
+                                                </a>
+                                            </td> -->
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- <pagination-controls (pageChange)="loadGrid($event)" *ngIf="ordersList.length > 0">
+              </pagination-controls> -->
+                        </div>
+                    </div>
+                    <div class="row form-group" *ngIf="myform.value.showOrders == true && ordersList.length>0"><strong style="color: green;">Resident All orders</strong> </div>
+                    <div class="row form-group" *ngIf="myform.value.showOrders == true && ordersList.length>0">
+                        <div class="table-responsive">
+                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Drug Name</th>
+                                        <th>Resident Name</th>
+                                        <!-- <th>Dosage Form</th> -->
+                                        <th>Quantity Received</th>
+                                        <th>New Barcode (Optional)</th>
+                                        <th>Lot# (Optional)</th>
+                                        <th>Expiration Date</th>
+                                        <th></th>
+                                        <!-- <th></th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of ordersList;index as j" [style.background-color]="(item.OrderStatus == 2 || item.ResidentStatus===2 || item.ResidentStatus===3)? '#ffdf62':''" data-toggle="tooltip" data-placement="top" title="{{item.Directions}}">
+                                        <!-- |paginate: { itemsPerPage: gridPagination, currentPage: currentPageNo, totalItems: totalRecords };"> -->
+                                        <!-- <td><i style="cursor: pointer" title="No Schedule Times"
+                      [ngClass]="item.ScheduleTimeFlag == 1?'fa fa-exclamation-triangle iconColor':''"></i>
+                    {{item.Date|date:'MM/dd/yyyy'}}
+                  </td> -->
+                                        <ng-container *ngIf="item.barcodeCheck==0 && item.OrderStatus!=2">
+                                            <td style="color: red;">
+                                                <div *ngIf="item.ResidentNSFlag===0 && item.ResidentStatus===1">Resident is active at {{item.NSName}}</div>
+                                                <div *ngIf="item.ResidentNSFlag===0 && (item.ResidentStatus===2 || item.ResidentStatus===3)">Resident is inactive at {{item.NSName}}</div>
+                                                <div *ngIf="item.OrderStatus===2">Order is Inactive</div>
+                                                <div *ngIf="item.ResidentNSFlag===1 && (item.ResidentStatus===2 || item.ResidentStatus===3)">Resident is Inactive</div>
+                                                <div *ngIf="item.ControlledMed===1">Controlled Med</div>
+                                            </td>
+                                            <td>{{item.DrugName}}</td>
+                                            <td>{{item.ResidentName}}</td>
+                                            <!-- <td>{{item.Dosage_Form}}</td> -->
+                                            <td>
+                                                <form [formGroup]="textform" autocomplete="off">
+                                                    <input id="{{item.PQuantity_Id}}" type="number" pattern="^[0-9]+(\.[0-9]{1,2})?$" min="0" onKeyPress="if(this.value.length==10) return false;" step=".01" formControlName="quantity" [value]="item.OnHand" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,$event.target.value,null,'qty',null,null)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form [formGroup]="textform1" autocomplete="off">
+                                                    <input type="text" id="{{'br'+item.PQuantity_Id}}" maxlength="150" [value]="item.NewBarcode" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');" formControlName="barcode" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,null,$event.target.value,'barcode',null,null)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form [formGroup]="textform2" autocomplete="off">
+                                                    <input type="text" id="{{'lot'+item.PQuantity_Id}}" [value]="item.LotNumber" formControlName="lotnumber" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,null,null,'lot',$event.target.value,null)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form [formGroup]="textform2" autocomplete="off">
+                                                    <input type="date" [min]="minDate" id="{{'exp'+item.PQuantity_Id}}" [value]="item.ExpirationDate===''?(yearDate|date:'yyyy-MM-dd'):(item.ExpirationDate|date:'yyyy-MM-dd')" style="height: 10px;" formControlName="expdate" (change)="readUserInputData(item.POrder_Id,item.PQuantity_Id,null,null,'exp',null,$event.target.value)">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a class="btn editicon"  (click)="getCheckinHistoryById(item.PQuantity_Id)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-history iconColor" title="History"></span>
+                                                </a>
+                                            </td>
+                                            <!-- <td>
+                                                <a class="btn editicon" *ngIf="pageConfig['AccessWrite']" style="color: red;height: 8px;" (click)="removeCheckInMed(item.PQuantity_Id)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-close (alias)" title="Delete"></span>
+                                                </a>
+                                            </td> -->
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- <pagination-controls (pageChange)="loadGrid($event)" *ngIf="ordersList.length > 0">
+              </pagination-controls> -->
+                        </div>
+                    </div>
+                    <div style="text-align: right">
+                        <input type="button" id="btnsave" [disabled]="textform.invalid || (checkInMedsObj.length==0&& this.textform.value.barcode=='')" *ngIf="pageConfig['AccessWrite'] && ordersList.length > 0" value="Check-in These Meds" (click)="$event.stopPropagation();$event.preventDefault();checkInSelectedMeds($event)"
+                            class="btn btn-success" />
+                        <!-- <input type="button" id="btnreset" value="Do them Later" class="btn btn-danger" /> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+    </section>
+</div>
+
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog" [ngStyle]="{'display': modalCheckinHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog" style="max-width: 80%;">
+        <div class="modal-content">
+            <div #DemoHandle1 class="modal-header " style="height:max-content ">
+                <h5>Check-in Meds History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+            </div>
+            <div class="modal-body bodystyle">
+                <div class="tableFixHead">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Drug Name</th>
+                                <th>Check-in Quantity</th>
+                                <th>Lot#</th>
+                                <th>Check-in By</th>
+                                <th>Check-in Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of CheckinMedsHistory| paginate: { itemsPerPage: historyPagination, currentPage: p };">
+                                <td>{{item.DrugName}}</td>
+                                <td>{{item.Inhand}}</td>
+                                <td>{{item.LotNumber}}</td>
+                                <td>{{item.TransOS_CreatedBy}}</td>
+                                <td>{{item.TransOS_CreatedDate|date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pagination-controls (pageChange)="p = $event" *ngIf="CheckinMedsHistory.length > 0"></pagination-controls>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

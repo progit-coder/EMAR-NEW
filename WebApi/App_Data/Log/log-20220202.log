@@ -1,0 +1,40 @@
+2022-02-03 00:02:25,080 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserController----
+2022-02-03 00:02:25,136 [34] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserService----
+2022-02-03 00:02:25,521 [34] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2022-02-03 00:02:25,527 [34] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2022-02-03 00:02:25,528 [34] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at WebApi.Controllers.UserController.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\WebApi\Controllers\UserController.cs:line 72
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2022-02-03 00:02:25,528 [34] ERROR LTCPro.ServiceLayer.Log4net -  Exception Message : = One or more errors occurred.
+2022-02-03 00:02:25,528 [34] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace  ===========
+2022-02-03 00:02:25,575 [34] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception  Stack Trace : =    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at LTCPro.Repositories.UserActivityRepository.InsertUserActivityDetails(UserActivityDetailEntity entity) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserActivityRepository.cs:line 53
+   at LTCPro.Repositories.UserRepository.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserRepository.cs:line 446
+   at LTCPro.ServiceLayer.UserService.<LogoutUser>d__13.MoveNext() in D:\old system Data 04042021\Emar Service Latest 1\BusinessLayer\Services\UserService.cs:line 76
+2022-02-03 00:02:25,575 [34] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace End  ===========
+2022-02-03 00:02:25,575 [34] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message  ===========
+2022-02-03 00:02:25,576 [34] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception Message : = An error occurred while updating the entries. See the inner exception for details.
+2022-02-03 00:02:25,576 [34] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message End  ===========

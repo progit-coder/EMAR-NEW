@@ -1,0 +1,14 @@
+<div class="all-wrapper fixed-header left-menu">
+  <div class="main-content">
+    <app-header *ngIf="isUserLoggedIn || isUserToken">
+    </app-header>  
+    <div class="hold-transition skin-blue sidebar-mini">
+      <div class="content-wrapper" style="min-height: 718px">
+          <app-sidebar *ngIf="isUserLoggedIn || isUserToken"></app-sidebar>
+          <router-outlet></router-outlet>
+          <ng-chat *ngIf="userId" [adapter]="adapter" [userId]="userId" [historyEnabled]="false" [theme]="'dark-theme'"></ng-chat>
+      </div>      
+    </div>
+   <app-footer *ngIf="isUserLoggedIn || isUserToken"></app-footer>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.c1 {
+    color: red;
+  }  
+  .modalstyle
+  {
+    z-index: 99999  !important;
+    overflow: hidden;
+  }
+  .bodystyle
+  {
+    height:250px;
+    overflow-y: auto;
+  }
+  .modal.fade .modal-dialog
+  {
+    transform: translate(0,0%);
+  }
+  .errorMessage
+  {
+      color:red;
+  }

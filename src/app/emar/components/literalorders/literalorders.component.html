@@ -1,0 +1,74 @@
+<style>
+    input {
+        margin-bottom: 5px;
+    }
+</style>
+
+<!-- <div class="content-wrapper" style="margin-left: 20px !important;"> -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content"  style="margin-left: 0px !important;">
+        <div class="container-fluid">
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">Orders Details</h3>
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-3">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tblliteralOrders" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Filler Type</th>
+                                    <th>Order Type</th>
+                                    <th>Drug Name</th>
+                                    <th>Dosage Form</th>
+                                    <th>Quantity</th>
+                                    <th>Physician Name</th>
+                                    <th>Directions</th>
+                                    <th>Effective Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of ordersData;index as i"  data-toggle="modal" style="cursor:pointer"
+                                data-target="#orderdetails_modified"
+                                (click)="getResidentOrdersView(item.OrderTypeID,item.POrder_Id,item.PQuantity_Id)">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.FillerType}}</td>
+                                    <td>{{item.OrderType}}</td>
+                                    <td>{{item.DrugName}}</td>
+                                    <td>{{item.DosageForm}}</td>
+                                    <td>{{item.Quantity}}</td>
+                                    <td>{{item.PhysicianName}}</td>
+                                    <td>{{item.Directions}}</td>
+                                    <td>{{item.EffectiveDate|date :'MM/dd/yyyy'}}</td>                                   
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000">
+                    </ng4-loading-spinner>
+            </div>
+        </div>
+    </div>
+    </section>

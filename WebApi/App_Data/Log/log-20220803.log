@@ -1,0 +1,175 @@
+2022-08-04 04:50:35,300 [94] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserController----
+2022-08-04 04:50:35,496 [94] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserService----
+2022-08-04 04:50:38,021 [94] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2022-08-04 04:50:38,021 [94] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2022-08-04 04:50:38,022 [94] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at WebApi.Controllers.UserController.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\WebApi\Controllers\UserController.cs:line 72
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2022-08-04 04:50:38,023 [94] ERROR LTCPro.ServiceLayer.Log4net -  Exception Message : = One or more errors occurred.
+2022-08-04 04:50:38,023 [94] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace  ===========
+2022-08-04 04:50:38,044 [94] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception  Stack Trace : =    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at LTCPro.Repositories.UserActivityRepository.InsertUserActivityDetails(UserActivityDetailEntity entity) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserActivityRepository.cs:line 53
+   at LTCPro.Repositories.UserRepository.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserRepository.cs:line 446
+   at LTCPro.ServiceLayer.UserService.<LogoutUser>d__13.MoveNext() in D:\old system Data 04042021\Emar Service Latest 1\BusinessLayer\Services\UserService.cs:line 76
+2022-08-04 04:50:38,044 [94] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace End  ===========
+2022-08-04 04:50:38,044 [94] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message  ===========
+2022-08-04 04:50:38,044 [94] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception Message : = An error occurred while updating the entries. See the inner exception for details.
+2022-08-04 04:50:38,044 [94] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message End  ===========
+2022-08-04 04:50:40,795 [94] ERROR LTCPro.ServiceLayer.Log4net -  InnerException Message : = An error occurred while updating the entries. See the inner exception for details.
+2022-08-04 04:50:40,795 [94] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2022-08-04 21:53:52,332 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2022-08-04 21:53:52,417 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2022-08-04 21:53:54,957 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2022-08-04 21:53:56,678 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2022-08-04 21:53:56,678 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2022-08-04 21:53:56,971 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2022-08-04 21:53:57,770 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2022-08-04 21:53:57,824 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2022-08-04 21:53:58,114 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2022-08-04 21:53:58,534 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2022-08-04 21:53:59,300 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-08-04 21:53:59,300 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2022-08-04 21:53:59,430 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2022-08-04 21:53:59,881 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in UserController----
+2022-08-04 21:53:59,885 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-08-04 21:53:59,979 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUpdateUserRecentFacNs() in CommonService----
+2022-08-04 21:54:00,129 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUpdateUserRecentFacNs() in UserController----
+2022-08-04 21:54:01,395 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:01,416 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:01,423 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:01,443 [73] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:01,492 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:01,527 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2022-08-04 21:54:01,527 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2022-08-04 21:54:01,588 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2022-08-04 21:54:01,588 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2022-08-04 21:54:01,592 [73] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2022-08-04 21:54:01,593 [73] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2022-08-04 21:54:01,645 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2022-08-04 21:54:01,645 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2022-08-04 21:54:01,645 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2022-08-04 21:54:01,646 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2022-08-04 21:54:01,646 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2022-08-04 21:54:01,867 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2022-08-04 21:54:01,898 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2022-08-04 21:54:01,901 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2022-08-04 21:54:01,948 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:01,993 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2022-08-04 21:54:01,993 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2022-08-04 21:54:02,006 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:02,058 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-08-04 21:54:02,058 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-08-04 21:54:02,062 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:02,069 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-08-04 21:54:02,069 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-08-04 21:54:02,071 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-08-04 21:54:02,081 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-08-04 21:54:02,134 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:02,141 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2022-08-04 21:54:02,141 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2022-08-04 21:54:02,625 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:02,625 [73] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2022-08-04 21:54:02,626 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2022-08-04 21:54:02,671 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-08-04 21:54:02,671 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-08-04 21:54:02,762 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-08-04 21:54:03,109 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2022-08-04 21:54:08,045 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:08,087 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2022-08-04 21:54:08,087 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2022-08-04 21:54:08,121 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2022-08-04 21:54:08,202 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:08,220 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2022-08-04 21:54:08,220 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2022-08-04 21:54:08,253 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2022-08-04 21:54:08,274 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:08,280 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-08-04 21:54:08,280 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2022-08-04 21:54:08,293 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2022-08-04 21:54:08,433 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:08,439 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2022-08-04 21:54:08,439 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2022-08-04 21:54:08,447 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2022-08-04 21:54:08,548 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:08,569 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentsListByNSId() in AssesmentController----
+2022-08-04 21:54:08,569 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentsListByNSId() in AssesmentService----
+2022-08-04 21:54:08,673 [37] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetResidentsListByNSId() in AssesmentController----
+2022-08-04 21:54:09,370 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:09,387 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetWeightList(Patient_Id) in AssessmentController----
+2022-08-04 21:54:09,388 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetWeightList() in AssessmentService----
+2022-08-04 21:54:09,918 [75] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetWeightList(Patient_Id) in AssessmentController----
+2022-08-04 21:54:10,051 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:10,081 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentInformation() in ResidentDemographicController----
+2022-08-04 21:54:10,082 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentInformation() in ResidentDemographicService----
+2022-08-04 21:54:10,450 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetResidentInformation() in ResidentDemographicController----
+2022-08-04 21:54:10,760 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:10,887 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2022-08-04 21:54:10,887 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2022-08-04 21:54:10,891 [60] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2022-08-04 21:54:11,069 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2022-08-04 21:54:11,076 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationName() in ResidentDemographicController----
+2022-08-04 21:54:11,076 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing  GetNurseStationName()  in UpdateResidentInfo----
+2022-08-04 21:54:11,109 [84] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationName() in ResidentDemographicController----
+2022-08-04 22:15:51,431 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserController----
+2022-08-04 22:15:51,432 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing LogoutUser() in UserService----
+2022-08-04 22:15:52,936 [6] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2022-08-04 22:15:53,060 [6] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2022-08-04 22:15:53,100 [6] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at WebApi.Controllers.UserController.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\WebApi\Controllers\UserController.cs:line 72
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2022-08-04 22:15:53,100 [6] ERROR LTCPro.ServiceLayer.Log4net -  Exception Message : = One or more errors occurred.
+2022-08-04 22:15:53,100 [6] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace  ===========
+2022-08-04 22:15:53,168 [6] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception  Stack Trace : =    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at LTCPro.Repositories.UserActivityRepository.InsertUserActivityDetails(UserActivityDetailEntity entity) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserActivityRepository.cs:line 53
+   at LTCPro.Repositories.UserRepository.LogoutUser(Int32 userId) in D:\old system Data 04042021\Emar Service Latest 1\Repositories\Repositories\UserRepository.cs:line 446
+   at LTCPro.ServiceLayer.UserService.<LogoutUser>d__13.MoveNext() in D:\old system Data 04042021\Emar Service Latest 1\BusinessLayer\Services\UserService.cs:line 76
+2022-08-04 22:15:53,168 [6] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Stack Trace End  ===========
+2022-08-04 22:15:53,168 [6] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message  ===========
+2022-08-04 22:15:53,168 [6] ERROR LTCPro.ServiceLayer.Log4net -  Inner Exception Message : = An error occurred while updating the entries. See the inner exception for details.
+2022-08-04 22:15:53,168 [6] ERROR LTCPro.ServiceLayer.Log4net - ============= Inner Exception  Message End  ===========

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aef42e780b624f87ac7218df2912650b" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="EMARModel.AllergyTypeCode" Width="1.5" PointX="5.25" PointY="253.5" />
+        <EntityTypeShape EntityType="EMARModel.ApiIntegration" Width="1.5" PointX="5.25" PointY="114" />
+        <EntityTypeShape EntityType="EMARModel.Bed" Width="1.5" PointX="5.25" PointY="160.375" />
+        <EntityTypeShape EntityType="EMARModel.BehavioralSymptomsMaster" Width="1.5" PointX="5.25" PointY="250.625" />
+        <EntityTypeShape EntityType="EMARModel.ClassDrugCodingType" Width="1.5" PointX="5.25" PointY="303.25" />
+        <EntityTypeShape EntityType="EMARModel.CompanyBedConfig" Width="1.5" PointX="12.75" PointY="214.625" />
+        <EntityTypeShape EntityType="EMARModel.Country" Width="1.5" PointX="5.25" PointY="333" />
+        <EntityTypeShape EntityType="EMARModel.DiagnosisCodingType" Width="1.5" PointX="5.25" PointY="316.75" />
+        <EntityTypeShape EntityType="EMARModel.DocFolder" Width="1.5" PointX="5.25" PointY="134.25" />
+        <EntityTypeShape EntityType="EMARModel.EventCategory" Width="1.5" PointX="5.25" PointY="313" />
+        <EntityTypeShape EntityType="EMARModel.FileAckInformation" Width="1.5" PointX="12.75" PointY="204.875" />
+        <EntityTypeShape EntityType="EMARModel.FileInformation" Width="1.5" PointX="9.75" PointY="203.75" />
+        <EntityTypeShape EntityType="EMARModel.Floor" Width="1.5" PointX="5.25" PointY="140.625" />
+        <EntityTypeShape EntityType="EMARModel.FrequencyMaster" Width="1.5" PointX="5.25" PointY="127.625" />
+        <EntityTypeShape EntityType="EMARModel.FTECategory" Width="1.5" PointX="5.25" PointY="110.875" />
+        <EntityTypeShape EntityType="EMARModel.FteConnection" Width="1.5" PointX="5.25" PointY="131.125" />
+        <EntityTypeShape EntityType="EMARModel.Gender" Width="1.5" PointX="5.25" PointY="277.625" />
+        <EntityTypeShape EntityType="EMARModel.HLSevenCompanyConfig" Width="1.5" PointX="9.75" PointY="212.25" />
+        <EntityTypeShape EntityType="EMARModel.HLSevenSegmentDetail" Width="1.5" PointX="7.5" PointY="248.625" />
+        <EntityTypeShape EntityType="EMARModel.HLSevenSegment" Width="1.5" PointX="5.25" PointY="322.875" />
+        <EntityTypeShape EntityType="EMARModel.Hour" Width="1.5" PointX="5.25" PointY="157" />
+        <EntityTypeShape EntityType="EMARModel.ICD10" Width="1.5" PointX="5.25" PointY="144" />
+        <EntityTypeShape EntityType="EMARModel.ImportFile" Width="1.5" PointX="5.25" PointY="329.75" />
+        <EntityTypeShape EntityType="EMARModel.IntegrationType" Width="1.5" PointX="5.25" PointY="310.125" />
+        <EntityTypeShape EntityType="EMARModel.MaritalStatu" Width="1.5" PointX="0.75" PointY="185.25" />
+        <EntityTypeShape EntityType="EMARModel.MedicationReason" Width="1.5" PointX="5.25" PointY="336.5" />
+        <EntityTypeShape EntityType="EMARModel.Month" Width="1.5" PointX="5.25" PointY="150.75" />
+        <EntityTypeShape EntityType="EMARModel.NursingSchedule" Width="1.5" PointX="7.5" PointY="233.125" />
+        <EntityTypeShape EntityType="EMARModel.OrderControlMaster" Width="1.5" PointX="5.25" PointY="268.125" />
+        <EntityTypeShape EntityType="EMARModel.OrderFavouriteMaster" Width="1.5" PointX="5.25" PointY="274.5" />
+        <EntityTypeShape EntityType="EMARModel.OrderType" Width="1.5" PointX="5.25" PointY="154.125" />
+        <EntityTypeShape EntityType="EMARModel.RoleConfig" Width="1.5" PointX="7.5" PointY="219.875" />
+        <EntityTypeShape EntityType="EMARModel.Room" Width="1.5" PointX="5.25" PointY="137.375" />
+        <EntityTypeShape EntityType="EMARModel.Screen" Width="1.5" PointX="5.25" PointY="124.375" />
+        <EntityTypeShape EntityType="EMARModel.Suffix" Width="1.5" PointX="5.25" PointY="339.625" />
+        <EntityTypeShape EntityType="EMARModel.TimeFormat" Width="1.5" PointX="5.25" PointY="292.375" />
+        <EntityTypeShape EntityType="EMARModel.User" Width="1.5" PointX="3" PointY="175.25" />
+        <EntityTypeShape EntityType="EMARModel.UserRoleFacilityConfig" Width="1.5" PointX="7.5" PointY="253.625" />
+        <EntityTypeShape EntityType="EMARModel.WeekDay" Width="1.5" PointX="5.25" PointY="117.75" />
+        <EntityTypeShape EntityType="EMARModel.Week" Width="1.5" PointX="5.25" PointY="280.875" />
+        <EntityTypeShape EntityType="EMARModel.Wing" Width="1.5" PointX="5.25" PointY="300" />
+        <EntityTypeShape EntityType="EMARModel.AddlInstructionDetail" Width="1.5" PointX="11.25" PointY="192.625" />
+        <EntityTypeShape EntityType="EMARModel.AncillaryDetail" Width="1.5" PointX="5.25" PointY="172.875" />
+        <EntityTypeShape EntityType="EMARModel.CompoundOrder" Width="1.5" PointX="8.25" PointY="181.25" />
+        <EntityTypeShape EntityType="EMARModel.InsuranceInfo" Width="1.5" PointX="10.5" PointY="250.875" />
+        <EntityTypeShape EntityType="EMARModel.NotesInfo" Width="1.5" PointX="8.25" PointY="177" />
+        <EntityTypeShape EntityType="EMARModel.Observation" Width="1.5" PointX="7.5" PointY="261.375" />
+        <EntityTypeShape EntityType="EMARModel.OutBoundFileInformation" Width="1.5" PointX="13.75" PointY="200.75" />
+        <EntityTypeShape EntityType="EMARModel.ResidentOrder" Width="1.5" PointX="7.5" PointY="271.25" />
+        <EntityTypeShape EntityType="EMARModel.TreatmentInfo" Width="1.5" PointX="5.25" PointY="183.625" />
+        <EntityTypeShape EntityType="EMARModel.VisitBehaviour" Width="1.5" PointX="18.75" PointY="222.875" />
+        <EntityTypeShape EntityType="EMARModel.VisitFoodintake" Width="1.5" PointX="18.75" PointY="228.75" />
+        <EntityTypeShape EntityType="EMARModel.VisitInfo" Width="1.5" PointX="16.5" PointY="258.625" />
+        <EntityTypeShape EntityType="EMARModel.VisitNursingNote" Width="1.5" PointX="18.75" PointY="218.375" />
+        <EntityTypeShape EntityType="EMARModel.VisitVital" Width="1.5" PointX="21.75" PointY="222.5" />
+        <AssociationConnector Association="EMARModel.FK_AllergyTypeCode_User" />
+        <AssociationConnector Association="EMARModel.FK_ApiIntegrations_User" />
+        <AssociationConnector Association="EMARModel.FK_Bed_User" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_Bed" />
+        <AssociationConnector Association="EMARModel.FK_BehavioralSymptomsMaster_User" />
+        <AssociationConnector Association="EMARModel.FK_ClassDrugCodingType_User" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_Floor" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_Room" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_Wing" />
+        <AssociationConnector Association="EMARModel.FK_Country_User" />
+        <AssociationConnector Association="EMARModel.FK_DiagnosisCodingType_User" />
+        <AssociationConnector Association="EMARModel.FK_DocFolder_User" />
+        <AssociationConnector Association="EMARModel.FK_EventCategory_User" />
+        <AssociationConnector Association="EMARModel.FK_FileAckInformation_User" />
+        <AssociationConnector Association="EMARModel.FK_FileInformation_User" />
+        <AssociationConnector Association="EMARModel.FK_Floor_User" />
+        <AssociationConnector Association="EMARModel.FK_FrequencyMaster_User" />
+        <AssociationConnector Association="EMARModel.FK_FTECategory_User" />
+        <AssociationConnector Association="EMARModel.FK_FteConnection_User" />
+        <AssociationConnector Association="EMARModel.FK_Gender_User" />
+        <AssociationConnector Association="EMARModel.FK_User_Gender" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenCompanyConfig_HLSevenSegmentDetails" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenCompanyConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenSegmentDetails_HLSevenSegments" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenSegmentDetails_User" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenSegments_User" />
+        <AssociationConnector Association="EMARModel.FK_Hours_User" />
+        <AssociationConnector Association="EMARModel.FK_ICD10_User" />
+        <AssociationConnector Association="EMARModel.FK_ImportFile_User" />
+        <AssociationConnector Association="EMARModel.FK_IntegrationType_User" />
+        <AssociationConnector Association="EMARModel.FK_MaritalStatus_User" />
+        <AssociationConnector Association="EMARModel.FK_User_MaritalStatus" />
+        <AssociationConnector Association="EMARModel.FK_MedicationReason_User" />
+        <AssociationConnector Association="EMARModel.FK_Months_User" />
+        <AssociationConnector Association="EMARModel.FK_NursingSchedule_User" />
+        <AssociationConnector Association="EMARModel.FK_OrderControlMaster_User" />
+        <AssociationConnector Association="EMARModel.FK_OrderFavouriteMaster_User" />
+        <AssociationConnector Association="EMARModel.FK_OrderType_User" />
+        <AssociationConnector Association="EMARModel.FK_RoleConfig_Screens" />
+        <AssociationConnector Association="EMARModel.FK_RoleConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_Room_User" />
+        <AssociationConnector Association="EMARModel.FK_Screens_User" />
+        <AssociationConnector Association="EMARModel.FK_Suffix_User" />
+        <AssociationConnector Association="EMARModel.FK_TimeFormat_User" />
+        <AssociationConnector Association="EMARModel.FK_AddlInstructionDetails_User" />
+        <AssociationConnector Association="EMARModel.FK_AncillaryDetails_User" />
+        <AssociationConnector Association="EMARModel.FK_AncillaryDetails_User1" />
+        <AssociationConnector Association="EMARModel.FK_CompoundOrder_User" />
+        <AssociationConnector Association="EMARModel.FK_CompoundOrder_User1" />
+        <AssociationConnector Association="EMARModel.FK_InsuranceInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_NotesInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_Observation_User" />
+        <AssociationConnector Association="EMARModel.FK_OutBoundFileInformation_User" />
+        <AssociationConnector Association="EMARModel.FK_ResidentOrder_User" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_User_User" />
+        <AssociationConnector Association="EMARModel.FK_UserRoleFacilityConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_UserRoleFacilityConfig_User1" />
+        <AssociationConnector Association="EMARModel.FK_VisitBehaviour_User" />
+        <AssociationConnector Association="EMARModel.FK_VisitFoodintake_User" />
+        <AssociationConnector Association="EMARModel.FK_VisitInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_VisitInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_VisitNursingNotes_User" />
+        <AssociationConnector Association="EMARModel.FK_VitalSigns_User" />
+        <AssociationConnector Association="EMARModel.FK_WeekDays_User" />
+        <AssociationConnector Association="EMARModel.FK_Weeks_User" />
+        <AssociationConnector Association="EMARModel.FK_Wing_User" />
+        <AssociationConnector Association="EMARModel.FK_VisitBehaviour_VisitInfo" />
+        <AssociationConnector Association="EMARModel.FK_VisitFoodintake_VisitInfo" />
+        <AssociationConnector Association="EMARModel.FK_VisitNursingNotes_VisitInfo" />
+        <AssociationConnector Association="EMARModel.FK_VitalSigns_VisitInfo" />
+        <EntityTypeShape EntityType="EMARModel.AllergyInfo" Width="1.5" PointX="5.25" PointY="166.5" />
+        <EntityTypeShape EntityType="EMARModel.DiagnosisInfo" Width="1.5" PointX="13.5" PointY="261.375" />
+        <AssociationConnector Association="EMARModel.FK_AllergyInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_AllergyInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_DiagnosisInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_DiagnosisInfo_User1" />
+        <EntityTypeShape EntityType="EMARModel.tmptblSegmentCheck" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.MailConfig" Width="1.5" PointX="5.25" PointY="179.125" />
+        <AssociationConnector Association="EMARModel.FK_MailConfig_User" />
+        <EntityTypeShape EntityType="EMARModel.OrderDestroy" Width="1.5" PointX="12.5" PointY="169.25" />
+        <AssociationConnector Association="EMARModel.FK_OrderDestroy_User" />
+        <AssociationConnector Association="EMARModel.FK_OrderDestroy_User1" />
+        <AssociationConnector Association="EMARModel.FK_OrderDestroy_User2" />
+        <EntityTypeShape EntityType="EMARModel.ApprovalAllergyInfo" Width="1.5" PointX="16.5" PointY="177.75" />
+        <EntityTypeShape EntityType="EMARModel.ApprovalDiagnosisInfo" Width="1.5" PointX="15.75" PointY="218.375" />
+        <EntityTypeShape EntityType="EMARModel.ApprovalVisitInfo" Width="1.5" PointX="24.75" PointY="219.375" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalAllergyInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalAllergyInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalDiagnosisInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalDiagnosisInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalVisitInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalVisitInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalAllergyInfo_AllergyInfo" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalDiagnosisInfo_DiagnosisInfo" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalVisitInfo_VisitInfo" />
+        <EntityTypeShape EntityType="EMARModel.ControlSubstanceCount" Width="1.5" PointX="5.25" PointY="260.375" />
+        <AssociationConnector Association="EMARModel.FK_ControlSubstanceCount_User" />
+        <AssociationConnector Association="EMARModel.FK_ControlSubstanceCount_User1" />
+        <EntityTypeShape EntityType="EMARModel.Conversation" Width="1.5" PointX="5.625" PointY="5.75" />
+        <EntityTypeShape EntityType="EMARModel.Message" Width="1.5" PointX="10.875" PointY="5.625" />
+        <EntityTypeShape EntityType="EMARModel.Participant" Width="1.5" PointX="7.875" PointY="6.125" />
+        <EntityTypeShape EntityType="EMARModel.User2" Width="1.5" PointX="3.375" PointY="5.25" />
+        <AssociationConnector Association="EMARModel.FK_Conversation_Users" />
+        <AssociationConnector Association="EMARModel.FK_Messages_Conversation" />
+        <AssociationConnector Association="EMARModel.FK_Participants_Conversation" />
+        <AssociationConnector Association="EMARModel.FK_Messages_Users" />
+        <AssociationConnector Association="EMARModel.FK_Participants_Users" />
+        <EntityTypeShape EntityType="EMARModel.UploadedDocument" Width="1.5" PointX="5.25" PointY="264.625" />
+        <AssociationConnector Association="EMARModel.FK_UploadedDocuments_User" />
+        <EntityTypeShape EntityType="EMARModel.DrFirstXMLTran" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="EMARModel.DrFirstOrderXMLTran" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="EMARModel.AllergyInfoMaster" Width="1.5" PointX="5.25" PointY="284.75" />
+        <AssociationConnector Association="EMARModel.FK_AllergyInfo_User2" />
+        <EntityTypeShape EntityType="EMARModel.NurseCommentType" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.ActivityMaster" Width="1.5" PointX="5.25" PointY="74.125" />
+        <EntityTypeShape EntityType="EMARModel.UserActivityDetail" Width="1.5" PointX="7.5" PointY="99.25" />
+        <EntityTypeShape EntityType="EMARModel.UserSession" Width="1.5" PointX="5.25" PointY="77.625" />
+        <AssociationConnector Association="EMARModel.FK_ActivityMaster_User" />
+        <AssociationConnector Association="EMARModel.FK_UserActivityDetails_ActivityMaster" />
+        <AssociationConnector Association="EMARModel.FK_UserActivityDetails_Screens" />
+        <AssociationConnector Association="EMARModel.FK_UserSession_User" />
+        <AssociationConnector Association="EMARModel.FK_UserActivityDetails_UserSession" />
+        <EntityTypeShape EntityType="EMARModel.UserOTP" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.FileInfoError" Width="1.5" PointX="12" PointY="208.625" />
+        <AssociationConnector Association="EMARModel.FK_FileInfoError_FileInformation" />
+        <EntityTypeShape EntityType="EMARModel.ApprovalRefill" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.OrderFavouriteData" Width="1.5" PointX="12.5" PointY="235.625" />
+        <AssociationConnector Association="EMARModel.FK_FavouriteData_OrderFavouriteMaster" />
+        <AssociationConnector Association="EMARModel.FK_FavouriteData_User" />
+        <AssociationConnector Association="EMARModel.FK_FavouriteData_FavouriteData" />
+        <EntityTypeShape EntityType="EMARModel.NurseComment" Width="1.5" PointX="7.375" PointY="9.75" />
+        <AssociationConnector Association="EMARModel.FK_NurseComments_User" />
+        <EntityTypeShape EntityType="EMARModel.PatientType" Width="1.5" PointX="9.75" PointY="208.375" />
+        <AssociationConnector Association="EMARModel.FK_PatientType_User" />
+        <EntityTypeShape EntityType="EMARModel.ColourType" Width="1.5" PointX="19" PointY="258" />
+        <AssociationConnector Association="EMARModel.FK_ColourType_PatientType" />
+        <AssociationConnector Association="EMARModel.FK_ColourType_User" />
+        <EntityTypeShape EntityType="EMARModel.Fingersdesc" Width="1.5" PointX="5.25" PointY="198.875" />
+        <AssociationConnector Association="EMARModel.FK_Fingersdesc_User" />
+        <EntityTypeShape EntityType="EMARModel.BarcodeDetail" Width="1.5" PointX="21.75" PointY="228.5" />
+        <AssociationConnector Association="EMARModel.FK_BarcodeDetails_User1" />
+        <EntityTypeShape EntityType="EMARModel.MailFavourite" Width="1.5" PointX="7.5" PointY="147.75" />
+        <EntityTypeShape EntityType="EMARModel.MailRead" Width="1.5" PointX="10.5" PointY="144.75" />
+        <AssociationConnector Association="EMARModel.FK_MailFavourite_User" />
+        <AssociationConnector Association="EMARModel.FK_MailRead_User" />
+        <EntityTypeShape EntityType="EMARModel.AlertStatu" Width="1.5" PointX="18.875" PointY="190.125" />
+        <EntityTypeShape EntityType="EMARModel.AlertText" Width="1.5" PointX="16.625" PointY="187.5" />
+        <EntityTypeShape EntityType="EMARModel.AlertType" Width="1.5" PointX="9.375" PointY="10.375" />
+        <AssociationConnector Association="EMARModel.FK_Alert_AlertText" />
+        <AssociationConnector Association="EMARModel.FK_Alert_User" />
+        <AssociationConnector Association="EMARModel.FK_AlertText_AlertType" />
+        <EntityTypeShape EntityType="EMARModel.Route" Width="1.5" PointX="5.25" PointY="215" />
+        <AssociationConnector Association="EMARModel.FK_Route_User" />
+        <EntityTypeShape EntityType="EMARModel.Ekit" Width="1.5" PointX="7.5" PointY="237.25" />
+        <EntityTypeShape EntityType="EMARModel.Stock" Width="1.5" PointX="10.5" PointY="239.5" />
+        <AssociationConnector Association="EMARModel.FK_BarcodeDetails_Ekit1" />
+        <AssociationConnector Association="EMARModel.FK_Ekit_User" />
+        <AssociationConnector Association="EMARModel.FK_BarcodeDetails_Stock1" />
+        <AssociationConnector Association="EMARModel.FK_Stock_User" />
+        <EntityTypeShape EntityType="EMARModel.Drug" Width="1.5" PointX="5.25" PointY="218.625" />
+        <AssociationConnector Association="EMARModel.FK_Drug_User" />
+        <EntityTypeShape EntityType="EMARModel.EkitAdminister" Width="1.5" PointX="12.75" PointY="257" />
+        <AssociationConnector Association="EMARModel.FK_EkitAdminister_Ekit" />
+        <AssociationConnector Association="EMARModel.FK_EkitAdminister_User" />
+        <EntityTypeShape EntityType="EMARModel.DrugActiveday" Width="1.5" PointX="12.75" PointY="211.375" />
+        <EntityTypeShape EntityType="EMARModel.DrFirstFileData" Width="1.5" PointX="9.75" PointY="224.625" />
+        <EntityTypeShape EntityType="EMARModel.OrderStock" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.NurseShift" Width="1.5" PointX="18.5" PointY="234.25" />
+        <AssociationConnector Association="EMARModel.FK_NurseShifts_Hours" />
+        <AssociationConnector Association="EMARModel.FK_NurseShifts_Hours1" />
+        <AssociationConnector Association="EMARModel.FK_NurseShifts_TimeFormat" />
+        <AssociationConnector Association="EMARModel.FK_NurseShifts_TimeFormat1" />
+        <AssociationConnector Association="EMARModel.FK_NurseShifts_User" />
+        <EntityTypeShape EntityType="EMARModel.CompanyConfig" Width="1.5" PointX="15.75" PointY="205.125" />
+        <EntityTypeShape EntityType="EMARModel.CompanyHlCategory" Width="1.5" PointX="18" PointY="158.875" />
+        <EntityTypeShape EntityType="EMARModel.CompanyHLEvent" Width="1.5" PointX="21.25" PointY="236.5" />
+        <EntityTypeShape EntityType="EMARModel.HLDirectionalWay" Width="1.5" PointX="13.5" PointY="197" />
+        <AssociationConnector Association="EMARModel.FK_CompanyConfig_Fingersdesc" />
+        <AssociationConnector Association="EMARModel.FK_CompanyConfig_HLDirectionalWay" />
+        <AssociationConnector Association="EMARModel.FK_CompanyConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_CompanyHlCategory_CompanyConfig" />
+        <AssociationConnector Association="EMARModel.FK_CompanyHlCategory_FTECategory" />
+        <AssociationConnector Association="EMARModel.FK_CompanyHLEvent_CompanyHlCategory" />
+        <AssociationConnector Association="EMARModel.FK_CompanyHLEvent_EventCategory" />
+        <AssociationConnector Association="EMARModel.FK_HL7DirectionalWay_User" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalRefill_OutBoundFileInformation" />
+        <EntityTypeShape EntityType="EMARModel.StockReport" Width="1.5" PointX="13.5" PointY="241.125" />
+        <AssociationConnector Association="EMARModel.FK_CompanyConfig_StockReport" />
+        <EntityTypeShape EntityType="EMARModel.OnLeave" Width="1.5" PointX="21.75" PointY="218" />
+        <AssociationConnector Association="EMARModel.FK_OnLeave_User" />
+        <AssociationConnector Association="EMARModel.FK_OnLeave_VisitInfo" />
+        <EntityTypeShape EntityType="EMARModel.Role" Width="1.5" PointX="3" PointY="165.75" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_NursingFrequencyConfig" />
+        <AssociationConnector Association="EMARModel.FK_Role_User" />
+        <AssociationConnector Association="EMARModel.FK_RoleConfig_Role" />
+        <AssociationConnector Association="EMARModel.FK_UserRoleFacilityConfig_Role" />
+        <AssociationConnector Association="EMARModel.FK_UserSession_Role" />
+        <EntityTypeShape EntityType="EMARModel.NursingFrequencyConfig" Width="1.5" PointX="18" PointY="208.125" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_Floor" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_FrequencyMaster" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_Hours" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_Months" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_Weeks" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_Wing" />
+        <EntityTypeShape EntityType="EMARModel.DefaultScreen" Width="1.5" PointX="7.5" PointY="164.875" />
+        <AssociationConnector Association="EMARModel.FK_DefaultScreens_Screens" />
+        <AssociationConnector Association="EMARModel.FK_DefaultScreens_User" />
+        <AssociationConnector Association="EMARModel.FK_Role_DefaultScreens" />
+        <EntityTypeShape EntityType="EMARModel.Company" Width="1.5" PointX="0.75" PointY="207.75" />
+        <EntityTypeShape EntityType="EMARModel.Facility" Width="1.5" PointX="3" PointY="248.125" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_Company" />
+        <AssociationConnector Association="EMARModel.FK_CompanyConfig_Company" />
+        <AssociationConnector Association="EMARModel.FK_DrFirstFileData_Company" />
+        <AssociationConnector Association="EMARModel.FK_Facility_Company" />
+        <AssociationConnector Association="EMARModel.FK_FileAckInformation_Company" />
+        <AssociationConnector Association="EMARModel.FK_FileInformation_Company" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenCompanyConfig_Company" />
+        <AssociationConnector Association="EMARModel.FK_OutBoundFileInformation_Company" />
+        <AssociationConnector Association="EMARModel.FK_PatientType_Company" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_Facility" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_Facility" />
+        <EntityTypeShape EntityType="EMARModel.NursingFCTime" Width="1.5" PointX="20.25" PointY="185.625" />
+        <AssociationConnector Association="EMARModel.FK_NursingFCTime_Hours" />
+        <AssociationConnector Association="EMARModel.FK_NursingFCTime_NursingFrequencyConfig" />
+        <EntityTypeShape EntityType="EMARModel.ApprovalDemographic" Width="1.5" PointX="23.25" PointY="185.625" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalDemographics_User" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalDemographics_User1" />
+        <EntityTypeShape EntityType="EMARModel.FTEConfiguration" Width="1.5" PointX="7.5" PointY="157.25" />
+        <AssociationConnector Association="EMARModel.FK_Company_Country" />
+        <AssociationConnector Association="EMARModel.FK_Company_User" />
+        <AssociationConnector Association="EMARModel.FK_Facility_Country" />
+        <AssociationConnector Association="EMARModel.FK_Facility_User" />
+        <AssociationConnector Association="EMARModel.FK_FTEConfiguration_FTECategory" />
+        <AssociationConnector Association="EMARModel.FK_FTEConfiguration_FteConnection" />
+        <AssociationConnector Association="EMARModel.FK_FTEConfiguration_User" />
+        <EntityTypeShape EntityType="EMARModel.RecentFac" Width="1.5" PointX="8.25" PointY="216.625" />
+        <AssociationConnector Association="EMARModel.FK_RecentFac_Facility" />
+        <AssociationConnector Association="EMARModel.FK_RecentFac_User" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_TimeFormat" />
+        <AssociationConnector Association="EMARModel.FK_OrderStock_User" />
+        <EntityTypeShape EntityType="EMARModel.HLSevenOutboundDisplayCompanyConfig" Width="1.5" PointX="18.75" PointY="193.75" />
+        <EntityTypeShape EntityType="EMARModel.HLSevenOutboundDisplaySegmentDetail" Width="1.5" PointX="16.5" PointY="191.375" />
+        <EntityTypeShape EntityType="EMARModel.HLSevenOutboundDisplaySegment" Width="1.5" PointX="5.25" PointY="194.375" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenOutboundDisplayCompanyConfig_Company" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenOutboundDisplayCompanyConfig_HLSevenOutboundDisplaySegmentDetails" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenOutboundDisplayCompanyConfig_User" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenOutboundDisplaySegmentDetails_HLSevenOutboundDisplaySegments1" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenOutboundDisplaySegmentDetails_User" />
+        <AssociationConnector Association="EMARModel.FK_HLSevenOutboundDisplaySegments_User" />
+        <EntityTypeShape EntityType="EMARModel.DrugAdministrationTime" Width="1.5" PointX="10.5" PointY="216.25" />
+        <AssociationConnector Association="EMARModel.FK_DrugActiveday_DrugAdministrationTime" />
+        <EntityTypeShape EntityType="EMARModel.DocAdministerTran" Width="1.5" PointX="24" PointY="215.875" />
+        <AssociationConnector Association="EMARModel.FK_DocAdministerTrans_User" />
+        <EntityTypeShape EntityType="EMARModel.OrderFavourite" Width="1.5" PointX="30" PointY="224.75" />
+        <EntityTypeShape EntityType="EMARModel.OrderHold" Width="1.5" PointX="30" PointY="203.375" />
+        <AssociationConnector Association="EMARModel.FK_OrderFavourite_OrderFavouriteMaster" />
+        <AssociationConnector Association="EMARModel.FK_OrderFavourite_User" />
+        <AssociationConnector Association="EMARModel.FK_OrderHold_User" />
+        <EntityTypeShape EntityType="EMARModel.TreatmentDispenseInfo" Width="1.5" PointX="28.5" PointY="186" />
+        <EntityTypeShape EntityType="EMARModel.TreatmentRouteInfo" Width="1.5" PointX="31.5" PointY="188.75" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentDispenseInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentDispenseInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentRouteInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentRouteInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_Ekit_Facility1" />
+        <AssociationConnector Association="EMARModel.FK_Stock_Facility1" />
+        <EntityTypeShape EntityType="EMARModel.ControlSubstanceTran" Width="1.5" PointX="12.5" PointY="223.25" />
+        <AssociationConnector Association="EMARModel.FK_TransCSCount_User" />
+        <AssociationConnector Association="EMARModel.FK_TransCSCount_User1" />
+        <AssociationConnector Association="EMARModel.FK_TransCSCount_ControlSubstanceCount" />
+        <EntityTypeShape EntityType="EMARModel.OrderStockTran" Width="1.5" PointX="13.625" PointY="103.125" />
+        <AssociationConnector Association="EMARModel.FK_TransOS_User" />
+        <AssociationConnector Association="EMARModel.FK_TransOS_OrderStock" />
+        <EntityTypeShape EntityType="EMARModel.ControlSubstanceReason" Width="1.5" PointX="16.75" PointY="201.75" />
+        <AssociationConnector Association="EMARModel.FK_ControlSubstanceReason_User" />
+        <AssociationConnector Association="EMARModel.FK_ControlSubstanceReason_ControlSubstanceTrans" />
+        <EntityTypeShape EntityType="EMARModel.ProcessKeyMaster" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="EMARModel.CertifyDate" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="EMARModel.CertifyOrder" Width="1.5" PointX="11.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EMARModel.MailBox" Width="1.5" PointX="2.25" PointY="145.625" />
+        <AssociationConnector Association="EMARModel.FK_MailFavourite_MailBox" />
+        <AssociationConnector Association="EMARModel.FK_MailRead_MailBox" />
+        <EntityTypeShape EntityType="EMARModel.OrderFavConfig" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.tblSideEffect" Width="1.5" PointX="13.375" PointY="4.75" />
+        <EntityTypeShape EntityType="EMARModel.tblDrugDiscardInfo" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="EMARModel.tblAdministeredSite" Width="1.5" PointX="13.375" PointY="10.75" />
+        <EntityTypeShape EntityType="EMARModel.tblRDCMailConfig" Width="1.5" PointX="10.5" PointY="271.625" />
+        <EntityTypeShape EntityType="EMARModel.tblRdcMailTime" Width="1.5" PointX="12.75" PointY="276.25" />
+        <AssociationConnector Association="EMARModel.FK_tblRDCMailConfig_Facility" />
+        <AssociationConnector Association="EMARModel.FK_tblRdcMailTime_tblRDCMailConfig" />
+        <EntityTypeShape EntityType="EMARModel.OrderHOAInfo" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="EMARModel.tblTimeZone" Width="1.5" PointX="13.375" PointY="14.75" />
+        <EntityTypeShape EntityType="EMARModel.PCertifyDate" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EMARModel.PCertifyOrder" Width="1.5" PointX="15.375" PointY="3.75" />
+        <EntityTypeShape EntityType="EMARModel.EkitControlSubstanceReason" Width="1.5" PointX="5.25" PointY="202.875" />
+        <EntityTypeShape EntityType="EMARModel.EKitControlSubstanceTran" Width="1.5" PointX="15.75" PointY="213.75" />
+        <AssociationConnector Association="EMARModel.FK_EkTransCSCount_ControlSubstanceCount" />
+        <AssociationConnector Association="EMARModel.FK_EkControlSubstanceReason_User" />
+        <AssociationConnector Association="EMARModel.FK_EkTransCSCount_User" />
+        <AssociationConnector Association="EMARModel.FK_EkTransCSCount_User1" />
+        <EntityTypeShape EntityType="EMARModel.CpoeSource" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="EMARModel.QuantityDose" Width="1.5" PointX="15.375" PointY="9.75" />
+        <EntityTypeShape EntityType="EMARModel.UnitMeasurement" Width="1.5" PointX="9.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EMARModel.DoseUom" Width="1.5" PointX="15.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EMARModel.WeightLog" Width="1.5" PointX="29.25" PointY="197.375" />
+        <AssociationConnector Association="EMARModel.FK_WeightLog_User" />
+        <EntityTypeShape EntityType="EMARModel.Demographic" Width="1.5" PointX="21" PointY="194.125" />
+        <AssociationConnector Association="EMARModel.FK_AlertText_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_Demographics_PatientType" />
+        <AssociationConnector Association="EMARModel.FK_Demographics_User" />
+        <AssociationConnector Association="EMARModel.FK_Demographics_User1" />
+        <AssociationConnector Association="EMARModel.FK_AllergyInfo_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalDemographics_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_ColourType_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_DiagnosisInfo_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_EkitAdminister_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_InsuranceInfo_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_Observation_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_OutBoundFileInformation_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_ResidentOrder_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_VisitInfo_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_WeightLog_Demographics" />
+        <EntityTypeShape EntityType="EMARModel.QuantityDetail" Width="1.5" PointX="31.5" PointY="194.25" />
+        <AssociationConnector Association="EMARModel.FK_QuantityDetails_User" />
+        <AssociationConnector Association="EMARModel.FK_NurseComments_QuantityDetails" />
+        <AssociationConnector Association="EMARModel.FK_OrderDestroy_QuantityDetails" />
+        <AssociationConnector Association="EMARModel.FK_OrderFavourite_QuantityDetails" />
+        <AssociationConnector Association="EMARModel.FK_OrderHold_QuantityDetails" />
+        <EntityTypeShape EntityType="EMARModel.NursingStation" Width="1.5" PointX="23.75" PointY="209.125" />
+        <AssociationConnector Association="EMARModel.FK_AlertText_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_CompanyBedConfig_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_Ekit_Facility" />
+        <AssociationConnector Association="EMARModel.FK_NursingStation_Facility" />
+        <AssociationConnector Association="EMARModel.FK_NurseShifts_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_NursingFrequencyConfig_NursingStation1" />
+        <AssociationConnector Association="EMARModel.FK_NursingSchedule_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_ControlSubstanceCount_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_NursingStation_User" />
+        <AssociationConnector Association="EMARModel.FK_Stock_Facility" />
+        <AssociationConnector Association="EMARModel.FK_tblRDCMailConfig_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_UserRoleFacilityConfig_NursingStation" />
+        <EntityTypeShape EntityType="EMARModel.DrugOrderMaster" Width="1.5" PointX="15.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EMARModel.PhysicianDetail" Width="1.5" PointX="27" PointY="213.125" />
+        <AssociationConnector Association="EMARModel.FK_CompanyConfig_PhysicianDetails" />
+        <AssociationConnector Association="EMARModel.FK_PhysicianDetails_Facility" />
+        <AssociationConnector Association="EMARModel.FK_NursingStation_PhysicianDetails" />
+        <AssociationConnector Association="EMARModel.FK_PhysicianDetails_NursingStation" />
+        <AssociationConnector Association="EMARModel.FK_PhysicianDetails_User" />
+        <EntityTypeShape EntityType="EMARModel.CommonOrderInfo" Width="1.5" PointX="26.25" PointY="186.875" />
+        <AssociationConnector Association="EMARModel.FK_CommonOrderInfo_User" />
+        <AssociationConnector Association="EMARModel.FK_CommonOrderInfo_User1" />
+        <AssociationConnector Association="EMARModel.FK_AddlInstructionDetails_CommonOrder" />
+        <AssociationConnector Association="EMARModel.FK_AncillaryDetails_CommonOrder" />
+        <AssociationConnector Association="EMARModel.FK_BarcodeDetails_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_CommonOrderInfo_Demographics" />
+        <AssociationConnector Association="EMARModel.FK_CompoundOrder_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_NotesInfo_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_OutBoundFileInformation_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_QuantityDetails_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentDispenseInfo_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentInfo_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_TreatmentRouteInfo_CommonOrderInfo" />
+        <EntityTypeShape EntityType="EMARModel.ApprovalOrder" Width="1.5" PointX="5.25" PointY="223.625" />
+        <EntityTypeShape EntityType="EMARModel.EncodedOrderDetail" Width="1.5" PointX="34.5" PointY="185.25" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalOrders_User" />
+        <AssociationConnector Association="EMARModel.FK_ApprovalOrders_User1" />
+        <AssociationConnector Association="EMARModel.FK_EncodedOrderDetails_User" />
+        <AssociationConnector Association="EMARModel.FK_EncodedOrderDetails_User1" />
+        <AssociationConnector Association="EMARModel.FK_EncodedOrderDetails_CommonOrderInfo" />
+        <EntityTypeShape EntityType="EMARModel.DrugAdminister" Width="1.5" PointX="28.5" PointY="252.75" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_MedicationReason" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_NurseShifts" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_User" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_User1" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_User2" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_User3" />
+        <AssociationConnector Association="EMARModel.FK_DrugAdminister_CommonOrderInfo" />
+        <AssociationConnector Association="EMARModel.FK_DocAdministerTrans_DrugAdminister" />
+        <AssociationConnector Association="EMARModel.FK_EkitAdminister_DrugAdminister" />
+        <AssociationConnector Association="EMARModel.FK_NurseComments_DrugAdminister" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

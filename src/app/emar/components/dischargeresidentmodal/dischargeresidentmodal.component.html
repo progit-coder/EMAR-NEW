@@ -1,0 +1,156 @@
+<app-commonmodal title="Resident Discharge">
+    <div class="modal-body bodystyle">
+        <form [formGroup]="myform" name="census">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right">
+                        Admit Date
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{AdmitDate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right">
+                        Prescriber Name
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{PhysicianName}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right">
+                        Facility Name
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{Facilityname}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="right" style="margin-top : 20px">
+                        Nursing Station Name
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{NursingStationName}}</label>
+                    </div>
+                </div>
+                <div class="form-group" [formGroup]="fetchform" *ngFor="let field of fetchfields">
+                    <div class="col-sm-12 col-lg-12" style="width: 204px">
+                        <div class="right" style="margin-top : 20px">
+                            {{field.label}}
+                        </div>
+                        <div class="left" style="margin-top : 5px">
+                            <label>{{field.label =='Floor'? FloorName:field.label =='Wing'?WingName:field.label =='Room'?RoomName:field.label =='Bed'?BedName:''}}</label>
+                        </div>
+                      </div>
+                  </div>
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf=" fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Floor
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{FloorName}}</label>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Wing
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{WingName}}</label>
+                    </div>
+                </div> -->
+
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Room
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{RoomName}}</label>
+                    </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+                    <div class="right" style="margin-top : 20px">
+                        Bed
+                    </div>
+                    <div class="left" style="margin-top : 5px">
+                        <label>{{BedName}}</label>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row form-group" *ngIf="Hlsevenconfig">
+                <div class="col-sm-4 col-md-6 col-lg-4" *ngIf="(displayfield.DischargeDate == 1 || displayfield.DischargeDate == 2) ">
+                    <div class="right1">
+                        <label>Discharge Date</label>
+                    </div>
+                    <div class="left1">
+                        <input type="date" id="txtDischargeDate" [readonly]="displayfield.DischargeDate == 2"
+                            formControlName="DischargeDate" class="form-control" [ngClass]="{
+                                                                                'is-valid':myform.controls.DischargeDate.valid  && myform.controls.DischargeDate.dirty && displayfield.DischargeDate === 1,
+                                                                                'is-invalid':myform.controls.DischargeDate.invalid && myform.controls.DischargeDate.touched && displayfield.DischargeDate === 1
+                                                                              }" />
+                        <div *ngIf="myform.controls.DischargeDate.errors && myform.controls.DischargeDate.touched && displayfield.DischargeDate === 1"
+                            class="errorMessage">
+                            <div *ngIf="myform.controls.DischargeDate.errors.required  ">
+                                Enter valid Discharge date.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-6 col-lg-4" *ngIf="(displayfield.DischargeDate == 1 || displayfield.DischargeDate == 2) ">
+                    <div class="right1">
+                        <label>Discharge Time</label>
+                    </div>
+                    <div class="left1">
+                        <input type="time" id="txtDischargeTime" [readonly]="displayfield.DischargeDate == 2"
+                            formControlName="DischargeTime" class="form-control" [ngClass]="{
+                                                                                'is-valid':myform.controls.DischargeTime.valid  && myform.controls.DischargeTime.dirty && displayfield.DischargeDate === 1,
+                                                                                'is-invalid':myform.controls.DischargeTime.invalid && myform.controls.DischargeTime.touched && displayfield.DischargeDate === 1
+                                                                              }" />
+                        <div *ngIf="myform.controls.DischargeTime.errors && myform.controls.DischargeTime.touched && displayfield.DischargeDate === 1"
+                            class="errorMessage">
+                            <div *ngIf="myform.controls.DischargeTime.errors.required  ">
+                                Enter valid Discharge time.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="(displayfield.DischargeDate == 1 || displayfield.DischargeDate == 2) ">
+                    <div class="right1">
+                        <label>Discharge Date</label>
+                    </div>
+                    <div class="left1">
+                        <input type="datetime-local" id="txtDischargeDate" [readonly]="displayfield.DischargeDate == 2" min="2010-01-
+                                                                              01T00:00:00"
+                            formControlName="DischargeDate" class="form-control" required [ngClass]="{
+                                                                                'is-valid':myform.controls.DischargeDate.valid  && myform.controls.DischargeDate.dirty && displayfield.DischargeDate === 1,
+                                                                                'is-invalid':myform.controls.DischargeDate.invalid && myform.controls.DischargeDate.touched && displayfield.DischargeDate === 1
+                                                                              }" />
+                        <div *ngIf="myform.controls.DischargeDate.errors && myform.controls.DischargeDate.touched && displayfield.DischargeDate === 1"
+                            class="errorMessage">
+                            <div *ngIf="myform.controls.DischargeDate.errors.required  ">
+                                Enter valid Discharge date & time.
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="errormessage != ''" style="color:red">
+                <div class="right">
+                    <label>{{errormessage}}</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="Approval==0" style="color:red">
+            <div style="text-align:center">
+                <label>{{approvalerrormessage}}</label>
+            </div>
+
+        </div>
+        <button type="button" id="btnsave" *ngIf="pageConfig['AccessWrite'] && Approval!=0 && visitStatus === 1 && allFields===1"
+            [disabled]="myform.invalid" (click)="dischargeResident()" class="btn btn-success">Save</button> &nbsp;
+        <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button>
+    </div>
+</app-commonmodal>

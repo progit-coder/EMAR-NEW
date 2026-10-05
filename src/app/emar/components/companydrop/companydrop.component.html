@@ -1,0 +1,4 @@
+<select [(ngModel)]="companyselected" (change)="changeCompany()">
+  <option *ngFor="let item of companyMaster"
+  [attr.selected]="companyselected == item.Company_Id"  value="{{item.Company_Id}}">{{item.Company_Name}}</option>
+</select>

@@ -1,0 +1,146 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Measurements and User Input Master</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform">
+            <div class="row form-group">
+
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name<span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Facility Name<span class="c1">*</span>
+                <div class="iconed-input">
+                    <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities" [(ngModel)]="selectedfaItems"
+                      [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'"
+                      (onSelect)="onFacilitySelect($event)" 
+                      (onDeSelect)="onFacilityDeSelect($event)"
+                      [ngClass]="{
+                        'is-valid':myform.controls.ddlfacilities.valid,
+                        'is-invalid':myform.controls.ddlfacilities.invalid && myform.controls.ddlfacilities.touched
+                      }" >
+                    </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.ddlfacilities.errors && (myform.controls.ddlfacilities.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.ddlfacilities.errors.required">
+                      Facility Name is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Measurements<span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Measurements<span class="c1">*</span>
+                <div class="iconed-input">
+                    <ng-multiselect-dropdown class="form-control" formControlName="ddlorderfav" [data]="OrderFav" [(ngModel)]="selectedOrderItems"
+                    [settings]="dropdownSettings_OrderFav" [placeholder]="'Measurements'"
+                    [ngClass]="{
+                      'is-valid':myform.controls.ddlorderfav.valid,
+                      'is-invalid':myform.controls.ddlorderfav.invalid && myform.controls.ddlorderfav.touched
+                    }" >
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.ddlorderfav.errors && (myform.controls.ddlorderfav.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.ddlorderfav.errors.required">
+                      Measurements is required.
+                    </div>
+                                     </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Code
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Code
+                <span class="c1">*</span>
+                  <div class="iconed-input">
+                      <input type="text" id="txtcode"  formControlName="code" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.code.valid,
+                        'is-invalid':myform.controls.code.invalid && myform.controls.code.touched
+                      }" />
+                      <div *ngIf="myform.controls.code.errors && (myform.controls.code.touched)" class="errorMessage">
+                        <div *ngIf="myform.controls.code.errors.required">
+                           Code is required.
+                        </div>
+                        <div *ngIf="myform.controls.code.errors.maxlength">
+                             Code cannot be more than 2 characters long.
+                        </div>
+                        <div *ngIf="myform.controls.code.errors.minlength">
+                           Code cannot be less than 2 characters long.
+                        </div>
+                        <div *ngIf="myform.controls.code.errors.pattern">
+                           Code {{config.alphabetsMessage}}
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']"  value="Save" (click)="insertOrderFavInfo()" [disabled]="myform.invalid" class="btn btn-success" />&nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Measurements and User Inputs View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+
+
+        </div>
+        <div class="card-body">
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table id="tbluserinputs" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Facility Name</th>
+                      <th>Order Fav Code</th>
+                      <th>Measurements and user Inputs</th>
+                      <!-- <th>Created By</th>
+                      <th>Created Date</th> -->
+                      <th *ngIf="pageConfig['AccessWrite']" ></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of orderFavDetails |gridFilter:searchText:'orderFav'| paginate: { itemsPerPage: gridPagination, currentPage: p };let i = index">
+                      <td>{{item.Facility_Name}}</td>
+                      <td>{{item.OrderFavCode}}</td>
+                      <td>{{item.OrderFavDesc}}</td>
+                      <!-- <td>{{item.OFConfig_CreatedBy}}</td>
+                      <td>{{item.OFConfig_CreatedDate}}</td> -->
+                      <td *ngIf="pageConfig['AccessWrite']" >
+                        <a class="btn editicon" (click)="getOrderFavDetailsByID(item.Facility_Id,item.OrderFavCode,item.OFConfig_CreatedDate)" id="edit">
+                          <i class="icon"></i>
+                          <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                        </a>
+                        <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="getRoomDetailsByID(item.Room_Id)" /> -->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls (pageChange)="p = $event" *ngIf="orderFavDetails.length >0"></pagination-controls>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>

@@ -1,0 +1,81 @@
+<!-- <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Floor Details</h3>
+      </div> -->
+           <div class="modal-content" ngDraggable [handle]="DemoHandle1">
+          <div #DemoHandle1 class="modal-header " style="height: 50px ">
+            <h5>Floor Details</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+
+          </div> 
+      <div class="modal-body bodystyle">
+        <form [formGroup]="myform" autocomplete="off">
+          <div class="row form-group">
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name<span class="c1">*</span></div>
+                  <div class="col-sm-4 col-md-4 col-lg-4" [ngClass]="{
+                'has-success has-iconed':myform.controls.facilityName.valid,
+                'has-error has-iconed':myform.controls.facilityName.invalid && myform.controls.facilityName.touched,
+                '':myform.controls.facilityName.untouched
+              }">
+                    <div class="iconed-input">
+                      <select id="ddlfacilityname" formControlName="facilityName" class="form-control">
+                        <option [value]="-1">--Select--</option>
+                        <option *ngFor="let item of facilities" [value]="item.Facility_Id">{{item.Facility_Name}}</option>
+                      </select></div>
+                  </div> -->
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Floor Number
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Floor Number
+              <span class="c1">*</span>
+              <div class="iconed-input">
+                <input type="text" id="txtfloornumber" formControlName="floorNumber" (change)="checkFloorNumber()"
+                  class="form-control" [ngClass]="{
+                  'is-valid':myform.controls.floorNumber.valid,
+                  'is-invalid':myform.controls.floorNumber.invalid && myform.controls.floorNumber.touched
+                 }" />
+                <div *ngIf="myform.controls.floorNumber.errors && (myform.controls.floorNumber.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.floorNumber.errors.required">
+                    Floor Number is required.
+                  </div>
+                  <div *ngIf="myform.controls.floorNumber.errors.maxlength">
+                    Floor Number cannot be more than 50 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.floorNumber.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+              
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Status
+              <div class="iconed-input">
+                <label class="switch">
+                  <input type="checkbox" id="chkstatus" formControlName="status">
+                  <div class="slider round">
+                    <!--ADDED HTML -->
+                    <span class="on">Active</span>
+                    <span class="off">Inactive</span>
+                    <!--END-->
+                  </div>
+                </label>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <div style="text-align: right">
+            <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']" (click)="insertFloor()" [disabled]="myform.invalid" class="btn btn-success" />&nbsp;
+            <input type="button" id="btnclose" value="Close" (click)="resetScreen()" data-dismiss="modal" class="btn btn-danger" #closeAddFloorModal/>
+          </div>
+        </div>
+       </form>
+      </div>
+    </div>
+   
+  <!-- </div> -->

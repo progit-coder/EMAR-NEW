@@ -1,0 +1,129 @@
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header{
+    height:175px;padding:10px;text-align:center
+}
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header>img{
+    z-index:5;height:90px;width:90px;border:3px solid;border-color:transparent;border-color:rgba(255,255,255,0.2)
+}
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p{
+    z-index:5;color:#fff;color:rgba(255,255,255,0.8);font-size:17px;margin-top:10px
+}
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p>small{
+    display:block;font-size:12px
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-body{
+    padding:15px;border-bottom:1px solid #f4f4f4;border-top:1px solid #dddddd
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-body:before,.navbar-nav>.user-menu>.dropdown-menu>.user-body:after{
+    content:" ";display:table
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-body:after{
+    clear:both
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-body a{
+    color:#444 !important
+}
+@media (max-width:991px){
+.navbar-nav>.user-menu>.dropdown-menu>.user-body a{
+    background:#fff !important;color:#444 !important
+}
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-footer{
+    background-color:#f9f9f9;padding:10px
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-footer:before,.navbar-nav>.user-menu>.dropdown-menu>.user-footer:after{
+    content:" ";display:table
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-footer:after{
+    clear:both
+}
+.navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default{
+    color:#666666
+}
+@media (max-width:991px){
+    .navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default:hover{
+        background-color:#f9f9f9
+    }
+}
+.navbar-nav>.user-menu .user-image{
+    float:left;width:25px;height:25px;border-radius:50%;margin-right:10px;margin-top:-2px
+}
+@media (max-width:767px){
+    .navbar-nav>.user-menu .user-image{
+        float:none;margin-right:0;margin-top:-8px;line-height:10px
+    }
+}
+.user-header{background-color:#CCCCCC}
+
+.modalstyle
+{
+  z-index: 9999;
+  overflow: hidden;
+}
+.bodystyle
+{
+  height:400px;
+  overflow-y: auto
+}
+.body2style
+{
+  height:200px;
+ 
+}
+.modal.fade .modal-dialog
+{
+  transform: translate(0,0%);
+}
+.doses
+{
+ height:400px !important;
+  overflow: scroll !important; 
+}
+.dropdown-item:active{
+    background-color: #f4f4f4!important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn {
+    border:none !important;
+    padding: 0px !important;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down 
+  {
+    border-top: 5px solid black !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up 
+  {
+    border-bottom: 5px solid #adadad !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item
+  {
+     overflow: hidden !important; 
+     white-space: nowrap !important;
+     width: 86% !important;  
+     text-overflow: ellipsis !important;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+{
+  border: 2px solid #ade39d !important;
+  background-color: #ade39d !important;
+  color: #000000 !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+{
+  background-color: #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+{
+  border: 2px solid #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+{
+  border-color: #000000 !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+{
+  color: #000000 !important;
+  font-weight: bold !important;
+}

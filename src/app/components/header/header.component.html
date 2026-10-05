@@ -1,0 +1,305 @@
+<nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom"  style="position: sticky ; top:0;">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#">
+        <i class="fa fa-bars"></i>
+      </a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a style="cursor: pointer;" (click)="Home()" class="nav-link">Home</a>
+    </li>
+    <li *ngFor="let alert of alerts" class="{{ cssClass(alert) }} alert-dismissable">
+<div class="row">
+  <div class="col-sm-10"><span> {{alert.message}}</span></div>
+  <div class="col-sm-2"><a class="close" (click)="removeAlert(alert)">&times;</a></div>
+</div>
+
+    </li>
+
+  </ul>
+  <!-- <ul class="nav navbar-nav" style="width: 600px;height: 28px;color: red;" *ngIf="dueAlert > 0 ">
+    <marquee behavior="alternate" style="font-size:18px;">
+      <i>
+        <b>{{dueAlert}} Doses missed from past 8 hours.Please Check Here</b>
+      </i>
+    </marquee>
+  </ul> -->
+
+  <ul class="navbar-nav ml-auto">
+    <!-- <li *ngFor="let alert of alerts" class="{{ cssClass(alert) }} alert-dismissable">
+
+      <span> {{alert.message}}</span>
+
+      <a class="close" (click)="removeAlert(alert)">&times;</a>
+
+    </li> -->
+    <li class="nav-item dropdown" appOutside *ngIf="mailPageConfig!=undefined && mailPageConfig['AccessRead']">
+      <a style="color:sandybrown;font-size:22px;cursor: pointer;" class="nav-link"  (click)="getAllMailData(0)" data-toggle="dropdown">
+        <i class="fa fa-envelope-o"></i>
+        <span *ngIf="mailData" class="badge badge-danger navbar-badge">{{mailData}}</span>
+      </a>
+      <!-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right mail">
+        <span class="dropdown-item dropdown-header" (click)="showHideToggleAlerts('.mail')">Mails</span>
+        <div class="dropdown-divider"></div>
+        <table>
+          <tr *ngFor="let item of mailData">
+            <td>
+              <a (click)="getAllMailData(0)" style="cursor: pointer" class="dropdown-item">
+                <i class="fa fa-envelope mr-2"></i>
+                <span class="float-right text-muted text-sm"></span>
+              </a>
+            </td>
+          </tr>
+        </table>
+        <div class="dropdown-divider"></div>
+        <a (click)="getAllMailData(0)" class="dropdown-item dropdown-footer" style="cursor: pointer;">Check All Mails</a>
+      </div> -->
+    </li>
+    <li class="nav-item dropdown" *ngIf="dueAlert > 0 && userPastDueAlertFlag==1">
+        <a style="color: #4fb633;font-size:22px;cursor: pointer;" class="nav-link"  (click)="showHideToggleAlerts('.doses')" data-toggle="dropdown">
+            <i class="fa fa-flag-o openmsgclass"></i>
+            <span class="badge badge-danger navbar-badge">{{dueAlert}}</span>
+          </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right doses" style="margin-left: 55px !important;cursor: pointer;">
+          <a class="dropdown-item">
+            <!-- Message Start -->
+           <div style="background:#ade39d;"><h4 style="text-align: center;color: #000000;"><i>Possibly Past Due</i></h4></div>
+            <div class="media">
+              <div class="media-body">
+                  <table>
+                      <tr *ngFor="let doses of DosesList">
+                        <td>
+                          <h3 class="dropdown-item-title">
+                      <a  title="Ignore"><span style="color: red;cursor: pointer;" (click)="insertDosesIgnoreStatus(doses.DrugAdminister_Id)"><b><i class="fa  fa-ban"></i></b></span> &nbsp;&nbsp;<b style="color: #4fb633;" (click)="getDosesData()">{{doses.PatientName}} &nbsp;&nbsp;<u  style="color: #000000;"(click)="getDosesData()" >{{doses.DrugName}}</u></b></a>
+                    </h3>
+                   <p (click)="getDosesData()" class="text-sm text-muted"><i class="fa fa-clock-o"></i>{{doses.AdminsterSchedule}} {{doses.PassTime}} </p>
+                        </td>
+                      </tr>
+                    </table>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <!-- <a href="javascript:void(0)" class="dropdown-item">
+            <div style="background:lightslategray;"><h4 style="text-align: center;color: white;"><i>Refill / Discontinue Rejections</i></h4></div>
+            <div class="media">
+              <div class="media-body">
+                  <table>
+                      <tr *ngFor="let error of OutBoundErrorList">
+                        <td>
+                          <h3 class="dropdown-item-title">
+                      <a href="javascript:void(0)"><span style="color: red;" (click)="insertOutboundErrorIgnoreStatus(error.File_Id)"><b><i class="fa  fa-ban"></i></b></span> &nbsp;&nbsp;<b style="color: #007bff;" (click)="getOutboundData()">{{error.ResidentName}}({{error.DOB}}) &nbsp;&nbsp;<u (click)="getOutboundData()" style="color: cadetblue;">{{error.Event}}</u></b></a>
+                    </h3>
+                   <p (click)="getOutboundData()" class="text-sm text-muted"><i class="fa fa-clock-o"></i>{{error.File_CreatedDate  |date :'MM/dd/yyyy hh:mm'}} </p>
+                        </td>
+                      </tr>
+                    </table>
+              </div>
+            </div>
+          </a> -->
+          <div class="dropdown-divider"></div>
+          <a  style="cursor: pointer;" class="dropdown-item dropdown-footer"></a>
+        </div>
+      </li>
+    <li class="nav-item dropdown" appOutside *ngIf="alertsPageConfig!=undefined && alertsPageConfig['AccessRead']">
+      <a style="color: darkblue;font-size:22px;cursor: pointer;" class="nav-link"  (click)="getAllAlertsData(0)" data-toggle="dropdown" >
+        <i class="fa fa-bell-o"></i>
+        <span class="badge badge-danger navbar-badge">{{alertsData}}</span>
+      </a>
+      <!--<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right alerts">
+        <span class="dropdown-item dropdown-header" (click)="showHideToggleAlerts('.alerts')">Notifications</span>
+        <div class="dropdown-divider"></div>
+        <table>
+           <tr *ngFor="let item of alertsData">
+            <td>
+              <a (click)="getAllAlertsData(item.TYPE_ID)" style="cursor: pointer" class="dropdown-item">
+                <i class="fa fa-envelope mr-2"></i>{{item.TypeCount}} &nbsp;&nbsp;&nbsp;&nbsp;{{item.Type_Desc}}
+                <span class="float-right text-muted text-sm"></span>
+              </a>
+            </td>
+          </tr>
+        </table>
+        <div class="dropdown-divider"></div>
+        <a (click)="getAllAlertsData(0)" class="dropdown-item dropdown-footer" style="cursor: pointer;">See All Notifications</a>
+      </div> -->
+    </li>
+    <li class="dropdown user user-menu" style="cursor: pointer;margin-top: 10px;"  appOutside (click)="showHideToggle('.login')">
+      <a style="color: #4fb633;cursor: pointer;" class="dropdown-toggle" >
+        <img src="./assets/img/avatar5.png" class="user-image" alt="User Image" style="cursor: pointer;">
+        <span class="hidden-xs">{{displayName}}</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right login">
+        <li class="user-header">
+          <img src="./assets/img/avatar5.png" class="img-circle" alt="User Image">
+
+          <!-- <p style="color: #000000;">{{userRole}}</p> -->
+          <p style="color: #000000;">{{displayName}}</p>
+        </li>
+        <!-- <li class="user-body">
+        </li> -->
+        <li class="user-footer">
+          <div class="pull-left" *ngIf="isUserLoggedIn || isUserToken">
+            <a href="#" class="btn btn-success btn-sm" data-target="#changePwd" data-toggle="modal">Change Password</a>
+          </div>
+          <div class="pull-right" *ngIf="isUserLoggedIn || isUserToken">
+            <a href="#" (click)="logoutClicked()" class="btn btn-danger btn-sm">Sign out</a>
+          </div>
+        </li>
+      </ul>
+    </li>
+    
+  </ul>
+</nav>
+<div id="changePwd" class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header" style="height: 50px;">
+        <h5 class="text-center">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="ChangePwdReset()"
+          aria-hidden="true">&times;</button>
+
+      </div>
+      <div class="modal-body style:max-height:400px overflow-y: auto">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <button class="btn btn-success pull-left" *ngIf="otpflag==0" (click)="changePwd()">Send OTP</button>
+              <div class="text-center" *ngIf="forgotPassFlag==1 && otpflag==1">
+                <app-resetpassword [userId]="userId" [typeFlag]="type" (Note)="NoteDisplay($event)">
+                </app-resetpassword>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-sm-10 col-md-10 col-lg-10" style="color:red" *ngIf="msg==1">
+          <div style="text-align:left">
+            <label>Note: OTP will send to register Email Id</label>
+          </div>
+          <div *ngIf="errmsg">
+            <label style="color:red">{{errmsg}}</label>
+          </div>
+        </div>
+        <button class="btn pull-right" data-dismiss="modal" (click)="ChangePwdReset()" class="btn btn-danger"
+          aria-hidden="true">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" style="padding-top: 34px;" ngDraggable [handle]="DemoHandle2"  id="modalinsulis" role="dialog" *ngIf="dueAlert > 0 "
+  [ngStyle]="{'display': modalDosesIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 1089px;">
+    <div class="modal-content">
+      <div #DemoHandle2 class="modal-header" style="height: 50px;padding:7px !important ">
+        <h5 style="color:#000000">Possibly Past Due</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body" >
+          <form [formGroup]="myform" autocomplete="off">
+          <div class="row form-group">
+          <div class="col-sm-3 col-md-6 col-lg-6">
+              <label>Facility</label>
+              <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities" [(ngModel)]="selectedfaItems"
+                [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'"
+                (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-3 col-md-6 col-lg-6">
+              <label>Nursing Station</label>
+              <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations" [data]="nurseStations"
+                [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'"
+                (onSelect)="onNurseStationSelect($event)" (onSelectAll)="onNurseStationSelectAll($event)"
+                (onDeSelect)="onNurseStationDeSelect($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            </div>
+          </form>
+            <div style="overflow: auto;height: 350px;">
+          <table>
+              <tr *ngFor="let doses of DosesList">
+                <td>
+                    <ul class="timeline">
+                        <li>
+                          <div class="timeline-item" style="width: 970px;">
+                            <span class="time" style="color: black;"><i class="fa fa-clock-o"></i> <b>{{doses.AdminsterSchedule}} {{doses.PassTime}}</b></span>
+                            <h3 class="timeline-header"><a  style="color: #4fb633;cursor: pointer;">{{doses.PatientName}} - {{doses.DrugName}}</a></h3>
+                            <div class="timeline-body">
+                               {{doses.ProviderAdminDrugInsText}}
+                            </div>
+                            <div class="timeline-footer">
+                                <a class="btn btn-danger btn-sm" (click)="insertDosesIgnoreStatus(doses.DrugAdminister_Id)"><i style="color: black;">Ignore</i></a>
+                              </div>
+                          </div>
+                        </li>
+                      </ul>
+                </td>
+              </tr>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" style="border-radius: 15px" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" style="padding-top: 36px;" ngDraggable [handle]="DemoHandle3" id="modalOutboundErrorIsOpen" role="dialog"
+    [ngStyle]="{'display': modalOutboundErrorIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog" style="max-width: 1089px;">
+      <div class="modal-content">
+        <div #DemoHandle3 class="modal-header" style="height: 35px;padding:7px !important ">
+          <h5>Refill / Discontinue Rejections</h5>
+          <button type="button" class="close" (click)="closeModelOrder()">&times;</button>
+        </div>
+        <div class="modal-body" style="overflow: auto;height: 510px;">
+            <table>
+                <tr *ngFor="let error of OutBoundErrorList">
+                  <td>
+                      <ul class="timeline">
+                          <li>
+                            <div class="timeline-item" style="width: 970px;">
+                              <span class="time" style="color: black;cursor: pointer;"><i class="fa fa-clock-o"></i> <b>{{error.File_CreatedDate  |date :'MM/dd/yyyy hh:mm'}}</b></span>
+                              <h3 class="timeline-header"><a  style="cursor: pointer;">{{error.ResidentName}}({{error.DOB}}) - {{error.DrugName}}</a></h3>
+                              <div class="timeline-body">
+                                 {{error.ErrorMessage}}
+                              </div>
+                              <div class="timeline-footer">
+                                  <a class="btn btn-danger btn-sm" (click)="insertOutboundErrorIgnoreStatus(error.File_Id)">Ignore</a>
+                                </div>
+                            </div>
+                          </li>
+                        </ul>
+                  </td>
+                </tr>
+              </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" style="border-radius: 15px" (click)="closeModelOrder()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modalstyle" id="exampleModal" ngDraggable [handle]="DemoHandle4" tabindex="-1" role="dialog" style="z-index: 999999 !important;"
+    [ngStyle]="{'display': modalAlertOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle4 class="modal-header" style="height: 50px;background-color: #ffdf62;">
+                <h5 class="modal-title">Alert</h5>
+                <!-- <button type="button" class="close" (click)="closeModelAlert()">&times;</button> -->
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let alert of alertsPop">
+                    {{alert.message}}
+               </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="closeModelAlert()">OK</button>
+
+            </div>
+        </div>
+    </div>
+</div>

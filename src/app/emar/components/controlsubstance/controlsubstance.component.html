@@ -1,0 +1,390 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Dr.First Verification</h3>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform">
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2"><strong>Residents</strong>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <select class="form-control" id="ddlresident" formControlName="ddlresidents"
+                  (change)="changeResident()">
+                  <option value="" select disabled>Select</option>
+                  <option *ngFor="let item of residents" value="{{item.Patient_Id}}">
+                    {{item.PatientLastName}},{{item.PatientFirstName}}</option>
+                </select>
+              </div>
+              <!-- <div class="col-sm-4">
+                  <span>History <input type="checkbox" [checked]="historyCheck" (change)="getHistory($event.target.checked?true:false)"/></span>
+                </div> -->
+              <!-- <div class="col-sm-4">
+                <div style="text-align: right">
+                  <input type="button" value="MapData" (click)="InsertDrFirstMaping()" class="btn btn-success"
+                    *ngIf="MapButton==1 " />
+                </div>
+              </div> -->
+            </div>
+          </form>
+          <div class="row form-group">
+            <div class="table-responsive">
+              <table id="tblDrFirstMap" class="table" style="width:100%">
+                <tbody>
+                  <tr>
+                    <td style="width:50%"><b>Pharmacy Order</b></td>
+                    <td style="width:50%"><b>Dr.First Order </b></td>
+                  </tr>
+                  <tr>
+                    <td style="width:50%">
+                      <div class="row-m-t" *ngIf="hl7DrFirstOrderInfo.length>0">
+                        <div
+                          *ngFor="let item of hl7DrFirstOrderInfo|gridFilter:searchText:'HL7DrFirstOrder';let j=index">
+                          <div class="card  card-light">
+                            <div class="card-header">
+                              <h4 class="card-title">
+                                <!-- <input type="checkbox" value="{{item.Porder_Id}}" name="{{item.Porder_Id}}"
+                                    id="{{item.Porder_Id}}"
+                                    (change)="onDrFirstSelect($event.target.checked,2, item.Porder_Id)" /> -->
+                                <a data-toggle="collapse" data-parent="#accordion" href="{{'#hl'+j}}">
+                                  <small><em style="color:darkcyan"><u>
+                                        {{item.Drug}}</u></em></small>
+                                </a>
+                                <div style="float: right">
+                                  <span *ngIf="item.POOutBoundApproval==3" style="color: green"
+                                    class=" fa  fa-check (alias)"></span>
+                                  &nbsp;
+                                  <input type="button" *ngIf="item.POOutBoundApproval==1"
+                                    value="Review, then Click Here to Approve"
+                                    (click)="ApproveHlRecord(item.Porder_Id,item.DAdmin_Id)"
+                                    class="btn btn-warning btn-xs" />
+                                </div>
+                              </h4>
+                            </div>
+                            <div id="{{'hl'+j}}" class="panel-collapse collapse">
+                              <div class="card-body">
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <td><b>RouteText</b></td>
+                                      <td>:</td>
+                                      <td>{{item.RouteText}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Additional Instructions</b></td>
+                                      <td>:</td>
+                                      <td>{{item.AdditionalInst}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>NumberofRefill</b></td>
+                                      <td>:</td>
+                                      <td>{{item.NumberofRefill}}</td>
+
+                                    </tr>
+                                    <tr>
+                                      <td><b>Quantity</b></td>
+                                      <td>:</td>
+                                      <td>{{item.Quantity}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Number Of Refill</b></td>
+                                      <td>:</td>
+                                      <td>{{item.NumberofRefill}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><b>Strength</b></td>
+                                      <td>:</td>
+                                      <td>{{item.Strength}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="width:50%">
+                      <div class="btn-group btn-group-justified" role="group" aria-label="..."
+                        style="margin-bottom : 5px">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default active"
+                            (click)="getDrFirstOrderCheck()">New</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default"
+                            (click)="getActiveDrFirst()">Active/Verified</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default">Void</button>
+                        </div>
+                      </div>
+                      <div *ngFor=" let item of drFirstOrderInfo|gridFilter:searchText:'DrFirstOrder';let i=index">
+                        <div class="card  card-light">
+                          <div class="card-header">
+                            <h4 class="card-title">
+                              <!-- <input type="checkbox" value="{{item.PrescriptionID}}" name="drFirstgroup"
+                                id="{{item.PrescriptionID}}" [(ngModel)]="item.Checked"
+                                [disabled]="!item.Checked && maxNo"
+                                (change)="onDrFirstSelect($event.target.checked?true:false,1, item.PrescriptionID)" /> -->
+                              <a data-toggle="collapse" data-parent="#accordion" href="{{'#dr'+i}}">
+                                <small><em style="color:tomato"><u>
+                                      {{item.Drug}}</u></em></small>
+                              </a>
+                              <div style="float: right">
+                                <span *ngIf="item.DrFirstOrderXMLTrans_Approval==1" style="color: green"
+                                  class=" fa  fa-check (alias)"></span>
+                                &nbsp;
+                                <input type="button" *ngIf="item.DrFirstOrderXMLTrans_Approval==0"
+                                  value="Acknowledge This DrFirst" (click)="ApproveDrFirstRecord(item.DrFirstOrder_Id)"
+                                  class="btn btn-info btControlled Substance Countn-xs" />
+                              </div>
+                            </h4>
+                          </div>
+                          <div id="{{'dr'+i}}" class="panel-collapse collapse">
+                            <div class="card-body">
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <td><b>Patient MR Number</b></td>
+                                    <td>:</td>
+                                    <td>{{item.PatientMRNumber}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Additional Instructions</b></td>
+                                    <td>:</td>
+                                    <td>{{item.AdditionalInst}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>OtherNotes</b></td>
+                                    <td>:</td>
+                                    <td>{{item.OtherNotes}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>PatientNotes</b></td>
+                                    <td>:</td>
+                                    <td>{{item.PatientNotes}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Physician Ordered</b></td>
+                                    <td>:</td>
+                                    <td>{{item.Physician_Ordered}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Date Received</b></td>
+                                    <td>:</td>
+                                    <td>{{item.DrFirstOrder_CreatedDate}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <pagination-controls (pageChange)="p = $event" *ngIf="ordersList.length > 0"></pagination-controls>
+          </div>
+          <div class="row form-group">
+            <div class="table table-responsive" *ngIf="history==1">
+              <table class="table-bordered table-hover" id="historytable">
+                <thead>
+                  <tr>
+                    <th>Patient Name</th>
+                    <th>Dr.First Order</th>
+                    <th>Pharmacy Order</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of historyData;let i index">
+                    <td>{{item.PatientName}}</td>
+                    <td>{{item.Dr_First}}</td>
+                    <td>{{item.HL7}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!--Model Destroy-->
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="modalDrfirst" role="dialog">
+  <div class="modal-dialog modal-lg" style="max-width: 65%; max-height:65%; 
+    ">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header" style="height: 50px ">
+        <h4 class="modal-title">Dr.First Orders</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="line-height:25px;">
+
+        <div class="row">
+
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-12">
+                <label>
+                  <h4>Order Information</h4>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-6"><strong>Patient_Id</strong></div>
+              <div class="col-sm-6"><label id="patientId">{{oPatient_Id}}</label></div>
+
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>GiveCodeIdentifier</strong></div>
+              <div class="col-sm-6"><label id="giveCodeIdentifier">{{oGiveCodeidentifier}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Drug</strong></div>
+              <div class="col-sm-6"><label id="drug"></label>{{oDrug}}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>PrescriptionID</strong></div>
+              <div class="col-sm-6"><label id="prescriptionID">{{oPrescriptionID}}</label></div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6"><strong>RouteText</strong></div>
+              <div class="col-sm-6"><label id="routeText"></label>{{oRouteText}}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>GiveDosageForm</strong></div>
+              <div class="col-sm-6"><label id="giveDosageFrom">{{oGiveDosageForm}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>AdditionalInst</strong></div>
+              <div class="col-sm-6"><label id="giveDosageFrom">{{oAdditionalInst}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Quantity</strong></div>
+              <div class="col-sm-6"><label id="quantity">{{oQuantity}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>NoOfRefill</strong></div>
+              <div class="col-sm-6"><label id="noOfRefill">{{oNumberOfRefill}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Strength</strong></div>
+              <div class="col-sm-6"><label id="strength">{{oStrength}}</label></div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-12">
+                <label>
+                  <h4>DrFirst Integration Information</h4>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Patient_Id</strong></div>
+              <div class="col-sm-6"><label id="patientId">{{dPatient_Id}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>GiveCodeIdentifier</strong></div>
+              <div class="col-sm-6"><label id="giveCodeIdentifier">{{dGiveCodeidentifier}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Drug</strong></div>
+              <div class="col-sm-6"><label id="drug">{{dDrug}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>PrescriptionID</strong></div>
+              <div class="col-sm-6"><label id="prescriptionID">{{dPrescriptionID}}</label></div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6"><strong>RouteText</strong></div>
+              <div class="col-sm-6"><label id="routeText">{{dRouteText}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>GiveDosageFrom</strong></div>
+              <div class="col-sm-6"><label id="giveDosageFrom">{{dGiveDosageForm}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>AdditionalInst</strong></div>
+              <div class="col-sm-6"><label id="giveDosageFrom">{{dAdditionalInst}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Quantity</strong></div>
+              <div class="col-sm-6"><label id="quantity">{{dQuantity}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>NoOfRefill</strong></div>
+              <div class="col-sm-6"><label id="noOfRefill">{{dNumberOfRefill}}</label></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><strong>Strength</strong></div>
+              <div class="col-sm-6"><label id="strength">{{dStrength}}</label></div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <form [formGroup]="buttonform">
+          <div class="row">
+
+            <div class="col-sm-3">
+              <input type="text" placeholder="username" class="form-control" formControlName="username" [ngClass]="{
+                'is-valid':buttonform.controls.username.valid ,
+                'is-invalid':buttonform.controls.username.invalid && buttonform.controls.username.touched ,'errmsg' : 'validmsg'
+                 }">
+            </div>
+            <div class="col-sm-3">
+              <input type="password" placeholder="password" class="form-control" formControlName="password" [ngClass]="{
+                'is-valid':buttonform.controls.password.valid ,
+                 'is-invalid':buttonform.controls.password.invalid && buttonform.controls.password.touched ,'errmsg' : 'validmsg'
+                 }">
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" value="Approve" class="btn btn-success" [disabled]="buttonform.invalid"
+                (click)="updateApprovalStatus()" /> &nbsp;
+              <input type="button" id="btnreject" value="Reject" class="btn btn-danger"
+                [disabled]="buttonform.invalid" />&nbsp;
+              <input type="button" id="btnclose" value="Close" class="btn btn-danger" data-dismiss="modal" />
+            </div>
+            <!-- <div class="col-sm-2">
+                 <input type="button" id="btnsave" value="Approve" 
+                  class="btn btn-success" [disabled]="buttonform.invalid" />
+              </div>
+              <div class="col-sm-2">
+                <input type="button" id="btnreject" value="Reject" class="btn btn-danger" [disabled]="buttonform.invalid" />
+              </div>
+              <div class="col-sm-2 ">
+                 <input type="button" id="btnclose" value="Close" class="btn btn-danger"  data-dismiss="modal" />
+              </div> -->
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

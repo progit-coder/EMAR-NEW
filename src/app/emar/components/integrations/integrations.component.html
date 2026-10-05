@@ -1,0 +1,177 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Dr.First Integration</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Dr.First Integration</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+          <div class="col-sm-6">
+              <h3 class="card-title">Dr.First Integration</h3>
+          </div>
+          <div class="col-sm-6">
+              <select [(ngModel)]="companyselected" style="width:60%; float: right" class="form-control" (change)="GetApiIntegrationAllData($event.target.value)">
+                  <option *ngFor="let item of companyMaster" value="{{item.Company_Id}}">{{item.Company_Name}}</option>
+                </select>
+          </div>
+        </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform">
+          <div class="row form-group">
+            <div class="col-sm-2">Api Path
+                <span class="c1">*</span>
+            </div>
+            <div class="col-sm-10">
+        <input type="text" class="form-control" formControlName="apiPath" [ngClass]="{
+          'is-valid':myform.controls.apiPath.valid && myform.controls.apiPath.dirty,
+          'is-invalid':myform.controls.apiPath.invalid && myform.controls.apiPath.touched
+        }" />
+        <div *ngIf="myform.controls.apiPath.errors && (myform.controls.apiPath.touched)" class="errorMessage">
+            <div *ngIf="myform.controls.apiPath.errors.required">
+                Api Path is required.
+            </div>          
+              <div *ngIf="myform.controls.apiPath.errors.maxlength">
+                Api Path Must be 50 characters long.
+            </div>
+            
+          </div>
+            </div>            
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-2">User Name
+                <span class="c1">*</span>
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" formControlName="userName" 
+              [ngClass]="{
+                'is-valid':myform.controls.userName.valid && myform.controls.userName.dirty,
+                'is-invalid':myform.controls.userName.invalid && myform.controls.userName.touched
+              }" />
+              <div *ngIf="myform.controls.userName.errors && (myform.controls.userName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.userName.errors.required">
+                      User Name is required.
+                  </div>          
+                    <div *ngIf="myform.controls.userName.errors.maxlength">
+                        User Name Must be 50 characters long.
+                  </div>
+                  
+                </div>
+            </div>
+            <div class="col-sm-2">
+              Password
+              <span class="c1">*</span>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="password" 
+                [ngClass]="{
+                  'is-valid':myform.controls.password.valid && myform.controls.password.dirty,
+                  'is-invalid':myform.controls.password.invalid && myform.controls.password.touched
+                }" />
+                <div *ngIf="myform.controls.password.errors && (myform.controls.password.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.password.errors.required">
+                        Password is required.
+                    </div>          
+                      <div *ngIf="myform.controls.password.errors.maxlength">
+                          Password  Must be 20 characters long.
+                    </div>
+                    
+                  </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-2">Type  <span class="c1">*</span></div>
+            <div class="col-sm-4">
+              <select class="form-control" formControlName="type"
+              [ngClass]="{
+                'is-valid':myform.controls.type.valid && myform.controls.type.dirty,
+                'is-invalid':myform.controls.type.invalid && myform.controls.type.touched
+              }" >
+                <option value="1">Test</option>
+                <option value="2">Production</option>
+                
+              </select>
+              <div *ngIf="myform.controls.type.errors && (myform.controls.type.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.type.errors.required">
+                      Type is required.
+                  </div>          
+                  
+                </div>
+            </div>
+            <div class="col-sm-6" style="text-align: right">
+              <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-success" [disabled]="myform.invalid" (click)="InsertUpdateApiIntegration()" value="Save"/>&nbsp;
+              <input type="button" class="btn btn-danger" value="Clear" (click)="resetDetail()"/>
+            </div>
+          </div>
+          <div class="row form-group">
+              <div class="col-sm-1">
+                  <label>Search</label>
+                </div>
+                <div class="col-sm-3">
+                  <input type="search" class="form-control" [(ngModel)]="searchText" placeholder="Search" [ngModelOptions]="{standalone: true}">
+                </div>
+          </div>
+          <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Api Path</th>
+                    <th>User Name</th>
+                    <th>Password</th>
+                    <th>Type</th>
+                    <th>Created By</th>
+                    <th *ngIf="pageConfig['AccessWrite']"></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of apiIntegrationData|gridFilter:searchText:'Integrations'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                    <td>{{item.ApiPath}}</td>
+                    <td>{{item.UserName}}</td>
+                    <td>{{item.Password}}</td>
+                    <td *ngIf="item.Integration_TypeId==1">Test</td>
+                    <td *ngIf="item.Integration_TypeId==2">Production</td>
+                    <td>{{item.CratedUserName}}</td>
+                    <td *ngIf="pageConfig['AccessWrite']">
+                        <a class="btn editicon" style="color: blue;" (click)="GetApiIntegrationDetails(item.Integration_Id)">
+                            <i class="icon"></i>
+                            <span class=" fa fa-edit (alias)" title="Edit"></span>
+                          </a>
+                      <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="GetApiIntegrationDetails(item.Integration_Id)"/> -->
+                    </td>
+                    <td>
+                        <a class="btn editicon" style="color:brown;">
+                            <i class="icon"></i>
+                            <span class=" fa fa-link fa-lg" title="Connect"></span>
+                          </a>
+                        <!-- <input type="button" class="btn btn-success" value="Connect"/> -->
+                    </td>
+                  </tr>
+                </tbody>
+                </table>
+                </div>
+                <pagination-controls (pageChange)="p = $event" *ngIf="apiIntegrationData.length > 0"></pagination-controls>
+              
+        </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

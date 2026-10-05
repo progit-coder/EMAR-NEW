@@ -1,0 +1,547 @@
+2020-12-01 10:12:00,226 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:12:00,270 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2020-12-01 10:14:11,869 [7] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2020-12-01 10:14:11,885 [7] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2020-12-01 10:14:11,885 [7] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at LTCPro.WebApi.Controllers.RoleController.UsersConfigNurseStationDrop(String username, String password) in D:\Emar Service Latest\WebApi\Controllers\RoleController.cs:line 297
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2020-12-01 10:14:11,910 [7] ERROR LTCPro.ServiceLayer.Log4net -  Message : = One or more errors occurred.
+2020-12-01 10:14:16,159 [7] ERROR LTCPro.ServiceLayer.Log4net -  InnerException Message : = An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
+2020-12-01 10:14:16,159 [7] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2020-12-01 10:15:01,733 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:15:01,733 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2020-12-01 10:16:10,238 [5] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2020-12-01 10:16:10,805 [5] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2020-12-01 10:16:11,259 [5] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at LTCPro.WebApi.Controllers.RoleController.UsersConfigNurseStationDrop(String username, String password) in D:\Emar Service Latest\WebApi\Controllers\RoleController.cs:line 297
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2020-12-01 10:16:11,813 [5] ERROR LTCPro.ServiceLayer.Log4net -  Message : = One or more errors occurred.
+2020-12-01 10:16:41,090 [5] ERROR LTCPro.ServiceLayer.Log4net -  InnerException Message : = An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy.
+2020-12-01 10:16:41,090 [5] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2020-12-01 10:17:53,419 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:17:53,419 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2020-12-01 10:17:57,669 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:18:01,881 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:18:01,881 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2020-12-01 10:18:02,488 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:18:02,776 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2020-12-01 10:18:02,777 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2020-12-01 10:18:03,056 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2020-12-01 10:18:06,610 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2020-12-01 10:18:07,731 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2020-12-01 10:18:08,133 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2020-12-01 10:18:09,044 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2020-12-01 10:18:10,120 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2020-12-01 10:18:10,159 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2020-12-01 10:18:10,400 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2020-12-01 10:18:10,766 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:10,767 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:10,769 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:10,769 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:11,005 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2020-12-01 10:18:11,006 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2020-12-01 10:18:11,226 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2020-12-01 10:18:11,240 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2020-12-01 10:18:11,449 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2020-12-01 10:18:11,450 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2020-12-01 10:18:11,551 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:11,724 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2020-12-01 10:18:11,757 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:11,947 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2020-12-01 10:18:11,948 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2020-12-01 10:18:12,170 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2020-12-01 10:18:12,171 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2020-12-01 10:18:12,553 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:12,580 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2020-12-01 10:18:12,613 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:12,784 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2020-12-01 10:18:12,785 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2020-12-01 10:18:12,865 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2020-12-01 10:18:12,928 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:13,108 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2020-12-01 10:18:13,181 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:18:13,182 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:18:13,236 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2020-12-01 10:18:13,237 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2020-12-01 10:18:13,883 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:18:14,335 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:18:14,355 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:18:14,840 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:18:14,865 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:14,893 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2020-12-01 10:18:15,096 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:18:15,097 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2020-12-01 10:18:15,328 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2020-12-01 10:18:15,625 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:18:19,231 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2020-12-01 10:18:38,779 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:38,820 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:38,830 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:39,000 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:18:39,000 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:18:39,041 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2020-12-01 10:18:39,043 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2020-12-01 10:18:39,052 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:18:39,052 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:18:39,321 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2020-12-01 10:18:39,439 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:18:39,475 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:39,703 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:18:39,703 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2020-12-01 10:18:39,715 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:18:40,146 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:18:40,175 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,399 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:18:40,400 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:18:40,644 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:18:40,708 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,721 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,734 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,763 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,774 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,777 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:40,933 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2020-12-01 10:18:40,952 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersController----
+2020-12-01 10:18:40,952 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing OrderEndingSoonStatus() in OrdersService----
+2020-12-01 10:18:40,952 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2020-12-01 10:18:41,000 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EMARController----
+2020-12-01 10:18:41,001 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetSeventyTwoHourDetailsByfilter() in EmarService----
+2020-12-01 10:18:41,006 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EMARController----
+2020-12-01 10:18:41,008 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EmarService----
+2020-12-01 10:18:41,161 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersController----
+2020-12-01 10:18:41,163 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersGridData() in OrdersService----
+2020-12-01 10:18:41,200 [18] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully OrderEndingSoonStatus() in OrdersController----
+2020-12-01 10:18:41,545 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2020-12-01 10:18:41,687 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:41,909 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2020-12-01 10:18:41,910 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2020-12-01 10:18:42,214 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2020-12-01 10:18:42,989 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersController----
+2020-12-01 10:18:42,990 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOrdersEndingSoon() in OrdersService----
+2020-12-01 10:18:43,533 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersEndingSoon() in OrdersController----
+2020-12-01 10:18:45,273 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetSeventyTwoHourDetailsByfilter() in EMARController----
+2020-12-01 10:18:45,373 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPRNDetailsByfilter() in EMARController----
+2020-12-01 10:18:47,191 [15] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOrdersGridData() in OrdersController----
+2020-12-01 10:18:47,294 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:47,519 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersController----
+2020-12-01 10:18:47,537 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingOrdersGridData() in OrdersService----
+2020-12-01 10:18:48,023 [16] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingOrdersGridData() in OrdersController----
+2020-12-01 10:18:49,779 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:49,789 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:49,834 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:50,003 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2020-12-01 10:18:50,004 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2020-12-01 10:18:50,012 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:18:50,012 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:18:50,055 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:18:50,055 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:18:50,277 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2020-12-01 10:18:50,454 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:18:50,500 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:50,729 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:18:50,737 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedData() in FacilityController----
+2020-12-01 10:18:50,738 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedData() in FacilityService----
+2020-12-01 10:18:53,043 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedData() in FacilityController----
+2020-12-01 10:18:53,082 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:53,327 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:18:53,327 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:18:53,553 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:18:53,584 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:53,586 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:53,809 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:18:53,810 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:18:53,811 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:18:53,836 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:18:54,095 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:18:54,153 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:18:54,375 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:18:54,376 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:18:54,624 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:19:02,596 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:02,596 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:02,816 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:19:02,817 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:19:02,818 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:19:02,818 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:19:03,040 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:19:03,072 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:03,292 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:19:03,292 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:19:03,520 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:19:07,730 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:19:07,797 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:08,019 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:19:08,020 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:19:12,767 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:19:12,796 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:13,017 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:19:13,017 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:19:13,183 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:19:18,010 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:19:18,192 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:18,408 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarController----
+2020-12-01 10:19:18,410 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarService----
+2020-12-01 10:19:19,110 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetEmarResidentGridData() in EmarController----
+2020-12-01 10:19:34,159 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:34,372 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarController----
+2020-12-01 10:19:34,372 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarService----
+2020-12-01 10:19:35,024 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetEmarResidentGridData() in EmarController----
+2020-12-01 10:19:41,097 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:19:41,312 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarController----
+2020-12-01 10:19:41,312 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarService----
+2020-12-01 10:19:41,963 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetEmarResidentGridData() in EmarController----
+2020-12-01 10:20:10,887 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:11,101 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarController----
+2020-12-01 10:20:11,101 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarService----
+2020-12-01 10:20:32,584 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetEmarResidentGridData() in EmarController----
+2020-12-01 10:20:36,229 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:36,257 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:36,554 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:20:36,554 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:20:36,584 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:20:36,584 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:20:37,210 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:20:37,230 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:37,552 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:20:37,553 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2020-12-01 10:20:37,580 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:20:38,209 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:20:38,248 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:38,573 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:20:38,573 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:20:39,431 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:20:39,514 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:39,522 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:39,547 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:39,560 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:39,566 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:39,831 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:20:39,831 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:20:39,845 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2020-12-01 10:20:39,845 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2020-12-01 10:20:39,876 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:20:39,876 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:20:39,876 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityController----
+2020-12-01 10:20:39,877 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedFlagByFacId() in FacilityService----
+2020-12-01 10:20:39,881 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EMARController----
+2020-12-01 10:20:39,881 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPRNDetailsByfilter() in EmarService----
+2020-12-01 10:20:40,217 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2020-12-01 10:20:40,479 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:20:40,498 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:40,804 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedData() in FacilityController----
+2020-12-01 10:20:40,804 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedData() in FacilityService----
+2020-12-01 10:20:40,818 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:20:42,185 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedFlagByFacId() in FacilityController----
+2020-12-01 10:20:42,229 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:42,446 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2020-12-01 10:20:42,446 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseStationHierarchyDetailsbyNsId() in CompanyService----
+2020-12-01 10:20:42,662 [9] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseStationHierarchyDetailsbyNsId() in CompanyController----
+2020-12-01 10:20:43,223 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedData() in FacilityController----
+2020-12-01 10:20:43,265 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:43,481 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:20:43,481 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:20:43,719 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:20:43,756 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:43,772 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:43,978 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:20:43,978 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:20:43,993 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:20:43,994 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:20:44,051 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPRNDetailsByfilter() in EMARController----
+2020-12-01 10:20:44,213 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:20:44,231 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:44,455 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:20:44,455 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:20:44,675 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:20:46,300 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:46,538 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:20:46,538 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:20:46,755 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:20:46,786 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:46,800 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:47,009 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:20:47,009 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:20:47,028 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:20:47,028 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:20:47,245 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:20:47,264 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:47,487 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:20:47,487 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:20:47,711 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:20:48,193 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:20:48,243 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:48,469 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:20:48,469 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:20:49,671 [14] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:20:49,970 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:20:55,998 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:56,005 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:56,218 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:20:56,218 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:20:56,228 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:20:56,228 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:20:56,454 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:20:56,474 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:20:56,702 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:20:56,702 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:20:56,930 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:20:59,280 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:07,320 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:07,540 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:21:07,540 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:21:07,760 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:21:07,789 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:07,791 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:08,009 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:08,009 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:21:08,009 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:08,009 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:21:08,232 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:08,249 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:08,463 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:08,463 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:21:08,689 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:10,435 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:14,466 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:14,679 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:21:14,679 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:21:14,890 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:21:14,920 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:14,920 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:15,144 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:15,144 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:21:15,147 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:15,147 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:21:15,369 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:15,386 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:15,599 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:15,599 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:21:15,812 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:17,251 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:17,252 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:17,473 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:17,473 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:21:17,473 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:17,474 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:21:17,687 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:17,710 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:17,925 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:17,925 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:21:18,151 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:19,973 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:20,090 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:20,136 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:20,356 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:21:20,356 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:21:21,003 [19] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:21:23,917 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:23,926 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:24,146 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:24,146 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:21:24,167 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:24,167 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:21:24,383 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:21:24,407 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:24,621 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:24,621 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:21:24,840 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:21:43,299 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:21:43,318 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:43,534 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:21:43,534 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:21:44,166 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:21:55,458 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:21:55,671 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarController----
+2020-12-01 10:21:55,671 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarService----
+2020-12-01 10:22:07,436 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetEmarResidentGridData() in EmarController----
+2020-12-01 10:22:13,418 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:22:13,435 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:22:13,650 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentInformation() in ResidentDemographicController----
+2020-12-01 10:22:13,658 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetLiteralOrderGridData() in OrdersController----
+2020-12-01 10:22:13,658 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetLiteralOrderGridData() in OrdersService----
+2020-12-01 10:22:13,665 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentInformation() in ResidentDemographicService----
+2020-12-01 10:22:14,502 [20] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetLiteralOrderGridData() in OrdersController----
+2020-12-01 10:22:17,230 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetResidentInformation() in ResidentDemographicController----
+2020-12-01 10:22:17,285 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:22:17,289 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:22:17,306 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:22:17,331 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:22:17,497 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetMedicationReason() in EmarController----
+2020-12-01 10:22:17,498 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetMedicationReason() in EmarService----
+2020-12-01 10:22:17,554 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarOrdersList() in EmarController----
+2020-12-01 10:22:17,555 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails() in OrdersController----
+2020-12-01 10:22:17,555 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarOrdersList() in EmarService----
+2020-12-01 10:22:17,556 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails() in OrdersService----
+2020-12-01 10:22:20,180 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPatientType() in ResidentDemographicController----
+2020-12-01 10:22:20,181 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPatientType() in EmarService----
+2020-12-01 10:22:20,628 [21] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPatientType() in ResidentDemographicController----
+2020-12-01 10:22:22,259 [23] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetMedicationReason() in EmarController----
+2020-12-01 10:22:22,665 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDiagnosisDetails() in OrdersController----
+2020-12-01 10:22:50,657 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarOrdersList() in EmarController----
+2020-12-01 10:22:53,730 [22] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarOrdersList() in EmarService----
+2020-12-01 10:27:52,363 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:27:52,371 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UsersConfigNurseStationDrop() in FacilityService----
+2020-12-01 10:27:56,293 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UsersConfigNurseStationDrop() in FacilityController----
+2020-12-01 10:27:56,504 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityController----
+2020-12-01 10:27:56,505 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetProcessKeyMasterList() in FacilityService----
+2020-12-01 10:27:56,738 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetProcessKeyMasterList() in FacilityController----
+2020-12-01 10:28:00,283 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing CheckUser() in UserService----
+2020-12-01 10:28:03,263 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing FindUser() in UserService----
+2020-12-01 10:28:03,544 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserSession() in UserService----
+2020-12-01 10:28:04,204 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserToken() in UserService----
+2020-12-01 10:28:05,109 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleController----
+2020-12-01 10:28:05,110 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetScreenPermissionsForLoggedInUser() in RoleService----
+2020-12-01 10:28:05,375 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetScreenPermissionsForLoggedInUser() in RoleController----
+2020-12-01 10:28:05,568 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:05,568 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:05,595 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:05,613 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:05,653 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:05,783 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxController----
+2020-12-01 10:28:05,783 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetAlertsDetails() in MailboxService----
+2020-12-01 10:28:05,997 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2020-12-01 10:28:05,997 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2020-12-01 10:28:06,571 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:06,647 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetAlertsDetails() in MailboxController----
+2020-12-01 10:28:06,662 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:06,921 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2020-12-01 10:28:06,957 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:07,132 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:28:07,133 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:28:07,355 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserActiveCompanyMasterList() in CompanyController----
+2020-12-01 10:28:07,356 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetActiveCompanyMasterList() in CompanyService----
+2020-12-01 10:28:07,681 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserController----
+2020-12-01 10:28:07,682 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserPassedDueFlag() in UserService----
+2020-12-01 10:28:07,892 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:28:08,028 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxController----
+2020-12-01 10:28:08,030 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetReadMailsCount() in MailboxService----
+2020-12-01 10:28:08,240 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserPassedDueFlag() in UserController----
+2020-12-01 10:28:08,295 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:08,349 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed successfully GetReadMailsCount() in MailboxController----
+2020-12-01 10:28:08,357 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:08,641 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:28:08,642 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:28:08,771 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:28:08,772 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserAccessFacilityNurseStaions() in FacilityService----
+2020-12-01 10:28:09,367 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonController----
+2020-12-01 10:28:09,368 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPendingDosesList() in CommonService----
+2020-12-01 10:28:09,404 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:28:09,714 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPendingDosesList() in CommonController----
+2020-12-01 10:28:09,814 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserAccessFacilityNurseStaions() in FacilityController----
+2020-12-01 10:28:10,632 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserActiveCompanyMasterList() in CompanyController----
+2020-12-01 10:28:11,276 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonController----
+2020-12-01 10:28:11,279 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetOutboundErrorDetails() in CommonService----
+2020-12-01 10:28:11,969 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetOutboundErrorDetails() in CommonController----
+2020-12-01 10:28:13,573 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:13,581 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:13,626 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:13,784 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarController----
+2020-12-01 10:28:13,784 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDueMARAlertData() in EmarService----
+2020-12-01 10:28:13,802 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserController----
+2020-12-01 10:28:13,802 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserRecentFacNs() in UserService----
+2020-12-01 10:28:13,846 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:28:13,846 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing InsertUserActivityDetails() in UserActivityService----
+2020-12-01 10:28:14,045 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDueMARAlertData() in EmarController----
+2020-12-01 10:28:14,228 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetUserRecentFacNs() in UserController----
+2020-12-01 10:28:14,307 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:14,490 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully InsertUserActivityDetails() in CompanyController----
+2020-12-01 10:28:14,535 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedData() in FacilityController----
+2020-12-01 10:28:14,537 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetCompanyToBedData() in FacilityService----
+2020-12-01 10:28:16,754 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetCompanyToBedData() in FacilityController----
+2020-12-01 10:28:16,788 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:16,999 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityController----
+2020-12-01 10:28:17,000 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing UserNurseStationDrop() in FacilityService----
+2020-12-01 10:28:17,218 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully UserNurseStationDrop() in FacilityController----
+2020-12-01 10:28:17,247 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:17,259 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:17,460 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:28:17,461 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:28:17,472 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:28:17,473 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:28:17,704 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:28:17,727 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:17,941 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:28:17,942 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:28:18,159 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:28:30,761 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:30,769 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:30,973 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarController----
+2020-12-01 10:28:30,973 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNursingScheduleData() in EmarService----
+2020-12-01 10:28:30,980 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:28:30,980 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDrFirstFlagForCompanyByNSId() in CompanyService----
+2020-12-01 10:28:31,197 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDrFirstFlagForCompanyByNSId() in CompanyController----
+2020-12-01 10:28:31,215 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:31,425 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonController----
+2020-12-01 10:28:31,425 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetTimeZoneDate() in CommonService----
+2020-12-01 10:28:31,640 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetTimeZoneDate() in CommonController----
+2020-12-01 10:28:35,240 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:28:35,285 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:35,499 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:28:35,500 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:28:35,747 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNursingScheduleData() in EmarController----
+2020-12-01 10:28:35,760 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:35,994 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonController----
+2020-12-01 10:28:35,994 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetNurseShiftDrop() in CommonService----
+2020-12-01 10:28:40,489 [12] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:28:40,914 [8] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetNurseShiftDrop() in CommonController----
+2020-12-01 10:28:43,881 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:44,093 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarController----
+2020-12-01 10:28:44,094 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarResidentGridData() in EmarService----
+2020-12-01 10:28:48,242 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetEmarResidentGridData() in EmarController----
+2020-12-01 10:28:52,354 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:52,391 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:52,579 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentInformation() in ResidentDemographicController----
+2020-12-01 10:28:52,604 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetResidentInformation() in ResidentDemographicService----
+2020-12-01 10:28:52,604 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetLiteralOrderGridData() in OrdersController----
+2020-12-01 10:28:52,605 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetLiteralOrderGridData() in OrdersService----
+2020-12-01 10:28:53,367 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetLiteralOrderGridData() in OrdersController----
+2020-12-01 10:28:56,374 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetResidentInformation() in ResidentDemographicController----
+2020-12-01 10:28:56,475 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:56,482 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:56,505 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:56,506 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetUserToken() in UserService----
+2020-12-01 10:28:56,700 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetMedicationReason() in EmarController----
+2020-12-01 10:28:56,701 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetMedicationReason() in EmarService----
+2020-12-01 10:28:56,754 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarOrdersList() in EmarController----
+2020-12-01 10:28:56,755 [11] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetEmarOrdersList() in EmarService----
+2020-12-01 10:28:59,464 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPatientType() in ResidentDemographicController----
+2020-12-01 10:28:59,747 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetPatientType() in EmarService----
+2020-12-01 10:28:59,786 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails() in OrdersController----
+2020-12-01 10:28:59,787 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails() in OrdersService----
+2020-12-01 10:29:00,739 [13] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetPatientType() in ResidentDemographicController----
+2020-12-01 10:29:03,070 [7] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetMedicationReason() in EmarController----
+2020-12-01 10:29:04,022 [6] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDiagnosisDetails() in OrdersController----

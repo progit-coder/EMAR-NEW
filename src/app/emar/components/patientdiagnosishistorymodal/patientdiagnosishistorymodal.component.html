@@ -1,0 +1,15 @@
+<app-commonmodal title="Diagnosis History Details" style="width: 600px;">
+    <div class="modal-body bodystyle">
+            <div class="row form-group" *ngIf="demographicInfoData">
+                <div class="col-sm-6 col-6"> <strong class="iconColor">{{demographicInfoData.PatientLastName+", "+demographicInfoData.PatientFirstName+" "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}  ({{demographicInfoData.DOB |  date: 'MM/dd/yyyy '}})</strong></div>
+                    <div class="col-sm-1 col-6" >Diagnosis:</div>
+                    <div class="col-sm-5 col-6" ><strong class="iconColor">{{diagnosis}}</strong></div>
+            </div><br/><br/>
+        <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+            <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+          <!-- </div> -->
+    </div>
+    <div class="modal-footer">
+        <button type="button"class="btn btn-danger"  (click)="activeDefaultModal.close('Close click')">Close</button>
+    </div>
+  </app-commonmodal>

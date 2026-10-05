@@ -1,0 +1,45 @@
+<app-commonmodal title="PRN Details">
+  <div class="modal-body bodystyle">
+    <div class="row form-group">
+      <div class="tableFixHead">
+        <table id="tbltable" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Resident</th>
+              <th>Date/Time</th>
+              <th>Drug Name</th>
+              <th>Medication Reason</th>
+              <th>Dispensed By</th>
+              <th>Nurse Notes</th>
+              <th>Result</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of PRNData|gridFilter:searchText:'PRNdocument'|paginate: { itemsPerPage: gridPagination, currentPage: p, id:'prn' };">
+              <td>{{item.PatientName}}</td>
+              <td>{{item.AdminsterOn|date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+              <td>{{item.GiveCodeText}}</td>
+              <td>{{item.MedicationReason_Desc}}</td>
+              <td>{{item.AdminsterBy}}</td>
+              <td>{{item.AdministerComment}}</td>
+
+              <td>
+                <form [formGroup]="textform">
+                <input type="text" formControlName="text" #inputFocus (change)="UpdateArray(item.DrugAdminister_Id,$event.target.value)" />
+              </form>
+              </td>
+
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <pagination-controls id="prn" (pageChange)="p = $event" *ngIf="PRNData.length > 0"></pagination-controls>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <input type="button" id="btnsave" [disabled]="textform.invalid" *ngIf="pageConfig['AccessWrite'] && PRNData.length > 0" value="Update" (click)="SavePRNData()" class="btn btn-success" />
+      <button type="button"class="btn btn-danger"  (click)="activeDefaultModal.close('Close click')">Close</button>
+  </div>
+</app-commonmodal>

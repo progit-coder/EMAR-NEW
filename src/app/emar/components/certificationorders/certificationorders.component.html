@@ -1,0 +1,340 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight"  [src] ="sanitize(this.MyImages)"></ng-template>
+<ng-template #tipContent1><img class="ImageAndWidthHeight1"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
+        <div class="container-fluid">
+            <form [formGroup]="myform" name="residentGridForm" [ngStyle]="{'display':selectstyle==1?'block':'none'}">
+                <div class="row form-group">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <label>Facility</label>
+                        <ng-multiselect-dropdown formControlName="ddlfacilities" class="form-control" [data]="facilities" [(ngModel)]="selectedFacItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <label>Nursing Station</label>
+                        <ng-multiselect-dropdown formControlName="ddlnursestations" class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                            (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4" *ngIf="isUserAdmin==true">
+                        <label>Prescriber</label>
+                        <ng-multiselect-dropdown formControlName="physician" [data]="physiciansdrop" [(ngModel)]="selectedphyItems" [settings]="dropdownSettings_Physician" class="form-control" (onSelect)="onPhysicianSelect($event)" (onDeSelect)="onPhysicianDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </form>
+            <div class="card card-primary" [ngStyle]="{'display':selectstyle==1?'block':'none'}">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">Order Certification</h3>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                        <div class="col-sm-3 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+                            <!-- (input)="onSearchChange($event.target.value)" -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- <div class="table-responsive">
+            <table id="tblAllResidents" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 10px">Picture</th>
+                  <th>Resident Name</th>
+                  <th>DOB</th>
+                  <th>Gender</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of residentsList|gridFilter:searchText:'certificationOrders'|paginate: { itemsPerPage: gridPagination, currentPage: p };"
+                  style="cursor:pointer" (click)="onRowSelect(item.Patient_Id)">
+                  <td>
+                    <img [src]="sanitize(item.ImageLocation)" class="zoom" />
+                  </td>
+                  <td>{{item.PatientName}}</td>
+                  <td>{{item.PatientDOB|date :'MM/dd/yyyy'}}</td>
+                  <td>{{item.PatientGender}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+                    <div class="row">
+                        <div class="col-sm-3 col-md-4 col-lg-4" *ngFor="let item of residentsList|gridFilter:searchText:'certificationOrders'|paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                            <div style="cursor:pointer" (click)="onRowSelect(item.Patient_Id)" class="card card-primary">
+                                <div class="card-header">
+                                    <b class="card-title">{{item.PatientName}}</b>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- <div class="col-sm-4">
+                                            <img  container="body"  (mouseenter) ="mouseEnter(item.ImageLocation)"  (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" [src]="sanitize(item.ImageLocation)" class="zoom3" />
+                                        </div> -->
+                                        <div class="col-sm-8">
+                                            <div class="row form-group">
+                                                <div class="col-sm-12">DOB: {{item.PatientDOB|date :'MM/dd/yyyy'}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-sm-12">Gender: {{item.PatientGender}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">Nursing Station: <span>&nbsp;&nbsp;{{item.NurseStationName}}</span></div>
+                                        <!-- <div class="col-sm-8">{{item.NurseStationName}}</div> -->
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12" [ngStyle]="{'color':item.ImgPath == 'Yes'?'black':'Red'}" >Image On File: {{item.ImgPath}}</div>
+                                      
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer" style="padding: 5px;">
+                                    <!-- <input type="button" value="Edit" class="btn btn-sm btn-success" style="float: right;" /> -->
+                                </div>
+                                <!-- /.card-footer-->
+                            </div>
+                        </div>
+                    </div>
+                    <pagination-controls (pageChange)="p=$event" *ngIf="residentsList.length > 0"></pagination-controls>
+                </div>
+            </div>
+            <div class="card card-primary" [ngStyle]="{'display':selectstyle==1?'none':'block'}">
+                <div class="card-header">
+                    <div class="row">
+                        <div [ngClass]="{'col-sm-7 col-md-5 col-lg-5':(certifiedDates.length>0),'col-sm-10 col-md-9 col-lg-9':(certifiedDates.length==0)}">
+                            <h3 class="card-title">Order Certification</h3>
+                        </div>
+                        <div class="col-sm-3 col-md-4 col-lg-4" *ngIf="certifiedDates.length>0">
+                            <ng-multiselect-dropdown [data]="certifiedDates" class="cerDates" [(ngModel)]="certDate" [settings]="dropdownSettings_Date" [placeholder]="'Previous Certifications'" class="form-control" (onSelect)="onDateSelect($event)" (onDeSelect)="onDateDeSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-sm-2 col-md-3 col-lg-3">
+                            <div class="left" style=" display: table-cell;width: 55%; float:left; margin: 0px;">
+                                <a class="btn pdficon" *ngIf="certifiedDates.length>0" (click)="exportCertifiedOrdersToPdf()" title="Export to PDF">
+                                    <i class="icon"></i>
+                                    <span class="  fa fa-file-pdf-o (alias) iconfontsize"></span>
+                                </a>
+                            </div>
+                            <div class="left" style=" display: table-cell;width: 45%; float:left; margin: 0px;">
+                                <button type="button" class="btn btn-primary" (click)="back()" style="height: 35px;width: 80px">
+                <!-- <img src="./assets/images/navigation-180.png" width="25" height="25"> -->
+                <strong>Back</strong>
+              </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="info-box bg-info-gradient infoBoxCustomCss">
+                                <div class="info-box-content">
+                                    <div class="row form-group formGroupCustomCss">
+                                        <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;" *ngIf="demographicInfoData">
+                                            <span>
+                        <img  container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"  (mouseleave) ="mouseLeave()"  [ngbTooltip]="this.tipContent1" [src]="sanitize(demographicInfoData.ImageLocation)" class="image--cover zoom1"
+                          alt="User Image">
+                      </span>
+                                            <br />
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="row" *ngIf="demographicInfoData">
+                                                <div class="col-sm-3 col-md-3 collg-3" *ngIf="demographicInfoData">
+                                                    <strong>{{demographicInfoData.PatientLastName+", "+demographicInfoData.PatientFirstName+" "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}
+                          </strong>
+                                                </div>
+                                                <div class="col-sm-2 col-md-3 col-lg-2">
+                                                    <strong>Gender: </strong>
+                                                    <span>{{demographicInfoData.AdministrativeSex}}</span>
+                                                </div>
+                                                <div class="col-sm-2 col-md-3 col-lg-2">
+                                                    <strong>DOB: </strong>
+                                                    <span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span>
+                                                </div>
+                                                <div class="col-sm-5 col-md-3 col-lg-5">
+                                                    <strong>Nursing Station Name: </strong>
+                                                    <span>{{demographicInfoData.NurseStation_Name}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row row-m-t">
+                                                <div class="col-sm-6" *ngIf="ordersInfo.Allergy!= ''">
+                                                    <strong>Allergies: </strong>
+                                                    <span class="blink">{{ordersInfo.Allergy}}</span>
+                                                </div>
+                                                <div class="col-sm-6" *ngIf="ordersInfo.Diagnosis!= ''">
+                                                    <strong>Diagnosis: </strong>
+                                                    <span class="blink">{{ordersInfo.Diagnosis}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row row-m-t">
+                                                <div class="col-sm-6" *ngIf="demographicInfoData">
+                                                    <div *ngIf="demographicInfoData.DietType!= ''" style="word-break: break-all;">
+                                                        <strong>Diet Type: </strong><span>{{demographicInfoData.DietType}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row" *ngIf="certDate.length==0">
+                        <div class="col-sm-10 col-md-10 col-lg-10" style="color:red">
+                            <div style="text-align:left">
+                                <label>
+                  Note: Click Check box if you want to discontinue order
+                </label>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row" *ngIf="certDate.length==0">
+                        <div class="col-sm-12">
+                            <div class="card card-primary">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <th>
+                                                <input type="checkbox" *ngIf="ordersList.length>0" [(ngModel)]="CheckAll" name="0" id="0" (change)="onCheckAll($event.target.checked?true:false)">
+                                                <label for="0"></label>
+                                            </th>
+                                            <th>Drug</th>
+                                            <th>Start Date</th>
+                                            <th>Administration Time</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of ordersList;">
+                                                <td>
+                                                    <form [formGroup]="myform">
+                                                        <input type="checkbox" formControlName="check" [checked]="CheckAll" value="{{item.PQuantity_Id}}" name="{{ item.PQuantity_Id }}" id="{{item.PQuantity_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)">
+                                                        <label for="{{item.PQuantity_Id}}"></label>
+                                                    </form>
+                                                </td>
+                                                <td><b>{{item.DrugName}}</b>&nbsp; ({{item.Directions}})</td>
+                                                <td>{{item.StartDate|date :'MM/dd/yyyy'}}</td>
+                                                <td>{{item.Schedule}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group" *ngIf="certDate.length>0 && certifiedOrdersList.length>0">
+                        <div class="col-md-4 col-sm-4 col-lg-4"> Prescriber: &nbsp;<strong style="color: red;"> {{certifiedOrdersList[0].PhysicianName+(certifiedOrdersList[0].PhysicianCredentials!=null?", " + certifiedOrdersList[0].PhysicianCredentials:'')}}</strong></div>
+                        <div class="col-md-4 col-sm-4 col-lg-4">Prescriber  NPI: &nbsp;<strong style="color: red;">{{certifiedOrdersList[0].PhysicianNPI}}</strong></div>
+                        <div class="col-md-4 col-sm-4 col-lg-4">Date/Time: &nbsp;<strong style="color: red;">{{certifiedOrdersList[0].CertifyDate|date:'MM/dd/yyyy hh:mm:ss a'}}</strong></div>
+                    </div>
+                    <div class="row" *ngIf="certDate.length>0">
+                        <div class="col-sm-12">
+                            <div class="card card-primary">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <th>Drug Orders and Treatments </th>
+                                            <th>Order Type</th>
+                                            <th>Directions</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Administration Time</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of certifiedOrdersList;">
+                                                <td><b>{{item.DrugName}}</b></td>
+                                                <td>{{item.OrderType}}</td>
+                                                <td>{{item.Directions}}</td>
+                                                <td>{{item.StartDate|date :'MM/dd/yyyy'}}</td>
+                                                <td>{{item.EndDate|date :'MM/dd/yyyy'}}</td>
+                                                <td>{{item.Schedule}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: right" *ngIf="certDate.length==0">
+                    <input type="button" id="btnsave" value="D/C Checked Orders" *ngIf="pageConfig['AccessWrite']" [disabled]="selectedRecords.length==0" (click)="discontinueCheckedOrders()" class="btn btn-danger" /> &nbsp;
+                    <input type="button" id="btnreset" value="Certify Orders" *ngIf="pageConfig['AccessWrite']" [disabled]="selectedRecords.length>0" (click)="openCertifyOrdersModal()" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+    </section>
+</div>
+<!-- User Credential Modal -->
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" id="modalApproval" role="dialog" style="padding-top: 35px;" [ngStyle]="{'display':modalUserCredential?'block':'none',opacity:'1'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="credentialform" autocomplete="off">
+                <div #DemoHandle1 class="modal-header" style="height: 35px;padding:7px !important ">
+                    <h5 >Enter User credentials</h5>
+                    <button type="button" class="close" (click)="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Certifier User Name</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Certifier Username
+                            <input type="text" class="form-control" #inputFocus formControlName="certUsername" [ngClass]="{
+              'is-valid':credentialform.controls.certUsername.valid && credentialform.controls.certUsername.dirty,
+              'is-invalid':credentialform.controls.certUsername.invalid && credentialform.controls.certUsername.touched
+            }" />
+                            <div *ngIf="credentialform.controls.certUsername.errors && (credentialform.controls.certUsername.touched)" class="errorMessage">
+                                <div *ngIf="credentialform.controls.certUsername.errors.required">
+                                    Certifier Username is required.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-2">Certifier Password</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Certifier Password
+                            <input type="password" class="form-control" formControlName="certPass" autocomplete="new-password" [ngClass]="{
+              'is-valid':credentialform.controls.certPass.valid && credentialform.controls.certPass.dirty,
+              'is-invalid':credentialform.controls.certPass.invalid && credentialform.controls.certPass.touched
+            }" />
+                            <div *ngIf="credentialform.controls.certPass.errors && (credentialform.controls.certPass.touched)" class="errorMessage">
+                                <div *ngIf="credentialform.controls.certPass.errors.required">
+                                    Certifier Password is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Professional Credentials</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Professional Credentials
+                            <input type="text" class="form-control" formControlName="Profcre" [ngClass]="{
+              'is-valid':credentialform.controls.Profcre.valid && credentialform.controls.Profcre.dirty,
+              'is-invalid':credentialform.controls.Profcre.invalid && credentialform.controls.Profcre.touched
+            }" />
+                            <div *ngIf="credentialform.controls.Profcre.errors && (credentialform.controls.Profcre.touched)" class="errorMessage">
+                                <div *ngIf="credentialform.controls.Profcre.errors.maxlength">
+                                    Professional Credentials cannot be more than 50 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label style="font-style: italic;padding-left: 1%;">By affixing my credentials below, I hereby authorize a </label>&nbsp;
+                        <input type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" formControlName="months" min="1" max="12" style="width: 70px;height: 32px;float: right;">&nbsp;
+                        <label style="font-style: italic;float: left;margin-top: 5px;">month fill of the above orders</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <input type="button" id="btnsave" value="Certify These Orders" *ngIf="pageConfig['AccessWrite']" [disabled]="credentialform.invalid" (click)="certifyOrders()" class="btn btn-success" /> &nbsp;
+                        <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="closeModal()" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

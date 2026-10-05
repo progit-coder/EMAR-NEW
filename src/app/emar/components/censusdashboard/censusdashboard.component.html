@@ -1,0 +1,211 @@
+<!-- <div class="content-wrapper" style="margin-left: 20px !important;">
+  <app-commondashboard *ngIf="dashboardType" [LoadDashboard]="dashboardType"></app-commondashboard>  
+  </div> -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <form [formGroup]="dashboardForm" name="dashboardForm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-3">
+              <h3 class="card-title">Census Dashboard</h3>
+            </div>
+            <div class="col-sm-2">
+              <select id="ddlcharttype" formControlName="chartType" class="form-control" (change)="chartTypechange()">
+                <option value="column" selected>Column</option>
+                <option value="line">Line</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="facilityName"
+                [data]="facilities" [settings]="dropdownSettings_FacID" [placeholder]="'Select facilities'"
+                (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-3">
+              <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="nursestationName"
+                [data]="nurseStations" [settings]="dropdownSettings_ID" [placeholder]="'Select Nursing Stations'"
+                (onSelect)="onNurseStationSelect($event)" (onSelectAll)="onNurseStationSelectAll($event)"
+                (onDeSelect)="onNurseStationDeSelect($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <!-- <div class="col-sm-2">
+              <ng-multiselect-dropdown class="form-control" formControlName="compare" style="padding: 4px;border:0px solid #ced4da" [data]="comparedropdownList"
+                [settings]="dropdownSettings_Compare" [placeholder]="'Choose to Compare'" (onSelect)="onCompareSelect($event)"
+                (onDeSelect)="onCompareDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div> -->
+            <div class="col-sm-1">
+              <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;cursor:pointer">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" 
+                      (click)="showHideToggle('.test')">
+                      <i class="fa fa-filter"></i>
+                      <span class="badge badge-warning navbar-badge"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:999 !important">
+                      <span class="dropdown-item dropdown-header">Filters</span>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        Report Category
+                        <select id="ddlcategory" formControlName="ddlcategory" class="form-control"
+                          (change)="categoryFilters($event.target.value)">
+                          <option value="4">Average Census</option>
+                          <option value="1">Active Residents</option>
+                          <option value="2">Discharge Residents</option>
+                          <option value="3">Census with Allergy</option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider" *ngIf="selectedOption != 'average'"></div>
+                      <div class="dropdown-item" *ngIf="selectedOption != 'average'">
+                        Select Type
+                        <select id="ddlCalender" formControlName="ddlCalender" class="form-control"
+                          (change)="calenderFilters($event.target.value)">
+                          <option value="1">Month</option>
+                          <option value="2">Quarter</option>
+                          <option value="3">Year</option>
+                          <option value="4">Compare</option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider" *ngIf="selectedOption === 'date'"></div>
+                      <div class="dropdown-item" *ngIf="selectedOption === 'date'">
+                        From Date
+                        <input type="date" class="form-control" formControlName="txtFromDate" />
+                      </div>
+                      <div class="dropdown-divider" *ngIf="selectedOption === 'date'"></div>
+                      <div class="dropdown-item" *ngIf="selectedOption === 'date'">
+                        To Date
+                        <input type="date" class="form-control" formControlName="txtToDate" />
+                      </div>
+                      <div class="dropdown-divider" *ngIf="selectedOption === 'compare'"></div>
+                      <div class="dropdown-item" style="width:178px" *ngIf="selectedOption === 'compare'">
+                        Compare Years
+                        <ng-multiselect-dropdown class="form-control" formControlName="compare"
+                          [data]="comparedropdownList" [settings]="dropdownSettings_Compare"
+                          [placeholder]="'Choose to Compare'">
+                          <!-- (onSelect)="onCompareSelect($event)" (onDeSelect)="onCompareDeSelect($event)"> -->
+                        </ng-multiselect-dropdown>
+                      </div>
+                      <div class="dropdown-divider" *ngIf="selectedOption === 'average'"></div>
+                      <div class="dropdown-item" style="width:178px" *ngIf="selectedOption === 'average'">
+                        Years
+                        <select id="years" formControlName="years" class="form-control ">
+                          <option *ngFor="let item of comparedropdownList" value="{{item.item_id}}">{{item.item_text}}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider" *ngIf="selectedOption === 'average'"></div>
+                      <div class="dropdown-item" *ngIf="selectedOption === 'average'">
+                        Months
+                        <select id="months" formControlName="months" class="form-control ">
+                          <option value="1">January</option>
+                          <option value="2">February</option>
+                          <option value="3">March</option>
+                          <option value="4">April</option>
+                          <option value="5">May</option>
+                          <option value="6">June</option>
+                          <option value="7">July</option>
+                          <option value="8">August</option>
+                          <option value="9">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        <input type="button" class="btn btn-info1" value="OK" (click)="loadChart()">&nbsp;
+                        <input type="button" class="btn btn-danger1" value="Close" (click)="close('.test')">
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div style="float:right">
+              <input type="button" class="btn btn-info1" *ngIf="backButton" value="Back" (click)="drillup()">
+            </div>
+          </div>
+          <div *ngIf="chartData == null" #chartTarget>
+          </div>
+          <app-charttemplate *ngIf="chartData != null" [ChartData]="chartData"></app-charttemplate>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-10 col-md-10 col-lg-10">
+            <h3 class="card-title">Census</h3>
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="right" style=" display: table-cell;width: 10%; float:left; margin: 0px;">
+            <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf'] && this.tableData.rows.length>0" (click)="GetReport()" title="Export To PDF">
+              <i class="icon"></i>
+              <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+            </a>
+          </div>
+          <div class="right" style=" display: table-cell;width: 80%; float:left; margin: 0px;"></div>
+          <div class="right" style=" display: table-cell;width: 10%; float:right; margin: 0px;">
+            <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintExcel']&& this.tableData.rows.length>0"  (click)="getExcel()" title="Export To Excel">
+              <i class="icon"></i>
+              <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+            </a>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <app-table *ngIf="tableData" [DashboardData]="tableData" (SelectedRow)="getPatientAllergies($event)" ></app-table>
+      </div>
+    </div>
+  </div>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="mdladdallergy" role="dialog"
+  [ngStyle]="{'display': modalPopIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="width: 80%;">
+      <div class="modal-content">
+        <div #DemoHandle1 class="modal-header" style="height: max-content ">
+          <h5>{{patientName|titlecase}} - Allergy Details</h5>
+          <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+        </div>
+        <div class="modal-body bodystyle">
+            <div class="table-responsive">
+                <table id="tbltable" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Allergy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of allergies;let i=index">
+                      <td>{{i+1}}</td>
+                      <td>{{item}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <div style="text-align: right">
+            <input type="button" value="Close" class="btn btn-danger" (click)="closeModel()">
+          </div>
+        </div>
+
+      </div>
+
+  </div>
+</div>
+</section>

@@ -1,0 +1,85 @@
+<!-- <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Wing Details</h3>
+      </div> -->
+      <div class="modal-content" ngDraggable [handle]="DemoHandle1">
+          <div #DemoHandle1 class="modal-header " style="height: 50px ">
+            <h5>Wing Details</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+
+          </div> 
+      <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" id="myModal" role="dialog" [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 80%;">
+          <div class="modal-content">
+            <div #DemoHandle2 class="modal-header " style="height: 50px ">
+              <h5>Wing History Details</h5>
+              <!-- <button type="button" class="close" (click)="closeModel()">&times;</button> -->
+
+            </div>
+            <div class="modal-body bodystyle">
+              <div class="table-responsive" style="overflow-x:hidden">
+                <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="myform">
+          <div class="row form-group">
+
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Wing Name
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Wing Name
+              <span class="c1">*</span>
+              <div class="iconed-input">
+                <input type="text" id="txtwingname" formControlName="wingname" class="form-control" (change)="checkWingName()"
+                  [ngClass]="{
+                  'is-valid':myform.controls.wingname.valid,
+                  'is-invalid':myform.controls.wingname.invalid && myform.controls.wingname.touched
+                }" />
+                <div *ngIf="myform.controls.wingname.errors && (myform.controls.wingname.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.wingname.errors.maxlength">
+                    Wing Name cannot be more than 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.wingname.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+              
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Status
+              <div class="iconed-input">
+                <label class="switch">
+                  <input type="checkbox" id="chkstatus" formControlName="status">
+                  <div class="slider round">
+                    <!--ADDED HTML -->
+                    <span class="on">Active</span>
+                    <span class="off">Inactive</span>
+                    <!--END-->
+                  </div>
+                </label>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <div style="text-align: right">
+            <input type="button" id="btnsave" value="Save"  *ngIf="pageConfig['AccessWrite']"  (click)="insertWing()" [disabled]="myform.invalid" class="btn btn-success" />&nbsp;
+            <input type="button" id="btnclose" value="Close" (click)="resetScreen()" data-dismiss="modal" class="btn btn-danger" #closeAddWingModal/>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  <!-- </div> -->

@@ -1,0 +1,88 @@
+﻿using LTCPro.Entities;
+using LTCPro.DAL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+using System.Data;
+
+namespace LTCPro.ServiceLayer
+{
+    public interface IReportsService
+    {
+        //Task<List<NurseCommentTypeDropEntity>> GetNurseComments();
+        Task<IList> GetReports();
+        Task<IList> GetCompanyReports();
+        Task<IList> GetFacilityReports(int companyId);
+        Task<IList> GetNursestationReports(int companyId, int facilityId);
+        Task<IList> GetCensusReports(int userId, string fromDate, string toDate);
+        Task<IList> GetFloorReport(int companyId, int facilityId, int nursestationId, int floorId, int wingId, int roomId, int bedId);
+        Task<IList> GetWingReport(int companyId, int facilityId, int nursestationId, int floorId, int wingId, int roomId, int bedId);
+        Task<IList> GetRoomReport(int companyId, int facilityId, int nursestationId, int floorId, int wingId, int roomId, int bedId);
+        Task<IList> GetBedReport(int companyId, int facilityId, int nursestationId, int floorId, int wingId, int roomId, int bedId);
+        Task<IList> GetEmarlogo(int Id = 0);
+        Task<IList> GetHeaderlogo(Nullable<int> companyId, Nullable<int> facilityId);
+        Task<DataSet> GetCensusReportByfilter(string fromdate, string todate, int userId, string nursestationId, int type, int reportType);
+        Task<DataSet> GetCensusReportByDates(string fromdate, string todate, int userId, string nursestationname, int type, int reportType, string value);
+        Task<IList> GetAllAllergiesByClassReport();
+        Task<IList> GetAllAllergiesByDrugReport();
+        Task<IList> GetAllICD10Report();
+        Task<DataSet> Get72HoursReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetPRNDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetOrderDetailsReport(string patientIds, string fromdate, string todate, int ordertype, int userId, string nursestationId);
+        Task<DataSet> GetWithoutBarcodeDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetBiometricsDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetOrderControlSignoffReport(string fromdate, string todate, string nursestationId, int userId);
+        Task<DataSet> GetOrderControlSubstanceReport(string nursestationId, int userId);
+        Task<DataSet> GetOrderHoldDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetOrderWithFavouritesReport(string passtime, string fromdate, string todate, int userId, string nursestationId,int shiftTime);
+        Task<DataSet> GetCompareCensusDataReport(string year, int userId, string nursestationId, int type, int reporttype);
+        Task<DataSet> GetRefusedByResidentDetailsReport(string fromdate, string todate, int userId, string nursestationId,string gpi, string datetime);
+        Task<DataSet> GetMedrefReport(string fromdate, string todate, int userId, string nursestationId, string gpi);
+        Task<DataSet> GetOrderChangeDetailsReport(string fromdate, string todate, int userId, string nursestationId,string residentId);
+        Task<DataSet> GetWithoutScanningDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetDestructionDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetFloorStockDetailsReport(int userId, string nursestationId,int facilityId);
+        Task<DataSet> GetPharmacyMedsDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetAverageCensusDataReport(int year, int month, int userId, string nursestationId);
+        Task<DataSet> GetPsychiatricDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetNurseNotesDetailsReport(string fromdate, string todate, int userId, string nursestationId, string commentType,string MedicationReason);
+        Task<DataSet> GetPrescriberNotesReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetEmarResidentdetailsReport(int month, int year, string nursestationId, string patientId, int userId);
+        Task<string> GetEmarResidentlegendReport(int month, int year, string nursestationId, string patientId, int userId);
+        Task<DataSet> GetEmarResidentdetailsReportAllergyAndDiagnosis(int month, int year, string nursestationId, string patientId, int userId);
+        Task<DataSet> GetInboundDetails(string fromdate, string todate, string residentName,int inboundStatus);
+        Task<DataSet> GetMARHoledetails(int month, int year, string nursingStationId, int userId, string patientID);
+        Task<DataSet> GetMARHistorydetails(int Month, int Year, string NursingStationId, int UserId, string PatientID);
+        Task<IList>  GetResidentnamesmarReport(string nursingStationIds ,  int? ResidentStatus);
+        Task<DataSet> GetOutBoundErrorDetails(string fromdate, string todate);
+        Task<DataSet> GetEmarResidentReportSecurity(int nursingStationId, string date, string passTime, int shiftId, int window);
+        Task<DataSet> GetUserActivityDetailsReport(string userId, string fromdate, string todate);
+        Task<DataSet> GetEkitDetailsReport(/*string fromdate, string todate, */int userId, string nursestationId, int ekitType);
+        Task<DataSet> GetStockDetailsReport(int userId,int companyId);
+        Task<DataSet> GetAdminUsersDetailsReport(string companyId, int userId);
+        Task<DataSet> GetSetUpConfigDetailsReport(string companyId);
+        Task<DataSet> GetRefillDetailsReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<string> GetNurseStationShiftTime(int nsShiftId, int nurseStationId);
+        Task<DataSet> GetAllergyMasterExcel(int type);
+        Task<DataSet> GetICDMasterExcel();
+        Task<DataSet> GetRoleConfigExcel(int userId, int roleId);
+        Task<DataSet> GetEkitMedsDispensingReport(string fromdate, string todate, int userId, string nursestationId);
+        Task<DataSet> GetDocAdministerOrderReport(string fromdate, string todate, int OrderType, int userId, string nursestationId);
+        Task<DataSet> GetCertifiedOrderReport(int userId, int certTimeId, int patientId);
+        Task<string> GetNursingStationNameByPId(int patientId); 
+        Task<DataSet> GetPharmacyMedsExpiryReport(string checkinFromDate, string checkinToDate, string expireFromDate, string expireTodate, string nursestationId,int userId);
+        Task<DataSet> GetEkitMedsExpiryReport(/*string checkinFromDate, string checkinToDate, string expireFromDate, string expireTodate, */string nursestationId, int facilityId, int userId);
+        Task<DataSet> GetCPOEOrderDetailsReport(int porder_id, int quantityId);
+        Task<DataSet> GetProfileCertifiedOrderReport(int userId, int certTimeId, int patientId);
+        Task<DataSet> GetTherapeuticaltwo(int month, int year, string nursestationId, string patientId, string commentType);
+        Task<string> GetTherapeuticaltwolegend(int month, int year, string nursestationId, string patientId, string commentType);
+        Task<DataSet> GetTherapeuticalMedication(int month, int year, string nursestationId, string patientId, string commentType, string shiftTime);
+        Task<string> GetTherapeuticalMedicationlegend(int month, int year, string nursestationId, string patientId, string commentType, string shiftTime);
+        Task<string> GetEmarResidentdetailsReportAllergyAndDiagnosisCPOE(int month, int year, string nursestationId, string patientId, int userId);
+        Task<DataSet> GetEkitMedicationCheckInReport(string fromdate, string todate, int userId, string nursestationid);
+        Task<DataSet> GetMedicationQtyonhandUpdateReport(string fromdate, string todate, int userId, string nursestationid);
+    }
+}

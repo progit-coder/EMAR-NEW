@@ -1,0 +1,99 @@
+<!--<div class="container-fluid">
+
+     <div class="card card-primary"> 
+      <div class="card-header">
+        <h3 class="bg-primary text-white">Bed Details</h3>
+      </div>-->
+      <div class="modal-content" ngDraggable [handle]="DemoHandle1">
+          <div #DemoHandle1 class="modal-header " style="height: 50px ">
+            <h5>Bed Details</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+
+          </div> 
+      <div class="modal-body bodystyle">
+        <form [formGroup]="myform">
+          <div class="row form-group">
+
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Bed Name
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Bed Name
+              <span class="c1">*</span>
+              <div class="iconed-input">
+                <input type="text" id="txtbednumber" formControlName="bedname" (change)="checkBedName()" class="form-control"
+                  [ngClass]="{
+                  'is-valid':myform.controls.bedname.valid,
+                  'is-invalid':myform.controls.bedname.invalid && myform.controls.bedname.touched
+                }" />
+                <div *ngIf="myform.controls.bedname.errors && (myform.controls.bedname.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.bedname.errors.required">
+                    Bed Name is required.
+                  </div>
+                  <div *ngIf="myform.controls.bedname.errors.maxlength">
+                    Bed Name cannot be more than 50 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.bedname.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Bed Code
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Bed Code
+              <span class="c1">*</span>
+              <div class="iconed-input">
+                <input type="text" id="txtbedcode" formControlName="bedcode" class="form-control" [ngClass]="{
+                  'is-valid':myform.controls.bedcode.valid,
+                  'is-invalid':myform.controls.bedcode.invalid && myform.controls.bedcode.touched
+                }" />
+                <div *ngIf="myform.controls.bedcode.errors && (myform.controls.bedcode.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.bedcode.errors.required">
+                    Bed Code is required.
+                  </div>
+                  <div *ngIf="myform.controls.bedcode.errors.maxlength">
+                    Bed Code cannot be more than 20 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.bedcode.errors.minlength">
+                    Bed Code cannot be less than 4 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.bedcode.errors.pattern">
+                    Bed Code {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+             
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Status
+              <div class="iconed-input">
+                <label class="switch">
+                  <input type="checkbox" id="chkstatus" formControlName="status">
+                  <div class="slider round">
+                    <!--ADDED HTML -->
+                    <span class="on">Active</span>
+                    <span class="off">Inactive</span>
+                    <!--END-->
+                  </div>
+                </label>
+
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <div style="text-align: right">
+            <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']"  (click)="insertBed()" [disabled]="myform.invalid" class="btn btn-success" />&nbsp;
+            <input type="button" id="btnclose" value="Close" (click)="resetScreen()" data-dismiss="modal" class="btn btn-danger" #closeAddBedModal/> 
+          </div>
+        </div>
+        </form>
+
+     </div>
+     </div>
+    <!-- </div> 
+  </div>-->

@@ -1,0 +1,190 @@
+<style>
+  .c1 {
+    color: red;
+  }
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>HL Segment Fields Config</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">HL Segment Fields Config</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Segment Fields Configuration Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="roleconfigForm">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Company
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                  Company
+                  <span class="c1">*</span>
+                  <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="ddlcompany"
+                  [data]="companyMaster" [settings]="dropdownSettings_Company" [placeholder]="'Select'" [(ngModel)]="selectedComItems"
+                  (onSelect)="GetHLSevenSegmentDetailData()" (onDeSelect)="GetHLSevenSegmentDetailData()">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlcompany.errors && (myform.controls.ddlcompany.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.ddlcompany.errors.required">
+                    Company is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Segment
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Segment
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown formControlName="ddlsegment"  class="form-control" 
+                [(ngModel)]="selectedHlItem" [data]="hlSegment" [settings]="dropdownSettings_HlSegment"
+                (onSelect)="onSegmentSelect($event)" (onDeSelect)="onSegmentDeSelect($event)">
+              </ng-multiselect-dropdown>
+                
+                <div *ngIf="myform.controls.ddlsegment.errors && (myform.controls.ddlsegment.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.ddlsegment.errors.required">
+                    Segment is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" style="text-align: right;margin-top: 1%;">
+                <input type="button" id="btnsave" value="Clone" *ngIf="cloneButton==1" class="btn btn-info" (click)="modalpop()"/> &nbsp;
+                 <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Segment Fields Configuration View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+           <div class="col-sm-3 col-md-4 col-lg-3">
+                  <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" 
+                    placeholder="Search">
+                </div> 
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <form [formGroup]="myform">
+            <div class="row form-group">
+              <div class="col-sm-12">
+                <div class="table-responsive">
+                  <table id="tblHlsegment" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Segment Detail Desc</th>
+
+                        <th>HL Seven Status</th>
+                        <!-- <th></th> -->
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of hlSegmentDetails |gridFilter:searchText:'HLSegmentFieldConfig'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                        <td *ngIf="item.SegDetail_Desc!='SetID'">{{item.SegDetail_Desc}}</td>
+                        <!-- <td>{{item.HLConfig_Id}}</td> -->
+                        <td *ngIf="item.SegDetail_Desc!='SetID'"  >
+                          <div class="iconed-input">
+                            <label class="switch">
+                              <input type="checkbox" id="chkstatus" [checked]="item.SegDetailConfig_Id" formControlName="hlsevenstatus" (change)="inserthlsevenstatus(item.HLConfig_Id,item.SegDisplay_Id,hlsevenstatus == true ? 1 : 0)">
+                              <div class="slider round">
+                                <!--ADDED HTML -->
+                                <span class="on">Mandatory</span>
+                                <span class="off">Optional</span>
+                                <!--END-->
+                              </div>
+                            </label>
+
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls (pageChange)="p = $event" *ngIf="hlSegmentDetails.length > 0"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="mdlclone" role="dialog" [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+      <div class="modal-dialog" style="max-width: 50%;">
+          <form [formGroup]="cloneform" name="Clone">
+        <div class="modal-content">
+          <div #DemoHandle1 class="modal-header " style="height: 50px ">
+            <h5>HL7 Clone</h5>
+            <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+          </div>
+          <div class="modal-body">
+          
+              <div class="row form-group">
+                <div class="col-sm-2 col-md-2 col-lg-2">Company
+                    <span class="c1">*</span>
+                  </div>
+                  <div class="col-sm-4 col-md-4 col-lg-4">
+                      <select formControlName="ddlCloneComp"  class="form-control " [ngClass]="{
+                          'is-valid':cloneform.controls.ddlCloneComp.valid,
+                          'is-invalid':cloneform.controls.ddlCloneComp.invalid && cloneform.controls.ddlCloneComp.touched
+                        }">
+                        <option value="" disabled selected>Select</option>
+                        <option *ngFor="let item of CloneComp" value="{{item.Company_Id}}">{{item.Company_Name}}</option>
+                      </select>
+                      <div *ngIf="cloneform.controls.ddlCloneComp.errors && (cloneform.controls.ddlCloneComp.touched)" class="errorMessage">
+                        <div *ngIf="cloneform.controls.ddlCloneComp.errors.required">
+                          Company is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          </div>
+
+          <div class="modal-footer">
+            <div style="text-align: right">
+              <input type="button" value="Save" class="btn btn-success" [disabled]="cloneform.invalid" (click)="InsertHLSevenClone()"/>&nbsp;
+              <input type="button" value="Close" class="btn btn-danger" (click)="closeModel()">
+            </div>
+          </div>
+        </div>
+        </form>
+        </div>
+     
+    </div>
+  
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

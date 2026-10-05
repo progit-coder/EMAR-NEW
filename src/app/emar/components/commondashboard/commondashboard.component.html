@@ -1,0 +1,119 @@
+<!-- <section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <form [formGroup]="dashboardForm" name="dashboardForm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-9">
+              <h3 class="card-title">{{title}} Dashboard</h3>
+            </div>
+            <div class="col-sm-2">
+                <ng-multiselect-dropdown class="form-control" formControlName="nursestationName"   style="padding: 0px"
+                [data]="nurseStations" [settings]="dropdownSettings_ID" [(ngModel)]="selectedItems">
+              </ng-multiselect-dropdown>
+                      </div>
+            <div class="col-sm-1">
+              <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;z-index: auto">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" (click)="showHideToggle('.test')">
+                      <i class="fa fa-filter"></i>
+                      <span class="badge badge-warning navbar-badge"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:auto">
+                      <span class="dropdown-item dropdown-header">Filters</span>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        Report Category
+                        <select id="ddlcategory" formControlName="ddlcategory" class="form-control">
+                          <option value="1">Active Residents</option>
+                          <option value="2">Discharge Residents</option>
+                          <option value="3">Census with Allergy</option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        Select Type
+                        <select id="ddlCalender" formControlName="ddlCalender" class="form-control" (change)="calenderFilters($event.target.value)">
+                          <option value="1">Month</option>
+                          <option value="2">Quarter</option>
+                          <option value="3">Year</option>
+                        </select>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        From Date
+                        <input type="date" class="form-control" formControlName="txtFromDate" />
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        To Date
+                        <input type="date" class="form-control" formControlName="txtToDate" />
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        <input type="button" class="btn btn-info" value="OK" (click)="loadChart()">
+                        <input type="button" class="btn btn-info" value="Close" (click)="close('.test')">
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="col-1" style="float:right">
+              <input type="button" class="btn btn-info" *ngIf="backButton" value="Back" (click)="drillup()">
+            </div>
+            <div #chartTarget>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3 class="card-title">{{title}}</h3>
+          </div>
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="text-align:right">
+          <input type="button" class="btn btn-danger" value="Report" (click)="GetReport()" />
+        </div>
+        <br />
+        <div class=" table table-responsive" style="overflow-x:hidden">
+          <table id="tbltable" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <ng-container *ngFor="let cols of gridColumns">
+                  <th *ngIf="cols.display">{{ cols.displayName }}</th>
+                </ng-container>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of gridData| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                <td>{{item.name}}</td>      
+                <td *ngIf="item.nsname">{{item.nsname}}</td>          
+                <ng-container *ngFor="let val of item.data">
+                  <td> {{val}}</td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section> -->

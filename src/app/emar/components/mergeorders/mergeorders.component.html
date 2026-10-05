@@ -1,0 +1,131 @@
+<app-commonmodal title="Merge Orders">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Choose an Order to Merge with</h3>
+    </div>
+    <div class="table-responsive">
+      <table id="tblMergeOrders" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Drug</th>
+            <th>Quantity</th>
+            <th>Directions</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ordersListExceptSelected" style="cursor: Pointer"
+            (click)="onSelectMergeWith(item.PQuantity_Id)"
+            [ngClass]="{'highlight' : (selectedOrderQtyForMerge == item.PQuantity_Id) }">
+            <td>{{item.Drug_Name}}</td>
+            <td>{{item.Quantity}}</td>
+            <td>{{item.Directions}}</td>
+            <td>{{item.StartDate|date:'MM/dd/yyyy'}}</td>
+            <td>{{item.EndDate|date:'MM/dd/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title"> Choose an Order to Keep Directions and Administration Time
+      </h3>
+    </div>
+    <div class="table-responsive">
+      <table id="tblOrdersDirHoa" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Drug</th>
+            <th>Quantity</th>
+            <th>Directions</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ordersList" style="cursor: Pointer" (click)="onSelectForDirectionsHoa(item.PQuantity_Id,item.StartDate)"
+            [ngClass]="{'highlight' : (selectedOrderQtyForDirHoa == item.PQuantity_Id) }">
+            <td>{{item.Drug_Name}}</td>
+            <td>{{item.Quantity}}</td>
+            <td>{{item.Directions}}</td>
+            <td>{{item.StartDate|date:'MM/dd/yyyy'}}</td>
+            <td>{{item.EndDate|date:'MM/dd/yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- <div class="row form-group">
+      <strong class="col-sm-2">Choose an End Date</strong> 
+      <div class="col-sm-3" *ngIf="endDateArray.length>0">
+      <select class="form-control" id="ddlEndDate" [(ngModel)]="ddlEndDate" [disabled]="endDate!=''">
+        <option value="">--Select--</option>
+          <option *ngFor="let item of endDateArray" value="{{item.date}}">{{item.date|date
+            :'MM/dd/yyyy'}}</option>
+        </select>
+      </div>
+        <div *ngIf="endDateArray.length>0">(OR)</div>
+        <div class="col-sm-3">
+        <input type="date" class="form-control" [(ngModel)]="endDate" [disabled]="ddlEndDate!=''" [min]="minEndDate"
+        maxlength="10" />
+      </div>
+  </div> -->
+    <div class="row form-group align-items-end">
+
+
+    <div class="col-sm-3">
+      <strong>Choose Start Date</strong>
+      <input type="date" class="form-control" [(ngModel)]="ddlStartDate" maxlength="10" />
+    </div>
+
+    <div class="col-sm-3" *ngIf="endDateArray.length > 0">
+      <strong>Choose End Date</strong>
+      <select class="form-control" id="ddlEndDate" [(ngModel)]="ddlEndDate" [disabled]="endDate != ''">
+        <option value="">--Select--</option>
+        <option *ngFor="let item of endDateArray" [value]="item.date">
+          {{ item.date | date:'MM/dd/yyyy' }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-sm-1 d-flex align-items-center justify-content-center" *ngIf="endDateArray.length > 0">
+      (OR)
+    </div>
+
+   
+    <div [ngClass]="endDateArray.length > 0 ? 'col-sm-3' : 'col-sm-3'">
+      <strong *ngIf="endDateArray.length === 0">Choose End Date</strong>
+      <input type="date" class="form-control" [(ngModel)]="endDate" [disabled]="ddlEndDate != ''" [min]="minEndDate"
+        maxlength="10" />
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <span class="errorMessage">{{errorMessage}}</span>&nbsp;&nbsp;&nbsp;
+    <input type="button" id="btnsave" value="Save" (click)="saveClick()" [disabled]="!ddlStartDate" class="btn btn-success" /> &nbsp;
+    <input type="button" id="btncancel" value="Cancel" (click)="cancelClick()" class="btn btn-primary" />
+    <!-- <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="closeModel()" /> -->
+  </div>
+</app-commonmodal>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" id="exampleModal" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': modalEndDateMergeOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <strong> Do you want to Merge End Date also?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+          (click)="orderEndDateMergeConfirmation()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="closeModel()">No</button>
+      </div>
+    </div>
+  </div>
+</div>

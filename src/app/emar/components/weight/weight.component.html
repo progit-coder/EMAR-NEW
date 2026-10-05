@@ -1,0 +1,315 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+           <h1>ICD10 Master</h1> 
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Weight</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary sticky">
+        <div class="card-body" style="padding-bottom: inherit;padding-top: inherit;">
+          <div class="row form-group">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <h3 class="card-title">Weight Monitoring Form</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+              (onDeSelect)="onNurseStationDeSelect($event)">
+          </ng-multiselect-dropdown>
+            </div>
+        </div>
+            <div *ngIf="residentID!=0 && demographicInfoData!={}">
+                    <div class="row form-group">
+                          <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;cursor: pointer;" >
+                            <a ><span class="info-box-icon">
+                              <img container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"   (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="demographicInfoData.ImageLocation!=undefined" [src]="sanitize(demographicInfoData.ImageLocation)" class="zoom">
+                            </span></a><br />
+                          </div>  
+                          <div  class="col-sm-10 col-md-10 col-lg-10">
+                              <div class="row form-group">
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                      <strong>Residents</strong> 
+                                      <ng-multiselect-dropdown class="form-control"
+                                      [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                                      (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                      <!-- <div class="col-sm-2 col-6"><strong>MR#:</strong><span>{{demographicInfoData.PatientMRNumber}}</span></div> -->
+                                      <div class="col-sm-3 col-md-3 col-lg-3"><strong>DOB:&nbsp;</strong><span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span></div>
+                                      <div class="col-sm-3 col-md-2 col-lg-2" ><strong>Gender:&nbsp;</strong><span>{{demographicInfoData.AdministrativeSex}}</span></div>
+                                      <div class="col-sm-6 col-md-5 col-lg-5"><strong>Nursing Station Name:&nbsp;</strong><span>{{nurseStationName}}</span></div>
+                                    </div>
+                          </div>
+                      </div>
+              </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-default">
+         
+            <div class="card-body" *ngIf="residentID!=0">
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                  <form [formGroup]="myform">
+                    <div *ngIf="residentID!=0">
+                  <div class="row form-group">
+                   <!-- <div class="col-sm-2" > Date<span class="c1">*</span></div> -->
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                      Date<span class="c1">*</span>
+                      <input type="date" formControlName="date" class="form-control" readonly>
+                     
+                    </div>                                      
+                    <!-- <div class="col-sm-2" >Initials</div> -->
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                      Initials
+                      <input type="text" class="form-control" formControlName="initials"  readonly>
+                  </div>
+                  <!-- <div class="col-sm-2">Weight<span class="c1">*</span></div> -->
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                      <div class="left" style="display: table-cell;width: 40%; float:left; margin: 0px;">
+                      Weight
+                      <!-- <span class="c1">*</span> -->
+                      <input type="text" class="form-control" formControlName="weight" [ngClass]="{
+                        'is-valid':myform.controls.weight.valid,
+                        'is-invalid':myform.controls.weight.invalid && myform.controls.weight.touched
+                      }">
+                      <div *ngIf="myform.controls.weight.errors && (myform.controls.weight.touched)" class="errorMessage">
+                        <div *ngIf="myform.controls.weight.errors.required">
+                          Weight is required.
+                        </div>
+                        <div *ngIf="myform.controls.weight.errors.maxlength">
+                          Weight cannot be more than 6 characters long.
+                        </div>
+                        <div *ngIf="myform.controls.weight.errors.pattern">
+                          Invalid Weight.
+                        </div>
+                        </div>
+                      </div>
+                      <div class="right" style="display: table-cell;width: 60%; float:left; margin: 0px;">
+                        <div class="iconed-input" style="margin-left: 3px;margin-top: 13px;">
+                          <label class="switch">
+                            <input type="checkbox" id="chkstatus" formControlName="type"  value="1">
+                            <div class="slider round">
+                              <!--ADDED HTML -->
+                              <span class="off">KG</span>
+                              <span class="on">LB</span>
+                              <!--END-->
+                            </div>
+                          </label>
+        
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <!-- <div class="col-sm-2">IBW<span class="c1">*</span></div> -->
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                      IBW
+                      <!-- <span class="c1">*</span> -->
+                      <input type="text" class="form-control" formControlName="ibw" [ngClass]="{
+                        'is-valid':myform.controls.ibw.valid,
+                        'is-invalid':myform.controls.ibw.invalid && myform.controls.ibw.touched
+                      }" >
+                      <div *ngIf="myform.controls.ibw.errors && (myform.controls.ibw.touched)" class="errorMessage">
+                        <div *ngIf="myform.controls.ibw.errors.required">
+                          IBW is required.
+                        </div>
+                        <div *ngIf="myform.controls.ibw.errors.maxlength">
+                          IBW cannot be more than 6 characters long.
+                        </div>
+                        <div *ngIf="myform.controls.ibw.errors.pattern">
+                          Invalid  IBW.
+                        </div>
+                        </div>
+                     
+                    </div>
+                    <!-- <div class="col-sm-2">Height<span class="c1">*</span></div> -->
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                      Height ft(')
+                      <!-- <span class="c1">*</span> -->
+                      <input type="text" class="form-control" formControlName="height" [ngClass]="{
+                      'is-valid':myform.controls.height.valid,
+                      'is-invalid':myform.controls.height.invalid && myform.controls.height.touched
+                    }">
+                    <div *ngIf="myform.controls.height.errors && (myform.controls.height.touched)" class="errorMessage">
+                      <div *ngIf="myform.controls.height.errors.required">
+                        Height Feet is required.
+                      </div>
+                      <div *ngIf="myform.controls.height.errors.maxlength && !myform.controls.height.errors.pattern">
+                        Height Feet cannot be more than 1 number.
+                      </div>
+                      <div *ngIf="myform.controls.height.errors.maxlength && myform.controls.height.errors.pattern">
+                        Invalid  Height Feet.
+                      </div>
+                      <div *ngIf="myform.controls.height.errors.pattern && !myform.controls.height.errors.maxlength">
+                        Invalid  Height Feet.
+                      </div>
+                      </div>
+                  
+                    <!-- <span>ft(')</span> -->
+                  </div> 
+                   <!-- <div class="col-sm-1">ft('')</div> -->
+                   
+                    <!-- <div class="col-sm-2"></div> -->
+                    <!-- <div class="col-sm-1">Feet<span class="c1">*</span></div> -->
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                      Height in(")
+                      <!-- <span class="c1">*</span> -->
+                      <input type="text" class="form-control"    formControlName="feet" [ngClass]="{
+                      'is-valid':myform.controls.feet.valid,
+                      'is-invalid':myform.controls.feet.invalid && myform.controls.feet.touched
+                    }">
+                    <div *ngIf="myform.controls.feet.errors && (myform.controls.feet.touched)" class="errorMessage">
+
+                      <div *ngIf="myform.controls.feet.errors.required">
+                        Height Inch is required.
+                      </div>
+                      <div *ngIf="myform.controls.feet.errors.maxlength && !myform.controls.feet.errors.pattern">
+                        Height Inch cannot be more than 2 number.
+                      </div>
+                      <div *ngIf="myform.controls.feet.errors.maxlength && myform.controls.feet.errors.pattern">
+                        Invalid entry; must be between 0 and 11.
+                      </div>
+                      <div *ngIf="myform.controls.feet.errors.pattern && !myform.controls.feet.errors.maxlength">
+                        Invalid entry; must be between 0 and 11.
+                      </div>
+                      <!-- <div *ngIf="myform.controls.feet > 11">
+                        Invalid  Height Inch 12.
+                      </div> -->
+                      
+                      <!-- <div *ngIf="myform.controls.feet.value.text > 11">
+                        Invalid  Height Inch.
+                      </div> -->
+                      </div>
+                 
+                    <!-- <span>in(")</span> -->
+                  </div>
+                  <!-- <div class="col-sm-2"><input type="radio" id="chkpre" formControlName="dialysis" name="dialysis" value="1">Pre-Dialysis</div> -->
+                   
+                     <!-- <div class="col-sm-3"><input type="radio" id="chkpro" formControlName="dialysis" name="dialysis" value="2">Post-Dialysis</div> -->
+                    <!-- <div class="col-sm-1">inches("")</div> -->                        
+                    </div>
+                    <div class="row form-group">
+                       <!-- <div class="col-sm-2">Remarks</div> -->
+                       <div class="col-sm-4 col-md-4 col-lg-4">
+                        Remarks
+                      <textarea rows="1" cols="4" class="form-control" formControlName="remarks">
+                        </textarea>
+                       </div>    
+                      <!-- <div class="col-sm-2">Dialysis</div>  -->
+                      <div class="col-sm-2 col-md-2 col-lg-2">
+                        Dialysis
+                        <div class="iconed-input">
+                          <label class="switch">
+                            <input type="checkbox" id="chkstatus" formControlName="dialysis"  value="1">
+                            <div class="slider round">
+                              <!--ADDED HTML -->
+                              <span class="on">PreDialysis</span>
+                              <span class="off">PostDialysis</span>
+                              <!--END-->
+                            </div>
+                          </label>
+        
+                        </div>
+                      </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+                                                                          
+                    </div>
+                  <div style="width: 100%; text-align: right">
+                  <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-success"  (click)="insertWeight()" value="Save" [disabled]="myform.invalid"/>&nbsp;
+                  <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-danger"  value="Reset" (click)="resetScreen()"/>
+                 
+                  </div>
+                  <br/>
+                </div>
+                </form>
+                </div>
+               
+                  
+              </div>
+            </div>
+            <div class="card card-primary">
+              <div class="card-header">
+                  <div class="row clearfix">
+                      <div class="col-sm-6">
+                          <h3 class="card-title">Weight Monitoring Details</h3>
+                      </div>
+                      <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                     <div class="col-sm-3 col-md-4 col-lg-3">
+                        <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                          placeholder="Search">
+                      </div> 
+                    </div>
+               
+              </div>
+              <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Weight</th>
+                  <th>Pre/Post Dialysis</th>
+                  <th>IBW</th>
+                  <th>Height</th>
+                  <!-- <th>Height in(")</th> -->
+                  <th>Remarks</th>
+                  <th>Logged By</th>
+                  <th>Logged Date</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                </tr>
+              </thead>
+              <tbody  *ngFor="let item of weightList|gridFilter:searchText:'Weight'| paginate: { itemsPerPage: gridPagination, currentPage: p }; let i = index">
+                <tr>
+                  <td>{{i+1}}</td>
+                  <td>{{item.Weight}}  <span *ngIf="item.Weight!=undefined && item.Weight!=null && item.Weight!=''">{{item.Type}}</span></td>
+                  <td *ngIf="item.PreDialysis===1">PreDialysis</td>
+                  <td *ngIf="item.PostDialysis===1">PostDialysis</td>
+                  <td>{{item.IBW}}</td>
+                  
+                  <td><span *ngIf="item.HeightFeet !='' && item.HeightFeet !=undefined && item.HeightFeet !=null">{{item.HeightFeet}} '</span><span *ngIf="item.HeightInc !='' && item.HeightInc !=undefined && item.HeightInc !=null"> {{item.HeightInc}}"</span></td>
+                  <!-- <td>{{item.HeightInc}}</td> -->
+                  <td>{{item.Remarks}}</td>
+                  <td>{{item.UserName}}</td>
+                  <!-- <td>{{item.WeightLog_CreatedBy}}</td> -->
+                  <td>{{item.WeightLog_CreatedOn | date: 'MM/dd/yyyy hh:mm:ss a'}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon"   (click)="getWeightDetailsByID(item.WeightLog_ID)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                      </a>
+                  
+                </td>
+                </tr>
+              </tbody>
+            </table>                            
+            </div>
+            <pagination-controls (pageChange)="p = $event" *ngIf="weightList.length > 0"></pagination-controls> 
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000" ></ng4-loading-spinner>
+  </section>

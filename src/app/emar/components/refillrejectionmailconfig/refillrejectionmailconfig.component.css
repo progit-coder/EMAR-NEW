@@ -1,0 +1,53 @@
+.c1 {
+    color: red;
+  }
+  .errorMessage
+  {
+      color:red;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn {
+   border:none !important;
+   padding: 0px !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down 
+ {
+   border-top: 6px solid black !important;
+   border-left: 4px solid transparent !important;
+   border-right: 2px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up 
+ {
+   border-bottom: 6px solid #adadad !important;
+   border-left: 4px solid transparent !important;
+   border-right: 2px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item
+ {
+    overflow: hidden !important; 
+    white-space: nowrap !important;
+    width: 86% !important;  
+    text-overflow: ellipsis !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+{
+  border: 2px solid #ade39d !important;
+  background-color: #ade39d !important;
+  color: #000000 !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+{
+  background-color: #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+{
+  border: 2px solid #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+{
+  border-color: #000000 !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+{
+  color: #000000 !important;
+  font-weight: bold !important;
+}

@@ -1,0 +1,70 @@
+.dropdown-menu-lg
+{
+    min-width: 0px !important;
+}
+
+.dropdown-menu-lg .dropdown-item
+{
+    padding:.25rem 0.5rem 0.25rem 0.5rem !important;
+    font-size: small !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn {
+    border:none !important;
+    padding: 0px !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down 
+ {
+    border-top: 5px solid black !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up 
+ {
+    border-bottom: 5px solid #adadad !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item
+ {
+    overflow: hidden !important; 
+    white-space: nowrap !important;
+    width: 86% !important;  
+    text-overflow: ellipsis !important;
+ }
+ .modalstyle
+  {
+    z-index: 99999  !important;
+    overflow: hidden;
+  }
+  .bodystyle
+  {
+    height:400px;
+    overflow-y: auto
+  }
+  .modal.fade .modal-dialog
+  {
+    transform: translate(0,0%);
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+{
+  border: 2px solid #ade39d !important;
+  background-color: #ade39d !important;
+  color: #000000 !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+{
+  background-color: #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+{
+  border: 2px solid #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+{
+  border-color: #000000 !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+{
+  color: #000000 !important;
+  font-weight: bold !important;
+}

@@ -1,0 +1,50 @@
+<app-commonmodal title="72 Hours Check">
+  <div class="modal-body bodystyle">
+    <div><h4 class="text-center" style="font-size: 1.0rem;">It has been 72 hours since the first dose of these medications were given.</h4></div>  
+    <div><h4 class="text-center"  style="font-size: 1.0rem;">Please document the effects.</h4></div>
+    <form [formGroup]="myform" name="seventytwohourcheckForm" autocomplete="off">
+      <div class="table-responsive">
+        <table id="tblFacilities" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Drug Name</th>
+            <th>Resident Name</th>
+            <th>First Administered On</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of drugInfoData|gridFilter:searchText:'72hours'|paginate: { itemsPerPage: gridPagination, currentPage: p, id: 'seventyTwoHours' };">
+            <td><strong>{{item.GiveCodeText}}</strong></td>
+            <td>{{item.ResidentName}}</td>
+            <td>(first administered {{item.AdministerOn| date:'MM/dd/yyyy hh:mm:ss a'}})</td>
+            <td><textarea formControlName="text" class="form-control" #inputFocus style="padding: .050rem .75rem;" (change)="UpdateArray(item.DrugAdminister_Id,$event.target.value)"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      <!-- <div *ngFor="let item of drugInfoData|gridFilter:searchText:'72hours'|paginate: { itemsPerPage: gridPagination, currentPage: p, id: 'seventyTwoHours'};">
+        <div class="row">
+          <div class="col-sm-4">
+           <div class="row">
+             <div class="col-sm-4"><strong>{{item.GiveCodeText}}</strong></div>
+             <div class="col-sm-4">{{item.ResidentName}}</div>
+             <div class="col-sm-4">(first administered {{item.AdministerOn| date:'MM/dd/yyyy hh:mm:ss a'}})</div>
+           </div>
+          </div>
+          <div class="col-sm-8">
+             <textarea formControlName="text" class="form-control" style="padding: .050rem .75rem;" (change)="UpdateArray(item.DrugAdminister_Id,$event.target.value)"></textarea>
+          </div>
+
+        </div><br/>
+        
+      </div> -->
+      <pagination-controls id="seventyTwoHours" (pageChange)="p = $event" *ngIf="drugInfoData.length > 0"></pagination-controls>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <input type="button" id="btnsave" value="Submit" [disabled]="myform.invalid" *ngIf="pageConfig['AccessWrite'] && drugInfoData.length > 0" (click)="insertChecks()"
+    class="btn btn-success" />
+      <button type="button"class="btn btn-danger"  (click)="activeDefaultModal.close('Close click')">Close</button>
+  </div>
+</app-commonmodal>

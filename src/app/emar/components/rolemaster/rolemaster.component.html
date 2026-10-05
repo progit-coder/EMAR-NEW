@@ -1,0 +1,210 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Role Details</h3>
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Role History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class="table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="roleForm">
+            <div class="row from-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Role Description<span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Role Description<span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" class="form-control" formControlName="roleDesc" (change)="checkRoleDesc()"
+                    [ngClass]="{
+                    'is-valid':myform.controls.roleDesc.valid,
+                    'is-invalid':myform.controls.roleDesc.invalid && myform.controls.roleDesc.touched
+                  }" />
+                  <div *ngIf="myform.controls.roleDesc.errors && (myform.controls.roleDesc.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.roleDesc.errors.required">
+                      Role Description is required.
+                    </div>
+                    <div *ngIf="myform.controls.roleDesc.errors.maxlength">
+                      Role Description Must be 50 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.roleDesc.errors.pattern">
+                      {{config.alphabetsMessage}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Superior Role
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Superior Role
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <ng-multiselect-dropdown  [disabled]="isReadOnly"  formControlName="superiorRole" [data]="roleDrop" [(ngModel)]="selectedrItems"
+                    [settings]="dropdownSettings_Roles" 
+                    class="form-control"  (onSelect)="onSuperiorRoleSelect($event)" (onDeSelect)="onSuperiorRoleDeSelect($event)" [ngClass]="{
+                          'is-valid':myform.controls.superiorRole.valid ,
+                          'is-invalid':myform.controls.superiorRole.invalid && myform.controls.superiorRole.touched}">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.superiorRole.errors && (myform.controls.superiorRole.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.superiorRole.errors.required">
+                      Superior Role is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Default Screen<span class="c1">*</span></div> -->
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                Default Screen<span class="c1">*</span>
+                <div class="iconed-input">
+                  <ng-multiselect-dropdown class="form-control" formControlName="screen"
+                    [(ngModel)]="selectedScreenItems" [data]="screens" [settings]="dropdownSettings_Screen" [ngClass]="{
+                        'is-valid':myform.controls.screen.valid ,
+                        'is-invalid':myform.controls.screen.invalid && myform.controls.screen.touched
+                      }">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.screen.errors && (myform.controls.screen.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.screen.errors.required">
+                      Default Screen is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-1 col-md-1 col-lg-1">
+                <a class="btn" style="margin-top: 5px;" *ngIf="DefaultScreenpageConfig['AccessRead']" (click)="addDefaultScreenModel()">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Default Screen"></span>
+                </a>
+              </div>
+              </div>
+              <br/>
+            <div class="row form-group">
+             
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch" >
+                    <input type="checkbox"  [attr.disabled]="statusbutton == 1? '':null" id="chkstatus"  formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align:right">
+              <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']" [disabled]="myform.invalid" (click)="insertRole()"
+                class="btn btn-success" />&nbsp;
+              <input type="button" value="Reset" class="btn btn-danger" (click)="reSet()" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Role View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-5">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive
+                    Roles</b></label></span>
+
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4"></div>
+                <div class="col-sm-2 col-md-2 col-lg-3">
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateRoleStatus()"
+                [disabled]="UpdateStatus" class="btn btn-danger" />
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table id="tblRoleMaster" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th><input  type="checkbox"  id="chkselectall" [(ngModel)]='CheckAll'
+                      (change)="onCheckAll($event.target.checked?true:false)"></th>
+                  <th>Role Description</th>
+                  <th>Superior Role</th>
+                  <th>Default Screen</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of roleList|gridFilter:searchText:'RoleMaster'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                 <td> <input type="checkbox"  *ngIf="item.Role_id !=1 && item.Role_id != loggedInUserRoleId" [checked]="CheckAll" value="{{item.Role_id}}" name="{{ item.Role_id }}"
+                      id="{{item.Role_id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                  <td>{{item.Role_Description}}</td>
+                  <td>{{item.Superior_Role}}</td>
+                  <td>{{item.Screen_Desc}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a  class="btn editicon"  (click)="getRoleDetailsByID(item.Role_id)"><i
+                        class="icon"></i><span class=" fa fa-edit (alias) iconColor" title="Edit"></span> </a>
+                  </td>
+                  <td>
+                    <a class="btn editicon"  (click)="getHistoryById(item.Role_id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="roleMaster.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

@@ -1,0 +1,120 @@
+<style>
+  .c1{
+    color: red;
+  }
+  </style>
+  <form [formGroup]="myform">
+
+
+<section class="content-header">
+    <app-companydetailsontop (oncompanyselect)="getcompanyselected($event)"></app-companydetailsontop>
+  <!-- <ol class="breadcrumb">
+    <li><a [routerLink]="['/home']"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li> EMAR</li>
+    <li class="active"> Device Master</li>
+  </ol> -->
+</section>
+<section class="content">
+  <div class="box box-warning">
+    <div class="box-body">
+      <div class="widget widget-blue">
+        <span class="offset_anchor" id="widget_stats"></span>
+        <div class="widget-title">
+          <div class="widget-controls">
+          </div>
+          <h3> Device Master</h3>
+        </div>
+        <div class="widget-content">
+          <div class="row form-group">
+            <div class="col-sm-2 col-md-2 col-lg-2">Company Name <span class="c1">*</span> </div>
+            <div class="col-sm-4 col-md-4 col-lg-4"  [ngClass]="{
+              'has-success has-iconed':myform.controls.companynameValidate.valid,
+              'has-error has-iconed':myform.controls.companynameValidate.invalid && myform.controls.companynameValidate.touched,
+              '':myform.controls.companynameValidate.untouched
+            }">
+            <div class="iconed-input"> <select id="ddlcompany" formControlName="companynameValidate"  class="form-control">
+                <option>--Select--</option>
+              </select></div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">Facility Name</div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <select id="ddlcompany" class="form-control">
+                <option>--Select--</option>
+              </select>
+            </div>
+          </div>
+          <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Device Name <span class="c1">*</span></div>
+              <div class="col-sm-4 col-md-4 col-lg-4"  [ngClass]="{
+                'has-success has-iconed':myform.controls.devicenameValidate.valid,
+                'has-error has-iconed':myform.controls.devicenameValidate.invalid && myform.controls.devicenameValidate.touched,
+                '':myform.controls.devicenameValidate.untouched
+              }">
+              <div class="iconed-input"> 
+                <input type="text" id="txtdevicename"  formControlName="devicenameValidate"  class="form-control" /></div>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">Device IP  <span class="c1">*</span></div>
+             
+              <div class="col-sm-4 col-md-4 col-lg-4"  [ngClass]="{
+                'has-success has-iconed':myform.controls.deviceipValidate.valid,
+                'has-error has-iconed':myform.controls.deviceipValidate.invalid && myform.controls.deviceipValidate.touched,
+                '':myform.controls.deviceipValidate.untouched
+              }">
+              <div class="iconed-input"> 
+                  <input type="text" id="txtdeviceip"  formControlName="deviceipValidate"  class="form-control" /></div>
+              </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2 col-md-2 col-lg-2">Communicate Mode  <span class="c1">*</span></div>
+                <div class="col-sm-4 col-md-4 col-lg-4" [ngClass]="{
+                  'has-success has-iconed':myform.controls.communicatemodeValidate.valid,
+                  'has-error has-iconed':myform.controls.communicatemodeValidate.invalid && myform.controls.communicatemodeValidate.touched,
+                  '':myform.controls.communicatemodeValidate.untouched
+                }">
+                <div class="iconed-input"> 
+                    <select id="ddlcommunicatemode"  formControlName="communicatemodeValidate" class="form-control">
+                        <option>--Select--</option>
+                      </select></div>
+                </div>
+                <div class="col-sm-2 col-md-2 col-lg-2">Port <span class="c1">*</span></div>
+                <div class="col-sm-4 col-md-4 col-lg-4" [ngClass]="{
+                  'has-success has-iconed':myform.controls.portValidate.valid,
+                  'has-error has-iconed':myform.controls.portValidate.invalid && myform.controls.portValidate.touched,
+                  '':myform.controls.portValidate.untouched
+                }">
+                <div class="iconed-input"> 
+                    <input type="text" id="txtport" formControlName="portValidate" class="form-control" /></div>
+                </div>
+              </div>
+              <div class="row form-group">
+                  <div class="col-sm-2 col-md-2 col-lg-2">Communication Password <span class="c1">*</span></div>
+                  <div class="col-sm-4 col-md-4 col-lg-4"  [ngClass]="{
+                    'has-success has-iconed':myform.controls.communicationpasswordValidate.valid,
+                    'has-error has-iconed':myform.controls.communicationpasswordValidate.invalid && myform.controls.communicationpasswordValidate.touched,
+                    '':myform.controls.communicationpasswordValidate.untouched
+                  }">
+                  <div class="iconed-input">
+                      <input type="text" id="txtcommunicationpass" formControlName="communicationpasswordValidate" class="form-control" />     </div>                 
+                  </div>
+                  <div class="col-sm-2 col-md-2 col-lg-2">Device Type  <span class="c1">*</span></div>
+                  <div class="col-sm-4 col-md-4 col-lg-4" [ngClass]="{
+                    'has-success has-iconed':myform.controls.devicetypeValidate.valid,
+                    'has-error has-iconed':myform.controls.devicetypeValidate.invalid && myform.controls.devicetypeValidate.touched,
+                    '':myform.controls.devicetypeValidate.untouched
+                  }">
+                    <div class="iconed-input"> <select id="ddldevicetype" formControlName="devicetypeValidate" class="form-control">
+                          <option>--Select--</option>
+                        </select></div>
+                  </div>
+                </div>
+                <div style="text-align: right">
+                    <input type="button" id="btntest" value="Test Connection" class="btn btn-primary"/>
+                    <input type="button" id="btnsave" [disabled]="myform.invalid" value="Save" class="btn btn-success"/>
+                    <input type="button" id="btnreset" value="Reset" class="btn btn-danger" />
+                  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</form>

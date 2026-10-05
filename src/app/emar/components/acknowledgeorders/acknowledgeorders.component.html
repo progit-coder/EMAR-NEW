@@ -1,0 +1,108 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Acknowledge Orders</h3>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="adminApprovalForm">
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Select Resident
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <select class="form-control" id="ddlresident" formControlName="ddlresidents"
+                  (change)="changeResident()">
+                  <option value="0">Select</option>
+                  <option *ngFor="let item of residents" value="{{item.Patient_Id}}">
+                    {{item.PatientLastName}},{{item.PatientFirstName}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table id="tbladmitdocu" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" id="chkselectall" (change)="onCheckAll($event.target.checked?true:false)">
+                  </th>
+                  <th></th>
+                  <th>Patient Name</th>
+                  <th>Order Type</th>
+                  <th>Drug Name</th>
+                  <th>Start Date</th>
+                  <th>Received Date/Time</th>
+                  <th>View</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of ackOrders|gridFilter:searchText:'AcknowledgeOrders'| paginate: { itemsPerPage: gridPagination, currentPage: p };index as i">
+                  <td> <input type="checkbox" [checked]="CheckAll" value="{{item.POrder_Id}}"
+                      name="{{ item.POrder_Id }}" id="{{item.POrder_Id}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                  <td>{{i+1}}</td>
+                  <td>{{item.PatientName}}</td>
+                  <td>{{item.OrderType}}</td>
+                  <td>{{item.DrugName}}</td>
+                  <td>{{item.StartDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                  <td>{{item.ReceivedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+
+                  <td><a style="cursor: pointer;" (click)="GetFileAckData(item.FileId,item.FileName)">View</a></td>
+                  <td>
+                    <a class="btn editicon" style="color: blue" (click)="getOrderDetailsID(item.OrderId)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias)"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="ackOrders.length > 0"></pagination-controls>
+          <div style="text-align: right" *ngIf="ackOrders.length > 0">
+            <input type="button" value="Acknowledge" class="btn btn-success" (click)="acceptcheck()"
+              [disabled]="AcceptButton" *ngIf="pageConfig['AccessWrite']" /> &nbsp;
+            <input type="button" value="Reject" (click)="rejectcheck()" class="btn btn-danger" [disabled]="RejectButton"
+              *ngIf="pageConfig['AccessWrite']" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+  <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" role="dialog" id="modalview"
+    [ngStyle]="{'display': modalViewIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog" style="max-width: 80%;">
+      <div class="modal-content">
+        <div #DemoHandle1 class="modal-header" style="height: 50px ">
+          <h4 class="modal-title" style="columns: #000000;">File Information ({{viewTitle}})</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="Modalclose()">&times;</button>
+        </div>
+        <div class="modal-body bodystyle">
+          <h3>File Data</h3>
+          <div class="row form-group" *ngIf="fileViewData">
+            <div class="col-sm-12">
+              <textarea class="form-control" cols="14" rows="14">{{fileViewData.FileData}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="Modalclose()">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,9 @@
+<app-commonmodal title="Warning!">
+  <div class="modal-body">
+    <strong> Do you want to Reactivate Resident?</strong>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="reactivateResident()">Ok</button>
+    <button type="button" class="btn btn-danger" (click)="closeModel()">Cancel</button>
+  </div>
+</app-commonmodal>

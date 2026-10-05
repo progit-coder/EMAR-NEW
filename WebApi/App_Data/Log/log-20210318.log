@@ -1,0 +1,32 @@
+2021-03-18 20:09:17,391 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails in ResidentDemographicController----
+2021-03-18 20:09:17,423 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails(DiagnosisId) in DiagnosisInfoService----
+2021-03-18 20:09:39,662 [5] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2021-03-18 20:09:39,666 [5] ERROR LTCPro.ServiceLayer.Log4net -  Source : = mscorlib
+2021-03-18 20:09:39,667 [5] ERROR LTCPro.ServiceLayer.Log4net -  Stack Trace : =    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at LTCPro.WebApi.ResidentDemographicController.GetDiagnosisDetails(Int32 DiagnosisId) in D:\Emar Service Latest\WebApi\Controllers\ResidentDemographicController.cs:line 287
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ExceptionFilterResult.<ExecuteAsync>d__6.MoveNext()
+2021-03-18 20:09:39,691 [5] ERROR LTCPro.ServiceLayer.Log4net -  Message : = One or more errors occurred.
+2021-03-18 20:09:44,119 [5] ERROR LTCPro.ServiceLayer.Log4net -  InnerException Message : = Object reference not set to an instance of an object.
+2021-03-18 20:09:44,119 [5] ERROR LTCPro.ServiceLayer.Log4net - ===================================
+2021-03-18 20:09:49,857 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails in ResidentDemographicController----
+2021-03-18 20:09:49,857 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails(DiagnosisId) in DiagnosisInfoService----
+2021-03-18 20:14:11,491 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails in ResidentDemographicController----
+2021-03-18 20:14:11,511 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executing GetDiagnosisDetails(DiagnosisId) in DiagnosisInfoService----
+2021-03-18 20:14:41,083 [5] DEBUG LTCPro.ServiceLayer.Log4net - ---Executed Successfully GetDiagnosisDetails() in ResidentDemographicController----

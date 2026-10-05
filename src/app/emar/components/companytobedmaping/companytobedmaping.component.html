@@ -1,0 +1,217 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Company to Bed Hierarchy Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="companyBedconfig">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Company Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Company Name
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown formControlName="companyName" class="form-control"
+                [(ngModel)]="selectedCompanyItem" [data]="companies" [settings]="dropdownSettings_Company" 
+                (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)">
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.companyName.errors && (myform.controls.companyName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.companyName.errors.required">
+                    Company Name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Facility Name
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown formControlName="facilityName" class="form-control"
+                [(ngModel)]="selectedFacilityItem" [data]="facilities" [settings]="dropdownSettings_Facility" 
+                (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.facilityName.errors && (myform.controls.facilityName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.facilityName.errors.required">
+                    Facility Name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Nursing Station Name
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown formControlName="nursestationName" class="form-control"
+                [(ngModel)]="selectedNurseStationItem" [data]="nurseStations" [settings]="dropdownSettings_Nurse" 
+                (onSelect)="onNurseStationSelect($event)"  (onDeSelect)="onNurseStationDeSelect($event)" 
+                >
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.nursestationName.errors && (myform.controls.nursestationName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.nursestationName.errors.required">
+                    Nurse Station Name is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Floor
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Floor
+                  <ng-multiselect-dropdown formControlName="floorName" class="form-control"
+                  [(ngModel)]="selectedFloorItem" [data]="records" [settings]="dropdownSettings_Floor"  
+                  (onSelect)="onFloorSelect($event)" (onDeSelect)="onFloorDeSelect($event)" >
+                </ng-multiselect-dropdown>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Wing
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Wing
+                    <ng-multiselect-dropdown formControlName="wingName" class="form-control"
+                  [(ngModel)]="selectedWingItem" [data]="records" [settings]="dropdownSettings_Wing"  
+                  (onSelect)="onWingSelect($event)" (onDeSelect)="onWingDeSelect($event)" >
+                </ng-multiselect-dropdown>
+                </div>
+                <!-- <div class="col-sm-2 col-md-2 col-lg-2">Room
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Room
+                    <ng-multiselect-dropdown formControlName="roomName" class="form-control"
+                    [(ngModel)]="selectedRoomItem" [data]="records" [settings]="dropdownSettings_Room"  
+                    (onSelect)="onRoomSelect($event)" (onDeSelect)="onRoomDeSelect($event)" >
+                  </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Bed
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Bed
+                  <ng-multiselect-dropdown formControlName="bedName" class="form-control"
+                  [(ngModel)]="selectedBedItem" [data]="records" [settings]="dropdownSettings_Bed"  
+                  (onSelect)="onBedSelect($event)" (onDeSelect)="onBedDeSelect($event)" >
+                </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" value="Save"  *ngIf="pageConfig['AccessWrite']" [disabled]="myform.invalid || saveFlag" (click)="insertUpdatenurseStationhierarchy()" class="btn btn-success"
+              />&nbsp;
+              <input type="button" id="btnreset" value="Reset" class="btn btn-danger" (click)="resetScreen()" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Company To Bed Hierarchy View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1"  id="myModal"  role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Company To Bed Hierarchy History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+              </div>
+              <div class="modal-body bodystyle">
+                <div class=" table table-responsive" style="overflow-x:hidden">
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group">
+            <div class="col-sm-3">
+              <span>
+                <!-- <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" />  -->
+                </span>
+              <!-- <span><label class="checkbox-label" style="padding:3%"><b style="color: brown">Show Inactive
+                    Company To Bed Hierarchy</b></label></span> -->
+            </div>
+            <div class="col-sm-7"></div>
+            <div class="col-sm-2">
+              <!-- <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateCompanyStatus()"
+                [disabled]="UpdateStatus" class="btn btn-success" /> -->
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                   <!--<th>
+                    <input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                      (change)="onCheckAll($event.target.checked?true:false)"> 
+                    </th>-->
+                  <th>Company Name</th>
+                  <th>Fcaility Name</th>
+                  <th>Nursing Station Name</th>
+                  <th>Floor</th>
+                  <th>Wing</th>
+                  <th>Room</th>
+                  <th>Bed</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <!-- <th></th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of companybedconfigs|gridFilter:searchText:'CompanyToBedMapp'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                   <!--<td> 
+                    <input type="checkbox" [checked]="CheckAll" value="{{item.Company_Id}}"
+                      name="{{ item.Company_Id }}" id="{{item.Company_Id}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" /> 
+                    </td>-->
+                  <td>{{item.CompanyName}}</td>
+                  <td>{{item.FacilityName}}</td>
+                  <td>{{item.NursingStationName}}</td>
+                  <td>{{item.FloorPrior}}</td>
+                  <td>{{item.WingPrior}}</td>
+                  <td>{{item.RoomPrior}}</td>
+                  <td>{{item.BedPrior}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon" (click)="getCompanyToBedDetailsByID(item.NSHierarchy_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                  <!-- <td>
+                    <a class="btn editicon" style="color:blue" (click)="getHistoryById(item.NSHierarchy_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history" title="History"></span>
+                    </a>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="companybedconfigs.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>
+<ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

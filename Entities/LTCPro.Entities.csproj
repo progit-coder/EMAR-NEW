@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C9839F34-9A6C-4250-BF8C-4312C7E8E85F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LTCPro.Entities</RootNamespace>
+    <AssemblyName>Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcknowledgeOrdersCustomEntity.cs" />
+    <Compile Include="ActivityEntity.cs" />
+    <Compile Include="AddlInstructionDetailEntity.cs" />
+    <Compile Include="AdmitDateEntity.cs" />
+    <Compile Include="AdvancedDirectiveEntity.cs" />
+    <Compile Include="AlertTypeEntity.cs" />
+    <Compile Include="AllergyInfoCustomEntity.cs" />
+    <Compile Include="AllergyInfoEntity.cs" />
+    <Compile Include="AllergyInfoMastersEntity.cs" />
+    <Compile Include="AncillaryDetailEntity.cs" />
+    <Compile Include="ApiIntegrationEntity.cs" />
+    <Compile Include="ApprovalAllergyInfoEntity.cs" />
+    <Compile Include="ApprovalDemographicEntity.cs" />
+    <Compile Include="ApprovalDiagnosisInfoEntity.cs" />
+    <Compile Include="ApprovalOrderEntity.cs" />
+    <Compile Include="ApprovalPendingCustomEntity.cs" />
+    <Compile Include="ApprovalRefillEntity.cs" />
+    <Compile Include="ApprovalVisitInfoEntity.cs" />
+    <Compile Include="AuditCustomEntity.cs" />
+    <Compile Include="AwarenessRatingEntity.cs" />
+    <Compile Include="BarcodeDetailEntity.cs" />
+    <Compile Include="Bed1Entity.cs" />
+    <Compile Include="BedEntity.cs" />
+    <Compile Include="BehavioralSymptomsMasterEntity.cs" />
+    <Compile Include="BypassBiometricEntity.cs" />
+    <Compile Include="CategoryEntity.cs" />
+    <Compile Include="CertifyAndApprovalCheckEntity.cs" />
+    <Compile Include="ChatMessageEntity.cs" />
+    <Compile Include="ChatParticipantEntity.cs" />
+    <Compile Include="ChatUsersEntity.cs" />
+    <Compile Include="CheckInMedsEntity.cs" />
+    <Compile Include="CityEntity.cs" />
+    <Compile Include="ColourTypeEntity.cs" />
+    <Compile Include="CommonOrderInfo1Entity.cs" />
+    <Compile Include="CommonOrderInfoEntity.cs" />
+    <Compile Include="Company1Entity.cs" />
+    <Compile Include="CompanyBedConfigCustomEntity.cs" />
+    <Compile Include="CompanyBedConfigEntity.cs" />
+    <Compile Include="CompanyBedCustomEntity.cs" />
+    <Compile Include="CompanyConfigEntity.cs" />
+    <Compile Include="CompanyCustomEntity.cs" />
+    <Compile Include="CompanyEntity.cs" />
+    <Compile Include="CompoundOrderEntity.cs" />
+    <Compile Include="ContactTypeEntity.cs" />
+    <Compile Include="ControlSubstanceCountEntity.cs" />
+    <Compile Include="ControlSubstanceFilter.cs" />
+    <Compile Include="ControlSubstanceGridEntity.cs" />
+    <Compile Include="CountryEntity.cs" />
+    <Compile Include="DashBoardEntity.cs" />
+    <Compile Include="DecisionEntity.cs" />
+    <Compile Include="DefaultScreenEntity.cs" />
+    <Compile Include="Demographic1Entity.cs" />
+    <Compile Include="DemographicEntity.cs" />
+    <Compile Include="DemographicInfoEntity.cs" />
+    <Compile Include="DiagnosisInfoCustomEntity.cs" />
+    <Compile Include="DiagnosisInfoEntity.cs" />
+    <Compile Include="DisciplineEntity.cs" />
+    <Compile Include="DocFolderEntity.cs" />
+    <Compile Include="DrfirstEntity.cs" />
+    <Compile Include="DrFirstFileDataEntity.cs" />
+    <Compile Include="DrFirstOrderCheck_ResultEntity.cs" />
+    <Compile Include="DrFirstXMLTransEntity.cs" />
+    <Compile Include="DrugAdministerEntity.cs" />
+    <Compile Include="DrugAdministrationTimeEntity.cs" />
+    <Compile Include="DrugTypeEntity.cs" />
+    <Compile Include="EkitEntity.cs" />
+    <Compile Include="EmarOrdersListEntity.cs" />
+    <Compile Include="EmarResidentGridEntity.cs" />
+    <Compile Include="EncodedOrderDetailEntity.cs" />
+    <Compile Include="EnumeratorEntity.cs" />
+    <Compile Include="EventCategoryEntity.cs" />
+    <Compile Include="FingersdescEntity.cs" />
+    <Compile Include="FlotChartEntity.cs" />
+    <Compile Include="gpiEntity.cs" />
+    <Compile Include="HLDirectionEntity.cs" />
+    <Compile Include="HlSevenApproveEntity.cs" />
+    <Compile Include="HLSevenConfigsEntity.cs" />
+    <Compile Include="HLSevenOutboundDisplayCompanyConfigEntity.cs" />
+    <Compile Include="InboundDashboardCustomEntity.cs" />
+    <Compile Include="InboundHeaderCountEntity.cs" />
+    <Compile Include="LogoEntity.cs" />
+    <Compile Include="MailboxEntity.cs" />
+    <Compile Include="NurseCommentTypeDropEntity.cs" />
+    <Compile Include="OnLeaveEntity.cs" />
+    <Compile Include="OrderFavouriteDataEntity.cs" />
+    <Compile Include="OrdersCertifyCustomEntity.cs" />
+    <Compile Include="OrdersViewEntity.cs" />
+    <Compile Include="PatientTypeEntity.cs" />
+    <Compile Include="PharmacyMedsExpiryDateDashboardd.cs" />
+    <Compile Include="PrcGetDocumentCheckData_Entity.cs" />
+    <Compile Include="PrcGetFreqMappingData_ResultEntity.cs" />
+    <Compile Include="PrcGetReportDrFirst_ResultEntity.cs" />
+    <Compile Include="PrcReportGetStockData_ResultEntity.cs" />
+    <Compile Include="PrcReportsAdminUsers_ResultEntity.cs" />
+    <Compile Include="PrcReportsSetUpConfigData_ResultEntity.cs" />
+    <Compile Include="RcopiaEntity.cs" />
+    <Compile Include="RecentFacEntity.cs" />
+    <Compile Include="RefillMailConfigCustomEntity.cs" />
+    <Compile Include="ResidentLiteralOrderDataEntity.cs" />
+    <Compile Include="ResidentMergeEntity.cs" />
+    <Compile Include="SeventyTwoHourCheckEntity.cs" />
+    <Compile Include="EthnicEntity.cs" />
+    <Compile Include="FacADTDefaultEntity.cs" />
+    <Compile Include="FacAssessments.cs" />
+    <Compile Include="FacCarePlanEntity.cs" />
+    <Compile Include="FacEhrInfoEntity.cs" />
+    <Compile Include="Facility1Entity.cs" />
+    <Compile Include="FacilityCustomEntity.cs" />
+    <Compile Include="FileInformationViewCustomEntity.cs" />
+    <Compile Include="Floor1Entity.cs" />
+    <Compile Include="ImportFileEntity.cs" />
+    <Compile Include="FacilityEntity.cs" />
+    <Compile Include="FacilityICDEntity.cs" />
+    <Compile Include="FacilityPOEntity.cs" />
+    <Compile Include="FacOtherEntity.cs" />
+    <Compile Include="FrequencyMasterEntity.cs" />
+    <Compile Include="HourEntity.cs" />
+    <Compile Include="InsertOrdersEntity.cs" />
+    <Compile Include="MailConfigEntity.cs" />
+    <Compile Include="MedicationReasonEntity.cs" />
+    <Compile Include="MessageEntity.cs" />
+    <Compile Include="MonthEntity.cs" />
+    <Compile Include="NurseStation1Entity.cs" />
+    <Compile Include="NursingFrequencyConfig1Entity.cs" />
+    <Compile Include="NursingFrequencyConfigCustomEntity.cs" />
+    <Compile Include="NursingFrequencyConfigEntity.cs" />
+    <Compile Include="NursingScheduleEntity.cs" />
+    <Compile Include="OrderControlUpdateEntity.cs" />
+    <Compile Include="OrderDestroyEntity.cs" />
+    <Compile Include="OrderDetailsEntity.cs" />
+    <Compile Include="OrderFavouriteCustomEntity.cs" />
+    <Compile Include="OrderFavouriteEntity.cs" />
+    <Compile Include="OrderFavouriteMasterEntity.cs" />
+    <Compile Include="OrderHoldEntity.cs" />
+    <Compile Include="OrdersCustomFilterEntity.cs" />
+    <Compile Include="OrdersGridCustomEntity.cs" />
+    <Compile Include="OrdersGridEntity.cs" />
+    <Compile Include="OrdersinfoCustomEntity.cs" />
+    <Compile Include="OrdersTypeCountEntity.cs" />
+    <Compile Include="OutBoundFileInformationEntity.cs" />
+    <Compile Include="FileInformationEntity.cs" />
+    <Compile Include="FloorEntity.cs" />
+    <Compile Include="FrictionEntity.cs" />
+    <Compile Include="FTECategoryEntity.cs" />
+    <Compile Include="FTEConfigurationEntity.cs" />
+    <Compile Include="FteConnectionEntity.cs" />
+    <Compile Include="FTPCustomEntity.cs" />
+    <Compile Include="HlFieldsEntity.cs" />
+    <Compile Include="ICD10Entity.cs" />
+    <Compile Include="InboundFileInformationEntity.cs" />
+    <Compile Include="GenderEntity.cs" />
+    <Compile Include="GroupTypeEntity.cs" />
+    <Compile Include="HLSevenCompanyConfigEntity.cs" />
+    <Compile Include="HLSevenSegmentDetailEntity.cs" />
+    <Compile Include="HLSevenSegmentEntity.cs" />
+    <Compile Include="ICDEntity.cs" />
+    <Compile Include="InsuranceInfoEntity.cs" />
+    <Compile Include="LanguageEntity.cs" />
+    <Compile Include="LiteralOrdersEntity.cs" />
+    <Compile Include="MaritalStatusEntity.cs" />
+    <Compile Include="MBICheckEntity.cs" />
+    <Compile Include="MedicaidCheckEntity.cs" />
+    <Compile Include="MedicareCheckEntity.cs" />
+    <Compile Include="MedicationEntity.cs" />
+    <Compile Include="MilitaryMasterEntity.cs" />
+    <Compile Include="MobilityEntity.cs" />
+    <Compile Include="NDCEntity.cs" />
+    <Compile Include="NotesInfoEntity.cs" />
+    <Compile Include="NursingStationEntity.cs" />
+    <Compile Include="NutritionEntity.cs" />
+    <Compile Include="OutboundRecordsCustomEntity.cs" />
+    <Compile Include="PersContactRelationEntity.cs" />
+    <Compile Include="PhysicianDetailsEntity.cs" />
+    <Compile Include="PRNDetailsCustomEntity.cs" />
+    <Compile Include="PRNInsertCustomEntity.cs" />
+    <Compile Include="ProfContactTypeMasterEntity.cs" />
+    <Compile Include="QuantityDetailEntity.cs" />
+    <Compile Include="RaceEntity.cs" />
+    <Compile Include="RatingEntity.cs" />
+    <Compile Include="ResidentAdmitDischargeEntity.cs" />
+    <Compile Include="ResidentAIMEntity.cs" />
+    <Compile Include="ResidentAlertEntity.cs" />
+    <Compile Include="ResidentAllergyEntity.cs" />
+    <Compile Include="ResidentBradenEntity.cs" />
+    <Compile Include="ResidentCountCustomEntity.cs" />
+    <Compile Include="ResidentDiagnosisEntity.cs" />
+    <Compile Include="ResidentEntity.cs" />
+    <Compile Include="ResidentGridEntity.cs" />
+    <Compile Include="ResidentOrderEntity.cs" />
+    <Compile Include="ResidentPayerEntity.cs" />
+    <Compile Include="ResponsiblePartyEntity.cs" />
+    <Compile Include="Role1Entity.cs" />
+    <Compile Include="RoleConfig1Entity.cs" />
+    <Compile Include="RoleConfigEntity.cs" />
+    <Compile Include="RoleEntity.cs" />
+    <Compile Include="Room1Entity.cs" />
+    <Compile Include="RoomEntity.cs" />
+    <Compile Include="RouteOfAdminEntity.cs" />
+    <Compile Include="ScreenPermissionsCustomEntity.cs" />
+    <Compile Include="ScreenEntity.cs" />
+    <Compile Include="SectionEntity.cs" />
+    <Compile Include="SensoryEntity.cs" />
+    <Compile Include="SessionTypeEntity.cs" />
+    <Compile Include="SkinEntity.cs" />
+    <Compile Include="StagingEncodedOrderEntity.cs" />
+    <Compile Include="StagingEventEntity.cs" />
+    <Compile Include="StagingMSHEntity.cs" />
+    <Compile Include="StagingNoteEntity.cs" />
+    <Compile Include="StagingOrderEntity.cs" />
+    <Compile Include="StagingPatientEntity.cs" />
+    <Compile Include="StagingPatientInEntity.cs" />
+    <Compile Include="StagingPatientVisitEntity.cs" />
+    <Compile Include="StagingRouteEntity.cs" />
+    <Compile Include="StagingTreatmentDispenseEntity.cs" />
+    <Compile Include="StagingTreatmentEntity.cs" />
+    <Compile Include="StateEntity.cs" />
+    <Compile Include="StockEntity.cs" />
+    <Compile Include="StockReportEntity.cs" />
+    <Compile Include="SuffixEntity.cs" />
+    <Compile Include="TherapyTypeEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeFormatEntity.cs" />
+    <Compile Include="TreatmentDispenseInfoEntity.cs" />
+    <Compile Include="TreatmentInfo1Entity.cs" />
+    <Compile Include="TreatmentInfoEntity.cs" />
+    <Compile Include="TreatmentRouteInfoEntity.cs" />
+    <Compile Include="UpdateOrdersCustomEntity.cs" />
+    <Compile Include="UploadedDocumentCustomEntity.cs" />
+    <Compile Include="UploadedDocumentEntity.cs" />
+    <Compile Include="UserActivityDetailEntity.cs" />
+    <Compile Include="UserActivityReportEntity.cs" />
+    <Compile Include="UserCustomEntity.cs" />
+    <Compile Include="UserEntity.cs" />
+    <Compile Include="UserIdCustomEntity.cs" />
+    <Compile Include="UserOTPCheckEntity.cs" />
+    <Compile Include="UserRoleFacilityConfig1Entity.cs" />
+    <Compile Include="UserRoleFacilityConfigEntity.cs" />
+    <Compile Include="UserRoleFacilityConfigGridEntity.cs" />
+    <Compile Include="UserRolesEntity.cs" />
+    <Compile Include="VisitBehaviourEntity.cs" />
+    <Compile Include="VisitFoodintakeEntity.cs" />
+    <Compile Include="VisitInfoEntity.cs" />
+    <Compile Include="VisitNursingNoteEntity.cs" />
+    <Compile Include="VisitUpdateEntity.cs" />
+    <Compile Include="VisitVitalEntity.cs" />
+    <Compile Include="WeekEntity.cs" />
+    <Compile Include="WeightLogEntity.cs" />
+    <Compile Include="Wing1Entity.cs" />
+    <Compile Include="WingEntity.cs" />
+    <Compile Include="XCodeEntity.cs" />
+    <Compile Include="ZipCodeEntity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\LTCPro.DAL.csproj">
+      <Project>{E3D08656-4592-40DC-8E93-8EEBB1B50947}</Project>
+      <Name>LTCPro.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://100.8.37.102/hl7listener/WebServiceSender.asmx?wsdl" docRef="http://100.8.37.102/hl7listener/WebServiceSender.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://100.8.37.102/hl7listener/WebServiceSender.asmx" xmlns:q1="http://100.8.37.102/hllistenerauth/WebServiceSender.asmx?" binding="q1:WebServiceSenderSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://100.8.37.102/hl7listener/WebServiceSender.asmx" xmlns:q2="http://100.8.37.102/hllistenerauth/WebServiceSender.asmx?" binding="q2:WebServiceSenderSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

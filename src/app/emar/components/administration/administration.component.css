@@ -1,0 +1,333 @@
+.zoom {
+  transition: transform .2s !important;
+  margin: 0  !important; 
+  padding: 0  !important;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.zoom3 {
+  transition: transform .2s !important;
+  margin: 0  !important; 
+  padding: 0  !important;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+
+
+::ng-deep .tooltip-inner {
+  max-width: 500px;
+  overflow: hidden;
+  
+ 
+
+ 
+}
+::ng-deep .tooltip {
+  opacity: 1;
+  z-index: 9999;
+}
+.ImageAndWidthHeight
+{
+height: 300px;
+ width: 400px; 
+ z-index: 9999;
+}
+.ImageAndWidthHeigh1
+{
+height: 300px;
+ width: 400px; 
+ z-index: 9999;
+}
+
+::ng-deep .tooltip.show {
+opacity: 1;
+z-index: 9999;
+}
+.highlighted {
+  /* color: white; */
+  /* background: repeating-linear-gradient(
+  -55deg,
+  #f4a742,
+  rgb(221, 160, 178) 10px,
+  rgb(221, 160, 178) 10px,
+  rgb(221, 160, 178) 20px
+);   */
+  background: #999999;
+}
+    /* .zoom:hover {
+      -ms-transform: scale(1.5)!important; /* IE 9 */
+      /*-webkit-transform: scale(1.5)!important;/* Safari 3-8 */
+      /* transform: scale(2.0) !important;  */
+    /* } */ 
+    .row-m-t{
+        margin-top : 20px
+      }
+      
+      .modalstyle
+  {
+    overflow: hidden;
+  }
+  .modalstyl {
+    z-index: 99999 !important;
+    overflow: hidden;
+}
+  .bodystyle
+  {
+    height:400px;
+    overflow-y: auto
+  }
+ 
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  /* margin: 5px; */
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+.foo1 {
+  float: left;
+  /* width: 20px; */
+  height: 19px;
+  /* margin: 5px; */
+  /* border: 1px solid rgba(0, 0, 0, .2); */
+}
+.Aliment
+{
+  padding-top: 8px; text-align: right;
+}
+
+.Color1 {
+ 
+  background:#999999;
+}
+.Color3
+{
+background:#454545;
+}
+.Color9
+{
+    background: white;
+}
+  .modal.fade .modal-dialog
+  {
+    transform: translate(0,0%);
+  }
+  /* .progress {
+     background-color: rgb(252, 151, 151);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .progress span {
+    position: absolute;
+    display: block;
+    width: 12%;
+ } */
+ .blink {
+  animation: blinker 2s linear infinite;
+  color:#cef307;
+  font-size: 15px;
+}
+.blink1 {
+  /* color:#cef307; */
+  font-size: 15px;
+}
+@keyframes blinker {  
+  10%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+}
+
+.infoBoxCustomCss{
+  padding: 0rem;
+}
+.formGroupCustomCss{
+  margin-bottom: 1px;
+}
+.strikeCss{
+  text-decoration: line-through;
+  color: red;
+}
+.c1 {
+  color: red;
+} 
+.formBorder
+{
+  /* border-radius: 5px; */
+  /* background-color: #f2f2f2; */
+  /* padding: 10px; */
+  border: 1px solid rosybrown;
+}
+/* tbody tr td:hover img {
+  transform: scale(2.0);
+  box-shadow: 0 0 10px rgba(243, 236, 236, 0); 
+} */
+.administerHeader{
+  position: absolute;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 16px;
+}
+.center {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 16px;
+}
+/* #container {
+  width: 550px;
+  height: 180px;
+} */
+.image--cover {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;    
+}
+.modalstyle
+{
+  overflow: hidden;
+}
+.bodystyle
+{
+  height:300px;
+  overflow-y: auto
+}
+.modal.fade .modal-dialog
+{
+  transform: translate(0,0%);
+}
+.errorMessage
+{
+    color:red;
+}
+.card-header
+{
+  padding: .20rem 0.75rem !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn {
+  border:none !important;
+  padding: 0px !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down 
+{
+  border-top: 5px solid black !important;
+  border-left: 5px solid transparent !important;
+  border-right: 5px solid transparent !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up 
+{
+  border-bottom: 5px solid #adadad !important;
+  border-left: 5px solid transparent !important;
+  border-right: 5px solid transparent !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+{
+  border: 2px solid #ade39d !important;
+  background-color: #ade39d !important;
+  color: #000000 !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+{
+  background-color: #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+{
+  border: 2px solid #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+{
+  border-color: #000000 !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+{
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+.singleline {
+  display: inline-block;
+  }
+  
+  .container1 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .container1 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  .container1:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  .container1 input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  .container1 input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .container1 .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item
+  {
+     overflow: hidden !important; 
+     white-space: nowrap !important;
+     width: 86% !important;  
+     text-overflow: ellipsis !important;
+  }
+.modal-header
+{
+    /* background-color: #007bff; */
+    height: 35px;
+    padding:7px !important;
+}
+.modal-footer
+{
+  height: 45px;
+ }
+ .flagText
+ {
+  color:red; font-size: medium; 
+  /* vertical-align: super; */
+ }
+ table tr.highlight {
+  background-color: #ade39d !important;
+  color: #000000;
+  border-color: #000000;
+}

@@ -1,0 +1,448 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Pharmacy Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="myform">
+            <div class="row form-group">
+                 
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Pharmacy Name
+                <span class="c1">*</span>
+                <input type="text" class="form-control" formControlName="phylastname" [ngClass]="{
+                      'is-valid':myform.controls.phylastname.valid,
+                      'is-invalid':myform.controls.phylastname.invalid && myform.controls.phylastname.touched
+                    }">
+                <div *ngIf="myform.controls.phylastname.errors && (myform.controls.phylastname.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.phylastname.errors.required">
+                   Pharmacy Name is required.
+                  </div>
+                  <div *ngIf="myform.controls.phylastname.errors.minlength">
+                    Pharmacy Name must be 3 characters.
+                   </div>
+                  <div *ngIf="myform.controls.phylastname.errors.maxlength">
+                   Pharmacy Name should not exceed more than 25 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.phylastname.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" >
+                Pharmacy Address
+                <span class="c1">*</span>
+                <input type="text" class="form-control" formControlName="phyadd1" [ngClass]="{
+                      'is-valid':myform.controls.phyadd1.valid && myform.controls.phyadd1.dirty,
+                      'is-invalid':myform.controls.phyadd1.invalid && myform.controls.phyadd1.touched
+                    }">
+                <div *ngIf="myform.controls.phyadd1.errors && (myform.controls.phyadd1.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.phyadd1.errors.required">
+                     Pharmacy Address  is required.
+                  </div>
+                  <div *ngIf="myform.controls.phyadd1.errors.maxlength">
+                     Pharmacy Address  should not exceed more than 100 characters long.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                City
+                <span class="c1">*</span>
+                <input type="text" id="txtcity" formControlName="city"   class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.city.valid && myform.controls.city.dirty,
+                        'is-invalid':myform.controls.city.invalid && myform.controls.city.touched
+                      }">
+                <div *ngIf="myform.controls.city.errors && (myform.controls.city.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.city.errors.required">
+                    City is required.
+                   </div>
+                  <div *ngIf="myform.controls.city.errors.maxlength">
+                    City cannot be more than 50 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.city.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage5}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                State
+                <span class="c1">*</span>
+                <input type="text" id="txtstate" formControlName="state" class="form-control"   [ngClass]="{
+                    'is-valid':myform.controls.state.valid && myform.controls.state.dirty,
+                    'is-invalid':myform.controls.state.invalid && myform.controls.state.touched
+                  }">
+                <div *ngIf="myform.controls.state.errors && (myform.controls.state.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.state.errors.required">
+                    State is required.
+                   </div>
+                  <div *ngIf="myform.controls.state.errors.maxlength">
+                    State must be 2 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.state.errors.minlength">
+                    State must be 2 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.state.errors.pattern">
+                    {{config.alphabetsMessage}}
+                  </div>
+                </div>
+              </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Zip Code
+                  <span class="c1">*</span>
+                  <input type="text" id="txtzipcode"  [(ngModel)]="zipcodeValue" formControlName="zipcode" class="form-control"
+                    placeholder="00000-0000" (keyup)="zipcodeChange($event.target.value)"   
+                    [ngClass]="{
+                    'is-valid':myform.controls.zipcode.valid && myform.controls.zipcode.dirty,
+                    'is-invalid':myform.controls.zipcode.invalid && myform.controls.zipcode.touched
+                  }" />
+                  <div *ngIf="myform.controls.zipcode.errors && (myform.controls.zipcode.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.zipcode.errors.required">
+                      Zip code is required.
+                     </div>
+                    <div *ngIf="myform.controls.zipcode.errors.maxlength">
+                      Zip Code must be 10 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.zipcode.errors.minlength">
+                      Zip Code must be 5 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.zipcode.errors.pattern">
+                      Zip Code Only Numbers(0-9), special characters(-) are allowed.
+                    </div>
+                    <div *ngIf="zipcodeisvalid==false && zipcodeValue!=''">
+                      Zip Code should be either 5 or 9 digits.
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Phone num
+                  <span class="c1">*</span>
+                  <input type="text" id="txtcontactno" formControlName="contactNumber" class="form-control"
+                    placeholder="(000)-000-0000"  
+                     [textMask]="{mask: mobileNumberMask, guide: false}" [ngClass]="{
+                    'is-valid':myform.controls.contactNumber.valid && myform.controls.contactNumber.dirty,
+                    'is-invalid':myform.controls.contactNumber.invalid && myform.controls.contactNumber.touched
+                  }" />
+                  <div *ngIf="myform.controls.contactNumber.errors && (myform.controls.contactNumber.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.contactNumber.errors.required">
+                      Phone number is required.
+                     </div>
+                    <div *ngIf="myform.controls.contactNumber.errors.minlength">
+                      Phone number must be 10 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.contactNumber.errors.maxlength">
+                      Phone number must be 10 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.contactNumber.errors.pattern">
+                      Invalid Phone number
+                    </div>
+  
+                  </div>
+                </div>
+              
+            
+              <!-- <div class="row form-group">
+              <div class="col-sm-8 col-md-8 col-lg-8" formGroupName="myCheckboxGroup">
+                Pharmacy Type
+                <span class="c1">*</span>
+                <div class="pharmacy-type-checkbox">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" formControlName="retail" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1"> Retail</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" formControlName="mail" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2"> Mail Order</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" formControlName="speciality" value="option3">
+                    <label class="form-check-label" for="inlineCheckbox3"> Specially</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" formControlName="ltc" value="option4">
+                    <label class="form-check-label" for="inlineCheckbox4"> Long Term care</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" formControlName="ihd" value="option4">
+                    <label class="form-check-label" for="inlineCheckbox4"> IHD</label>
+                  </div>
+                </div>
+                <div *ngIf="myform.controls.myCheckboxGroup.errors && (myform.controls.myCheckboxGroup.dirty || myform.controls.myCheckboxGroup.touched) && !myform.controls.myCheckboxGroup.value.retail && !myform.controls.myCheckboxGroup.value.mail && !myform.controls.myCheckboxGroup.value.speciality && !myform.controls.myCheckboxGroup.value.ltc && !myform.controls.myCheckboxGroup.value.ihd" class="errorMessage">
+                  Please check at least one checkbox.
+                </div>
+
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Pharmacy Options
+                <span class="c1">*</span>
+                <div class="pharmacy-type-checkbox" formGroupName = "myCheckboxOptions">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" formControlName="hours" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1"> 24 Hours</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" formControlName="epcs" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">EPCS Enabled</label>
+                  </div>
+                </div>
+                <div *ngIf="myform.controls.myCheckboxOptions.errors && (myform.controls.myCheckboxOptions.dirty || myform.controls.myCheckboxOptions.touched) && !myform.controls.myCheckboxOptions.value.hours && !myform.controls.myCheckboxOptions.value.epcs" class="errorMessage">
+                  Please check at least one checkbox.
+                </div>
+
+                </div>
+              </div> -->
+             
+            </div>
+            <div class="row form-group">
+              
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Fax
+                <input type="text" id="txtfax" formControlName="fax" placeholder="(000)-000-0000"
+                  [textMask]="{mask: mobileNumberMask, guide: false}" (blur)="resetNotMandatoryFields('Pharmacy_Fax')" class="form-control" [ngClass]="{
+                  'is-valid':myform.controls.fax.valid && myform.controls.fax.dirty,
+                  'is-invalid':myform.controls.fax.invalid && myform.controls.fax.touched
+                }" />
+                <div *ngIf="myform.controls.fax.errors && (myform.controls.fax.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.fax.errors.minlength">
+                    Fax must be 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.fax.errors.maxlength">
+                    Fax must be 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.fax.errors.pattern">
+                    Invalid fax number
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                NCPDP
+                <span class="c1">*</span>
+                <input type="text"   formControlName="ncpdp"   class="form-control"
+                [textMask]="{mask: pharmacyncpdp, guide: false}" [ngClass]="{
+                        'is-valid':myform.controls.ncpdp.valid && myform.controls.ncpdp.dirty,
+                        'is-invalid':myform.controls.ncpdp.invalid && myform.controls.ncpdp.touched
+                      }">
+                <div *ngIf="myform.controls.ncpdp.errors && (myform.controls.ncpdp.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.ncpdp.errors.required">
+                    Ncpdp is required.
+                   </div>
+                  <div *ngIf="myform.controls.ncpdp.errors.maxlength">
+                    Ncpdp should not exceed more than 7 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.ncpdp.errors.minlength">
+                    Ncpdp must be 7 numbers long.
+                  </div>
+                  <div *ngIf="myform.controls.ncpdp.errors.pattern">
+                    {{config.numericMessage}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                NPI
+                <input type="text"   formControlName="npi"   class="form-control" 
+                [textMask]="{mask: pharmacynpi, guide: false}"
+                  [ngClass]="{
+                        'is-valid':myform.controls.npi.valid && myform.controls.npi.dirty,
+                        'is-invalid':myform.controls.npi.invalid && myform.controls.npi.touched
+                      }">
+                <div *ngIf="myform.controls.npi.errors && (myform.controls.npi.touched)" class="errorMessage">
+                  
+                  <div *ngIf="myform.controls.npi.errors.maxlength">
+                     Npi should not exceed more than 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.npi.errors.minlength">
+                    Npi must be 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.npi.errors.pattern">
+                    {{config.numericMessage}}
+                  </div>
+                </div>
+              </div>
+
+              
+            </div>
+            
+            <div class="row form-group">
+               <div class="col-sm-4 col-md-4 col-lg-4">
+                Facility
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlfacility" [data]="roleFacilty"
+                  [(ngModel)]="selectedfItems" [settings]="dropdownSettings_Facility"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                          'is-valid':myform.controls.ddlfacility.valid,
+                          'is-invalid':myform.controls.ddlfacility.invalid && myform.controls.ddlfacility.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlfacility.errors && (myform.controls.ddlfacility.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlfacility.errors.required">
+                    Facility is required.
+                  </div>
+                </div>
+              </div>
+              
+            
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Nursing Station
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestation"
+                  [data]="roleNurseStation" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStation"
+                  [ngClass]="{
+                            'is-valid':myform.controls.ddlnursestation.valid,
+                            'is-invalid':myform.controls.ddlnursestation.invalid && myform.controls.ddlnursestation.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlnursestation.errors && (myform.controls.ddlnursestation.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlnursestation.errors.required">
+                    Nursing Station is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                    </div>
+                  </label>
+                </div>
+                </div>
+            </div>
+ 
+
+             
+          
+
+            <div style="text-align: right">
+              <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Save" [disabled]="myform.invalid || savedisable==true || (zipcodeisvalid==false && zipcodeValue!='')"
+                (click)="insertPhysicianDetails()" class="btn btn-success" /> &nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Pharmacy Details View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Prescriber History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+              </div>
+              <div class="modal-body bodystyle">
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-5">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive
+                Pharmacy</b></label></span>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4"></div>
+            <div class="col-sm-2 col-md-2 col-lg-3">
+              <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']"  value="Update Status" (click)="updatePhysicianStatus()"
+                [disabled]="UpdateStatus" class="btn btn-danger" />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                      (change)="onCheckAll($event.target.checked?true:false)"></th>
+                  <th>Facility</th>
+                  <th>Nursing Station Name</th>
+                  <th>Pharmacy NCPDP</th>
+                  <!-- <th>Pharmacy Type</th> -->
+                  <th>Pharmacy Name</th>
+                  <!-- <th>Pharmacy Option</th> -->
+                  <th>Pharmacy address</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Zip Code</th>
+
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <th ></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of phyisicianList | gridFilter:searchText:'PharmacyDetails' | paginate: { itemsPerPage: gridPagination, currentPage: p , id:'Pharmacy' };">
+                  <td> <input type="checkbox" [checked]="CheckAll" value="{{item.Pharmacy_Id}}"
+                    name="{{ item.Pharmacy_Id }}" id="{{item.Pharmacy_Id}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" />
+                  </td>
+                  <td>{{item.Facility_Name}}</td>
+                  <td>{{item.NurseStation_Name}}</td>
+                  <td>{{item.NCPDP}}</td>
+                  <!-- <td> {{item.Pharamcy_Type}}</td> -->
+                  <td>{{item.PharmacyName}}</td>
+                  <!-- <td>{{item.Pharmacy_Options}}</td> -->
+                  <td>{{item.Pharmacy_Address1}}</td>
+                  <td>{{item.Pharmacy_State}}</td>
+                  <td> {{item.Pharmacy_City}}</td>
+                  <td>{{item.Pharmacy_Zip}} </td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon" (click)="getPhysicianDetailsById(item.Pharmacy_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                  <td>
+                    <p  class="star" [ngClass]="{'clicked': item.Pharmacy_Fav == 1}"  (click)="toggleS(item.Pharmacy_Id, item.Pharmacy_Fav  === '1' ? 0 : 1)" >&#9733; </p>
+
+                  </td>
+                  <td style="display: none">
+                    <a class="btn editicon"  (click)="getHistoryById(item.Pharmacy_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls id ="Pharmacy" (pageChange)="p = $event"  *ngIf="phyisicianList.length > gridPagination"></pagination-controls>
+        </div>
+      </div>
+    </div>
+   </section>
+   <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</div>

@@ -1,0 +1,32 @@
+.left {
+    float: right ;
+    width: 50% ;
+  }
+  .right {
+    float: left;
+    width: 50%;
+  }
+  .modalstyle
+  {
+    z-index: 99999  !important;
+    overflow: hidden;
+  }
+  .bodystyle
+  {
+    height:400px;
+    overflow-y: auto
+  }
+  .modal.fade .modal-dialog
+  {
+    transform: translate(0,0%);
+  }
+  .card-title {
+    font-size: initial;
+    font-weight: 200;
+    margin: 0;
+}
+
+.card-header {
+    padding: .25rem 1.2rem;
+    margin-bottom: 0;
+}

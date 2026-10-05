@@ -1,0 +1,226 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <a (click)="mainMailBox()" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Folders</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item active cursor">
+                <a (click)="getMailboxDetails(userId)" class="nav-link">
+                  <i class="fa fa-inbox"></i> Inbox
+                  <span class="badge float-right" style="background-color: #ffdf62;color: #000000;">{{mailData}}</span>
+                </a>
+              </li>
+              <li class="nav-item cursor">
+                <a (click)="getsentMailDetails()" class="nav-link">
+                  <i class="fa fa-envelope-o"></i> Sent
+                </a>
+              </li>
+              <li class="nav-item cursor">
+                <a (click)="getdraftsMailDetails()" class="nav-link">
+                  <i class="fa fa-file-text-o"></i> Drafts
+                </a>
+              </li>
+              <li class="nav-item cursor">
+                <a (click)="getimportantMailDetails()" class="nav-link">
+                  <i class="fa fa-star text-warning"></i> Important
+                  <span class="badge bg-warning float-right"></span>
+                </a>
+              </li>
+              <li class="nav-item cursor">
+                <a (click)="getTrashMailDetails()" class="nav-link">
+                  <i class="fa fa-trash-o"></i> Trash
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.card-body -->
+        </div>
+
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9" *ngIf="inboxflag == false">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Compose New Message</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <form [formGroup]="myform" name="composemail" autocomplete="off">
+              <div class="form-group">
+                <!-- <select formControlName="tomail" class="form-control chosen-select">
+                  <option value="" disabled selected>To:</option>
+                  <option *ngFor="let item of userDrop" value="{{item.User_Id}}">{{item.User_DisplayName}}</option>
+                </select> -->
+                <ng-multiselect-dropdown formControlName="tomail" class="form-control" placeholder="TO (Up to 10 recipients)"
+                [(ngModel)]="selectedMailItem" [data]="userDrop" [settings]="dropdownSettings_Mail">
+              </ng-multiselect-dropdown>
+              </div>
+              <div class="form-group">
+                <ng-multiselect-dropdown formControlName="ccmail" class="form-control"  placeholder="CC (Up to 10 recipients)"
+                [(ngModel)]="selectedCCMailItem" [data]="userDrop" [settings]="dropdownSettings_Mail">
+              </ng-multiselect-dropdown>
+                <!-- <select formControlName="ccmail" class="form-control chosen-select">
+                  <option value="" disabled selected>Cc:</option>
+                  <option *ngFor="let item of userDrop" value="{{item.User_Id}}">{{item.User_DisplayName}}</option>
+                </select> -->
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="subject" placeholder="Subject:">
+              </div>
+              <div class="form-group">
+                <textarea id="compose-textarea" formControlName="mailbody" class="form-control" style="height: 300px">
+                    <h1><u>Heading Of Message</u></h1>
+                  
+                  </textarea>
+              </div>
+              <!-- <div class="form-group">
+                <div class="btn btn-default btn-file">
+                  <i class="fa fa-paperclip"></i> Attachment
+                  <input type="file" name="attachment">
+                </div>
+                <p class="help-block">Max. 32MB</p>
+              </div> -->
+            </form>
+          </div>
+
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <div class="float-right">
+              <button type="button" class="btn btn-danger" (click)="insertDraftimail()">
+                <i class="fa fa-pencil"></i> Draft</button>&nbsp;
+              <button type="submit" class="btn btn-success" (click)="insertComposemail()">
+                <i class="fa fa-envelope-o"></i> Send</button>
+            </div>
+            <!-- <button type="reset" class="btn btn-default">
+              <i class="fa fa-times"></i> Discard</button> -->
+          </div>
+          <!-- /.card-footer -->
+        </div>
+        <!-- /. box -->
+      </div>
+      <div class="col-md-9 col-sm-9 col-lg-9" *ngIf="inboxflag == true" style="padding-bottom:380px">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title" *ngIf="mailStatus =='Inbox'">Inbox</h3>
+            <h3 class="card-title" *ngIf="mailStatus =='Sent'">Sent</h3>
+            <h3 class="card-title" *ngIf="mailStatus =='Drafts'">Drafts</h3>
+            <h3 class="card-title" *ngIf="mailStatus =='Favourite'">Important</h3>
+            <h3 class="card-title" *ngIf="mailStatus =='Trash'">Trash</h3>
+            <div class="card-tools">
+              <div class="input-group input-group-sm" *ngIf="mailboxdetails.length>1">
+                <input type="text" class="form-control" placeholder="Search Mail" [(ngModel)]="searchText">
+                <div class="input-group-append" style="margin-top: -1px;">
+                  <div class="btn btn-success">
+                    <i class="fa fa-search" title="Search"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <div class="mailbox-controls">
+              <div class="btn-group" *ngIf="mailboxdetails.length>0" style="float: left; display: table-header-group; padding-right: 10px; white-space: nowrap;">
+                <div class="container">
+                  <!-- <input type="checkbox" *ngIf="mailboxdetails.length>1" id="checkboxall" [(ngModel)]="CheckAll"
+                    (change)="onCheckAll($event.target.checked?true:false)">
+                    <label for="checkboxall"></label>&nbsp; -->
+                  <button type="button" class="btn btn-danger btn-sm" (click)="trashRecord()">
+                    <i class="fa fa-trash-o"  title="Move To Trash"></i>
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm" *ngIf="mailStatus=='Inbox'"
+                    (click)="replyToMail()">
+                    <i class="fa fa-reply"  title="Reply"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm" *ngIf="mailStatus=='Sent' || mailStatus=='Inbox'"
+                    (click)="forwardMail()">
+                    <i class="fa fa-share"  title="Forward"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.btn-group -->
+              <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button> -->
+              <!-- <div class="float-right">
+                1-50/200
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                </div>
+              </div> -->
+            </div>
+            <div class="table-responsive mailbox-messages">
+              <table class="table table-hover" *ngIf="mailboxdetails.length>0 ">
+                <thead>
+                  <tr>
+                    <td>
+                      <input type="checkbox" *ngIf="mailboxdetails.length>1" id="checkboxall" [(ngModel)]="CheckAll"
+                      (change)="onCheckAll($event.target.checked?true:false)">
+                      <label for="checkboxall"></label>
+                    </td>
+                    <td *ngIf="(mailStatus =='Inbox'|| mailStatus =='Favourite')"></td>
+                    <td><b>User Name </b></td>
+                    <td><b>Subject</b></td>
+                    <td><b>Date/Time</b></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of mailboxdetails|gridFilter:searchText:'ComposeMail'| paginate: { itemsPerPage: gridPagination, currentPage: p };" [style.background-color]="item.ReadFlag==0?'#ddd':'white'">
+                    <td>
+                      <form [formGroup]="checkform">
+                        <input type="checkbox" formControlName="check" [checked]="CheckAll" value="{{item.MailBoxId}}" 
+                          name="{{ item.MailBoxId }}" id="{{item.MailBoxId}}"
+                          (change)="onselectRecord($event.target.checked?true:false, item)">
+                          <label for="{{item.MailBoxId}}"></label>
+                      </form>
+                    </td>
+                    <td  style="cursor: pointer;" class="mailbox-star" *ngIf="item.FavouriteFlag == 1 && (mailStatus =='Inbox'|| mailStatus =='Favourite')">
+                      <a  (click)="favourite(item.MailBoxId,0)">
+                        <i class="fa fa-star text-warning"></i>
+                      </a>
+                    </td>
+                    <td style="cursor: pointer;" class="mailbox-star" *ngIf="item.FavouriteFlag == 0 && (mailStatus =='Inbox'|| mailStatus =='Favourite')">
+                      <a  (click)="favourite(item.MailBoxId,1)">
+                        <i class="fa fa-star-o text-warning"></i>
+                      </a>
+                    </td>
+                    <td style="cursor: pointer;" class="mailbox-name">
+                      <a  class="iconColor" (click)="mailBody(item.MailBoxId,item.ToUserId)">{{item.UserName}}</a>
+                    </td>
+                    <td class="mailbox-subject">
+                      <b>{{item.Subject}}</b>
+                    </td>
+                    <td class="mailbox-date">{{item.MailBoxDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /.table -->
+            </div>
+            <!-- /.mail-box-messages -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /. box -->
+        <pagination-controls (pageChange)="p = $event" *ngIf="mailboxdetails.length > 0"></pagination-controls>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section>

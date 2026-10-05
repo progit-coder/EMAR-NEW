@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E3D08656-4592-40DC-8E93-8EEBB1B50947}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LTCPro.DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivityMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AddlInstructionDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlertStatu.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlertText.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlertType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlertTypeDataCount_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllergyInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllergyInfoMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllergyTypeCode.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AncillaryDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApiIntegration.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalAllergyInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalDemographic.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalDiagnosisInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalOrder.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalRefill.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApprovalVisitInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BarcodeDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bed.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BehavioralSymptomsMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CertifyDate.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CertifyOrder.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClassDrugCodingType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ColourType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommonOrderInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Company.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyBedConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyHlCategory.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyHLEvent.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompoundOrder.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlSubstanceCount.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlSubstanceReason.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlSubstanceTran.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conversation.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CpoeSource.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultScreen.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Demographic.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiagnosisCodingType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiagnosisInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocAdministerTran.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocFolder.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DoseUom.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrFirstFileData.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrFirstOrderCheck_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrFirstOrderXMLTran.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrFirstXMLTran.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Drug.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrugActiveday.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrugAdminister.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrugAdministrationTime.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DrugOrderMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ekit.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EkitAdminister.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EkitControlSubstanceReason.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EKitControlSubstanceTran.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMAR.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMAR.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMAR.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMAR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMAR.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EncodedOrderDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventCategory.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Facility.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileAckInformation.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileInfoError.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileInformation.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fingersdesc.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Floor.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FooterLogo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FrequencyMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FTECategory.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FTEConfiguration.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FteConnection.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLDirectionalWay.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLSevenCompanyConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLSevenOutboundDisplayCompanyConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLSevenOutboundDisplaySegment.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLSevenOutboundDisplaySegmentDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLSevenSegment.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HLSevenSegmentDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hour.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICD10.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDbContextEmar.cs" />
+    <Compile Include="ImportFile.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntegrationType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MailBox.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MailConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MailFavourite.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MailRead.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaritalStatu.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicationReason.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Month.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotesInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NurseComment.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NurseCommentType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NurseShift.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NurseStationHierarchy.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NursingFCTime.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NursingFrequencyConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NursingSchedule.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NursingStation.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Observation.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OnLeave.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderControlMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDestroy.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderFavConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderFavourite.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderFavouriteData.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderFavouriteMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderHOAInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderHold.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderInactiveReason.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderStock.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderStockTran.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OutBoundFileInformation.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Participant.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientType.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PCertifyDate.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PCertifyOrder.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicianDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcApprovalRefillDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcDashboardVitalsdata_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcDrFirstOrderHL7_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcEmargriddetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcEmarResidentReport_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcFirstDrugAdministerSchedule_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetAllergyChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetAllergyInfoChanges_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetAllergyMasterChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetAverageCensusData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetBedChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetCensusCompareDatainfo_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetCertifyOrderGridData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetCertifyOrderResidentGridData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetCompanyBedConfigChangesdetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetCompanyChangesdetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetCompanyConfigChanges_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetCompanyStockReport_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetDemographicChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetDempographicsChanges_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetDiagnosisChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetDiagnosisInfoChanges_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetDocAdminOrderAudit_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetDocumentCheckData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcgetDosesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetFacilityChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetFloorChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetFreqMappChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetFreqMappingData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetFTConfigChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prcgetgpidropdown_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetHeaderLogo_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetHOAdata_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetICD10ChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetMARHistorydetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetMARHoledetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetNursingStationChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrderEndDate_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrderFavConfigByCode_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrderFavConfigInfo_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrderGridData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrderGrid_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrderInfoChanges_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOrdersdata_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetOutBoundErrorAck_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetPatientTypeChangesdetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetPhysicianChangesdetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetPhysicianData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetPhysicianDetailsatorder_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetProfieOrderResidentGridData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetProfileOrderGridData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetRemoveDocumentOrderData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportDrFirst_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReports72HoursData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReports72HrscheckData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReportsAllergyData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsBedData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReportsCensusDatainfo_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReportsCensusData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReportsCensusDetail1_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReportsCensusDetail_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsCompanyData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsFacilityData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsFloorData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcgetReportsInActiveData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsNurseStationData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsRoomData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetReportsWingData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetResientOrderData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetRoleChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetRoleConfigChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetRoleconfigData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetRoleData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetRoomChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetUserActivityDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetUserChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetUserRoleConfigChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetUserRoleConfigData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetVisitChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetVisitInfoChanges_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcGetWingChangesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcInsertDrFirstData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcMergeOrderData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcPRNDrugAdministerSchedule_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportGetCertifyedOrders_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportGetPrifileCertifyedOrders_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsAdminUsers_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetDestructionDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetDocAdminOrderDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetEKitDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetEKitDispensingDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetEkitExpirationDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetEmarDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetFloorStockDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetInboundDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetNurseNotesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOrderChangeDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOrderControlSignoff_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOrderControlSubstance_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOrderDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOrderHoldDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOrderWithFavourites_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetOutBoundErrorDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetPharmacyExpirationDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetPharmacyMedsDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetPrescriberNotesDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetPRNDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetPsychiatricDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetRefillDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetRefusedByResidentDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetScheduleOrderDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetStockData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetWithoutBarcodeDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetWithoutBiometricsDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsGetWithoutScanningDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsNewGetFloorStockDetails_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrcReportsSetUpConfigData_Result.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessKeyMaster.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuantityDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuantityDose.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecentFac.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentOrder.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Room.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Route.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Screen.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockReport.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Suffix.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblAdministeredSite.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblDrugDiscardInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblRDCMailConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblRdcMailTime.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSideEffect.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblTimeZone.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeFormat.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tmptblSegmentCheck.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TreatmentDispenseInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TreatmentInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TreatmentRouteInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitMeasurement.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UploadedDocument.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User2.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserActivityDetail.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserOTP.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRoleFacilityConfig.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserSession.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitBehaviour.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitFoodintake.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitInfo.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitNursingNote.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitVital.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Week.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeekDay.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WeightLog.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wing.cs">
+      <DependentUpon>EMAR.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EMAR.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EMAR.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="EMAR.edmx.diagram">
+      <DependentUpon>EMAR.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EMAR.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EMAR.edmx</DependentUpon>
+      <LastGenOutput>EMAR.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EMAR.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EMAR.edmx</DependentUpon>
+      <LastGenOutput>EMAR.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,171 @@
+.dropdown-menu-lg
+{
+    min-width: 0px !important;
+}
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  /* margin: 5px; */
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+.foo1 {
+  float: left;
+  /* width: 20px; */
+  height: 19px; 
+  /* margin: 5px; */
+  /* border: 1px solid rgba(0, 0, 0, .2); */
+}
+.Aliment
+{
+  padding-top: 8px; text-align: right;
+}
+
+.Color1 {
+ 
+  background:#999999;
+}
+.Color3
+{
+background:#454545;
+}
+.Color9
+{
+    background: white;
+}
+.dropdown-menu-lg .dropdown-item
+{
+    padding:.25rem 0.5rem 0.25rem 0.5rem !important;
+    font-size: small !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn {
+    border:none !important;
+    padding: 0px !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down 
+ {
+    border-top: 5px solid black !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up 
+ {
+    border-bottom: 5px solid #adadad !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+ }
+
+ :host /deep/ .marResdients .multiselect-dropdown  .dropdown-list
+ {
+     width:200%
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item
+ {
+    overflow: hidden !important; 
+    white-space: nowrap !important;
+    width: 86% !important;  
+    text-overflow: ellipsis !important;
+ }
+ .highlighted
+{
+  /* color: white; */
+  /* background: repeating-linear-gradient(
+    -55deg,
+    #f4a742,
+    rgb(221, 160, 178) 10px,
+    rgb(221, 160, 178) 10px,
+    rgb(221, 160, 178) 20px
+  );   */
+  background-color: #999999;
+}
+/* table, th, td {
+    border: 1px solid black;
+} */
+table {
+    table-layout: fixed; 
+    width: 100%;
+    *margin-left: -100px; /*ie7*/
+  }
+  td, th {
+    vertical-align: top;
+    border-top: 1px solid #000000;
+    padding: 10px;
+    width: 100px;
+  }
+  td{
+    height: 153px !important;
+
+  }
+  .fix1 {
+    position: absolute;;
+    *position: relative; /*ie7*/
+    margin-left: -650px;
+    width: 150px;
+    overflow: hidden !important;
+    top: auto;
+  }
+  .fix2 {
+    position: absolute;
+    *position: relative; /*ie7*/
+    margin-left: -500px;
+    width: 200px;
+    overflow: hidden !important;
+    top: auto;
+  }
+  .fix3 {
+    position: absolute;
+    *position: relative; /*ie7*/
+    margin-left: -300px;
+    width: 100px;
+    overflow: hidden !important;
+    top: auto;
+  }
+  .fix4 {
+    position: absolute;;
+    *position: relative;
+    margin-left: -200px;
+    width: 200px;
+    overflow: hidden !important;
+    top: auto;
+  }
+  .outer {
+    position: relative;
+  }
+  tr{
+    max-height: auto;
+  }
+  .inner {
+    overflow-x: scroll;
+    overflow-y: visible;
+    width: auto; 
+    margin-left: 650px;
+  }
+  .allCells
+  {
+    width: 50px;
+    overflow: hidden !important;
+    top: auto;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+{
+  border: 2px solid #ade39d !important;
+  background-color: #ade39d !important;
+  color: #000000 !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+{
+  background-color: #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+{
+  border: 2px solid #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+{
+  border-color: #000000 !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+{
+  color: #000000 !important;
+  font-weight: bold !important;
+}

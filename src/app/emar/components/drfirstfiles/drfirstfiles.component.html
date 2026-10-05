@@ -1,0 +1,55 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Dr.First Files View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Resident Name</th>
+                  <th>Resident MR Number</th>
+                  <th>Received On</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of drFirstFilesGrid |gridFilter:searchText:'DrFistFilesGrid'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                  <td>{{item.CompanyName}}</td>
+                  <td>{{item.PatientName}}</td>
+                  <td>{{item.PatientMRNumber}}</td>
+                  <td>{{item.ReceivedOn |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                  <td>
+                    <a class="btn editicon" style="height: 8px;"
+                        (click)="downLoadFile(item.DrFirstFile_Id)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-download (alias) iconColor" title="Download"></span>
+                      </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="drFirstFilesGrid.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C6A426E-4EBF-4CD6-A0E9-0AB0C1E2664A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LTCPro.Repositories</RootNamespace>
+    <AssemblyName>Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Data.AdoDotNetInterop, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EncDec">
+      <HintPath>..\..\Angular5\EncDec.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IAdminApprovalRepository.cs" />
+    <Compile Include="Interfaces\IAllergyInfoRepository.cs" />
+    <Compile Include="Interfaces\IAssessmentsRepository.cs" />
+    <Compile Include="Interfaces\IAuditRepository.cs" />
+    <Compile Include="Interfaces\IChatRepository.cs" />
+    <Compile Include="Interfaces\ICheckInPharmacyMedsRepository.cs" />
+    <Compile Include="Interfaces\ICompanyRepository.cs" />
+    <Compile Include="Interfaces\ICommonRepository.cs" />
+    <Compile Include="Interfaces\IDashboardsRepository.cs" />
+    <Compile Include="Interfaces\IDiagnosisInfoRepository.cs" />
+    <Compile Include="Interfaces\IDocumentManagerRepository.cs" />
+    <Compile Include="Interfaces\IDrFirstIntegrationRepository.cs" />
+    <Compile Include="Interfaces\IEmarRepository.cs" />
+    <Compile Include="Interfaces\IFacilityRepository.cs" />
+    <Compile Include="Interfaces\IMailboxRepository.cs" />
+    <Compile Include="Interfaces\IOutboundFileInformationRepository.cs" />
+    <Compile Include="Interfaces\IFTEConfigurationRepository.cs" />
+    <Compile Include="Interfaces\IHLSevenSegmentRepository.cs" />
+    <Compile Include="Interfaces\IFileInformationRepository.cs" />
+    <Compile Include="Interfaces\IAllergiesICDRepository.cs" />
+    <Compile Include="Interfaces\IOrdersRepository.cs" />
+    <Compile Include="Interfaces\IReportsRepository.cs" />
+    <Compile Include="Interfaces\IResidentDemographicRepository.cs" />
+    <Compile Include="AutoMapping.cs" />
+    <Compile Include="Interfaces\IAutoMapper.cs" />
+    <Compile Include="Interfaces\IRoleRepository.cs" />
+    <Compile Include="Interfaces\IStockEkitRepository.cs" />
+    <Compile Include="Interfaces\IUserActivityRepository.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Interfaces\IRcopiaResository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\crpt72HoursReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptAllergyByClassReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptAllergyByDrugReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptAverageCensusDataReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptBarcodeDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptBedReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptBypassReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptCensusCustomDataReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptCensusCustomDatesReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptCensusCustomfilterReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptCensusDashboardCompareReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptCensusReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptCompanyReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptcpoeOriginalorderdetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptcpoeOriginalorderdetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptDashboardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptDestructionDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptEkitDetailsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptEkitDetailsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptEmarlogoReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptEmarResidentdetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptEmarSecurityreportondatewise.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptEmarSecurityreportondatewise.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptNewFloorStockReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptNewFloorStockReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptNurseNotesDetailsReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptNurseNotesDetailsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptResidentScheduledReport_Date_Time.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptResidentScheduledReport_Date_Time.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptFacilitylogoReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptFacilityReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptFloorReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptFloorStockDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptICD10Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptICD10Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptInboundDetailsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptInboundDetailsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptMARHistorydetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptMARHoledetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptNurseStationReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOrderChangeDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOrderControlSignoffReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOrderControlSubstanceReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOrderDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOrderHoldDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOrderWithFavouritesReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptOutBoundErrorDetailsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptOutBoundErrorDetailsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptPharmacyMedsDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptPrescriberNotesReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptPRNDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptPsychiatricDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptRefusedByResidenReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptRoomReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptStockDetailsReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptStockDetailsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptTherapeuticalResidentReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptTherapeuticalResidentReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptUserActivityReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptUserActivityReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptWingReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\crptWithoutScanningReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\GetEkitMedicationCheckInReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetEkitMedicationCheckInReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\GetMedicationQtyonhandUpdateReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetMedicationQtyonhandUpdateReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Repositories\AdminApprovalRepository.cs" />
+    <Compile Include="Repositories\AllergiesICDRepository.cs" />
+    <Compile Include="Repositories\AllergyInfoRepository.cs" />
+    <Compile Include="Repositories\AssessmentsRepository.cs" />
+    <Compile Include="Repositories\AuditRepository.cs" />
+    <Compile Include="Repositories\ChatRepository.cs" />
+    <Compile Include="Repositories\CheckInPharmacyMedsRepository.cs" />
+    <Compile Include="Repositories\CommonRepository.cs" />
+    <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\DashboardsRepository.cs" />
+    <Compile Include="Repositories\DiagnosisInfoRepository.cs" />
+    <Compile Include="Repositories\DocumentManagerRepository.cs" />
+    <Compile Include="Repositories\DrFirstIntegrationRepository.cs" />
+    <Compile Include="Repositories\EmarRepository.cs" />
+    <Compile Include="Repositories\FacilityRepository.cs" />
+    <Compile Include="Repositories\MailboxRepository.cs" />
+    <Compile Include="Repositories\OutboundFileInformationRepository.cs" />
+    <Compile Include="Repositories\FTEConfigurationRepository.cs" />
+    <Compile Include="Repositories\HLSevenSegmentRepository.cs" />
+    <Compile Include="Repositories\FileInformationRepository.cs" />
+    <Compile Include="Repositories\OrdersRepository.cs" />
+    <Compile Include="Repositories\RcopiaResository.cs" />
+    <Compile Include="Repositories\ReportsRepository.cs" />
+    <Compile Include="Repositories\ResidentDemographicRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\StockEkitRepository.cs" />
+    <Compile Include="Repositories\UserActivityRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="SqlHelperClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\LTCPro.DAL.csproj">
+      <Project>{e3d08656-4592-40dc-8e93-8eebb1b50947}</Project>
+      <Name>LTCPro.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\LTCPro.Entities.csproj">
+      <Project>{c9839f34-9a6c-4250-bf8c-4312c7e8e85f}</Project>
+      <Name>LTCPro.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\crpt72HoursReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpt72HoursReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptAllergyByDrugReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptAllergyByDrugReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptAverageCensusDataReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptAverageCensusDataReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptBarcodeDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptBarcodeDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptBedReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptBedReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptBypassReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptBypassReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptCensusCustomDataReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptCensusCustomDataReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptCensusCustomDatesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptCensusCustomDatesReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptCensusCustomfilterReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptCensusCustomfilterReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptCensusDashboardCompareReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptCensusDashboardCompareReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptCensusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptCensusReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptCompanyReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptCompanyReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptcpoeOriginalorderdetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptcpoeOriginalorderdetails.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptDashboardReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptDashboardReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptDestructionDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptDestructionDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptEkitDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptEkitDetailsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptEmarlogoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptEmarlogoReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptEmarResidentdetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptEmarResidentdetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptEmarSecurityreportondatewise.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptEmarSecurityreportondatewise.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptNewFloorStockReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptNewFloorStockReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptNurseNotesDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptNurseNotesDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptResidentScheduledReport_Date_Time.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptResidentScheduledReport_Date_Time.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptFacilitylogoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptFacilitylogoReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptFacilityReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptFacilityReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptFloorReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptFloorReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptFloorStockDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptFloorStockDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptICD10Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptICD10Report.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptInboundDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptInboundDetailsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptMARHistorydetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptMARHistorydetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptMARHoledetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptMARHoledetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptNurseStationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptNurseStationReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptOrderControlSignoffReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOrderControlSignoffReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptOrderControlSubstanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOrderControlSubstanceReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptOrderDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOrderDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptOrderWithFavouritesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOrderWithFavouritesReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptOutBoundErrorDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptOutBoundErrorDetailsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptPharmacyMedsDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptPharmacyMedsDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptPrescriberNotesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptPrescriberNotesReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptPRNDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptPRNDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptPsychiatricDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptPsychiatricDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptRefusedByResidenReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptRefusedByResidenReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptRoomReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptRoomReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptStockDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptStockDetailsReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptTherapeuticalResidentReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptTherapeuticalResidentReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptUserActivityReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptUserActivityReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptWingReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptWingReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\crptWithoutScanningReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptWithoutScanningReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\GetEkitMedicationCheckInReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GetEkitMedicationCheckInReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\GetMedicationQtyonhandUpdateReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GetMedicationQtyonhandUpdateReport.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

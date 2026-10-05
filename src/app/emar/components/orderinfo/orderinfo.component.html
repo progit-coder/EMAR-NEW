@@ -1,0 +1,2112 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<div class="content-wrapper" style="margin-left: 0px !important">
+    <form *ngIf="residentId!=0" [formGroup]="myform" autocomplete="off" (keyup)="forChange()">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary sticky">
+                    <div class="card-body" style="padding-bottom: inherit;padding-top: inherit;">
+                        <div class="row form-group clearfix">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <h5 class="card-title">Order Details</h5>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                <h6>{{facilityName}}</h6>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <ng-multiselect-dropdown formControlName="nursestationName" class="form-control" [(ngModel)]="selectedNursestation" [data]="nurseStations" [settings]="dropdownSettings_Nuresestation" (onSelect)="onNurseStationSelect($event)" (onDeSelect)="onNurseStationDeSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right">
+                                <button type="button" class="bt-lg btn btn-primary btn-xs" (click)="back()">Back
+                                    <!--<img src="./assets/images/navigation-180.png" width="25" height="25">-->
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row form-group clearfix">
+                            <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;" *ngIf="demographicInfoData">
+                                <span class="info-box-icon">
+
+                                        <img   container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"  (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="demographicInfoData.ImageLocation!=undefined"  [src]="sanitize(demographicInfoData.ImageLocation)"
+                                            class="image--cover zoom">
+                                    </span>
+                                <br />
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10">
+                                <div class="row form-group">
+                                    <div class="col-sm-3 col-md-3 col-lg-4">
+                                      <ng-multiselect-dropdown formControlName="ddlresidents" class="form-control" [data]="residents"
+                                        [settings]="dropdownSettings_Residents" [(ngModel)]="selectedResItem"
+                                        (onSelect)="changeResident()" (onDeSelect)="changeResident()">
+                                      </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+
+                                      <strong>Allergies: </strong>
+                                      <span class="blink" data-toggle="tooltip" data-placement="top"
+                                        title="{{ordersInfo.Allergy}}">{{residentAllergies}}</span>
+
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        <strong>Diagnosis: </strong>
+                                        <span class="blink" data-toggle="tooltip" data-placement="top"
+                                          title="{{ordersInfo.Diagnosis}}">{{residentDiagnosis}}</span>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-2" style="text-align: end;">
+                                      <button type="button" class="bt-lg btn btn-primary btn-xs" *ngIf="pageConfig['AccessRead']"
+                                        (click)="emarModel()">MAR</button>
+                                  </div>
+                                  </div>
+                                <div class="row form-group" *ngIf="demographicInfoData">
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        <strong>DOB: </strong>
+                                        <span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 col-lg-2">
+                                        <strong>Gender: </strong>
+                                        <span>{{demographicInfoData.AdministrativeSex}}</span>
+                                    </div>
+
+                                    <!-- <div class="col-sm-2 col-6">
+                    <strong>MR#:</strong>
+                    <span>{{demographicInfoData.PatientMRNumber}}</span>
+                  </div> -->
+                                    <div class="col-sm-6 col-md-5 col-lg-5">
+                                        <strong>Nursing Station Name:&nbsp;</strong>
+                                        <span>{{demographicInfoData.HomeFlag == 0? demographicInfoData.NurseStation_Name: demographicInfoData.PatientAddress1
+                      +' '+ demographicInfoData.PatientAddress2 + ','+demographicInfoData.PatientCity + ','+demographicInfoData.PatientState}}</span>
+                                    </div>
+                                    <div class="col-sm-6 col-md-2 col-lg-2" *ngIf="demographicInfoData.DietType!= ''">
+                                        <div style="word-break: break-all;">
+                                            <strong>Diet Type:
+                                                </strong><span>{{demographicInfoData.DietType}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 ">
+                                      <div class="checkbox-female" >
+                                        <label class="label" for="Preg_checkbox" style="margin-bottom: 0px !important;">
+                                            <strong style="margin:0px !important;">Pregnancy:</strong>
+                                        </label>
+                                        <input style="accent-color: #ade39d;" type="checkbox" id="Preg_checkbox" [disabled]="demographicInfoData?.AdministrativeSex === 'Male'"  [checked]="demographicInfoData?.Pregnant"  (click) = "updatePregnancy($event.target.checked)" />
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-4 col-md-4 col-lg-2 ">
+                                    <div class="checkbox-female">
+                                      <label class="label" for="Feed_checkbox" style="margin-bottom: 0px !important;">
+                                          <strong  style="margin:0px !important;">Breast Feeding:</strong>
+                                      </label>
+                                      <input style="accent-color: #ade39d" type="checkbox" class="check-bg" id="Feed_checkbox" [disabled]="demographicInfoData?.AdministrativeSex === 'Male'" [checked] = "demographicInfoData?.BreastFeeding" (click) = "updateFeeding($event.target.checked)"/>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-2" >
+                                    <div class="weight-text">
+                                       <strong>Height: </strong>
+                                      <p *ngIf="isHeight">{{weightDetails.HeightFeet}}'{{weightDetails.HeightInc}}''</p>
+                                      <p *ngIf="!isHeight"></p>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-2" >
+                                    <div class="weight-text">
+                                       <strong>Weight: </strong>
+                                      <p *ngIf="isWeight">{{weightDetails.Weight}} {{weightDetails.Type}} </p>
+                                      <p *ngIf="!isWeight"></p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row row-m-t clearfix">
+                                    <div *ngFor="let type of patientTypeList" style="width: 160px;padding-left: 5px;">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div style="display: table-cell;width: 20%; float:left; margin: 0px;">
+                                                    <div style=" height:20px;
+                          width:20px;" [ngStyle]="{'background-color':type.Color_Code}">
+                                                    </div>
+                                                </div>
+                                                <div style="display: table-cell;width: 80%; float:left; margin: 0px;">
+                                                    {{type.Color_Description}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <table style="width: 50%" *ngIf="patientTypeList.length>0">
+                                            <tr>
+                                                <td *ngFor="let type of patientTypeList">
+                                                    <div class="row ">
+                                                        <div class="col-sm-2">
+                                                            <div style=" height:20px;
+                                  width:20px;" [ngStyle]="{'background-color':type.Color_Code}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            {{type.Color_Description}}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="col-sm-6" *ngIf="demographicInfoData">
+                                            <div *ngIf="demographicInfoData.DietType!= ''" style="word-break: break-all;">
+                                                <strong>Diet Type: <span>{{demographicInfoData.DietType}}</span></strong>
+                                            </div>
+                                        </div>-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                    <!-- form start-->
+                    <div>
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="row form-group clearfix" style="margin-left: 2px;">
+                        <div class="col-sm-7">
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-6">
+                                    Prescriber
+                                    <span class="c1">*</span>
+                                    <ng-multiselect-dropdown formControlName="physician" [disabled]="isReadOnly || (rightGridOnHoldChangesFlag || rightGridDCChangesFlag || ( myform.value.orderTypeId!=4 && !adminLoggedin))" [data]="physiciansdrop" [(ngModel)]="selectedphyItems" [settings]="dropdownSettings_Physician" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.physician.valid ,
+                        'is-invalid':myform.controls.physician.invalid && myform.controls.physician.touched}" (onSelect)='forChange()' (onDeSelect)='forChange()'>
+                                    </ng-multiselect-dropdown  >
+                                    <div *ngIf="myform.controls.physician.errors" class="errorMessage">
+                                        <div *ngIf="myform.controls.physician.errors.required">
+                                            Prescriber Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    Route
+                                    <span class="c1" *ngIf="this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2">*</span>
+                                    <ng-multiselect-dropdown formControlName="route" [disabled]="isReadOnly|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) || ( myform.value.orderTypeId!=4 && !adminLoggedin)" [data]="routes" [(ngModel)]="selectedroItems" [settings]="dropdownSettings_Route" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.route.valid ,
+                        'is-invalid':myform.controls.route.invalid && myform.controls.route.touched} " (onSelect)='forChange()' (onDeSelect)='forChange()' >
+                                    </ng-multiselect-dropdown>
+                                    <div *ngIf="myform.controls.route.errors " class="errorMessage">
+                                        <div *ngIf="myform.controls.route.errors.required">
+                                            Route Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-12">
+                                    <div class="right" style=" display: table-cell;width: 90%; float:left; margin: 0px;">
+                                        Drug/Literal
+                                        <span class="c1" *ngIf="this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2">*</span>
+                                        <input type="text" id="txtdrug" [attr.disabled]="isReadOnly ? '' : null" formControlName="drug" class="form-control" [(ngModel)]="DrugName" [ngClass]="{
+                        'is-valid':myform.controls.drug.valid,
+                        'is-invalid':myform.controls.drug.invalid && myform.controls.drug.touched}" (keyup)="onDrugNameChange(DrugName)" />
+                                        <div *ngIf="myform.controls.drug.errors " class="errorMessage">
+                                            <div *ngIf="myform.controls.drug.errors.required">
+                                                Drug Name is required.
+                                            </div>
+                                            <div *ngIf="myform.controls.drug.errors.maxlength">
+                                                Drug name must not exceed 60 characters.
+                                            </div>
+                                        </div>
+                                        <div class="search-result" *ngIf="flag">
+                                            <ul>
+                                                <li (click)="onselectDrugbyBoth(item)" *ngFor="let item of drugList | async">
+                                                    {{item.DrugName}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="right" style=" display: table-cell;width: 5%; float:left; margin: 0px;padding-left: 2px;">
+                                        <div [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) ? 'none' : 'auto', 'vertical-align': 'middle'}" *ngIf="myform.value.orderTypeId!=4 && this.myform.value.orderTypeId != 2">
+                                            <a class="btn" style="padding: 0px !important;" (click)="searchDrugNames(DrugName)">
+                                                <i title="Search Drug Names" class="fa fa-search" style="color:#4fb633;font-size: 20px;padding-top: 23px;
+                          padding-left: 8%;"></i>
+                                            </a>
+                                            <!-- <div class="search-result" *ngIf="flag">
+                                <ul>
+                                  <li (click)="onselectDrug(item)" *ngFor="let item of drugList | async">
+                                    {{item.DrugName}}
+                                  </li>
+                                </ul>
+                              </div>  -->
+                                            <!-- <input type="text" class="form-control" formControlName="drug" [readonly]="isReadOnly" /> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-6 col-md-4 col-lg-2">
+                                    Qty on Hand
+                                    <input type="text" class="form-control" formControlName="qtyHand" [readonly]="this.isChecked==true ?true : false" />
+                                    <div *ngIf="myform.controls.qtyHand.errors && (myform.controls.qtyHand.touched)" class="errorMessage">
+                                        <div *ngIf="myform.controls.qtyHand.errors.maxlength">
+                                            Quantity on Hand must not exceed 10 characters.
+                                        </div>
+                                        <div *ngIf="myform.controls.qtyHand.errors.pattern">
+                                            {{config.decimalMessage}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-2">
+                                    Refill
+                                    <input type="text" class="form-control" formControlName="refill" [attr.disabled]="myform.value.orderTypeId!=4 && this.myform.value.orderTypeId != 2 && !adminLoggedin ? true: null" />
+                                    <div *ngIf="myform.controls.refill.errors && (myform.controls.refill.touched)" class="errorMessage">
+                                        <div *ngIf="myform.controls.refill.errors.maxlength">
+                                            Refill cannot be more than 3 characters long.
+                                        </div>
+                                        <div *ngIf="myform.controls.refill.errors.pattern && !myform.controls.refill.errors.maxlength">
+                                            {{config.numericMessage1}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-2">
+                                    Qty / Dose
+                                    <span class="c1" *ngIf="this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2">*</span>
+                                    <input type="text" oninput="this.value = this.value.replace(/[^a-zA-Z0-9.]/g, '').replace(/(\..*)\./g, '$1');" (change)="isDoseValid($event.target.value)"  #qtyFocus
+                                     class="form-control" formControlName="dose" [disabled]="qtydisabled" [ngClass]="{
+                      'is-valid':myform.controls.dose.valid,
+                      'is-invalid':myform.controls.dose.invalid && myform.controls.dose.touched}" [readonly]="isReadOnly || qtydisabled" />
+                                    <div *ngIf="myform.controls.dose.errors" class="errorMessage">
+                                        <div *ngIf="myform.controls.dose.errors.required">
+                                            Qty / Dose is required.
+                                        </div>
+                                        <div *ngIf="myform.controls.dose.errors.maxlength">
+                                            Qty / Dose cannot be more than 9 characters long.
+                                        </div>
+                                        <div *ngIf="myform.controls.dose.errors.pattern">
+                                            {{config.decimalMessage}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-2">
+                                    Max Per Day
+                                    <span class="c1" *ngIf="this.myform.value.prn == true">*</span>
+                                    <input type="text" class="form-control" (blur)="appendZero()" (input)="isInteger()" #maxperdayFocus [ngStyle]="styleMaxperday"  formControlName="maxPerDay" [ngClass]="{
+                                      'is-valid':myform.controls.maxPerDay.valid,
+                                      'is-invalid':myform.controls.maxPerDay.invalid && myform.controls.maxPerDay}" />
+                                      <div *ngIf="myform.controls.maxPerDay.invalid && myform.controls.maxPerDay" class="errorMessage">
+                                     
+                                        <div *ngIf="myform.controls.maxPerDay.errors.maxlength">
+                                          Max Per Day cannot be more than 7 characters long.
+                                        </div>
+
+                                        <div *ngIf="myform.controls.maxPerDay.errors.integerError">
+                                          Please enter 3 digits only.
+                                        </div>
+                                        <div *ngIf="myform.controls.maxPerDay.errors.decimalError">
+                                          Please enter up to 3 decimal places only.
+                                        </div>
+                                        <div *ngIf="myform.controls.maxPerDay.errors.required &&(myform.value.prn == true)">
+                                          Max Per Day is required.
+                                        </div>
+                                        <div *ngIf="myform.controls.maxPerDay.errors.dotOnly || myform.controls.maxPerDay.errors.data " >
+                                          Please enter a valid number.
+                                        </div>
+                                      </div>
+                                </div>
+
+                                <div style="width:118px; padding-top: 20px;padding-left: 6px;">
+                                    <label class="switch">
+                                            <input type="checkbox" formControlName="type"
+                                                [attr.disabled]="isReadOnly ? '' : null" (change)="onOrderTypeChange();forChange()" [disabled]="(rightGridOnHoldChangesFlag || rightGridDCChangesFlag)">
+                                            <div class="slider round">
+                                                <span class="on">Order</span>
+                                                <span class="off">Stock</span>
+                                            </div>
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-12">
+                                    Directions
+                                    <span class="c1">*</span>
+                                    <textarea cols="3" class="form-control" formControlName="addInst" [ngClass]="{
+                    'is-valid':myform.controls.addInst.valid,
+                    'is-invalid':myform.controls.addInst.invalid && myform.controls.addInst.touched}"></textarea>
+                                    <div *ngIf="myform.controls.addInst.errors " class="errorMessage">
+                                        <div *ngIf="myform.controls.addInst.errors.required">
+                                            Directions is required.
+                                        </div>
+                                        <div *ngIf="myform.controls.addInst.errors.maxlength">
+                                            Directions cannot exceed 250 characters long.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    Start Date
+                                    <span class="c1">*</span>
+                                    <input type="date" class="form-control" [min]="writtendate" formControlName="startDate" [ngClass]="{
+                      'is-valid':myform.controls.startDate.valid,
+                      'is-invalid':myform.controls.startDate.invalid && myform.controls.startDate.touched}" [readonly]="isReadOnly" maxlength="10" (ngModelChange)='forChange()' />
+                                    <div *ngIf="myform.controls.startDate.errors " class="errorMessage">
+                                        <div *ngIf="myform.controls.startDate.errors.required">
+                                            Start Date is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    End Date
+                                    <input type="date" class="form-control" [min]="StartOnemonthDate" formControlName="endDate" maxlength="10" (change)="EnddateChanged()"  (ngModelChange)='forChange()' />
+                                    <!-- [min]="minStartDate" -->
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top: 14px;">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                    <input type="checkbox"
+                                                        [attr.disabled]="(isDrugOrder == true || this.myform.value.orderTypeId == 4 || this.myform.value.orderTypeId == 2) ? '':null"
+                                                        (change)="checkLiteral($event.target.checked?true:false);forChange()"
+                                                        formControlName="literal">
+                                                </span>
+                                        </div>
+                                        <span class="form-control">&nbsp; Literal</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top: 14px;">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                    <input type="checkbox" formControlName="prn"
+                                                        [attr.disabled]="this.myform.value.orderTypeId == 4?'':null"
+                                                        (change)="checkPRN($event.target.checked?true:false);forChange()">
+                                                </span>
+                                        </div>
+                                        <span class="form-control">&nbsp; PRN</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-6 col-md-12 col-lg-12">
+                                    Alert Text
+                                    <input type="text" class="form-control" formControlName="alertText" />
+                                </div>
+                                <!-- <div style="width:118px; padding-top: 20px;">
+                                        <label class="switch">
+                                            <input type="checkbox" formControlName="type"
+                                                [attr.disabled]="isReadOnly ? '' : null" (change)="onOrderTypeChange()">
+                                            <div class="slider round">
+                                                <span class="on">Order</span>
+                                                <span class="off">Stock</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <div style="padding-left: 17px; padding-top: 20px;">
+                                        <a class="btn" style="padding-top: 20px" *ngIf="favstatus == 1"
+                                            (click)="modalfav()">
+                                            <i title="User Inputs" class="fa fa-pencil-square-o"
+                                                style="color: red;font-size: 18px"></i>
+                                        </a>
+                                        <a class="btn" style="padding: 0px !important;" *ngIf="favstatus == 0"
+                                            (click)="modalfav()">
+                                            <i title="User Inputs" class="fa fa-pencil-square-o"
+                                                style="font-size: 18px"></i>
+                                        </a>
+                                        <a class="btn" style="padding: 0px !important;" (click)="insulinOpen()">
+                                            <i title="Insulin Data" class="fa   fa-sellsy"
+                                                style="color: #4fb633;font-size: 18px"></i>
+                                        </a>
+                                        <a class="btn" style="padding: 0px !important;" *ngIf="splits == 0">
+                                            <i title="No Splits" class="fa  fa-navicon (alias)"
+                                                style="font-size: 18px"></i>
+                                        </a>
+                                        <a class="btn" style="padding: 0px !important;" *ngIf="splits == 1">
+                                            <i title="Split Order" class="fa  fa-navicon (alias)"
+                                                style="color: #4fb633;font-size: 18px"></i>
+                                        </a>&nbsp;&nbsp;
+                                        <a class="btn" style="padding: 0px !important;" *ngIf="notesFlag ==0"
+                                            (click)="modalnote()">
+                                            <i title="Note" class="fa fa-sticky-note" style="font-size: 18px"></i>
+                                        </a>
+                                    </div> -->
+                            </div>
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-6 col-md-4 col-lg-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                    <input type="checkbox" formControlName="self" (change)="forChange()">
+                                                </span>
+                                        </div>
+                                        <span class="form-control" style="height:38px;">&nbsp; Self Administered</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                    <input type="checkbox"
+                                                        [attr.disabled]="(isDrugOrder == true || this.myform.value.orderTypeId == 2 || this.myform.value.orderTypeId == 4 ) ? '':null"
+                                                        (change)="checkTreatment($event.target.checked?true:false);forChange()"
+                                                        formControlName="treatment">
+                                                </span>
+                                        </div>
+                                        <span class="form-control">&nbsp; Treatment</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                    <input type="checkbox"
+                                                        [attr.disabled]="isControlSubstanceReadOnly == true? '':null"
+                                                        formControlName="controlSubstance" [(ngModel)]="isChecked" (change)="forChange()">
+                                                </span>
+                                        </div>
+                                        <span class="form-control" style="height: 38px;">&nbsp; Controlled Substance</span>
+                                    </div>
+                                </div>
+                                <div  [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) ? 'none' : 'auto', 'padding-left': '17px','padding-top' : '20px'}">
+                                    <a class="btn" style="padding-top: 20px" *ngIf="favstatus == 1" (click)="modalfav()">
+                                        <i title="User Inputs" class="fa fa-pencil-square-o" style="color: red;font-size: 18px"></i>
+                                    </a>
+                                    <a class="btn" style="padding: 0px !important;" *ngIf="favstatus == 0" (click)="modalfav()">
+                                        <i title="User Inputs" class="fa fa-pencil-square-o" style="font-size: 18px"></i>
+                                    </a>
+                                    <a class="btn" style="padding: 0px !important;" (click)="insulinOpen()">
+                                        <i title="Insulin Data" class="fa   fa-sellsy" style="font-size: 18px" [style.color]="myform.get('insulincomments').value && myform.get('insulincomments').value.length > 0 ? 'red' : '#4fb633'"></i>
+                                    </a>
+                                    <!-- <a class="btn" style="padding: 0px !important;" *ngIf="splits == 0">
+                                        <i title="No Splits" class="fa  fa-navicon (alias)" style="font-size: 18px"></i>
+                                    </a> -->
+                                    <a class="btn" style="padding: 0px !important;" *ngIf="splits == 1">
+                                        <i title="Split Order" class="fa  fa-navicon (alias)" style="color: #4fb633;font-size: 18px"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <a class="btn" style="padding: 0px !important;" *ngIf="notesFlag ==0" (click)="modalnote()">
+                                        <i title="Note" class="fa fa-sticky-note" style="font-size: 18px"        [style.color]="this.nurseNotes && this.nurseNotes.length > 0 ? 'red' : null"></i>                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-10">
+                                    Scheduled Time
+                                    <span class="c1" *ngIf="this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2">*</span>
+                                    <textarea rows="2" class="form-control" formControlName="schduleText" readonly [ngClass]="{
+                        'is-valid':myform.controls.schduleText.valid,
+                        'is-invalid':myform.controls.schduleText.invalid && myform.controls.schduleText.touched}"></textarea>
+                                    <div *ngIf="myform.controls.schduleText.errors" class="errorMessage">
+                                        <div *ngIf="myform.controls.schduleText.errors.required">
+                                            Scheduled Time is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2" style="padding-top: 10px;">
+                                    <!-- Remvove -->
+                                    <!-- <a (click)="hoaOpen()" title="Add Schedule Time">
+                                        <i class="icon"></i>
+                                        <span style="color: #4fb633;font-size: 34px" class="fa fa-calendar-times-o "></span>
+                                    </a>  -->
+                                    <!-- un comment -->
+                                    <a [ngClass]="(SchFlag==true)?'btn ':'btn'" [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) ? 'none' : 'auto'}" (click)="hoaOpen()" title="Add Schedule Time">
+                                        <i class="icon"></i>
+                                        <span style="color: #4fb633;font-size: 34px" class="fa fa-calendar-times-o "></span>
+                                    </a>
+                                </div>
+                                <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                    <a class="btn col-sm-2" (click)="barcodeModalOpen()" title="Add Barcode" style="cursor: pointer;">
+                      <i class="icon"></i>
+                      <span style="color: blue;" class="fa fa-2x fa-barcode"></span>
+                      <span class="c1" *ngIf="barCodeFlag === 1 || (myform.value.orderTypeId!=4 && barcodear.length==0)">Barcode is required </span>
+                    </a>
+                    <div class="row form-group">
+                      <div *ngIf="barcodear.length>0" style="margin-top : 5px;">
+                        <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                          <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                          <a class="btn editicon" style="color:red" (click)="removeBarcode(i)">
+                            <i class="icon"></i>
+                            <span class=" fa fa-times " title="Delete"></span>
+                          </a>
+                        </span>
+                      </div>
+                      </div>
+                  </div> -->
+                            </div>
+                            <div class="row form-group clearfix">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    Barcode
+                                    <span class="c1" *ngIf="this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2">*</span>
+                                    <input type="text" maxlength="150" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');" id="txtbarcode" formControlName="barcode" [ngClass]="{
+                  'is-valid':myform.controls.barcode.valid && barcodear.length > 0,
+                  'is-invalid':myform.controls.barcode.invalid && myform.controls.barcode.touched && barcodear.length == 0}" class="form-control" />
+                                    <div *ngIf="myform.controls.barcode.errors  && barcodear.length == 0" class="errorMessage">
+                                        <div *ngIf="myform.controls.barcode.errors.required && barcodear.length == 0">
+                                            Barcode is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1" style="padding-top: 14px;">
+                                    <input type="button" id="btnok" value="Add" class="bt-lg btn btn-success" [disabled]="myform.value.barcode=='' || myform.value.barcode==null || (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)" (click)="addBarcode(myform.value.barcode)" />
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div *ngIf="barcodear.length>0">
+                                        <!-- <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                                                <span
+                                                    style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                                        <a class="btn editicon" [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) ? 'none' : 'auto','color':'red'}" (click)="removeBarcode(i)">
+                                            <i class="icon"></i>
+                                            <span class=" fa fa-times " title="Delete"></span>
+                                        </a>
+                                        </span> -->
+                                        <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                                            <span
+                                                style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                                            <span *ngIf="autobarcode !== item">
+                                                <a class="btn editicon"
+                                                    [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag ) ? 'none' : 'auto','color':'red'}"
+                                                    (click)="removeBarcode(i)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-times " title="Delete"></span>
+                                                </a>
+                                            </span>
+                                            <span *ngIf="autobarcode == item" style="pointer-events: none;">
+                                                <a class="btn editicon"
+                                                    [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag ) ? 'none' : 'auto','color':'grey'}"
+                                                    >
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-times " title="Delete"></span>
+                                                </a>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group" *ngIf="(ordersDetails.HoldStatus == 1 && activeTab ==='Active'  && orderHoldData!=undefined && orderHoldData!=null)">
+                                Hold From: &nbsp;<strong style="color: red;">
+                                        {{orderHoldData.HoldFrom|date:'MM/dd/yyyy'}}</strong> &nbsp;&nbsp; Hold To: &nbsp;
+                                <strong style="color: red;">{{orderHoldData.HoldTo|date:'MM/dd/yyyy'}}</strong> &nbsp;&nbsp; Release Hold On: &nbsp;<strong style="color: red;">{{orderReleaseDate|date:'MM/dd/yyyy'}}</strong>
+                                <!-- Reason: <strong data-toggle="tooltip" data-placement="top"
+                  title="{{orderHoldData.HoldReason}}">{{holdReason}}</strong> -->
+                            </div>
+                            <!-- <div class="row form-group" *ngIf="newOrderFlag===1">
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <input type="checkbox">
+                            </span>
+                          </div>
+                          <span class="form-control">Controlled Substance</span>
+                        </div>
+                      </div>
+                </div> -->
+                        </div>
+
+
+
+
+                        <div class="col-sm-5" style="height: 100%">
+                            <!-- <div class="col-sm-4" style="padding-bottom:315px;max-height:400px;overflow-y: scroll"> -->
+                            <div>
+                                <div class="row form-group" [ngStyle]="{'display': (drFirstFlag == 1) ? 'block' : 'none'}">
+                                    <a href="javscript:void(0)" class="iconColor" (click)="opendrFirst()"><u><b>Display Dr.First Order</b></u></a>
+                                </div>
+                                <!-- <div class="row form-group"> style="max-height: 600px;overflow: scroll;" | paginate: { itemsPerPage: 15, currentPage: re, id:'allActiveOrderGrid' }; -->
+                                <div class="tableFixHead1" style="max-height: 600px;overflow: scroll;">
+                                    <table id="tblAllResidents" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Drug Name</th>
+                                                <th>On Hold </th>
+                                                <th>Refills left</th>
+                                                <th>D/C</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of residentAllOrders" [ngClass]="{'highlight' : (selectedOrder == item.porder_Id && selectedOrderQuantity == item.PQuantity_Id && selectedOrderDADminId == item.DAdmin_Id) }" id="allordersRow">
+                                                <td style="white-space: pre-wrap; padding: 3px 5px 0 5px;"  (click)="getOrderDetailsbyorderIdRowClick(item.porder_Id,item.PQuantity_Id,item.DAdmin_Id,item.POrder_Status)" class="child">
+                                                    <span class="tip" data-tipsy="sample tipsy">
+                                                        {{item.DrugName}}
+                                                            <!-- <b>{{item.DrugName}}</b> -->
+                                                            <hr/>
+                                                        SIG: {{item.Directions}}
+                                                            <!-- <b>SIG: {{item.Directions}}</b> -->
+                                                            <hr/>
+                                                        START: {{item.StartDate|date :'MM/dd/yy'}}
+                                                            <!-- <b>START: {{item.StartDate|date :'MM/dd/yy'}}</b> -->
+                                                            <hr/>
+                                                        END: {{item.EndDate|date :'MM/dd/yy'}}
+                                                            <hr/>
+                                                        HOA: {{item.Schedule}}
+                                                            <hr/>
+                                                            <b>PRN: </b>
+                                                            <b *ngIf="item.PRNFlag==true">YES</b>
+                                                            <b *ngIf="item.PRNFlag==false">NO</b>
+                                                    </span>
+                                                         {{item.DrugName}}
+                                                </td>
+                                                <td style="white-space: pre-wrap; padding: 0 5px 0 5px;">
+                                                    <div class="row" style="flex-direction: row;padding: 3px 7px 0px;">
+                                                        <div >
+                                                        <input type="checkbox" [disabled]="item.POrder_Status!=1 || (discardChanges==true) || rightGridDCChangesFlag" value="{{item.PQuantity_Id}}" [checked]="resetCheckbox" name="{{ item.PQuantity_Id }}" id="{{'holdchk'+item.PQuantity_Id}}"  (change)="onCheckHold($event.target.checked?true:false, item)">                                                    &nbsp;
+
+                                                        </div>
+                                                        <div >
+                                                            <ng-container *ngIf = "item.HoldFrom != '' && (item.HoldStatus == 1 || item.HoldStatus == 4 )" >
+                                                                <div style="display: flex;align-items: center;justify-content: flex-end;" [ngStyle]="{'color':item.HoldStatus == 1 ? 'red' : 'black'}">
+                                                                    <p style="margin: 0;">From : </p>
+                                                                    <p class="date-styling" [ngStyle]="{'color':item.HoldStatus == 1 ? 'red' : 'black'}" id="{{'holddate'+item.PQuantity_Id}}">{{item.HoldStatus==0 ||(checkOrderHold(item)==2)?'':(item.HoldFrom|date:'yyyy-MM-dd')}}</p>
+                                                                </div>
+                                        
+                                                            </ng-container>
+                                                            <ng-container *ngIf = "item.On_Hold_Until != '' && (item.HoldStatus == 1 || item.HoldStatus == 4 )">
+                                                                <div style="display: flex;align-items: center;justify-content: flex-end;" [ngStyle]="{'color':item.HoldStatus == 1 ? 'red' : 'black'}">
+                                                                    <p style="margin: 0;">To : </p>
+                                                                    <p class="date-styling"  id="{{'holddate'+item.PQuantity_Id}}">{{item.HoldStatus==0 ||(checkOrderHold(item)==2)?'':(item.On_Hold_Until|date:'yyyy-MM-dd')}}</p>    
+                                                                </div>
+                                                            
+                                                            </ng-container>
+
+                                                        <!-- </form> -->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{item.NumberOfRefillsRemaining}}</td>
+                                                <td style="white-space: pre-wrap; padding: 3px 5px 0 5px;">
+                                                    <!-- <input type="checkbox" [disabled]="(discardChanges==true) || rightGridOnHoldChangesFlag" [checked]="item.POrder_Status!=1 || checkOrderDC(item)==1" value="{{item.PQuantity_Id}}" name="{{ item.PQuantity_Id}}" id="{{'dcchk'+item.PQuantity_Id}}" (change)="onCheckDC($event.target.checked?true:false, item)"> -->
+                                                    <input type="checkbox"  [disabled]="(discardChanges==true) || rightGridOnHoldChangesFlag" [checked]="item.POrder_Status!=1 || checkOrderDC(item)==1" value="{{item.PQuantity_Id}}" name="{{ item.PQuantity_Id}}" id="{{'dcchk'+item.PQuantity_Id}}" (change)="onCheckDC($event.target.checked?true:false, item)">
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- <pagination-controls id="allActiveOrderGrid" (pageChange)="re = $event" *ngIf="residentAllOrders.length > 0"></pagination-controls> -->
+                                <table class="table table-bordered table-hover" style="position: sticky;z-index: 0;">
+                                    <tfoot style="background-color: #cccccc;" *ngIf="residentAllOrders.length>0">
+                                        <tr>
+                                            <th style=" border:1px solid #cccccc">
+                                                <!-- Profile Changes -->
+                                                <input type="button" class="btn btn-success" value="Save Profile Changes" [disabled]="updateOrdersRecords.length==0|| (discardChanges==true) || (!rightGridOnHoldChangesFlag && !rightGridDCChangesFlag) || BUttonFlag" (click)="updateMultipleOrderChanges()" />
+                                            </th>
+                                            <th style=" border:1px solid #cccccc">
+                                                <input type="button" class="btn btn-danger" value="Discard Profile Changes" [disabled]="updateOrdersRecords.length==0|| (discardChanges==true) || (!rightGridOnHoldChangesFlag && !rightGridDCChangesFlag) || BUttonFlag" (click)="discardAllOrdersUpdate()" />
+                                            </th>
+                                            <th style=" border:1px solid #cccccc"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                                <!-- </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row form-group clearfix" style="margin-left: 2px;">
+                        <div class="card card-primary" style="height: 600px;width: -webkit-fill-available;">
+                            <div class="card-header">
+                                <div class="row form-group">
+                                    <div class="col-sm-6">
+                                        <h5 class="card-title">Orders</h5>
+                                    </div>
+                                    <div class="col-sm-6" style="padding-top: 8px">
+                                        <span>Pending Review - {{pendingReviewCount}}</span>
+                                    </div>
+                                    <div class="col-sm-12" style="text-align: left;">
+                                        <button type="button" (click)="cpoeNewOrder()" *ngIf="cpoepageConfig != undefined && cpoepageConfig['AccessWrite']" [disabled]="demographicInfoData.PVisit_Status == 2 ||demographicInfoData.PVisit_Status == 3 || (discardChanges==true && residentAllOrders.length !=0 )  || (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) ||  BUttonFlag" class="bt-lg btn btn-success">New</button>
+                                       <!-- Remove -->
+                                        <!-- <button type="button" *ngIf="activeTab ==='Active' && pageConfig['AccessWrite']" [disabled]="(myform.invalid || barCodeFlag === 1 || newOrderFlag==1 || BUttonFlag)"  (click)=" DelayCalling()" class="bt-lo btn" style="width: 160px;">Save</button> -->
+                                       <!-- un comment -->
+                                        <!-- <button type="button" *ngIf="activeTab ==='Active' && pageConfig['AccessWrite'] && residentAllOrders.length>0"   [disabled]="(myform.invalid || barCodeFlag === 1 || newOrderFlag==1 || !discardChanges || barcodear.length == 0)"  (click)=" DelayCalling()" [ngClass]="(discardChanges==false || myform.invalid || barcodear.length == 0) ? 'bt-lo btn btndis' :'bt-lo btn blink'" style="width: 160px;">Save Order Changes</button> -->
+                                        <!-- <button type="button" *ngIf="activeTab ==='Active' && pageConfig['AccessWrite'] && residentAllOrders.length>0"
+                                            [disabled]= "(discardChanges==false) || (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) || (reviewFlag ==1 && myform.value.orderTypeId != 4 ? (myform.invalid || barcodear.length == 0 ) : myform.invalid ? true:false) || residentAllOrders.length == 0 || (myform.value.prn == true && (myform.value.maxPerDay == 0 || myform.value.maxPerDay == '' || myform.value.maxPerDay == null))"
+                                            [ngClass]="(discardChanges==false) || (myform.value.prn == true && (myform.value.maxPerDay == 0 || myform.value.maxPerDay == '' || myform.value.maxPerDay == null)) ||
+                                             ((reviewFlag ==1 && myform.value.orderTypeId != 4 ? (myform.invalid || barcodear.length == 0 ) : myform.invalid ? true:false)  )|| residentAllOrders.length == 0 ? 'bt-lo btn btndis' :'bt-lo btn blink'"
+                                            style="width: 160px;"
+                                            (click)=" DelayCalling()"
+                                            >
+                                            Save Order Changes
+                                        </button> -->
+                                        <button type="button" *ngIf="activeTab ==='Active' && pageConfig['AccessWrite'] && residentAllOrders.length>0"
+                                            [disabled]= "(discardChanges==false) || (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) || (reviewFlag ==1 && myform.value.orderTypeId != 4 ? (myform.invalid || barcodear.length == 0 ) : false) || residentAllOrders.length == 0 || (myform.value.prn == true && (myform.value.maxPerDay == 0 || myform.value.maxPerDay == '' || myform.value.maxPerDay == null))"
+                                            [ngClass]="(discardChanges==false) || (myform.value.prn == true && (myform.value.maxPerDay == 0 || myform.value.maxPerDay == '' || myform.value.maxPerDay == null)) ||
+                                             ((reviewFlag ==1 && myform.value.orderTypeId != 4 ? (myform.invalid || barcodear.length == 0 ) : false)  )|| residentAllOrders.length == 0 ? 'bt-lo btn btndis' :'bt-lo btn blink'"
+                                            style="width: 160px;"
+                                            (click)=" DelayCalling()"
+                                            >
+                                            Save Order Changes
+                                        </button>
+                                        <!-- <button type="button" *ngIf="activeTab ==='Active' && pageConfig['AccessWrite'] && residentAllOrders.length>0"   [disabled]="( barCodeFlag === 1 || newOrderFlag==1 || BUttonFlag)"  (click)=" DelayCalling()" [ngClass]="(discardChanges==false) ? 'bt-lo btn btndis' :'bt-lo btn blink'" style="width: 160px;">Save Order Changes</button> -->
+                                        <!-- <button type="button" (click)=" checkformvalid()">test</button> -->
+                                        <!-- </div>
+                  <div  style="float: right"> -->
+
+                                        <button *ngIf="(pageConfig['AccessWrite'] && orderGridData.length>0 && ordersDetails && selectedOrder != 0 && reactivateStatus == 0 && activeTab ==='Active' && buttonsStatus !=1)"
+                                            [disabled]=" (discardChanges==true)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag " type="button" (click)="orderDiscontinueopen()" class="bt-lg btn btn-success">D/C</button>
+                                        <button type="button" *ngIf="(pageConfig['AccessWrite'] && orderGridData.length>0 && ordersDetails.HoldStatus == 0 && activeTab ==='Active' && buttonsStatus !=1)" (click)="holdOrder()" class="bt-lo btn"  [disabled]=" (discardChanges==true)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag ">Hold</button>
+                                        <button type="button" *ngIf="(orderGridData.length>0 && ordersDetails.HoldStatus == 1 && activeTab ==='Active' && pageConfig['AccessWrite'])" (click)="releasefromholdStatus()" class="bt-lo btn"  [disabled]=" (discardChanges==true)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag ">Release from
+                                                Hold</button>
+                                        <button type="button" *ngIf="(orderGridData.length>0 && ordersDetails  && selectedOrder != 0 && pageConfig['AccessWrite'] && activeTab ==='Active' && buttonsStatus !=1)" (click)="DestroyOrder()" class="bt-lg btn"  [disabled]=" (discardChanges==true)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag ">Destroy</button>
+                                        <button type="button" *ngIf="(orderGridData.length>0 && ordersDetails && reactivateStatus == 1 && pageConfig['AccessWrite'] && discontinueFlag != 4)" (click)="reactivateOrder()" class="bt-lo btn"  [disabled]=" (discardChanges==true)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag ">Reactivate</button>
+                                        <button type="button" *ngIf="(mergeFlag == 1 && pageConfig['AccessWrite'] && activeTab ==='Active' && buttonsStatus !=1 && this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2 && gpiCode!='')" (click)="mergeOrder()" class="bt-lo btn btn-xs"  [disabled]=" (discardChanges==true)||(rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag ">Merge</button>
+                                        <!-- <button type="button" [disabled]="(myform.invalid || barCodeFlag === 1||reviewButtonDisable)" *ngIf="(orderGridData.length>0 && reviewFlag != 1 && newOrderFlag==0 && activeTab ==='Active' && pageConfig['AccessWrite'])" (click)="CompletedReviewClick(1)" class="bt-lo btn btn-xs">Complete
+                                                Review</button> -->
+                                                <button type="button"  [disabled]=" myform.invalid || (this.myform.value.orderTypeId != 4 && barcodear.length == 0) || (this.myform.value.orderTypeId != 2 && barcodear.length == 0) || (discardChanges==true)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)|| BUttonFlag" *ngIf="(orderGridData.length>0 && reviewFlag != 1 && newOrderFlag==0 && activeTab ==='Active' && pageConfig['AccessWrite'])" (click)="CompletedReviewClick(1)" class="bt-lo btn btn-xs">Complete
+                                                    Review</button>
+                                                
+
+                                                <!-- un comment -->
+                                                <button class="btn btn-danger" *ngIf="discardChanges && residentAllOrders.length>0" [disabled]="(discardChanges==false)|| (rightGridOnHoldChangesFlag || rightGridDCChangesFlag)" style="width: 160px; height: 45px;" (click)="discardOrderchange()">Discard Order Changes</button>
+
+
+                                                <input type="button" class="singleline" *ngIf="this.ordersDetails.Refill_Request===1 && this.ordersDetails.Refill !== null && this.ordersDetails.Refill !== undefined && +(this.ordersDetails.Refill) > 0" id="refill" class="bt-lo bt-lg  btn" value="Refill" [disabled]="clicked || (discardChanges==true) || (rightGridOnHoldChangesFlag || rightGridDCChangesFlag) || BUttonFlag" (click)="insertRefill(this.ordersDetails); clicked = true;" />
+                                                &nbsp;&nbsp;&nbsp;
+                                                <h6 style="color:black" class="singleline"  *ngIf="this.ordersDetails.Refill_Request===1 && this.ordersDetails.Refill_Note !== '' ">{{this.ordersDetails.Refill_Note}}</h6>
+
+
+                                                <h6 style="color:red" class="singleline" *ngIf="this.ordersDetails.Refill_Request===2">Refill request pending with admin approval</h6>
+
+                                                <h6 *ngIf="this.ordersDetails.Refill_Request===3" class="singleline" style="color:green;">{{this.ordersDetails.Refill_Note}}</h6>
+
+                                                <!-- <a (click)="rejectedRefill(this.RordersList3[0])" class="singleline" style="color:red;cursor: pointer" *ngIf="this.RifillFalg===4">Refill Request
+                                                    Pending</a> -->
+                                                    <!-- <a class="singleline" style="color:green;cursor: pointer" *ngIf="this.ordersDetails.Refill_Request===4">Refill submitted
+                                                        </a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body  table-responsive">
+                                <div class=" row form-group col-sm-4">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" style="cursor: pointer;" href="#Active" [ngClass]="{ 'active':activeTab==='Active'}" (click)="getOrderGridData('Active',0,1)" data-toggle="tab">Active</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" style="cursor: pointer;" href="#Inactive" [ngClass]="{ 'active':activeTab==='InActive'}" (click)="getOrderGridData('InActive',0,1)" data-toggle="tab">Inactive</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="Current">
+                                        <div class="tableFixHead">
+                                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Order Type</th>
+                                                        <th>Drug Name</th>
+                                                        <th>Directions</th>
+                                                        <th>Refills left</th>
+                                                        <th>Start Date</th>
+                                                        <th>End Date</th>
+                                                        <th *ngIf="activeTab ==='Active'">Review</th>
+                                                        <th>Created By</th>
+                                                        <th>Created Date</th>
+                                                        <th *ngIf="activeTab ==='InActive'">Discontinued By</th>
+                                                        <th *ngIf="activeTab ==='InActive'">Discontinued Reason
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of orderGridData" [ngClass]="{'highlight' : (selectedOrder == item.porder_Id && selectedOrderQuantity == item.PQuantity_Id && selectedOrderDADminId == item.DAdmin_Id) }" (click)="getOrderDetailsbyorderIdRowClick(item.porder_Id,item.PQuantity_Id,item.DAdmin_Id,item.POrder_Status)"
+                                                        style="cursor: pointer">
+                                                        <td>
+                                                            <i style="cursor: pointer" title="No Schedule Times" [ngClass]="item.scheduleTimeflag == 1?'fa fa-exclamation-triangle iconColor':''"></i> {{item.OrderType}}
+                                                        </td>
+                                                        <td>{{item.DrugName}}</td>
+                                                        <td>{{item.Directions}}</td>
+                                                        <td >{{item.NumberOfRefillsRemaining}}</td>
+                                                        <td>{{item.StartDate |date :'MM/dd/yyyy'}}</td>
+                                                        <td>{{item.EndDate |date :'MM/dd/yyyy'}}</td>
+                                                        <td *ngIf="(item.ReviewFlag ==1) && (activeTab ==='Active')">
+                                                            Completed</td>
+                                                        <td *ngIf="(item.ReviewFlag ==0 || item.ReviewFlag ==2) && (activeTab ==='Active')">
+                                                            Pending</td>
+                                                        <td>{{item.OrderCreatedBy}}</td>
+                                                        <td>{{item.OrderCreatedDate|date :'MM/dd/yyyy hh:mm:ss a'}}
+                                                        </td>
+                                                        <td *ngIf="activeTab ==='InActive'">
+                                                            {{item.DiscontinuedBy}}</td>
+                                                        <td *ngIf="activeTab ==='InActive'">
+                                                            {{item.DiscontinueReason}}</td>
+                                                        <!-- <td style="border: 0px !important" *ngIf="item.ReviewFlag == 0 && newOrderFlag==0">
+                              <a (click)="orderReview(item.porder_Id, item.DAdmin_Id)" style="color:red">
+                                <u>
+                                  <b>Review</b>
+                                </u>
+                              </a>
+                            </td> -->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <ng4-loading-spinner [template]="template" [timeout]="99000" [zIndex]="999999" [loadingText]="'Please wait...'">
+            </ng4-loading-spinner>
+        </section>
+    </form>
+</div>
+<!-- Modals -->
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" style="padding-top: 126px" id="modalshu" role="dialog" [ngStyle]="{'display': modalHOAIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog customwidth">
+        <div class="modal-content">
+            <div #DemoHandle1 class="modal-header" style="background-color:#cccccc;height: 43px ">
+                <h5 style="color: #000000;">HOA</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+            </div>
+
+            <div class="modal-body bodystyle">
+                <form *ngIf="residentId!=0" [formGroup]="scheduleform">
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Frequency</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Frequency
+                            <ng-multiselect-dropdown class="form-control" formControlName="frequency" [data]="frequencyList" [(ngModel)]="selectedfrequencyItems" (onSelect)="onFrequencyChange($event)" (onDeSelect)="onFrequencyChange($event)" [settings]="dropdownSettings_Frequency">
+                            </ng-multiselect-dropdown>
+                            <!-- <select class="form-control" formControlName="frequency"
+                (change)="onFrequencyChange($event.target.value)">
+                <option value="0" selected>Select</option>
+                <option *ngFor="let item of frequencyList" value="{{item.Frequency_Id}}">{{item.Frequency_Name}}
+                </option>
+              </select> -->
+                        </div>
+                        <!-- <div class="col-sm-2">Start Time</div> -->
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            Start Time
+                            <ng-multiselect-dropdown formControlName="either" [data]="hoursList" [(ngModel)]="selectedstItems" [settings]="dropdownSettings_StartTime" (onSelect)="addstartTime()" (onDeSelect)="addstartTime()" class="form-control" [disabled]="isShiftSchedule">
+                            </ng-multiselect-dropdown>
+                            <!-- <select class="form-control" formControlName="either" (change)="addstartTime()">
+                <option value="0" selected disabled>Select</option>
+                <option *ngFor="let item of hoursList" value="{{item.Hour_Id}}">{{item.Hour_Desc}}</option>
+              </select> -->
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-1" *ngIf="!isShiftSchedule" style="margin-top: 10px;">
+                            <a class="btn" (click)="timemodalopen()">
+                                <i class="icon"></i>
+                                <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Time"></span>
+                            </a>
+                        </div>
+                        <!-- <div class="col-sm-3">
+                <select class="form-control" formControlName="timeFormat">
+                  <option value="0">--Select--</option>
+                  <option *ngFor="let item of timeFormatList" value="{{item.TimeFormat_Id}}">{{item.TimeFormat_Desc}}
+                  </option>
+                </select>
+              </div> -->
+                    </div>
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Every Hours</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Every Hours
+                            <input type="text" class="form-control" disabled="true" formControlName="hours"  [ngClass]="{
+                'is-valid':scheduleform.controls.hours.valid && scheduleform.controls.hours.dirty,
+                'is-invalid':scheduleform.controls.hours.invalid && scheduleform.controls.hours.touched}" />
+
+                            <div *ngIf="scheduleform.controls.hours.errors && (scheduleform.controls.hours.touched)" class="errorMessage">
+                                <div *ngIf="scheduleform.controls.hours.errors.maxlength">
+                                    Hours must be 2 characters long.
+                                </div>
+                                <div *ngIf="scheduleform.controls.hours.errors.pattern">
+                                    {{config.numericMessage}}
+                                </div>
+                                <div *ngIf="scheduleform.controls.hours.errors.min">
+                                    Hours allow 1 to 23 values only.
+                                </div>
+                                <div *ngIf="scheduleform.controls.hours.errors.max">
+                                    Hours allow 1 to 23 values only.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Only administration on these days
+                            <div>
+                                <label class="customcontainer">Mon
+                                    <input type="checkbox" formControlName="mon">
+                                    <span class="checkmark"></span>
+                                </label> &nbsp;
+                                <label class="customcontainer">Tue
+                                    <input type="checkbox" formControlName="tue">
+                                    <span class="checkmark"></span>
+                                </label>&nbsp;
+                                <label class="customcontainer">Wed
+                                    <input type="checkbox" formControlName="wed">
+                                    <span class="checkmark"></span>
+                                </label> &nbsp;
+                                <label class="customcontainer">Thu
+                                    <input type="checkbox" formControlName="thu">
+                                    <span class="checkmark"></span>
+                                </label> &nbsp;
+                                <label class="customcontainer">Fri
+                                    <input type="checkbox" formControlName="fri">
+                                    <span class="checkmark"></span>
+                                </label> &nbsp;
+                                <label class="customcontainer">Sat
+                                    <input type="checkbox" formControlName="sat">
+                                    <span class="checkmark"></span>
+                                </label>&nbsp;
+                                <label class="customcontainer">Sun
+                                    <input type="checkbox" formControlName="sun">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5>Month Filters</h5>
+                    </div>
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Months</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Months
+                            <ng-multiselect-dropdown class="form-control" formControlName="month" (onSelect)="onMonthSelect($event)" (onDeSelect)="onMonthDeSelect($event)" [data]="monthsList" [settings]="dropdownSettings_Month">
+                            </ng-multiselect-dropdown>
+                            <!-- <select class="form-control" formControlName="month">
+                                <option value="0">Select</option>
+                                <option *ngFor="let item of monthsList" value="{{item.Month_Id}}">{{item.Month_Name}}
+                                </option>
+                            </select> -->
+                        </div>
+                        <!-- <div class="col-sm-2">Week</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Week
+                            <ng-multiselect-dropdown class="form-control" [disabled]="isWeeksDisabled" formControlName="week" (onSelect)="onWeekSelect($event)" (onDeSelect)="onWeekDeSelect($event)" [data]="weeksList" [settings]="dropdownSettings_Week">
+                            </ng-multiselect-dropdown>
+                            <!-- <select class="form-control" formControlName="week">
+                                <option value="0">Select</option>
+                                <option *ngFor="let item of weeksList" value="{{item.Week_Id}}">{{item.Week_Desc}}
+                                </option>
+                            </select> -->
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Days</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Days
+                            <ng-multiselect-dropdown class="form-control" [disabled]="isdaysDisabled" formControlName="days" (onSelect)="onDaysSelect($event)" (onDeSelect)="onDaysDeSelect($event)" [data]="monthDays" [settings]="dropdownSettings_Days">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <!-- <div class="col-sm-2">Active For Days</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Active For Days
+                            <input type="text" class="form-control" formControlName="aDay" [ngClass]="{
+'is-valid':scheduleform.controls.aDay.valid && scheduleform.controls.aDay.dirty,
+'is-invalid':scheduleform.controls.aDay.invalid && scheduleform.controls.aDay.touched}" />
+                            <div *ngIf="scheduleform.controls.aDay.errors && (scheduleform.controls.aDay.touched)" class="errorMessage">
+                                <div *ngIf="scheduleform.controls.aDay.errors.maxlength">
+                                    Active For Days must be 3 characters long.
+                                </div>
+                                <div *ngIf="scheduleform.controls.aDay.errors.pattern">
+                                    {{config.numericMessage}}
+                                </div>
+                                <div *ngIf="scheduleform.controls.aDay.errors.min">
+                                    Minimum 1 Active for day allowed.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row form-group" style="display: none">
+              <div class="col-sm-3">Only on Day</div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" formControlName="oDay" />
+              </div>
+              <div class="col-sm-3">Through</div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" formControlName="through" />
+              </div>
+            </div> -->
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2">Hold For Days</div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            Hold For Days
+
+                            <input type="text" class="form-control" formControlName="hDay" [ngClass]="{
+                'is-valid':scheduleform.controls.hDay.valid && scheduleform.controls.hDay.dirty,
+                'is-invalid':scheduleform.controls.hDay.invalid && scheduleform.controls.hDay.touched}" />
+                            <div *ngIf="scheduleform.controls.hDay.errors && (scheduleform.controls.hDay.touched)" class="errorMessage">
+                                <div *ngIf="scheduleform.controls.hDay.errors.maxlength">
+                                    Active For Days must be 3 characters long.
+                                </div>
+                                <div *ngIf="scheduleform.controls.hDay.errors.pattern">
+                                    {{config.numericMessage}}
+                                </div>
+                                <div *ngIf="scheduleform.controls.hDay.errors.min">
+                                    Minimum 1 Hold for day allowed.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-warning" value="Reset" *ngIf="pageConfig['AccessWrite'] && myform.value.orderTypeId==4 && (scheduleTextObj!=undefined && scheduleTextObj.NursingFreqId!=null)" (click)="resetScheduleTimes()" />
+                <!-- Remove -->
+                <input type="button" class="btn btn-success" value="Save and close" *ngIf="pageConfig['AccessWrite']" (click)="insertHoa()" [disabled]="scheduleform.invalid" />
+               <!-- Un Comment -->
+                <!-- <input type="button" [ngClass]="(SchFlag==true)?'btn btn-success blink':'btn btn-success'" value="Save" *ngIf="pageConfig['AccessWrite']" (click)="insertHoa()" [disabled]="scheduleform.invalid" /> -->
+                <button type="button" class="btn btn-danger" (click)="cancelHOAChanges()">Close without changes</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 126px" id="modalinsulis" role="dialog" [ngStyle]="{'display': modalInsuliIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle2 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Insulin Comments</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <form *ngIf="residentId!=0" [formGroup]="myform" autocomplete="off">
+                        <!-- <div class="card-header">
+                <h3 class="card-title">Favourites List</h3>
+              </div> -->
+                        <div class="card-body">
+                            Insulin Comments
+                            <input type="text" class="form-control" formControlName="insulincomments" #insulincomments />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle3" style="padding-top: 126px" id="modalnote" role="dialog" [ngStyle]="{'display': modalnoteIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle3 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Nurse Comments</h5>
+                <button type="button" *ngIf="!nurseValidation" class="close" (click)="closeNotesModel()">&times;</button>
+            </div>
+            <div class="modal-body" style="height: 350px !important;overflow-x: scroll !important;">
+                <form *ngIf="residentId!=0" [formGroup]="noteform" autocomplete="off">
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            Note
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text"  #nursecomments class="form-control" formControlName="notes" [ngClass]="{
+                        'is-valid':noteform.controls.notes.valid && noteform.controls.notes.dirty,
+                        'is-invalid':noteform.controls.notes.invalid && noteform.controls.notes.touched}" />
+                            <div *ngIf="noteform.controls.notes.errors && (noteform.controls.notes.touched)" class="errorMessage">
+                                <div *ngIf="noteform.controls.notes.errors.required">
+                                    Notes is Required.
+                                </div>
+                                <div *ngIf="noteform.controls.notes.errors.maxlength">
+                                    Notes cannot be more than 500 characters long.
+                                </div>
+                                <!-- <div *ngIf="noteform.controls.notes.errors('whitespace')">
+                  Please enter valid note
+                </div> -->
+                                <!-- <div *ngIf="noteform.controls.notes.errors.pattern">
+                  Please enter valid note
+                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <div class="tableFixHead">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Notes</th>
+                                            <th>Added Date</th>
+                                            <th>Added By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of nurseNotes">
+                                            <td>{{item.Comment}}</td>
+                                            <td>{{item.Comment_CreatedOn|date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                            <td>{{item.UserName}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" *ngIf="pageConfig['AccessWrite'] && !nurseValidation" [disabled]="noteform.invalid" (click)="nurseCommentsSave()">Save and close</button>
+                <button type="button" class="btn btn-success" *ngIf="nurseValidation" [disabled]="noteform.invalid" (click)="nurseEndComments()">Save and close</button>
+                <button type="button" class="btn btn-danger"  *ngIf="!nurseValidation"  (click)="closeNotesModel()">Close without changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle4" style="padding-top: 126px" id="modalfavs" role="dialog" [ngStyle]="{'display': modalfavIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog modal-dialog-scrollable customHeight">
+        <div class="modal-content">
+            <div #DemoHandle4 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Measurements and other checks</h5>
+                <button type="button" class="close" (click)="closeFavModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form *ngIf="residentId!=0" [formGroup]="favForm">
+                    <div class="card card-primary">
+                        <!-- <div class="card-header">
+                <h3 class="card-title">Favourites List</h3>
+              </div> -->
+
+                        <div class="card-body">
+                            <div *ngFor="let item of favouriteMasterList;let i = index">
+                                <label>
+                                    <input type="checkbox" formControlName="favchecks" [checked]="item.check!=0"
+                                        (change)="FavouriteChange(item.OrderFavMaster_ID,$event.target.checked,item.OrderFavourite_ID)" />{{item.OrderFavDesc}}
+                                </label>
+                               
+                                <br />
+                                <ng-container *ngIf="i === 3">
+                                    <hr /> <!-- This is the line separating the items -->
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" value="Save and close" *ngIf="pageConfig['AccessWrite']" class="btn btn-success" (click)="InsertOrderFavourities()" />
+                <button type="button" class="btn btn-danger" (click)="closeFavModal()">Close without changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" ngDraggable [handle]="DemoHandle5" id="modalinfo" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle5 class="modal-header" style="background-color:#cccccc;height: 43px ">
+                <h5 style="color: #000000">Resident Infomation</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" *ngIf="ordersInfo">
+                <div class="row form-group btn-primary">
+                    <div class="col-sm-12" style="text-align: center">
+                        <b>Allergies</b>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12" style="text-align: center">{{ordersInfo.Allergy}}</div>
+                </div>
+                <!-- <div class="row form-group btn-primary">
+            <div class="col-sm-12" style="text-align: center"><b>Diet</b></div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12" style="text-align: center">{{ordersinfo.Diet}}</div>
+          </div> -->
+                <div class="row form-group btn-primary">
+                    <div class="col-sm-12" style="text-align: center">
+                        <b>Diagnosis</b>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12" style="text-align: center">{{ordersInfo.Diagnosis}}</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Model hold-->
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle6" style="padding-top: 126px" id="modalhold" role="dialog" [ngStyle]="{'display': modalholdIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div #DemoHandle6 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Hold Order</h5>
+                <button type="button" class="close" *ngIf="isHoldChecked==false" (click)="orderHoldDetailsCancel()">&times;</button>
+                <button type="button" class="close" *ngIf="isHoldChecked==true" (click)="selectedOrderHoldsCancel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form *ngIf="residentId!=0" [formGroup]="orderholdform">
+                    <div class="row form-group">
+                        <div class="col-sm-3">Hold Start Date</div>
+                        <div class="col-sm-3">
+                            <input type="date" formControlName="orderHoldFormDate" min="{{minDate|date:'yyyy-MM-dd'}}" #holdFocus class="form-control" id="dtholdfrom" (change)="holdDatesCheck()" [ngClass]="{
+                'is-valid':orderholdform.controls.orderHoldFormDate.valid,
+                'is-invalid':orderholdform.controls.orderHoldFormDate.invalid && orderholdform.controls.orderHoldFormDate.touched}" />
+                            <div *ngIf="orderholdform.controls.orderHoldFormDate.errors && (orderholdform.controls.orderHoldFormDate.touched)" class="errorMessage">
+                                <div *ngIf="orderholdform.controls.orderHoldFormDate.errors.required">
+                                    Start Date is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">Hold End Date</div>
+                        <div class="col-sm-3">
+                            <input type="date" formControlName="orderHoldToDate"  min="{{minDate|date:'yyyy-MM-dd'}}" class="form-control" id="dtholdto" (blur)="holdDatesCheck()" [ngClass]="{
+                'is-valid':orderholdform.controls.orderHoldToDate.valid,
+                'is-invalid':orderholdform.controls.orderHoldToDate.invalid && orderholdform.controls.orderHoldToDate.touched}" />
+                            <div *ngIf="orderholdform.controls.orderHoldToDate.errors && (orderholdform.controls.orderHoldToDate.touched)" class="errorMessage">
+                                <div *ngIf="orderholdform.controls.orderHoldToDate.errors.required">
+                                    End Date is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row form-group">
+                        <div class="col-sm-3">Reason</div>
+                        <div class="col-sm-3">
+                            <textarea cols="5" formControlName="orderHoldReason" class="form-control" id="txtholdreason" [ngClass]="{
+                'is-valid':orderholdform.controls.orderHoldReason.valid,
+                'is-invalid':orderholdform.controls.orderHoldReason.invalid && orderholdform.controls.orderHoldReason.touched}"></textarea>
+                            <div *ngIf="orderholdform.controls.orderHoldReason.errors && (orderholdform.controls.orderHoldReason.touched)" class="errorMessage">
+                                <div *ngIf="orderholdform.controls.orderHoldReason.errors.required">
+                                    Reason is required.
+                                </div>
+                                <div *ngIf="orderholdform.controls.orderHoldReason.errors.maxlength">
+                                    Reason cannot be more than 500 characters long.
+                                </div>
+                                <!-- <div *ngIf="orderholdform.controls.orderHoldReason.errors.pattern">
+                  {{config.alphaNumericFewSpecialCharactersMessage1}}
+                </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="holdReleaseDate != undefined && holdReleaseDate != null && holdReleaseDate != ''">
+                            <div class="right">
+                                <label>Release Hold On: &nbsp;</label><strong style="color: red;">{{holdReleaseDate|date:'MM/dd/yyyy'}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right">
+                        <!-- <input type="button" id="btncanel" value="Cancel" (click)="OrderHoldDetailsCancel()"
+              class="btn btn-primary" /> -->
+                        <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite'] && isHoldChecked==false" value="Save" [disabled]="orderholdform.invalid" data-dismiss="modal" (click)="insertOrderHoldDetails()" class="btn btn-success" />&nbsp;
+                        <input type="button" id="btnclose" *ngIf="isHoldChecked==false" value="Close" class="btn btn-danger" (click)="orderHoldDetailsCancel()" />
+                        <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite'] && isHoldChecked==true" value="Save" [disabled]="orderholdform.invalid" data-dismiss="modal" (click)="getSelectedOrderHold()" class="btn btn-success" />&nbsp;
+                        <input type="button" id="btnclose" *ngIf="isHoldChecked==true" value="Close" class="btn btn-danger" (click)="selectedOrderHoldsCancel()" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Model Destroy-->
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle7" style="padding-top: 126px" id="modaldes" role="dialog" [ngStyle]="{'display': modalDesIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div #DemoHandle7 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Medication Destruction</h5>
+                <button type="button" class="close" (click)="orderDestroyDetailsCancel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form *ngIf="residentId!=0" [formGroup]="destroyform">
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-3">Remaining Quantity</div> -->
+                        <div class="col-sm-3">Quantity to Destroy</div>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="quantity" #quantityFocus (change)="checkDestroyQuantity()" [ngClass]="{
+                'is-valid':destroyform.controls.quantity.valid,
+                'is-invalid':destroyform.controls.quantity.invalid && destroyform.controls.quantity.touched}" />
+                            <div *ngIf="destroyform.controls.quantity.errors && (destroyform.controls.quantity.touched)" class="errorMessage">
+                                <div *ngIf="destroyform.controls.quantity.errors.required">
+                                    Quantity is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.quantity.errors.maxlength">
+                                    Quantity cannot be more than 5 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.quantity.errors.pattern">
+                                    {{config.decimalMessage}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">Reason</div>
+                        <div class="col-sm-9">
+                            <textarea rows="3" class="form-control" formControlName="reason" [ngClass]="{
+                'is-valid':destroyform.controls.reason.valid,
+                'is-invalid':destroyform.controls.reason.invalid && destroyform.controls.reason.touched}"></textarea>
+                            <div *ngIf="destroyform.controls.reason.errors && (destroyform.controls.reason.touched)" class="errorMessage">
+                                <div *ngIf="destroyform.controls.reason.errors.required">
+                                    Reason is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.reason.errors.maxlength">
+                                    Reason cannot be more than 500 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.reason.errors.pattern">
+                                    {{config.alphaNumericFewSpecialCharactersMessage8}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>
+                        <b>Destroyer</b>
+                    </h5>
+                    <div class="row form-group">
+                        <div class="col-sm-2">User Name</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="destroyerUsername" [ngClass]="{
+                'is-valid':destroyform.controls.destroyerUsername.valid,
+                'is-invalid':destroyform.controls.destroyerUsername.invalid && destroyform.controls.destroyerUsername.touched}" />
+                            <div *ngIf="destroyform.controls.destroyerUsername.errors && (destroyform.controls.destroyerUsername.touched)" class="errorMessage">
+                                <div *ngIf="destroyform.controls.destroyerUsername.errors.required">
+                                    User Name is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerUsername.errors.maxlength || destroyform.controls.destroyerUsername.errors.minlength">
+                                    User Name should contains min of 4 and max of 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerUsername.errors.pattern">
+                                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">Password</div>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" formControlName="destroyerPass" autocomplete="new-password" [ngClass]="{
+                'is-valid':destroyform.controls.destroyerPass.valid,
+                'is-invalid':destroyform.controls.destroyerPass.invalid && destroyform.controls.destroyerPass.touched}" />
+                            <div *ngIf="destroyform.controls.destroyerPass.errors && (destroyform.controls.destroyerPass.touched)" class="errorMessage">
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.maxlength">
+                                    Password cannot be more than 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.pattern">
+                                    Password {{config.alphaNumericFewSpecialCharactersMessage3}}
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.minlength ">
+                                    Password cannot be less than 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>
+                        <b>Witness</b>
+                    </h5>
+                    <div class="row form-group">
+                        <div class="col-sm-2">User Name</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="approvalUsername" [ngClass]="{
+                'is-valid':destroyform.controls.approvalUsername.valid,
+                'is-invalid':destroyform.controls.approvalUsername.invalid && destroyform.controls.approvalUsername.touched}" />
+                            <div *ngIf="destroyform.controls.approvalUsername.errors && (destroyform.controls.approvalUsername.touched)" class="errorMessage">
+                                <div *ngIf="destroyform.controls.approvalUsername.errors.required">
+                                    User Name is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalUsername.errors.maxlength || destroyform.controls.approvalUsername.errors.minlength ">
+                                    User Name should contains min of 4 and max of 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalUsername.errors.pattern">
+                                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">Password</div>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" formControlName="approvalPass" autocomplete="new-password" [ngClass]="{
+                'is-valid':destroyform.controls.approvalPass.valid,
+                'is-invalid':destroyform.controls.approvalPass.invalid && destroyform.controls.approvalPass.touched}" />
+                            <div *ngIf="destroyform.controls.approvalPass.errors && (destroyform.controls.approvalPass.touched)" class="errorMessage">
+                                <div *ngIf="destroyform.controls.approvalPass.errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalPass.errors.maxlength">
+                                    Password cannot be more than 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalPass.errors.pattern">
+                                    Password {{config.alphaNumericFewSpecialCharactersMessage3}}
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalPass.errors.minlength">
+                                    Password cannot be less than 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <input type="button" id="btncancel" value="Cancel" (click)="OrderDestroyDetailsCancel()"
+          class="btn btn-primary" /> -->
+                <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Save" data-dismiss="modal" [disabled]="destroyform.invalid" (click)="destroyOrderSave()" class="btn btn-success" />
+                <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="orderDestroyDetailsCancel()" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle8" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle8 class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+                <button type="button" class="close" *ngIf="isDcChecked==false" (click)="closeModel()">&times;</button>
+                <button type="button" class="close" *ngIf="isDcChecked==true" (click)="closeMultpleDcModel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <strong> Do you want to discontinue this Order?</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite'] && isDcChecked==false" (click)="orderDiscontinueConfirmation()">Yes</button>
+                <button type="button" class="btn btn-danger" *ngIf="isDcChecked==false" (click)="closeModel()">No</button>
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite'] && isDcChecked==true" (click)="multipleOrdersDiscontinueConfirmation()">Yes</button>
+                <button type="button" class="btn btn-danger" *ngIf="isDcChecked==true" (click)="closeMultpleDcModel()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle9" id="exampleModal" style="top:49px" role="dialog" [ngStyle]="{'display': modalDcConfirmationIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle9 class="modal-header" style="padding-top: 50px; background-color: #cccccc;">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#000000">Discontinue Order</h5>
+                <button type="button" class="close" *ngIf="isDcChecked==false  && fieldsChangesDcFlag!='YES'" (click)="closeDcModel()">&times;</button>
+                <button type="button" class="close" *ngIf="isDcChecked==true  && fieldsChangesDcFlag!='YES'" (click)="closeMultpleDcModel()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form *ngIf="residentId!=0" [formGroup]="DcForm" autocomplete="off">
+                    <div class="row form-group">
+                        <div class="col-sm-6 col-md-6 col-lg-6">Discontinuation  Reason</div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" id="txtreason" #discontinueFocus formControlName="DcReason" class="form-control" [ngClass]="{
+                'is-valid':DcForm.controls.DcReason.valid,
+                'is-invalid':DcForm.controls.DcReason.invalid && DcForm.controls.DcReason.touched}" />
+                            <div *ngIf="DcForm.controls.DcReason.errors && (DcForm.controls.DcReason.touched)" class="errorMessage">
+                                <div *ngIf="DcForm.controls.DcReason.errors.required">
+                                    Reason is required.
+                                </div>
+                                <div *ngIf="DcForm.controls.DcReason.errors.maxlength">
+                                    Reason cannot be more than 500 characters long.
+                                </div>
+                                <!-- <div *ngIf="DcForm.controls.DcReason.errors.pattern">
+                  {{config.alphaNumericFewSpecialCharactersMessage7}}
+                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group" *ngIf="splits == 1 && multipleOrdersplits != 1">
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <input type="checkbox" formControlName="dcSplits">
+                                    </span>
+                                </div>
+                                <span class="form-control">&nbsp; Discontinue all splits?</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group" style="display: none;" *ngIf="multipleOrdersplits == 1">
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <input type="checkbox" formControlName="multipledcSplits">
+                                    </span>
+                                </div>
+                                <span class="form-control">&nbsp; Discontinue all splits?</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite'] && isDcChecked==false" (click)="orderDiscontinue()">Ok</button>
+                <button type="button" class="btn btn-danger" *ngIf="isDcChecked==false  && fieldsChangesDcFlag!='YES'" (click)="closeDcModel()">Cancel</button>
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite'] && isDcChecked==true" (click)="multipleOrdersDiscontinue()">Ok</button>
+                <button type="button" class="btn btn-danger" *ngIf="isDcChecked==true  && fieldsChangesDcFlag!='YES'" (click)="closeMultpleDcModel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fad modalstyl" ngDraggable [handle]="DemoHandle10" id="modalemar" role="dialog" [ngStyle]="{'display': modaleMar ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialo" style="max-width: 100%;padding-top: 10px">
+        <div class="modal-content">
+            <div #DemoHandle10 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">MAR Preview</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+            </div>
+            <div class="modal-body bodystyle" style="height: 500px;">
+                <div class="card card-primary">
+                    <form *ngIf="residentId!=0" [formGroup]="emarform">
+                        <div class="card-body">
+                            <div class="row form-group">
+                                <div class="col-sm-2 col-md-2 col-lg-2" style="padding-top: 8px;">
+                                    <label>Name: </label>
+                                    &nbsp;&nbsp;<strong>{{demographicInfoData.PatientLastName+", "+demographicInfoData.PatientFirstName+" "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}</strong>
+                                </div>
+                                <div class="col-sm-1 col-md-2 col-lg-1" style="padding-top: 8px; text-align: right;">Month
+                                </div>
+                                <div class="col-sm-1 col-md-2 col-lg-1">
+                                    <select id="ddlmonth" formControlName="month" class="form-control" (change)="getEMARDetails()">
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                                <div class="" style="padding-top: 8px; text-align: right;">Year
+                                </div>
+                                <div class="col-sm-1 col-md-2 col-lg-1">
+                                    <select id="ddlyear" formControlName="year" class="form-control" (change)="getEMARDetails()">
+                                        <option value="0" disabled selected>Select</option>
+                                        <option *ngFor="let item of yearDrop" value="{{item}}">{{item}}</option>
+                                    </select>
+                                </div>
+                                <!-- <div class="col-sm-1"></div> -->
+                                <div class="col-sm-2 col-md-3 col-lg-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <input type="checkbox" id="chkselect" formControlName="hidechk"
+                                                    (change)="HideInactiveOrders($event.target.checked?true:false)">
+                                            </span>
+                                        </div>
+                                        <span class="form-control">&nbsp; Hide Inactive Orders</span>
+                                    </div>
+                                </div>
+
+                                <div class="Aliment">
+                                    <p class="foo Color1"></p> <b class="foo1">&#8594; Discontinued</b>
+                                </div>
+                                <div   style="padding-right: 3px;"></div>
+                                <div class="Aliment">
+                                    <p class="foo Color3"></p> <b class="foo1">&#8594; Order not scheduled</b>
+                                </div>
+                             <div   style="padding-right: 3px;"></div>
+                                <div class="Aliment">
+                                    <p class="foo Color9"></p> <b class="foo1">&#8594; Order scheduled</b>
+                                </div>
+                                <div   style="padding-right: 3px;"></div>
+                                <div class="Aliment">
+                                    <p class="foo Color9"  style="text-align: center;">&#9913;</p><b class="foo1">&#8594; Pending</b>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>DOB: </label>
+                                    &nbsp;&nbsp;<strong>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</strong>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Gender: </label>
+                                    &nbsp;&nbsp;<strong>{{demographicInfoData.AdministrativeSex}}</strong>
+                                </div>
+
+                            </div>
+                            <div class="row" *ngIf="ordersInfo.Allergy!=''">
+                                <div class="col-sm-12">
+                                    <label>Allergies (may be incomplete): </label>
+                                    &nbsp;&nbsp;<strong data-toggle="tooltip" data-placement="top"
+                                        title="{{ordersInfo.Allergy}}" >{{ordersInfo.Allergy}}</strong>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="ordersInfo.Diagnosis!=''">
+                                <div class="col-sm-12">
+                                    <label>Medical Conditions: </label>
+                                    &nbsp;&nbsp;<strong  data-toggle="tooltip" data-placement="top"
+                                    title="{{ordersInfo.Diagnosis}}" >{{ordersInfo.Diagnosis}}</strong>
+                                </div>
+                            </div>
+                            <div class="tableFixHead">
+                                <table id="tblAllResidents" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>Patient Name</th> -->
+                                            <th>Drug Name</th>
+                                            <th>Time</th>
+                                            <th>1</th>
+                                            <th>2</th>
+                                            <th>3</th>
+                                            <th>4</th>
+                                            <th>5</th>
+                                            <th>6</th>
+                                            <th>7</th>
+                                            <th>8</th>
+                                            <th>9</th>
+                                            <th>10</th>
+                                            <th>11</th>
+                                            <th>12</th>
+                                            <th>13</th>
+                                            <th>14</th>
+                                            <th>15</th>
+                                            <th>16</th>
+                                            <th>17</th>
+                                            <th>18</th>
+                                            <th>19</th>
+                                            <th>20</th>
+                                            <th>21</th>
+                                            <th>22</th>
+                                            <th>23</th>
+                                            <th>24</th>
+                                            <th>25</th>
+                                            <th>26</th>
+                                            <th>27</th>
+                                            <th *ngIf="days>=28">28</th>
+                                            <th *ngIf="days>=29">29</th>
+                                            <th *ngIf="days>=30">30</th>
+                                            <th *ngIf="days>=31">31</th>
+                                        </tr>
+                                    </thead>
+                                     <tbody>
+                                        <tr *ngFor="let item of eMARDetails">
+                                            <td><b>{{item.GiveCodeText}}</b> ({{item.Direction}})
+                                                <br>
+                                               <b>Ordered By:</b> {{item.Prescriber}}
+                                               <br>
+                                               <b>Start Date:</b> {{item.StartDate| date :'MM/dd/yyyy'}}
+                                               <br>
+                                               <span *ngIf="item.EndDate.includes('D/C')"><b>D/C Date:</b> {{item.EndDate | replace:'D/C Date:':''}}</span>
+                                               <span *ngIf="item.EndDate.includes('End')"><b>End Date:</b>  {{item.EndDate | replace:'End Date:':''}}</span>
+                                            </td>
+                                            <td>{{item.time}}</td>
+                                            <td [ngStyle]="{'color':item[1].includes(';') ?item[1].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[1] == 0 ? '#454545':item[1].includes(';')?(item[1].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[1] == 2 ? '#999999':item[1] == 0 ? '#454545':item[1].includes(';')?(item[1].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[1] == 0 ? '': (item[1] == 1 ? '':item[1] == 2 ?'': item[1])}}</td>
+                                            <td [ngStyle]="{'color':item[2].includes(';') ?item[2].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[2] == 0 ? '#454545':item[2].includes(';')?(item[2].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[2] == 2 ? '#999999':item[2] == 0 ? '#454545':item[2].includes(';')?(item[2].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[2] == 0 ? '': (item[2] == 1 ? '':item[2] == 2 ?'':item[2].includes(';')?item[2].split(';')[1]:item[2])}}</td>
+                                            <td [ngStyle]="{'color':item[3].includes(';') ?item[3].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[3] == 0 ? '#454545':item[3].includes(';')?(item[3].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[3] == 2 ? '#999999':item[3] == 0 ? '#454545':item[3].includes(';')?(item[3].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[3] == 0 ? '': (item[3] == 1 ? '':item[3] == 2 ?'':item[3].includes(';')?item[3].split(';')[1]:item[3])}}</td>
+                                            <td [ngStyle]="{'color':item[4].includes(';') ?item[4].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[4] == 0 ? '#454545':item[4].includes(';')?(item[4].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[4] == 2 ? '#999999':item[4] == 0 ? '#454545':item[4].includes(';')?(item[4].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[4] == 0 ? '': (item[4] == 1 ? '':item[4] == 2 ?'':item[4].includes(';')?item[4].split(';')[1]:item[4])}}</td>
+                                            <td [ngStyle]="{'color':item[5].includes(';') ?item[5].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[5] == 0 ? '#454545':item[5].includes(';')?(item[5].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[5] == 2 ? '#999999':item[5] == 0 ? '#454545':item[5].includes(';')?(item[5].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[5] == 0 ? '': (item[5] == 1 ? '':item[5] == 2 ?'':item[5].includes(';')?item[5].split(';')[1]:item[5])}}</td>
+                                            <td [ngStyle]="{'color':item[6].includes(';') ?item[6].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[6] == 0 ? '#454545':item[6].includes(';')?(item[6].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[6] == 2 ? '#999999':item[6] == 0 ? '#454545':item[6].includes(';')?(item[6].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[6] == 0 ? '': (item[6] == 1 ? '':item[6] == 2 ?'':item[6].includes(';')?item[6].split(';')[1]:item[6])}}</td>
+                                            <td [ngStyle]="{'color':item[7].includes(';') ?item[7].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[7] == 0 ? '#454545':item[7].includes(';')?(item[7].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[7] == 2 ? '#999999':item[7] == 0 ? '#454545':item[7].includes(';')?(item[7].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[7] == 0 ? '': (item[7] == 1 ? '':item[7] == 2 ?'':item[7].includes(';')?item[7].split(';')[1]:item[7])}}</td>
+                                            <td [ngStyle]="{'color':item[8].includes(';') ?item[8].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[8] == 0 ? '#454545':item[8].includes(';')?(item[8].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[8] == 2 ? '#999999':item[8] == 0 ? '#454545':item[8].includes(';')?(item[8].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[8] == 0 ? '': (item[8] == 1 ? '':item[8] == 2 ?'':item[8].includes(';')?item[8].split(';')[1]:item[8])}}</td>
+                                            <td [ngStyle]="{'color':item[9].includes(';') ?item[9].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[9] == 0 ? '#454545':item[9].includes(';')?(item[9].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[9] == 2 ? '#999999':item[9] == 0 ? '#454545':item[9].includes(';')?(item[9].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[9] == 0 ? '': (item[9] == 1 ? '':item[9] == 2 ?'':item[9].includes(';')?item[9].split(';')[1]:item[9])}}</td>
+                                            <td [ngStyle]="{'color':item[10].includes(';') ?item[10].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[10] == 0 ? '#454545':item[10].includes(';')?(item[10].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[10] == 2 ? '#999999':item[10] == 0 ? '#454545':item[10].includes(';')?(item[10].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[10] == 0 ? '': (item[10] == 1 ? '':item[10] == 2 ?'':item[10].includes(';')?item[10].split(';')[1]:item[10])}}</td>
+                                            <td [ngStyle]="{'color':item[11].includes(';') ?item[11].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[11] == 0 ? '#454545':item[11].includes(';')?(item[11].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[11] == 2 ? '#999999':item[11] == 0 ? '#454545':item[11].includes(';')?(item[11].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[11] == 0 ? '': (item[11] == 1 ? '':item[11] == 2 ?'':item[11].includes(';')?item[11].split(';')[1]:item[11])}}</td>
+                                            <td [ngStyle]="{'color':item[12].includes(';') ?item[12].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[12] == 0 ? '#454545':item[12].includes(';')?(item[12].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[12] == 2 ? '#999999':item[12] == 0 ? '#454545':item[12].includes(';')?(item[12].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[12] == 0 ? '': (item[12] == 1 ? '':item[12] == 2 ?'':item[12].includes(';')?item[12].split(';')[1]:item[12])}}</td>
+                                            <td  [ngStyle]="{'color':item[13].includes(';') ?item[13].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[13] == 0 ? '#454545':item[13].includes(';')?(item[13].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[13] == 2 ? '#999999':item[13] == 0 ? '#454545':item[13].includes(';')?(item[13].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[13] == 0 ? '': (item[13] == 1 ? '':item[13] == 2 ?'':item[13].includes(';')?item[13].split(';')[1]:item[13])}}</td>
+                                            <td [ngStyle]="{'color':item[14].includes(';') ?item[14].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[14] == 0 ? '#454545':item[14].includes(';')?(item[14].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[14] == 2 ? '#999999':item[14] == 0 ? '#454545':item[14].includes(';')?(item[14].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[14] == 0 ? '': (item[14] == 1 ? '':item[14] == 2 ?'':item[14].includes(';')?item[14].split(';')[1]:item[14])}}</td>
+                                            <td [ngStyle]="{'color':item[15].includes(';') ?item[15].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[15] == 0 ? '#454545':item[15].includes(';')?(item[15].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[15] == 2 ? '#999999':item[15] == 0 ? '#454545':item[15].includes(';')?(item[15].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[15] == 0 ? '': (item[15] == 1 ? '':item[15] == 2 ?'':item[15].includes(';')?item[15].split(';')[1]:item[15])}}</td>
+                                            <td [ngStyle]="{'color':item[16].includes(';') ?item[16].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[16] == 0 ? '#454545':item[16].includes(';')?(item[16].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[16] == 2 ? '#999999':item[16] == 0 ? '#454545':item[16].includes(';')?(item[16].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[16] == 0 ? '': (item[16] == 1 ? '':item[16] == 2 ?'':item[16].includes(';')?item[16].split(';')[1]:item[16])}}</td>
+                                            <td [ngStyle]="{'color':item[17].includes(';') ?item[17].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[17] == 0 ? '#454545':item[17].includes(';')?(item[17].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[17] == 2 ? '#999999':item[17] == 0 ? '#454545':item[17].includes(';')?(item[17].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[17] == 0 ? '': (item[17] == 1 ? '':item[17] == 2 ?'':item[17].includes(';')?item[17].split(';')[1]:item[17])}}</td>
+                                            <td [ngStyle]="{'color':item[18].includes(';') ?item[18].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[18] == 0 ? '#454545':item[18].includes(';')?(item[18].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[18] == 2 ? '#999999':item[18] == 0 ? '#454545':item[18].includes(';')?(item[18].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[18] == 0 ? '': (item[18] == 1 ? '':item[18] == 2 ?'':item[18].includes(';')?item[18].split(';')[1]:item[18])}}</td>
+                                            <td [ngStyle]="{'color':item[19].includes(';') ?item[19].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[19] == 0 ? '#454545':item[19].includes(';')?(item[19].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[19] == 2 ? '#999999':item[19] == 0 ? '#454545':item[19].includes(';')?(item[19].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[19] == 0 ? '': (item[19] == 1 ? '':item[19] == 2 ?'':item[19].includes(';')?item[19].split(';')[1]:item[19])}}</td>
+                                            <td [ngStyle]="{'color':item[20].includes(';') ?item[20].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[20] == 0 ? '#454545':item[20].includes(';')?(item[20].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[20] == 2 ? '#999999':item[20] == 0 ? '#454545':item[20].includes(';')?(item[20].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[20] == 0 ? '': (item[20] == 1 ? '':item[20] == 2 ?'':item[20].includes(';')?item[20].split(';')[1]:item[20])}}</td>
+                                            <td [ngStyle]="{'color':item[21].includes(';') ?item[21].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[21] == 0 ? '#454545':item[21].includes(';')?(item[21].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[21] == 2 ? '#999999':item[21] == 0 ? '#454545':item[21].includes(';')?(item[21].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[21] == 0 ? '': (item[21] == 1 ? '':item[21] == 2 ?'':item[21].includes(';')?item[21].split(';')[1]:item[21])}}</td>
+                                            <td [ngStyle]="{'color':item[22].includes(';') ?item[22].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[22] == 0 ? '#454545':item[22].includes(';')?(item[22].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[22] == 2 ? '#999999':item[22] == 0 ? '#454545':item[22].includes(';')?(item[22].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[22] == 0 ? '': (item[22] == 1 ? '':item[22] == 2 ?'':item[22].includes(';')?item[22].split(';')[1]:item[22])}}</td>
+                                            <td [ngStyle]="{'color':item[23].includes(';') ?item[23].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[23] == 0 ? '#454545':item[23].includes(';')?(item[23].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[23] == 2 ? '#999999':item[23] == 0 ? '#454545':item[23].includes(';')?(item[23].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[23] == 0 ? '': (item[23] == 1 ? '':item[23] == 2 ?'':item[23].includes(';')?item[23].split(';')[1]:item[23])}}</td>
+                                            <td [ngStyle]="{'color':item[24].includes(';') ?item[24].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[24] == 0 ? '#454545':item[24].includes(';')?(item[24].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[24] == 2 ? '#999999':item[24] == 0 ? '#454545':item[24].includes(';')?(item[24].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[24] == 0 ? '': (item[24] == 1 ? '':item[24] == 2 ?'':item[24].includes(';')?item[24].split(';')[1]:item[24])}}</td>
+                                            <td [ngStyle]="{'color':item[25].includes(';') ?item[25].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[25] == 0 ? '#454545':item[25].includes(';')?(item[25].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[25] == 2 ? '#999999':item[25] == 0 ? '#454545':item[25].includes(';')?(item[25].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[25] == 0 ? '': (item[25] == 1 ? '':item[25] == 2 ?'':item[25].includes(';')?item[25].split(';')[1]:item[25])}}</td>
+                                            <td [ngStyle]="{'color':item[26].includes(';') ?item[26].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[26] == 0 ? '#454545':item[26].includes(';')?(item[26].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[26] == 2 ? '#999999':item[26] == 0 ? '#454545':item[26].includes(';')?(item[26].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[26] == 0 ? '': (item[26] == 1 ? '':item[26] == 2 ?'':item[26].includes(';')?item[26].split(';')[1]:item[26])}}</td>
+                                            <td [ngStyle]="{'color':item[27].includes(';') ?item[27].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[27] == 0 ? '#454545':item[27].includes(';')?(item[27].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[27] == 2 ? '#999999':item[27] == 0 ? '#454545':item[27].includes(';')?(item[27].split(';')[0] == 0?'#454545':'#999999'):''">
+                                                {{item[27] == 0 ? '': (item[27] == 1 ? '':item[27] == 2 ?'':item[27].includes(';')?item[27].split(';')[1]:item[27])}}</td>
+                                                <td [ngStyle]="{'color':item[28].includes(';') ?item[28].split(';')[0]==0?'white':'black' : 'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[28] == 0 ? '#454545':item[28].includes(';')?(item[28].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[28] == 2 ? '#999999':item[28] == 0 ? '#454545':item[28].includes(';')?(item[28].split(';')[0] == 0?'#454545':'#999999'):''">  {{item[28] == 0 ? '': (item[28] == 1 ? '':item[28] == 2 ?'':item[28].includes(';')?item[28].split(';')[1]:item[28])}}</td>
+                                                <td [ngStyle]="{'color':item[29] != undefined ?(item[29].includes(';') ?item[29].split(';')[0]==0?'white':'black' : 'black'):'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[29] == 0 ? '#454545':item[29] != undefined ?( item[29].includes(';')?(item[29].split(';')[0] == 0?'#454545':'#999999') :'white'): 'white'):item[29] == 2 ? '#999999':item[29] == 0 ? '#454545':item[29]!= undefined ? (item[29].includes(';')?(item[29].split(';')[0] == 0?'#454545':'#999999'):''):''">  <span *ngIf="item[29] != undefined">{{item[29] == 0 ? '': (item[29] == 1 ? '':item[29] == 2 ?'':  item[29].includes(';')?item[29].split(';')[1]:item[29])}}</span> </td>
+                                                <td [ngStyle]="{'color':item[30] != undefined ?(item[30].includes(';') ?item[30].split(';')[0]==0?'white':'black' : 'black'):'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[30] == 0 ? '#454545':item[30] != undefined ?( item[30].includes(';')?(item[30].split(';')[0] == 0?'#454545':'#999999') :'white'): 'white'):item[30] == 2 ? '#999999':item[30] == 0 ? '#454545':item[30]!= undefined ? (item[30].includes(';')?(item[30].split(';')[0] == 0?'#454545':'#999999'):''):''">  <span *ngIf="item[30] != undefined">{{item[30] == 0 ? '': (item[30] == 1 ? '':item[30] == 2 ?'':  item[30].includes(';')?item[30].split(';')[1]:item[30])}}</span> </td>
+                                                 <td [ngStyle]="{'color':item[31] != undefined ?(item[31].includes(';') ?item[31].split(';')[0]==0?'white':'black' : 'black'):'black' }"  [style.background-color]="item.POrder_Status != 2 ? (item[31] == 0 ? '#454545':item[31] != undefined ?( item[31].includes(';')?(item[31].split(';')[0] == 0?'#454545':'#999999') :'white'): 'white'):item[31] == 2 ? '#999999':item[31] == 0 ? '#454545':item[31]!= undefined ? (item[31].includes(';')?(item[31].split(';')[0] == 0?'#454545':'#999999'):''):''">  <span *ngIf="item[31] != undefined">{{item[31] == 0 ? '': (item[31] == 1 ? '':item[31] == 2 ?'':  item[31].includes(';')?item[31].split(';')[1]:item[31])}}</span> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                    <div class="row col-md-12">
+                            <div class="col-md-5">
+                                    <p style="color: red;"><b>Note</b>: <b>V</b>-Vomited, <b>A</b>-Away, <b>H</b>-Hold, <b>N</b>-No Show, <b>R</b>-Refused, <b>O</b>-Other</p>
+                                </div>
+
+                                <div class="col-md-5 ">
+                                        <p><b>Users</b>: {{legend}}</p>
+                                </div>
+                                <div class="col-md-2">
+                                <button type="button" class="btn btn-danger" (click)="closeModel()" style="margin-top: -9px !important; margin-left: 148px !important;">Close</button>
+                           </div>
+                            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle11" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': modalControlIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle11 class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+                <!-- <button type="button" class="close" (click)="closeModel()">&times;</button> -->
+            </div>
+            <div class="modal-body">
+                <strong> {{controlledSubstancemessage}}</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="checkedflag==true" (click)="saveOrder(1)">Yes</button>
+                <button type="button" class="btn btn-danger" *ngIf="checkedflag==true" (click)="saveOrder(0)">No</button>
+                <button type="button" class="btn btn-primary" *ngIf="checkedflag==false" (click)="saveOrder(0)">Yes</button>
+                <button type="button" class="btn btn-danger" *ngIf="checkedflag==false" (click)="saveOrder(1)">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle12" style="padding-top: 126px" id="modaldes" role="dialog" [ngStyle]="{'display': modalTimeIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div #DemoHandle12 class="modal-header" style="height: 35px;padding:7px !important;background-color:#cccccc">
+                <h5 style="color:#000000">Add Time</h5>
+                <button type="button" class="close" (click)="modalTimeIsClose()">&times;</button>
+            </div>
+            <div class="modal-body bodystyle">
+                <form *ngIf="residentId!=0" [formGroup]="timeform">
+                    <div class="row form-group">
+                        <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                            Next Time
+                        </div> -->
+                        <div class="col-sm-4 col-md-7 col-lg-6">
+                            Next Time
+                            <ng-multiselect-dropdown formControlName="starttime" [data]="hoursList" [(ngModel)]="selectedntItems" [settings]="dropdownSettings_NextTime" class="form-control">
+                            </ng-multiselect-dropdown>
+                            <!-- <select class="form-control" formControlName="starttime">
+                   <option value="" disabled selected>Select</option>
+                   <option *ngFor="let item of hoursList" value="{{item.Hour_Id}}">{{item.Hour_Desc}}</option>
+                 </select> -->
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-1" style="margin-top: 10px;">
+                            <a class="btn" (click)="addTimes()">
+                                <i class="icon"></i>
+                                <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Time"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div *ngIf="timesArray.length>0">
+                        <div class="row" *ngFor="let item of timesArray;index as i" style="margin-top : 5px;">
+                            <span>
+                                <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">
+                                    <span *ngIf="i==0">
+                                        <strong>Start Time - </strong>
+                                    </span>{{item.Hour_Desc}}</span>
+                            <a class="btn editicon" style="color:red" (click)="removeTime(i)">
+                                <i class="icon"></i>
+                                <span class=" fa fa-times " title="Delete"></span>
+                            </a>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="modalTimeIsClose()" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle13" style="padding-top: 35px" id="modaldes" role="dialog" [ngStyle]="{'display': modalBarcodeIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div #DemoHandle13 class="modal-header" style="height: 35px;padding:7px !important;background-color:#cccccc">
+                <h5 style="color:#000000">Add Barcode</h5>
+                <button type="button" class="close" (click)="modalBarcodeIsClose()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form *ngIf="residentId!=0" [formGroup]="myform">
+                    <div class="row form-group">
+                        <div class="col-sm-2"> Barcode
+                            <span class="c1" *ngIf="this.myform.value.orderTypeId != 4 && this.myform.value.orderTypeId != 2">*</span>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" maxlength="20" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').replace(/(\..*)\./g, '$1');" id="txtbarcode" formControlName="barcode" [ngClass]="{
+                'is-valid':myform.controls.barcode.valid && barcodear.length > 0,
+                'is-invalid':myform.controls.barcode.invalid && myform.controls.barcode.touched && barcodear.length == 0}" class="form-control" />
+                            <div *ngIf="myform.controls.barcode.errors  && barcodear.length == 0" class="errorMessage">
+                                <div *ngIf="myform.controls.barcode.errors.required && barcodear.length == 0">
+                                    Barcode is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="button" id="btnok" value="Add" class="btn btn-success" [disabled]="myform.value.barcode=='' || myform.value.barcode==null" (click)="addBarcode(myform.value.barcode)" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div *ngIf="barcodear.length>0" style="margin-top : 5px;">
+                            <!-- <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                                <span
+                                    style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                            <a class="btn editicon" style="color:red" (click)="removeBarcode(i)">
+                                <i class="icon"></i>
+                                <span class=" fa fa-times " title="Delete"></span>
+                            </a>
+                            </span> -->
+                            <span *ngFor="let item of barcodear;index as i" style=" margin-right : 5px;">
+                                <span
+                                    style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                                <span *ngIf="autobarcode !== item">
+                                    <a class="btn editicon"
+                                        [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag ) ? 'none' : 'auto','color':'red'}"
+                                        (click)="removeBarcode(i)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-times " title="Delete"></span>
+                                    </a>
+                                </span>
+                                <span *ngIf="autobarcode == item" style="pointer-events: none;">
+                                    <a class="btn editicon"
+                                        [ngStyle]="{'pointer-events': (rightGridOnHoldChangesFlag || rightGridDCChangesFlag ) ? 'none' : 'auto','color':'grey'}"
+                                        >
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-times " title="Delete"></span>
+                                    </a>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <input type="button" id="btnok" value="Ok" class="btn btn-success"  [disabled]="barCodeFlag === 1" (click)="modalBarcodeIsClose()" /> -->
+                <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="modalBarcodeIsClose()" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle14" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': prnSchedleCheckModal ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle14 class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">PRN Alert</h5>
+                <button type="button" class="close" (click)="closePRNModel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- <strong> Are you sure you want to Complete Review this PRN Without HOA?</strong> -->
+                 <strong>{{prnAlert}}</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="CompletePRNReview()">Yes</button>
+                <button type="button" class="btn btn-danger" (click)="OpenHOAForPRN()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle15" id="exampleModal" style="padding-top: 126px;" role="dialog" [ngStyle]="{'display': drFirstModal ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog" style="max-width: 70%;">
+        <div class="modal-content">
+            <div #DemoHandle15 class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dr.First Orders</h5>
+                <button type="button" class="close" (click)="closeDrFirstModel()">&times;</button>
+            </div>
+            <div class="modal-body bodystyle">
+                <div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-bottom : 5px">
+                    <div class="btn-group" role="group">
+
+                        <button type="button" class="btn btn-default" [ngClass]="{'focus': active == 'new'}" (click)="getDrFirstOrderCheck()">New</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" [ngClass]="{'focus': active == 'Verified'}" (click)="getActiveDrFirst()">Active/Verified</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" [ngClass]="{'focus': active == 'void'}" (click)="getVoidDrFirst()">Void</button>
+                    </div>
+                </div>
+                <div *ngFor=" let item of drFirstOrderInfo;let i=index">
+                    <div class="card  card-light">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <!-- <input type="checkbox" value="{{item.PrescriptionID}}" name="drFirstgroup"
+        id="{{item.PrescriptionID}}" [(ngModel)]="item.Checked"
+        [disabled]="!item.Checked && maxNo"
+        (change)="onDrFirstSelect($event.target.checked?true:false,1, item.PrescriptionID)" /> -->
+                                <a data-toggle="collapse" data-parent="#accordion" href="{{'#dr'+i}}">
+                                    <small>
+                                            <em style="color:#000000">
+                                                <u>
+                                                    {{item.Drug}}</u>
+                                            </em>
+                                        </small>
+                                </a>
+
+                                <a *ngIf="acknowledge ==1" style="cursor: pointer;" (click)="Updatedrfirstacknowledge(item.DrFirstOrder_Id)" style="color:#4fb633">
+                                    <small>
+                                            <u>
+                                                Acknowledge
+                                            </u>
+                                        </small>
+
+                                </a>
+                                <div style="float: right">
+                                    <span *ngIf="item.DrFirstOrderXMLTrans_Approval == 1" style="color: #4fb633" class=" fa  fa-check (alias)"></span> &nbsp;
+                                    <!-- <input type="button" *ngIf="item.DrFirstOrderXMLTrans_Approval == 0" value="Acknowledge This DrFirst" (click)="ApproveDrFirstRecord(item.DrFirstOrder_Id)"
+          class="btn btn-info btn-xs" /> -->
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="{{'dr'+i}}" class="panel-collapse collapse">
+                            <div class="card-body">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Patient MR Number</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.PatientMRNumber}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Directions</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.AdditionalInst}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Other Notes</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.OtherNotes}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Patient Notes</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.PatientNotes}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Physician Ordered</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.Physician_Ordered}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Date Received</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.DrFirstOrder_CreatedDate | date :'MM/dd/yyyy hh:mm:ss a'}}
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="canceldate ==1">
+                                            <td>
+                                                <b>Cancel Date</b>
+                                            </td>
+                                            <td>:</td>
+                                            <td>{{item.Cancel_Date | date :'MM/dd/yyyy hh:mm:ss a'}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeDrFirstModel()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle16" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': modalDcAllSplits ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle16 class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+                <button type="button" class="close" (click)="discontinueSplits(0)">&times;</button>
+            </div>
+            <div class="modal-body">
+                <strong> Do you want to discontinue all splits?</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="discontinueSplits(1)">Yes</button>
+                <button type="button" class="btn btn-danger" (click)="discontinueSplits(0)">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle17" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': modalFieldsChangesDcConfirmation ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle17 class="modal-header" style="background-color: #ffdf62;">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+                <!-- <button type="button" class="close" (click)="fileldsChangesDcOrder(0)">&times;</button> -->
+            </div>
+            <div class="modal-body">
+                <strong>Changing this information requires a new order. If you select OK, this order will be discontinued.</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="fileldsChangesDcOrder(0)">Cancel</button>
+                <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="fileldsChangesDcOrder(1)">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 126px" id="enddatealert" role="dialog" [ngStyle]="{'display': modalEndDateConfirm ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle2 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">End Date Confirmation</h5>
+                <!-- <button type="button" class="close" (click)="closeModel()">&times;</button> -->
+            </div>
+            <div class="modal-body">
+               <strong>Please enter a reason for selecting End Date in the past</strong> 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="OpenNurseComments()">Ok</button>
+
+                <button type="button" class="btn btn-danger" (click)="CancelNurseComments()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 126px" id="literalBarcodeAlert" role="dialog" [ngStyle]="{'display': literalBarcodeAlert ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle2 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Literal Barcode Confirmation</h5>
+                <!-- <button type="button" class="close" (click)="closeModel()">&times;</button> -->
+            </div>
+            <div class="modal-body">
+               <strong>This order has no barcodes, RightMAR will not be able to chart it. Do you still want to complete the review?</strong> 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="LiteralBarcCompleteReview()">Complete Review</button>
+
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Cancel Review</button>
+            </div>
+        </div>
+    </div>
+</div>

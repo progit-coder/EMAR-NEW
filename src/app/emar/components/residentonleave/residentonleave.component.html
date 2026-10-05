@@ -1,0 +1,52 @@
+<app-commonmodal title="Temporary Absence">
+  <div class="modal-body">
+    <form [formGroup]="residentleaveform">
+      <div class="row form-group">
+        <div class="col-sm-3">Start Date
+          <span class="c1">*</span>
+        </div>
+        <div class="col-sm-5">
+          <input type="date" class="form-control" formControlName="leaveStartDate" [ngClass]="{
+            'is-valid':residentleaveform.controls.leaveStartDate.valid,
+            'is-invalid':residentleaveform.controls.leaveStartDate.invalid && residentleaveform.controls.leaveStartDate.touched
+          }" />
+          <div *ngIf="residentleaveform.controls.leaveStartDate.errors && (residentleaveform.controls.leaveStartDate.touched)"
+            class="errorMessage">
+            <div *ngIf="residentleaveform.controls.leaveStartDate.errors.required">
+              Start Date is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">End Date</div>
+        <div class="col-sm-5">
+          <input type="date" class="form-control" formControlName="leaveEndDate" />
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-3">Reason
+          <span class="c1">*</span>
+        </div>
+        <div class="col-sm-5">
+          <textarea class="form-control" formControlName="reason" [ngClass]="{
+            'is-valid':residentleaveform.controls.reason.valid,
+            'is-invalid':residentleaveform.controls.reason.invalid && residentleaveform.controls.reason.touched
+          }"></textarea>
+          <div *ngIf="residentleaveform.controls.reason.errors && (residentleaveform.controls.reason.touched)"
+            class="errorMessage">
+            <div *ngIf="residentleaveform.controls.reason.errors.required">
+              Reason is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <span class="errorMessage">{{errorMessage}}</span>&nbsp;&nbsp;&nbsp;
+    <input type="button" id="btnsave" value="Save"  *ngIf="pageConfig['AccessWrite']" (click)="saveClick()" class="btn btn-success"
+      [disabled]="!residentleaveform.valid" />
+    <input type="button" id="btncancel" value="Close"  data-dismiss="modal" (click)="activeDefaultModal.close('Close click')" class="btn btn-danger" />
+  </div>
+</app-commonmodal>

@@ -1,0 +1,94 @@
+<!-- Content Wrapper. Contains page content -->
+<!-- <div class="content-wrapper" style="margin-left: 20px !important;"> -->
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content"  style="margin-left: 0px !important;">
+
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Allergies Details</h3>
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3" style="float: right;">
+              <div style="text-align: right">
+                <input type="button" value="Add New Allergy" id="Addnew"
+                  *ngIf="pageConfig['AccessWrite'] && residentId != 0 && residentStatus === 1" class="btn btn-success btn-xs"
+                  (click)="getAllergiesbyAllergiesId(0)" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tblallergies" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Allergies</th>
+                  <th>Reaction</th>
+                  <th *ngIf="residentStatus === 1 && pageConfig['AccessWrite']"></th>
+                  <th></th>
+                  <th *ngIf="residentStatus === 1 && pageConfig['AccessWrite']"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of allergies;index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{item.ClassDrug_Name}}</td>
+                  <td>{{item.AllergyReactionCode}}</td>
+                  <td *ngIf="residentStatus === 1 && pageConfig['AccessWrite']">
+                    <a class="btn editicon" (click)="getAllergiesbyAllergiesId(item.PAllergy_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="btn editicon"  (click)=" getHistoryById(item.PAllergy_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+                  <td class="align-middle" *ngIf="residentStatus === 1 && pageConfig['AccessWrite']">
+                    <!-- <a class="btn editicon" style="color: red;" (click)="modalAllergiesopen(item.PAllergy_Id)">
+                        <i class="icon"></i>
+                        <span  title="Remove">Remove</span>
+                      </a> -->
+                      <a class="btn editicon" style="color:red;" (click)="modalAllergiesopen(item.PAllergy_Id)"><i
+                        class="icon"></i><span class=" fa fa-trash" title="Remove"></span> </a>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" style="padding-top: 35px;" id="exampleModal" role="dialog"
+  [ngStyle]="{'display': modalAllergyIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+        <button type="button" class="close" (click)="closeAllergyModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <strong> Do you want to Delete?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="RemoveAllergy()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="closeAllergyModel()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>

@@ -1,0 +1,1187 @@
+<!-- Content Wrapper. Contains page content -->
+<!-- <style>
+  .modal-header {
+    background-color: #428bca;
+  }
+</style> -->
+<!-- <div class="content-wrapper" style="margin-left: 20px !important;"> -->
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content" style="margin-left: 0px !important;">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Demographic Details</h3>
+      </div>
+      <div class="card-body">
+
+        <div class="table-responsive">
+          <table id="tbldemographicinfo" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Resident Name</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <!-- <th>Address</th>
+                <th>Phone</th> -->
+                <th>Patient MR Number</th>
+                <!-- <th>SSN</th> -->
+                <th>Status</th>
+                <th>
+                  <input type="button" (click)="getAllResidentHistoryById()" class="btn btn-warning btn-xs" value="History" />
+                  <!-- <a class="btn editicon" style="color:blue" (click)="getHistoryById()">
+                    <i class="icon"></i>
+                    <span class=" fa fa-history" title="History"></span>
+                  </a> -->
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="demographicInfoData">
+                <td>
+                  {{demographicInfoData.PatientLastName+", "+demographicInfoData.PatientFirstName+" "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}
+                </td>
+                <td>{{demographicInfoData.DOB |  date: 'MM/dd/yyyy '}}</td>
+                <td>{{demographicInfoData.AdministrativeSex}}</td>
+                <!-- <td>{{demographicInfoData.PatientAddress1}}</td>
+                <td>{{demographicInfoData.PhoneHome}}</td> -->
+                <td>{{demographicInfoData.PatientMRNumber}}</td>
+                <!-- <td>{{demographicInfoData.SSN}}</td> -->
+                <td>
+                  {{demographicInfoData.PVisit_Status == 3? 'Temporary Absence' : (demographicInfoData.PVisit_Status == 2 ? 'Discharged': 'Active' )}}
+                  <input type="button" id="statusButton"
+                    [value]="demographicInfoData.PVisit_Status == 3? 'Reactivate' : (demographicInfoData.PVisit_Status == 1 ? 'Temporary Absence': '' )"
+                    *ngIf="pageConfig['AccessRead'] && residentId != 0 && demographicInfoData.PVisit_Status != 2"
+                    class="btn btn-success btn-xs"
+                    (click)="updateLeaveStatus(demographicInfoData.Patient_Id,demographicInfoData.PVisit_Id, demographicInfoData.PVisit_Status)">
+
+                </td>
+                <td>
+                  <a class="btn editicon" *ngIf="pageConfig['AccessWrite']" (click)="getResidentDetailsById()">
+                    <i class="icon"></i>
+                    <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                  </a>
+
+                </td>
+                <td>
+                  <a class="btn editicon"  (click)="getHistoryById()">
+                    <i class="icon"></i>
+                    <span class=" fa fa-history iconColor" title="History"></span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal fade in modalstyle" id="demographicModal" role="dialog">
+    <div class="modal-dialog modal-lg" style="max-width: 75%;">
+      <div class="modal-content">
+        <div class="modal-header " style="background-color:#007bff;height: 50px ">
+          <h5 style="color: white;">Demographic Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+        </div>
+        <div class="modal-body bodystyle" *ngIf="hlSevenConfig">
+          <form [formGroup]="myform" name="Demographic">
+            <div class="row">
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ExternalPatientId">
+                <div class="right"><label>External PatientId</label></div>
+                <div class="left"><input type="text" id="txtexternalpatientid" formControlName="ExternalPatientId"
+                    class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.ExternalPatientId.valid && myform.controls.ExternalPatientId.dirty,
+                        'is-invalid':myform.controls.ExternalPatientId.invalid && myform.controls.ExternalPatientId.touched
+                                              }" />
+                  <div *ngIf="myform.controls.ExternalPatientId.errors && (myform.controls.ExternalPatientId.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.ExternalPatientId.errors.pattern">
+                      {{config.numericMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.ExternalPatientId.errors.maxlength">
+                      ExternalPatientId cannot be more than 50 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ExternalFacPatientId">
+                <div class="right"><label>Facility PatientId</label> </div>
+                <div class="left">
+                  <input type="text" id="txtexternalfacilitypatientid" formControlName="ExternalFacPatientId"
+                    class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.ExternalFacPatientId.valid && myform.controls.ExternalFacPatientId.dirty,
+                        'is-invalid':myform.controls.ExternalFacPatientId.invalid && myform.controls.ExternalFacPatientId.touched
+                                              }" />
+                  <div
+                    *ngIf="myform.controls.ExternalFacPatientId.errors && (myform.controls.ExternalFacPatientId.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.ExternalFacPatientId.errors.pattern">
+                      {{config.numericMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.ExternalFacPatientId.errors.maxlength">
+                      ExternalFacPatientId cannot be more than 50 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ExternalFacShortName">
+                <div class="right"><label>External Facility ShortName </label></div>
+                <div class="left">
+                  <input type="text" id="txtexternalfacshot" formControlName="ExternalFacShortName" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.ExternalFacShortName.valid && myform.controls.ExternalFacShortName.dirty,
+                        'is-invalid':myform.controls.ExternalFacShortName.invalid && myform.controls.ExternalFacShortName.touched
+                                              }" />
+                  <div
+                    *ngIf="myform.controls.ExternalFacShortName.errors && (myform.controls.ExternalFacShortName.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.ExternalFacShortName.errors.maxlength">
+                      ExternalFacShortName cannot be more than 50 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AlternatePatientId">
+                <div class="right"><label>Alternate PatientId</label></div>
+                <div class="left">
+                  <input type="text" id="txtalernatepatientid" formControlName="AlternatePatientId" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.AlternatePatientId.valid && myform.controls.AlternatePatientId.dirty,
+                        'is-invalid':myform.controls.AlternatePatientId.invalid && myform.controls.AlternatePatientId.touched
+                                              }" />
+                  <div *ngIf="myform.controls.AlternatePatientId.errors && (myform.controls.AlternatePatientId.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.AlternatePatientId.errors.maxlength">
+                      AlternatePatientId cannot be more than 50 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.AlternatePatientId.errors.pattern">
+                      {{config.numericMessage}}
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientFirstName">
+                <div class="right"><label>First Name</label></div>
+                <div class="left">
+                  <input type="text" id="txtresidentfirstname" formControlName="PatientFirstName" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.PatientFirstName.valid && myform.controls.PatientFirstName.dirty,
+                        'is-invalid':myform.controls.PatientFirstName.invalid && myform.controls.PatientFirstName.touched
+                                              }" />
+                  <div *ngIf="myform.controls.PatientFirstName.errors && (myform.controls.PatientFirstName.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientFirstName.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage3}}
+                    </div>
+                    <div *ngIf="myform.controls.PatientFirstName.errors.maxlength">
+                      PatientFirstName cannot be more than 100 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientMiddleInitial">
+                <div class="right"><label>Middle Name</label></div>
+                <div class="left">
+                  <input type="text" id="txtresidentmiddlename" formControlName="PatientMiddleInitial"
+                    (change)="checkPatientMiddleName()" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.PatientMiddleInitial.valid && myform.controls.PatientMiddleInitial.dirty,
+                        'is-invalid':myform.controls.PatientMiddleInitial.invalid && myform.controls.PatientMiddleInitial.touched
+                                              }" />
+                  <div
+                    *ngIf="myform.controls.PatientMiddleInitial.errors && (myform.controls.PatientMiddleInitial.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientMiddleInitial.errors.pattern">
+                      Alphabets(a-z). And special characters(- _ ’ `space) are allowed
+                    </div>
+                    <div *ngIf="myform.controls.PatientMiddleInitial.errors.maxlength">
+                      PatientMiddleInitial cannot be more than 1 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientLastName">
+                <div class="right"><label>Last Name</label></div>
+                <div class="left">
+                  <input type="text" id="txtresidentlastname" formControlName="PatientLastName" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.PatientLastName.valid && myform.controls.PatientLastName.dirty,
+                        'is-invalid':myform.controls.PatientLastName.invalid && myform.controls.PatientLastName.touched
+                                              }" />
+                  <div *ngIf="myform.controls.PatientLastName.errors && (myform.controls.PatientLastName.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientLastName.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage3}}
+                    </div>
+                    <div *ngIf="myform.controls.PatientLastName.errors.maxlength">
+                      PatientLastName cannot be more than 100 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NameTypeCode">
+                <div class="right"><label>Name Type Code</label></div>
+                <div class="left">
+                  <input type="text" id="txtnametypecode" formControlName="NameTypeCode" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.NameTypeCode.valid && myform.controls.NameTypeCode.dirty,
+                        'is-invalid':myform.controls.NameTypeCode.invalid && myform.controls.NameTypeCode.touched
+                                          }" />
+                  <div *ngIf="myform.controls.NameTypeCode.errors  && (myform.controls.NameTypeCode.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.NameTypeCode.errors.pattern">
+                      {{config.alphabetsMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.NameTypeCode.errors.maxlength">
+                      NameTypeCode cannot be more than 1 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MotherMaidenName">
+                <div class="right"><label>Mother Maiden Name</label></div>
+                <div class="left">
+                  <input type="text" id="txtmothermaidenname" formControlName="MotherMaidenName" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.MotherMaidenName.valid && myform.controls.MotherMaidenName.dirty,
+                        'is-invalid':myform.controls.MotherMaidenName.invalid && myform.controls.MotherMaidenName.touched
+                                              }" />
+                  <div *ngIf="myform.controls.MotherMaidenName.errors && (myform.controls.MotherMaidenName.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.MotherMaidenName.errors.maxlength">
+                      MotherMaidenName cannot be more than 100 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DOB">
+                <div class="right"><label>DOB</label></div>
+                <div class="left">
+                  <input type="date" id="txtdob" formControlName="DOB" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.DOB.valid && myform.controls.DOB.dirty,
+                      'is-invalid':myform.controls.DOB.invalid && myform.controls.DOB.touched
+                                          }" />
+                  <div *ngIf="myform.controls.DOB.errors && (myform.controls.DOB.touched)" class="errorMessage">
+
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdministrativeSex">
+                <div class="right"><label>Gender</label></div>
+                <div class="left">
+                  <div class="iconed-input">
+                    <select id="ddlgender" class="form-control" formControlName="AdministrativeSex" [ngClass]="{
+                            'is-valid':myform.controls.AdministrativeSex.valid && myform.controls.AdministrativeSex.dirty,
+                            'is-invalid':myform.controls.AdministrativeSex.invalid && myform.controls.AdministrativeSex.touched
+                          }">
+                      <option value="" disabled selected>Select</option>
+                      <option *ngFor="let item of genders" value="{{item.Gender_Code}}">{{item.Gender_Desc}}</option>
+                    </select>
+                    <div *ngIf="myform.controls.AdministrativeSex.errors && (myform.controls.AdministrativeSex.touched)"
+                      class="errorMessage">
+
+                    </div>
+                    <div class="valid-feedback feedback-icon">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="invalid-feedback feedback-icon customFeedback">
+                      <i class="fa fa-times"></i>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientAlias">
+                <div class="right"><label>Patient Alias</label></div>
+                <div class="left">
+                  <input type="text" id="txtalias" formControlName="PatientAlias" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.PatientAlias.valid && myform.controls.PatientAlias.dirty,
+                      'is-invalid':myform.controls.PatientAlias.invalid && myform.controls.PatientAlias.touched
+                                          }" />
+                  <div *ngIf="myform.controls.PatientAlias.errors && (myform.controls.PatientAlias.touched)  "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientAlias.errors.maxlength">
+                      PatientAlias cannot be more than 100 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Race">
+                <div class="right"><label>Race</label></div>
+                <div class="left">
+                  <input type="text" id="txtrace" formControlName="Race" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.Race.valid && myform.controls.Race.dirty,
+                      'is-invalid':myform.controls.Race.invalid && myform.controls.Race.touched
+                                          }" />
+                  <div *ngIf="myform.controls.Race.errors  && (myform.controls.Race.touched) " class="errorMessage">
+
+                    <div *ngIf="myform.controls.Race.errors.maxlength">
+                      Race cannot be more than 100 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientAddress1">
+                <div class="right"><label> Address 1</label></div>
+                <div class="left">
+                  <input type="text" id="txtaddress1" formControlName="PatientAddress1" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.PatientAddress1.valid && myform.controls.PatientAddress1.dirty,
+                        'is-invalid':myform.controls.PatientAddress1.invalid && myform.controls.PatientAddress1.touched
+                                          }" />
+                  <div *ngIf="myform.controls.PatientAddress1.errors && (myform.controls.PatientAddress1.touched)  "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientAddress1.errors.maxlength">
+                      PatientAddress1 cannot be more than 100 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientAddress2">
+                <div class="right"><label> Address 2</label></div>
+                <div class="left">
+                  <input type="text" id="txtaddress2" formControlName="PatientAddress2" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.PatientAddress2.valid && myform.controls.PatientAddress2.dirty,
+                        'is-invalid':myform.controls.PatientAddress2.invalid && myform.controls.PatientAddress2.touched
+                                          }" />
+                  <div *ngIf="myform.controls.PatientAddress2.errors && (myform.controls.PatientAddress2.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientAddress2.errors.maxlength">
+                      PatientAddress2 cannot be more than 100 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.CountyCode">
+                <div class="right"><label>Country</label></div>
+                <div class="left">
+                  <input type="text" id="txtcountry" formControlName="CountyCode" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.CountyCode.valid && myform.controls.CountyCode.dirty,
+                      'is-invalid':myform.controls.CountyCode.invalid && myform.controls.CountyCode.touched
+                                          }" />
+                  <div *ngIf="myform.controls.CountyCode.errors && (myform.controls.CountyCode.touched) "
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.CountyCode.errors.pattern">
+                      {{config.alphabetsMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.CountyCode.errors.maxlength">
+                      CountyCode cannot be more than 10 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientState">
+                <div class="right"><label>State</label></div>
+                <div class="left">
+                  <input type="text" id="txtstate" formControlName="PatientState" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.PatientState.valid && myform.controls.PatientState.dirty,
+                      'is-invalid':myform.controls.PatientState.invalid && myform.controls.PatientState.touched
+                                          }" />
+                  <div *ngIf="myform.controls.PatientState.errors && (myform.controls.PatientState.touched) "
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.PatientState.errors.pattern">
+                      {{config.alphabetsMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.PatientState.errors.maxlength">
+                      PatientState cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientCity">
+                <div class="right"><label>City</label></div>
+                <div class="left">
+                  <input type="text" id="txtcity" formControlName="PatientCity" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.PatientCity.valid && myform.controls.PatientCity.dirty,
+                      'is-invalid':myform.controls.PatientCity.invalid && myform.controls.PatientCity.touched
+                                          }" />
+                  <div *ngIf="myform.controls.PatientCity.errors && (myform.controls.PatientCity.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.PatientCity.errors.pattern">
+                      {{config.alphabetsMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.PatientCity.errors.maxlength">
+                      PatientCity cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientZipCode">
+                <div class="right"><label>Zipcode</label></div>
+                <div class="left">
+                  <input type="text" id="txtzipcode" formControlName="PatientZipCode" class="form-control"
+                    [textMask]="{mask: config.zipcode, guide: false}" [ngClass]="{
+                        'is-valid':myform.controls.PatientZipCode.valid && myform.controls.PatientZipCode.dirty,
+                        'is-invalid':myform.controls.PatientZipCode.invalid && myform.controls.PatientZipCode.touched
+                                          }" />
+                  <div *ngIf="myform.controls.PatientZipCode.errors && (myform.controls.PatientZipCode.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PatientZipCode.errors.maxlength">
+                      Zipcode must be 10 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PhoneHome">
+                <div class="right"><label>Phone</label></div>
+                <div class="left">
+                  <input type="text" id="txtphone" formControlName="PhoneHome" class="form-control"
+                    placeholder="(000)-000-0000" [textMask]="{mask: config.mobileNumberMask, guide: false}" [ngClass]="{
+                        'is-valid':myform.controls.PhoneHome.valid && myform.controls.PhoneHome.dirty,
+                        'is-invalid':myform.controls.PhoneHome.invalid && myform.controls.PhoneHome.touched
+                                      }" />
+                  <div *ngIf="myform.controls.PhoneHome.errors && (myform.controls.PhoneHome.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.PhoneHome.errors.minlength">
+                      Phone must be 14 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PhoneBusiness">
+                <div class="right"><label>Phone Business</label></div>
+                <div class="left">
+                  <input type="text" id="txtphnbusiness" formControlName="PhoneBusiness" class="form-control"
+                    placeholder="(000)-000-0000" [textMask]="{mask: config.mobileNumberMask, guide: false}" [ngClass]="{
+                        'is-valid':myform.controls.PhoneBusiness.valid && myform.controls.PhoneBusiness.dirty,
+                        'is-invalid':myform.controls.PhoneBusiness.invalid && myform.controls.PhoneBusiness.touched
+                                      }" />
+                  <div *ngIf="myform.controls.PhoneBusiness.errors && (myform.controls.PhoneBusiness.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.PhoneBusiness.errors.minlength">
+                      Phone must be 14 characters long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PrimaryLanguage">
+                <div class="right"><label>Primary Language</label></div>
+                <div class="left">
+                  <input type="text" id="txtprimarylang" formControlName="PrimaryLanguage" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.PrimaryLanguage.valid && myform.controls.PrimaryLanguage.dirty,
+                        'is-invalid':myform.controls.PrimaryLanguage.invalid && myform.controls.PrimaryLanguage.touched
+                                        }" />
+                  <div *ngIf="myform.controls.PrimaryLanguage.errors && (myform.controls.PrimaryLanguage.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.PrimaryLanguage.errors.maxlength">
+                      PrimaryLanguage cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MaritalStatus">
+                <div class="right"><label>Marital Status</label></div>
+                <div class="left">
+                  <input type="text" id="txtmaritalstatus" formControlName="MaritalStatus" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.MaritalStatus.valid && myform.controls.MaritalStatus.dirty,
+                        'is-invalid':myform.controls.MaritalStatus.invalid && myform.controls.MaritalStatus.touched
+                                        }" />
+                  <div *ngIf="myform.controls.MaritalStatus.errors && (myform.controls.MaritalStatus.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.MaritalStatus.errors.maxlength">
+                      MaritalStatus cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Religion">
+                <div class="right"><label>Religion</label></div>
+                <div class="left">
+                  <input type="text" id="txtreligiion" formControlName="Religion" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.Religion.valid && myform.controls.Religion.dirty,
+                      'is-invalid':myform.controls.Religion.invalid && myform.controls.Religion.touched
+                                        }" />
+                  <div *ngIf="myform.controls.Religion.errors && (myform.controls.Religion.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.Religion.errors.maxlength">
+                      Religion cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientMRNumber">
+                <div class="right"><label>MR Number</label></div>
+                <div class="left">
+                  <input type="text" id="txtmrnumber" formControlName="PatientMRNumber" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.PatientMRNumber.valid && myform.controls.PatientMRNumber.dirty,
+                        'is-invalid':myform.controls.PatientMRNumber.invalid && myform.controls.PatientMRNumber.touched
+                                        }" />
+                  <div *ngIf="myform.controls.PatientMRNumber.errors && (myform.controls.PatientMRNumber.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.PatientMRNumber.errors.pattern">
+                      {{config.numericMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.PatientMRNumber.errors.minlength">
+                      PatientMRNumber cannot be more than 5 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SSN">
+                <div class="right"><label>SSN</label></div>
+                <div class="left">
+                  <input type="text" id="txtssn" formControlName="SSN" class="form-control" placeholder="000-00-0000"
+                    [textMask]="{mask: config.ssn, guide: false}" [ngClass]="{
+                      'is-valid':myform.controls.SSN.valid && myform.controls.SSN.dirty,
+                      'is-invalid':myform.controls.SSN.invalid && myform.controls.SSN.touched
+                                        }" />
+                  <div *ngIf="myform.controls.SSN.errors && (myform.controls.SSN.touched)" class="errorMessage">
+
+                    <div *ngIf="myform.controls.SSN.errors.maxlength">
+                      SSN cannot be more than 20 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DriverLicense">
+                <div class="right"><label>Driver License</label></div>
+                <div class="left">
+                  <input type="text" id="txtdriverlicense" formControlName="DriverLicense" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.DriverLicense.valid && myform.controls.DriverLicense.dirty,
+                        'is-invalid':myform.controls.DriverLicense.invalid && myform.controls.DriverLicense.touched
+                                        }" />
+                  <div *ngIf="myform.controls.DriverLicense.errors && (myform.controls.DriverLicense.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.DriverLicense.errors.maxlength">
+                      DriverLicense cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MotherIdentifier">
+                <div class="right"><label>Mother Identifier</label></div>
+                <div class="left">
+                  <input type="text" id="txtmotheridentifier" formControlName="MotherIdentifier" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.MotherIdentifier.valid && myform.controls.MotherIdentifier.dirty,
+                        'is-invalid':myform.controls.MotherIdentifier.invalid && myform.controls.MotherIdentifier.touched
+                                            }" />
+                  <div *ngIf="myform.controls.MotherIdentifier.errors && (myform.controls.MotherIdentifier.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.MotherIdentifier.errors.maxlength">
+                      MotherIdentifier cannot be more than 100 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EthnicGroup">
+                <div class="right"><label> Ethnic Group</label></div>
+                <div class="left">
+                  <input type="text" id="txtethnicgroup" formControlName="EthnicGroup" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.EthnicGroup.valid && myform.controls.EthnicGroup.dirty,
+                      'is-invalid':myform.controls.EthnicGroup.invalid && myform.controls.EthnicGroup.touched
+                                        }" />
+                  <div *ngIf="myform.controls.EthnicGroup.errors && (myform.controls.EthnicGroup.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.EthnicGroup.errors.maxlength">
+                      EthnicGroup cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.BirthPlace">
+                <div class="right"><label>Birth Place</label></div>
+                <div class="left">
+                  <input type="text" id="txtbirthplace" formControlName="BirthPlace" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.BirthPlace.valid && myform.controls.BirthPlace.dirty,
+                      'is-invalid':myform.controls.BirthPlace.invalid && myform.controls.BirthPlace.touched
+                                        }" />
+                  <div *ngIf="myform.controls.BirthPlace.errors && (myform.controls.BirthPlace.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.BirthPlace.errors.maxlength">
+                      BirthPlace cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MultipleBirthIndicator">
+                <div class="right"><label>Multiple Birth Indicator</label></div>
+                <div class="left">
+                  <input type="text" id="txtmulbirthindi" formControlName="MultipleBirthIndicator" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.MultipleBirthIndicator.valid && myform.controls.MultipleBirthIndicator.dirty,
+                        'is-invalid':myform.controls.MultipleBirthIndicator.invalid && myform.controls.MultipleBirthIndicator.touched
+                                            }" />
+                  <div
+                    *ngIf="myform.controls.MultipleBirthIndicator.errors   && (myform.controls.MultipleBirthIndicator.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.MultipleBirthIndicator.errors.maxlength">
+                      MultipleBirthIndicator cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.BirthOrder">
+                <div class="right"><label>Birth Order</label></div>
+                <div class="left">
+                  <input type="text" id="txtbirthorder" formControlName="BirthOrder" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.BirthOrder.valid && myform.controls.BirthOrder.dirty,
+                      'is-invalid':myform.controls.BirthOrder.invalid && myform.controls.BirthOrder.touched
+                                        }" />
+                  <div *ngIf="myform.controls.BirthOrder.errors && (myform.controls.BirthOrder.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.BirthOrder.errors.maxlength">
+                      BirthOrder cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Citizenship">
+                <div class="right"><label>Citizenship</label></div>
+                <div class="left">
+                  <input type="text" id="txtcitizenship" formControlName="Citizenship" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.Citizenship.valid && myform.controls.Citizenship.dirty,
+                      'is-invalid':myform.controls.Citizenship.invalid && myform.controls.Citizenship.touched
+                                        }" />
+                  <div *ngIf="myform.controls.Citizenship.errors  && (myform.controls.Citizenship.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.Citizenship.errors.maxlength">
+                      Citizenship cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MilitaryStatus">
+                <div class="right"><label>Military Status</label></div>
+                <div class="left">
+                  <input type="text" id="txtmilitystatus" formControlName="MilitaryStatus" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.MilitaryStatus.valid && myform.controls.MilitaryStatus.dirty,
+                        'is-invalid':myform.controls.MilitaryStatus.invalid && myform.controls.MilitaryStatus.touched
+                                        }" />
+                  <div *ngIf="myform.controls.MilitaryStatus.errors && (myform.controls.MilitaryStatus.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.MilitaryStatus.errors.maxlength">
+                      MilitaryStatus cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Nationality">
+                <div class="right"><label>Nationality</label></div>
+                <div class="left">
+                  <input type="text" id="txtnationality" formControlName="Nationality" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.Nationality.valid && myform.controls.Nationality.dirty,
+                      'is-invalid':myform.controls.Nationality.invalid && myform.controls.Nationality.touched
+                                        }" />
+                  <div *ngIf="myform.controls.Nationality.errors && (myform.controls.Nationality.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.Nationality.errors.maxlength">
+                      Nationality cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeathDateTime">
+                <div class="right"><label>Death Date Tme</label></div>
+                <div class="left">
+                  <input type="date" id="txtdeathdatetime" formControlName="DeathDateTime" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.DeathDateTime.valid && myform.controls.DeathDateTime.dirty,
+                        'is-invalid':myform.controls.DeathDateTime.invalid && myform.controls.DeathDateTime.touched
+                                        }" />
+                  <div *ngIf="myform.controls.DeathDateTime.errors  && (myform.controls.DeathDateTime.touched)"
+                    class="errorMessage">
+
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeathIndicator">
+                <div class="right"><label>Death Indicator</label></div>
+                <div class="left">
+                  <input type="text" id="txtdeathindicator" formControlName="DeathIndicator" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.DeathIndicator.valid && myform.controls.DeathIndicator.dirty,
+                        'is-invalid':myform.controls.DeathIndicator.invalid && myform.controls.DeathIndicator.touched
+                                            }" />
+                  <div *ngIf="myform.controls.DeathIndicator.errors && (myform.controls.DeathIndicator.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.DeathIndicator.errors.pattern">
+                      {{config.alphabetsMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.DeathIndicator.errors.maxlength">
+                      DeathIndicator cannot be more than 1 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IdentityIndicator">
+                <div class="right"><label>Identity Indicator</label></div>
+                <div class="left">
+                  <input type="text" id="txtidentityindicator" formControlName="IdentityIndicator" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.IdentityIndicator.valid && myform.controls.IdentityIndicator.dirty,
+                        'is-invalid':myform.controls.IdentityIndicator.invalid && myform.controls.IdentityIndicator.touched
+                                            }" />
+                  <div *ngIf="myform.controls.IdentityIndicator.errors && (myform.controls.IdentityIndicator.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.IdentityIndicator.errors.maxlength">
+                      IdentityIndicator cannot be more than 1 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IdentityReliability">
+                <div class="right"><label>Identity Reliability</label></div>
+                <div class="left">
+                  <input type="text" id="txtidentityindicator" formControlName="IdentityReliability"
+                    class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.IdentityReliability.valid && myform.controls.IdentityReliability.dirty,
+                        'is-invalid':myform.controls.IdentityReliability.invalid && myform.controls.IdentityReliability.touched
+                                            }" />
+                  <div
+                    *ngIf="myform.controls.IdentityReliability.errors && (myform.controls.IdentityReliability.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.IdentityReliability.errors.maxlength">
+                      IdentityReliability cannot be more than 1 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LastUpdate">
+                <div class="right"><label>Last Update</label></div>
+                <div class="left">
+                  <input type="text" id="txtlastupdate" formControlName="LastUpdate" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.LastUpdate.valid && myform.controls.LastUpdate.dirty,
+                      'is-invalid':myform.controls.LastUpdate.invalid && myform.controls.LastUpdate.touched
+                                        }" />
+                  <div *ngIf="myform.controls.LastUpdate.errors && (myform.controls.LastUpdate.touched)  "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.LastUpdate.errors.maxlength">
+                      LastUpdate cannot be more than 25 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LastFacilityUpdate">
+                <div class="right"><label>Last Facility Update</label></div>
+                <div class="left">
+                  <input type="text" id="txtlastfacilityupdate" formControlName="LastFacilityUpdate"
+                    class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.LastFacilityUpdate.valid && myform.controls.LastFacilityUpdate.dirty,
+                        'is-invalid':myform.controls.LastFacilityUpdate.invalid && myform.controls.LastFacilityUpdate.touched
+                                            }" />
+                  <div
+                    *ngIf="myform.controls.LastFacilityUpdate.errors && (myform.controls.LastFacilityUpdate.touched) "
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.LastFacilityUpdate.errors.maxlength">
+                      LastFacilityUpdate cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SpeciesCode">
+                <div class="right"><label>Species Code</label></div>
+                <div class="left">
+                  <input type="text" id="txtspeciescode" formControlName="SpeciesCode" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.SpeciesCode.valid && myform.controls.SpeciesCode.dirty,
+                      'is-invalid':myform.controls.SpeciesCode.invalid && myform.controls.SpeciesCode.touched
+                                        }" />
+                  <div *ngIf="myform.controls.SpeciesCode.errors  && (myform.controls.SpeciesCode.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.SpeciesCode.errors.maxlength">
+                      SpeciesCode cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.BreedCode">
+                <div class="right"><label>Breed Code</label></div>
+                <div class="left">
+                  <input type="text" id="txtbreedcode" formControlName="BreedCode" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.BreedCode.valid && myform.controls.BreedCode.dirty,
+                      'is-invalid':myform.controls.BreedCode.invalid && myform.controls.BreedCode.touched 
+                                        }" />
+                  <div *ngIf="myform.controls.BreedCode.errors && (myform.controls.BreedCode.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.BreedCode.errors.maxlength">
+                      BreedCode cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Strain">
+                <div class="right"><label>Strain</label></div>
+                <div class="left">
+                  <input type="text" id="txtstrain" formControlName="Strain" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.Strain.valid && myform.controls.Strain.dirty,
+                      'is-invalid':myform.controls.Strain.invalid && myform.controls.Strain.touched 
+                                        }" />
+                  <div *ngIf="myform.controls.Strain.errors  && (myform.controls.Strain.touched)" class="errorMessage">
+
+                    <div *ngIf="myform.controls.Strain.errors.maxlength">
+                      Strain cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ProductionClassCode">
+                <div class="right"><label>Production Class Code</label></div>
+                <div class="left">
+                  <input type="text" id="txtproclasscode" formControlName="ProductionClassCode" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.ProductionClassCode.valid && myform.controls.ProductionClassCode.dirty,
+                        'is-invalid':myform.controls.ProductionClassCode.invalid && myform.controls.ProductionClassCode.touched 
+                                            }" />
+                  <div
+                    *ngIf="myform.controls.ProductionClassCode.errors  && (myform.controls.ProductionClassCode.touched)"
+                    class="errorMessage">
+
+                    <div *ngIf="myform.controls.ProductionClassCode.errors.maxlength">
+                      ProductionClassCode cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TribalCitizenship">
+                <div class="right"><label>Tribal Citizenship</label></div>
+                <div class="left">
+                  <input type="text" id="txttribalcitizenship" formControlName="TribalCitizenship" class="form-control"
+                    [ngClass]="{
+                        'is-valid':myform.controls.TribalCitizenship.valid && myform.controls.TribalCitizenship.dirty,
+                        'is-invalid':myform.controls.TribalCitizenship.invalid && myform.controls.TribalCitizenship.touched 
+                                            }" />
+                  <div *ngIf="myform.controls.TribalCitizenship.errors && (myform.controls.TribalCitizenship.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.TribalCitizenship.errors.maxlength">
+                      TribalCitizenship cannot be more than 50 character long.
+                    </div>
+                  </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="approval==0" style="color:red">
+            <div style="text-align:center">
+              <label>{{errorMessage}}</label>
+            </div>
+          </div>
+          <div style="text-align: right">
+            <input type="button" id="btnsave" value="Save" [disabled]="checkMiddleName"
+              *ngIf="pageConfig['AccessWrite'] && approval!=0 && demographicInfoData.PVisit_Status == 1"
+              (click)="insertDemographicDetails()" class="btn btn-success" data-dismiss="modal" />
+            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <ng4-loading-spinner [template]="template" [timeout]="99000" [loadingText]="'Please wait...'"></ng4-loading-spinner>
+</section>

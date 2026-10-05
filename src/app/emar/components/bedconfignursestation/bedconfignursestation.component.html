@@ -1,0 +1,235 @@
+<!-- <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Nurse Station Details</h3>
+      </div> -->
+<div class="modal-content" ngDraggable [handle]="DemoHandle1">
+  <div #DemoHandle1 class="modal-header " style="height: 50px ">
+    <h5>Nursing Station Details</h5>
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+
+  </div>
+  <div class="modal-body bodystyle">
+    <form [formGroup]="myform" autocomplete="off">
+      <div class="row form-group">
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name
+          <span class="c1">*</span>
+        </div> -->
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          Facility Name
+          <span class="c1">*</span>
+          <ng-multiselect-dropdown class="form-control" formControlName="facilityName" [(ngModel)]="selectedfacilityItems"
+          [data]="facilities" [settings]="dropdownSettings_Facility"  (onSelect)="onFacilitySelect($event)"
+          (onDeSelect)="onFacilityDeSelect($event)"  [ngClass]="{
+                'is-valid':myform.controls.facilityName.valid ,
+                'is-invalid':myform.controls.facilityName.invalid && myform.controls.facilityName.touched
+              }">
+        </ng-multiselect-dropdown>
+          <div *ngIf="myform.controls.facilityName.errors && (myform.controls.facilityName.touched)"
+            class="errorMessage">
+            <div *ngIf="myform.controls.facilityName.errors.required">
+              Facility Name is required.
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station External ID
+          <span class="c1" *ngIf="companyHlFlag===1">*</span>
+        </div> -->
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          Nursing Station External ID
+          <span class="c1" *ngIf="companyHlFlag===1">*</span>
+          <div class="iconed-input">
+            <input type="text" id="txtnursestationcode" formControlName="nursestationcode"
+              (change)="checkNurseStationCode()" class="form-control" [ngClass]="{
+                'is-valid':myform.controls.nursestationcode.valid,
+                'is-invalid':myform.controls.nursestationcode.invalid && myform.controls.nursestationcode.touched
+             }" />
+            <div *ngIf="myform.controls.nursestationcode.errors && (myform.controls.nursestationcode.touched)"
+              class="errorMessage">
+              <div *ngIf="myform.controls.nursestationcode.errors.required">
+                Nursing Station External ID is required.
+              </div>
+              <div *ngIf="myform.controls.nursestationcode.errors.maxlength">
+                Nursing Station External ID cannot be more than 25 characters long.
+              </div>
+              <div *ngIf="myform.controls.nursestationcode.errors.pattern">
+                {{config.alphaNumericMessage}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station Name
+          <span class="c1">*</span>
+        </div> -->
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          Nursing Station Name
+          <span class="c1">*</span>
+          <div class="iconed-input">
+            <input type="text" id="txtnursestationname" formControlName="nursestationname"
+              (change)="checkNurseStationName()" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.nursestationname.valid,
+                    'is-invalid':myform.controls.nursestationname.invalid && myform.controls.nursestationname .touched
+                     }" />
+            <div *ngIf="myform.controls.nursestationname.errors && (myform.controls.nursestationname.touched)"
+              class="errorMessage">
+              <div *ngIf="myform.controls.nursestationname.errors.required">
+                Nursing Station Name is required.
+              </div>
+              <div *ngIf="myform.controls.nursestationname.errors.maxlength">
+                Nursing Station Name cannot be more than 50 characters long.
+              </div>
+              <div *ngIf="myform.controls.nursestationname.errors.pattern">
+                {{config.alphaNumericFewSpecialCharactersMessage1}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Add Nursing Station Shifts <span class="c1">*</span>
+        </div> -->
+        <div class="col-sm-2 col-md-2 col-lg-2">
+          Add Nursing Station Shifts <span class="c1">*</span>
+          <a class="btn" (click)="shiftsopen()">
+            <i class="icon"></i>
+            <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Nursing Station Shifts"></span>
+          </a>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+        <div *ngIf="shiftsArray.length>0">
+          <div class="row" *ngFor="let item of shiftsArray;index as i" style="margin-top : 5px;">
+            <span>
+              <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item.NurseShifts_Name}}
+                {{item.FromHours}} - {{item.ToHours}}</span>
+              <a class="btn editicon" style="color:red" (click)="removeShift(i)">
+                <i class="icon"></i>
+                <span class=" fa fa-times " title="Delete"></span>
+              </a></span>
+          </div>
+        </div>
+      </div>
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Default Physician
+      </div> -->
+      <div class="col-sm-4 col-md-4 col-lg-4">
+        Default Physician
+        <ng-multiselect-dropdown formControlName="defaultphysician" class="form-control"
+          [(ngModel)]="selectedPhysicianItem" [data]="physiciansdrop" [settings]="dropdownSettings_Physician"
+          [ngClass]="{
+                  'is-valid':myform.controls.defaultphysician.valid,
+                  'is-invalid':myform.controls.defaultphysician.invalid && myform.controls.defaultphysician.touched
+                }">
+        </ng-multiselect-dropdown>
+        <div *ngIf="myform.controls.defaultphysician.errors && (myform.controls.defaultphysician.touched)"
+          class="errorMessage">
+          <!-- <div *ngIf="myform.controls.defaultphysician.errors.required">
+              Default Physician is required.
+            </div> -->
+        </div>
+      </div>
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+        </div> -->
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          Status
+          <div class="iconed-input">
+            <label class="switch">
+              <input type="checkbox" id="chkstatus" formControlName="status">
+              <div class="slider round">
+                <!--ADDED HTML -->
+                <span class="on">Active</span>
+                <span class="off">Inactive</span>
+                <!--END-->
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <!-- <div class="col-sm-8 col-md-8 col-lg-8" style="color:red">
+              <div style="text-align:center">
+                <label>{{existsErrorMessage}}</label>
+              </div>
+            </div> -->
+        <div style="text-align: right">
+          <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Save" (click)="insertNurseStation()"
+            [disabled]="myform.invalid || shiftsArray.length==0" class="btn btn-success" />&nbsp;
+          <input type="button" id="btnclose" value="Close" data-dismiss="modal" (click)="resetScreen()" #closeAddNursingStationModal
+            class="btn btn-danger" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 35px;height:450px;" id="modaldes" role="dialog"
+    [ngStyle]="{'display': modalShiftIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div #DemoHandle2 class="modal-header" style="height: 35px;padding:7px !important;">
+          <h5>Nurse Shifts</h5>
+          <button type="button" class="close" (click)="closeshiftModel()">&times;</button>
+        </div>
+        <div class="modal-body" style="height: 280px; overflow-y: scroll !important;">
+          <form [formGroup]="shiftsform">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2">Shift Name </div> -->
+              <div class="col-sm-6">
+                Shift Name
+                <input type="text" id="txtshits" formControlName="shiftname" class="form-control" />
+              </div>
+              <!-- <div class="col-sm-2">From Time </div> -->
+              <div class="col-sm-6">
+                From Time
+                <ng-multiselect-dropdown formControlName="fromtime" [data]="hoursList"
+                  [settings]="dropdownSettings_FromTime" class="form-control">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2">To Time</div> -->
+              <div class="col-sm-6">
+                To Time
+                <ng-multiselect-dropdown formControlName="totime" [data]="hoursList"
+                  [settings]="dropdownSettings_ToTime" class="form-control">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-5" style="margin-top: 13px;">
+                <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <input type="checkbox" formControlName="nextDayTime">
+                  </span>
+                  </div>
+                  <span class="form-control">Next day time</span>
+                </div>
+                </div>
+              <div class="col-sm-1 col-md-1 col-lg-1" style="margin-top: 10px;">
+                <a class="btn" (click)="addShiftForm()">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Shift"></span>
+                </a>
+              </div>
+            </div>
+            <div *ngIf="shiftsArray.length>0">
+              <div class="row" *ngFor="let item of shiftsArray;index as i" style="margin-top : 5px;">
+                <span>
+                  <span style="font-family:'Times New Roman', Times, serif;font-size: 15px"
+                    *ngIf="cmpTimeFormat==1">{{item.NurseShifts_Name}} {{item.Fromtime_hoursId-1}}:00 -
+                    {{item.Totime_hoursId-1}}:00</span>
+                  <span style="font-family:'Times New Roman', Times, serif;font-size: 15px"
+                    *ngIf="cmpTimeFormat==0">{{item.NurseShifts_Name}} {{item.FromHours}}{{item.FromTimeFormat}} -
+                    {{item.ToHours}}{{item.ToTimeFormat}}</span>
+                  <a class="btn editicon" style="color:red" (click)="removeShift(i)">
+                    <i class="icon"></i>
+                    <span class=" fa fa-times " title="Delete"></span>
+                  </a></span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <input type="button" id="btnsave" value="Save"  *ngIf="shiftsArray.length>0"
+            (click)="shiftSave()" class="btn btn-success" /> &nbsp;
+          <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="closeshiftModel()" />
+        </div>
+      </div>
+    </div>
+  </div>

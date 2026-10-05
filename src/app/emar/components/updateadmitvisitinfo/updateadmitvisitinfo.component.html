@@ -1,0 +1,135 @@
+<app-commonmodal title="Admit / Visit Info Details">
+  <div class="modal-body bodystyle">
+    <form [formGroup]="myform" name="census">
+      <div class="row form-group">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="right">
+            Facility Name
+          </div>
+          <div class="left" style="margin-top : 5px">
+            <label>{{Facilityname}}</label>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="right">
+            Nursing Station Name
+          </div>
+          <div class="left" style="margin-top : 5px">
+            <label>{{NursingStationName}}</label>
+          </div>
+        </div>
+        <div class="form-group" [formGroup]="fetchform" *ngFor="let field of fetchfields">
+          <div class="col-sm-12 col-lg-12" style="width: 204px">
+              <div class="right" style="margin-top : 20px">
+                  {{field.label}}
+              </div>
+              <div class="left" style="margin-top : 5px">
+                  <label>{{field.label =='Floor'? FloorName:field.label =='Wing'?WingName:field.label =='Room'?RoomName:field.label =='Bed'?BedName:''}}</label>
+              </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf=" fetchComToBed==1">
+          <div class="right">
+            Floor
+          </div>
+          <div class="left" style="margin-top : 5px">
+            <label>{{FloorName}}</label>
+          </div>
+        </div> -->
+        <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+          <div class="right" style="margin-top : 20px">
+            Wing
+          </div>
+          <div class="left" style="margin-top : 5px">
+            <label>{{WingName}}</label>
+          </div>
+        </div> -->
+
+        <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+          <div class="right" style="margin-top : 20px">
+            Room
+          </div>
+          <div class="left" style="margin-top : 5px">
+            <label>{{RoomName}}</label>
+          </div>
+        </div> -->
+        <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="fetchComToBed==1">
+          <div class="right" style="margin-top : 20px">
+            Bed
+          </div>
+          <div class="left" style="margin-top : 5px">
+            <label>{{BedName}}</label>
+          </div>
+        </div> -->
+      </div>
+      <div class="row form-group" style="margin-top : 20px" *ngIf="Hlsevenconfig">
+        <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="(displayfield.AdmitDate == 1 || displayfield.AdmitDate == 2) ">
+          <div class="right">
+            <label>Admit Date<span class="c1">*</span></label>
+          </div>
+          <div class="left">
+            <input  id="txtAdmitDate" #inputFocus formControlName="AdmitDate" [readonly]="displayfield.AdmitDate === 2" type="date" [max]="maxDate" class="form-control" [ngClass]="{
+                      'is-valid':myform.controls.AdmitDate.valid && myform.controls.AdmitDate.dirty,
+                      'is-invalid':myform.controls.AdmitDate.invalid && myform.controls.AdmitDate.touched
+                    }" />
+            <div *ngIf="myform.controls.AdmitDate.errors && (myform.controls.AdmitDate.touched)" class="errorMessage">
+
+              <div *ngIf="myform.controls.AdmitDate.errors.required">
+                Admit Date is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="(displayfield.PrimaryPhysicianNPI == 1 || displayfield.PrimaryPhysicianNPI == 2 || displayfield.PrimaryPhysicianLName == 1 || displayfield.PrimaryPhysicianLName == 2 || displayfield.PrimaryPhysicianFName == 1 || displayfield.PrimaryPhysicianFName == 2) ">
+          <div class="right" >
+            <label>Prescriber Name<span class="c1">*</span></label>
+          </div>
+          <div class="left">
+            <ng-multiselect-dropdown class="form-control" [disabled]="displayfield.PrimaryPhysicianNPI === 2 && displayfield.PrimaryPhysicianLName ===2 && displayfield.PrimaryPhysicianFName ===2" formControlName="physicianname" [data]="physiciansdrop"
+              [(ngModel)]="selectedphyItems" [settings]="dropdownSettings_Physician">
+            </ng-multiselect-dropdown>
+          <!-- <span *ngIf="defaultPhyFlag==1" style="color: red;">This Default Physician is for Nursing Station, Not assigned to Resident. Please assign and Save</span> -->
+        </div>
+      </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="(displayfield.DietType == 1 || displayfield.DietType == 2) ">
+          <div class="right" >
+            <label>Diet Type</label>
+          </div>
+          <div class="left">
+            <input type="text" id="txtDietType" [readonly]="displayfield.DietType == 2" formControlName="DietType" class="form-control" [ngClass]="{
+                                                              'is-valid':myform.controls.DietType.valid && myform.controls.DietType.dirty,
+                                                              'is-invalid':myform.controls.DietType.invalid && myform.controls.DietType.touched
+                                                            }" />
+            <div *ngIf="myform.controls.DietType.errors && (myform.controls.DietType.touched)" class="errorMessage">
+              <div *ngIf="myform.controls.DietType.errors.maxlength">
+                Diet Type cannot be more than 150 characters long.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="errormessage != ''" style="color:red">
+          <div class="right">
+              <label>{{errormessage}}</label>
+          </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="Approval==0" style="color:red">
+      <div style="text-align:center">
+        <label>{{approvalerrormessage}}</label>
+      </div>
+
+    </div>
+    <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="Approval!=0 && defaultPhyFlag==1" style="color:red">
+      <div style="text-align:center">
+        <label>This Default Prescriber  is for Nursing Station, Not assigned to Resident. Please assign and Save</label>
+      </div>
+    </div>
+    <button type="button" id="btnsave" *ngIf="pageConfig['AccessWrite'] && Approval!=0 && visitStatus === 1 && allFields===1"
+      [disabled]="myform.invalid" (click)="updateAdmitVisitInfo()" class="btn btn-success">Save</button> &nbsp;
+    <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button>
+  </div>
+</app-commonmodal>

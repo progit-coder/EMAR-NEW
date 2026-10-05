@@ -1,0 +1,255 @@
+<style>
+  .c1 {
+    color: red;
+  }
+</style>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>User Facility Role Config</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+              <li class="breadcrumb-item active">User Facility Role Config</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section> -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">User Role Config Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="roleconfigForm">
+            <div class="row form-group">
+
+              <div class="col-sm-2 col-md-2 col-lg-2">User
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="iconed-input">
+                  <ng-multiselect-dropdown formControlName="ddluser" [data]="userDrop" [(ngModel)]="selecteduItems"
+                    [disabled]="disabled" [settings]="dropdownSettings_Users" (onSelect)="onUserSelect($event)"
+                    (onDeSelect)="onUserDeSelect($event)" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.ddluser.valid ,
+                          'is-invalid':myform.controls.ddluser.invalid && myform.controls.ddluser.touched}">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.ddluser.errors && (myform.controls.ddluser.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.ddluser.errors.required">
+                      User is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-2 col-md-2 col-lg-2">Role
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="iconed-input">
+                  <!-- <select formControlName="roleDesc" (change)="getUserRoleFacilityConfigGridInfo()" class="form-control chosen-select" [ngClass]="{
+                            'is-valid':myform.controls.roleDesc.valid ,
+                            'is-invalid':myform.controls.roleDesc.invalid && myform.controls.roleDesc.touched
+                            }">
+                    <option value="" disabled selected>Select</option>
+                    <option *ngFor="let item of roleDrop" value="{{item.Role_Id}}">{{item.Role_Desc}}</option>
+                  </select> -->
+                  <ng-multiselect-dropdown formControlName="roleDesc" [data]="roleDrop" [(ngModel)]="selectedrItems"
+                    [disabled]="disabled" [settings]="dropdownSettings_Roles" (onSelect)="onRoleSelect($event)"
+                    (onDeSelect)="onRoleDeSelect($event)" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.roleDesc.valid ,
+                          'is-invalid':myform.controls.roleDesc.invalid && myform.controls.roleDesc.touched}">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.roleDesc.errors && (myform.controls.roleDesc.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.roleDesc.errors.required">
+                      Role is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Facility
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlfacility" [data]="roleFacilty"
+                  [(ngModel)]="selectedfItems" [disabled]="disabled" [settings]="dropdownSettings_Facility"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                          'is-valid':myform.controls.ddlfacility.valid,
+                          'is-invalid':myform.controls.ddlfacility.invalid && myform.controls.ddlfacility.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlfacility.errors && (myform.controls.ddlfacility.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlfacility.errors.required">
+                    Facility is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">Nurse Station
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestation"
+                  [data]="roleNurseStation" [(ngModel)]="selectednItems" [disabled]="disabled"
+                  [settings]="dropdownSettings_NurseStation" (onSelect)="onNurseStationSelect($event)"
+                  (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+                  (onDeSelectAll)="onNurseStationDeSelectAll($event)"
+                  [ngClass]="{
+                              'is-valid':myform.controls.ddlnursestation.valid,
+                              'is-invalid':myform.controls.ddlnursestation.invalid && myform.controls.ddlnursestation.touched}"></ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlnursestation.errors && (myform.controls.ddlnursestation.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlnursestation.errors.required">
+                    Nurse Station is required.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+                
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="chkstatus">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+              <span class="on">Active</span>
+              <span class="off">Inactive</span>
+              <!--END
+                    </div>
+                  </label>
+
+                </div>
+              </div> -->
+            </div>
+
+            <div style="text-align: right">
+              <input type="button" value="Save" [disabled]="myform.invalid"
+                (click)="InsertUserRoleFacilityConfigData()" class="btn btn-success" />
+              <input type="button" value="Excel" class="btn btn-primary" (click)="excelDownload()" />
+              <input type="button" value="Reset" class="btn btn-danger" (click)="reSet()" />
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">User Role Config View</h3>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tblUserRole" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Role</th>
+                  <th>Company Name</th>
+                  <th>Facility</th>
+                  <th>Nurse Station</th>
+                  <!-- <th>Created By </th>
+                  <th>Created Date </th> -->
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of roleUserObjDataList|gridFilter:searchText:'UserFacilityRoleConfig'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                  <td>{{item.DisplayName}}</td>
+                  <td>{{item.RoleName}}</td>
+                  <td>{{item.CompanyName}}</td>
+                  <td>{{item.FacilityName}}</td>
+                  <td>{{item.NurseStationNames}}</td>
+                  <!-- <td>{{item.User_DisplayName}}</td>
+                  <td>{{item.UserRole_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                  <td>
+                    <a class="btn editicon" style="color: blue"  (click)="getRoleDetailsByID(item.Role_ID,item.User_Id,item.Facility_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias)" title="Edit"></span>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="btn editicon" style="color:blue" (click)="getHistoryById(item.User_Id,item.Role_ID,item.Facility_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history" title="History"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="roleUserObjDataList.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="990000">
+    </ng4-loading-spinner>
+  </section>
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+  [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 80%;">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header " style="height: 50px ">
+        <h5>User Role Config History Details</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+      </div>
+      <div class="modal-body bodystyle">
+          <div class="row form-group" *ngIf="firstCreated">
+              <div class="col-sm-1"><strong>Created By:</strong></div>
+              <div class="col-sm-2">{{firstCreated.UpdatedBy}}</div>
+              <div class="col-sm-1"><strong>Created On:</strong></div>
+              <div class="col-sm-2">{{firstCreated.UpdatedOn}}</div>
+            </div>
+            <div class="row form-group">
+        <div class=" table table-responsive" style="overflow-x:hidden">
+          <table class="table table-bordered table-hover">
+            <tr>
+              <th *ngFor="let h of headers">{{h}}</th>
+            </tr>
+            <tr class="component-style table-row-component"
+              *ngFor="let item of records  | paginate: { itemsPerPage: 100, currentPage: p };" app-table-row [records]="item"
+              [headers]="headers">
+            </tr>
+          </table>
+          <pagination-controls (pageChange)="p = $event" *ngIf="records"></pagination-controls>
+        </div>
+      </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

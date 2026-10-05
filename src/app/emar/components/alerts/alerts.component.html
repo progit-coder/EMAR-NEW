@@ -1,0 +1,184 @@
+<section class="content">
+    <div class="row">
+      <div class="col-sm-3 col-lg-3 col-md-3" >
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Folders</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item active cursor">
+                <a class="nav-link" (click)="getAllAlertsRecords(1)">
+                  <i class="fa fa-inbox"></i> All
+                  <span class="badge bg-primary float-right"></span>
+                </a>
+              </li>
+              <li class="nav-item cursor">
+                <a (click)="getAllAlertsRecords(2)" class="nav-link">
+                  <i class="fa fa-star text-warning"></i> Important
+                  <span class="badge bg-warning float-right"></span>
+                </a>
+              </li>
+              <li class="nav-item cursor">
+                <a (click)="getAllAlertsRecords(3)" class="nav-link">
+                  <i class="fa fa-trash-o" title="Move To Trash"></i> Trash
+                  <span class="badge bg-warning float-right"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9 col-sm-9 col-lg-9" *ngIf="display==1">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Alerts</h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm" *ngIf="alertsData.length>0">
+                <input type="text" class="form-control" placeholder="Search Alerts" [(ngModel)]="searchText" (input)="onSearchChange($event.target.value)">
+                <div class="input-group-append">
+                  <div class="btn btn-primary">
+                    <i class="fa fa-search" title="Search"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <form [formGroup]="myform">
+              <div class=" row form-group">
+              <div class="col-sm-6">
+            <div class="mailbox-controls" *ngIf="alertsData.length>0">
+              <!-- Check all button -->
+            
+              <div class="btn-group" *ngIf="alertsData.length>0" style="float: left; display: table-header-group; padding-right: 10px; white-space: nowrap;">
+                <input type="checkbox"  *ngIf="alertsData.length>1" id="checkboxall" [(ngModel)]="CheckAll"
+                  (change)="onCheckAll($event.target.checked?true:false)" [ngModelOptions]="{standalone: true}">
+                  <label for="checkboxall"></label>&nbsp;
+                <button type="button" class="btn btn-default btn-sm"(click)="trashRecord()" ><i class="fa fa-trash-o"></i></button>
+              </div>
+              <button type="button" class="btn btn-default btn-sm" (click)="getRefreshRecords(1)"><i class="fa fa-refresh"></i></button>
+            </div>
+              </div>
+              <!-- <div class="float-right">
+                1-50/200
+              </div> -->
+              <!-- /.float-right -->
+              
+            <!-- <div class=" row form-group"> -->
+                  <div class="col-sm-3">
+                      <ng-multiselect-dropdown class="form-control" [(ngModel)]="selectedComItem" formControlName="company"
+                        [data]="companyMaster" [settings]="dropdownSettings_Company" (onSelect)="onCompanySelect($event)"
+                        (onDeSelect)="onCompanyDeSelect($event)">
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="col-sm-3">
+                      <ng-multiselect-dropdown class="form-control" [(ngModel)]="selectedResItem" formControlName="resident" [data]="residents"
+                        [settings]="dropdownSettings_Resident" (onSelect)="onResidentSelect($event)" (onSelectAll)="onResidentSelectAll($event)"
+                        (onDeSelect)="onResidentDeSelect($event)" (onDeSelectAll)="onResidentDeSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                    </div>
+                  </div>
+              </form>
+            <!-- </div> -->
+            <div class="table-responsive mailbox-messages">
+              <table class="table table-hover table-striped">
+                <tbody>
+                    <tr
+                    *ngFor="let item of alertsData| paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };" [style.background-color]="item.ReadFlag==0?'#ddd':'white'">
+                    <td >
+                      <form [formGroup]="myform">
+                      <input type="checkbox"formControlName="check" [checked]="CheckAll" value="{{item.AlertTextId}}"
+                      name="{{ item.AlertTextId }}" id="{{item.AlertTextId}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" >
+                      <label for="{{item.AlertTextId}}"></label>
+                    </form>
+                    </td>
+                    <td class="mailbox-star" style="cursor: pointer;" *ngIf="item.FavouriteFlag == 0 && alertType!='Trash'" ><a 
+                        (click)="favourite(item.AlertTextId,1)"><i class="fa fa-star-o text-warning"></i></a></td>
+                    <td style="cursor: pointer;" class="mailbox-star" *ngIf="item.FavouriteFlag == 1 && alertType!='Trash'"><a 
+                        (click)="favourite(item.AlertTextId,0)"><i class="fa fa-star text-warning"></i></a></td>
+                    <td style="cursor: pointer;" class="mailbox-name"><a (click)="alertBody(item)"
+                    >{{item.NurseStationName}}</a></td>
+                    <td style="cursor: pointer;" class="mailbox-name"><a  (click)="alertBody(item)"
+                    >{{item.ResidentName}}</a></td>
+                    <td class="mailbox-subject"><b>{{item.TypeName}}</b></td>
+                    <!-- <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td> -->
+                    <td class="mailbox-date">{{item.DateTime|date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /.table -->
+            </div>
+            <!-- /.mail-box-messages -->
+          </div>
+          <!-- /.card-body -->
+          <!-- <div class="card-footer p-0">
+            <div class="mailbox-controls" *ngIf="alertsData.length>0">
+              <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+              </div>
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+              <div class="float-right">
+                1-50/200
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <pagination-controls (pageChange)="getAllAlerts($event)" *ngIf="alertsData.length > 0"></pagination-controls>
+        <!-- /. box -->
+      </div>
+      <div class="col-md-9 col-sm-9 col-lg-9" *ngIf="display==2">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Alerts</h3>
+          </div>
+          <div class="card-body p-0">
+            <br/>
+            <div class="row form-group" *ngIf="alertTextDisplay">
+              <div class="col-sm-12 col-12"> <strong  style="color:blue;">&nbsp;&nbsp;{{alertTextDisplay.ResidentName}}</strong>&nbsp;&nbsp;<strong style="color: red;"> ({{alertTextDisplay.TypeName}})</strong></div>
+          </div><br/>
+          <div class="row form-group" *ngIf="fileViewData!=undefined && fileViewData!=null">
+            <div class="col-sm-12">
+              <textarea class="form-control" cols="10" rows="6">{{fileViewData.FileData}}</textarea>
+            </div>
+          </div>
+            <div class="row form-group" *ngIf="fileViewData!=undefined && fileViewData!=null">
+            <div class="col-sm-12">
+              <h3>{{fileAck}}</h3>
+              <textarea class="form-control" cols="10" rows="3">{{fileViewData.FileAckData}}</textarea>
+            </div>
+          </div>
+            <div class="row form-group">
+            <div class="col-sm-12" *ngIf="fileError.length>0">
+              <h3>File Error</h3>
+              <table style="border: 1px  lightgrey">
+                <tbody>
+                  <tr *ngFor="let item of fileError">
+                    <td>{{item}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

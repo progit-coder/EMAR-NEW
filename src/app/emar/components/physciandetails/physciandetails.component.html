@@ -1,0 +1,644 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Company Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Company Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>    
+  </section>  -->
+
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Prescriber Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="myform">
+            <div class="row form-group">
+                <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility
+                    <span class="c1">*</span>
+                  </div> -->
+                  <div class="col-sm-4 col-md-4 col-lg-4">
+                    Facility
+                    <span class="c1">*</span>
+                    <ng-multiselect-dropdown class="form-control" formControlName="ddlfacility" [data]="roleFacilty"
+                      [(ngModel)]="selectedfItems" [settings]="dropdownSettings_Facility"
+                      (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" 
+                      (onSelectAll)="onFacilitySelectAll($event)"  (onDeSelectAll)="onFacilityDeSelectAll($event)"
+                     
+                      [ngClass]="{
+                              'is-valid':myform.controls.ddlfacility.valid,
+                              'is-invalid':myform.controls.ddlfacility.invalid && myform.controls.ddlfacility.touched}">
+                    </ng-multiselect-dropdown>
+                    <div *ngIf="myform.controls.ddlfacility.errors && (myform.controls.ddlfacility.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.ddlfacility.errors.required">
+                        Facility is required.
+                      </div>
+                    </div>
+    
+              
+                  </div> 
+                  <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                  Nursing Station
+                  <span class="c1">*</span>
+                  <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestation"
+                    [data]="roleNurseStation" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStation"
+                    [ngClass]="{
+                                'is-valid':myform.controls.ddlnursestation.valid,
+                                'is-invalid':myform.controls.ddlnursestation.invalid && myform.controls.ddlnursestation.touched}">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.ddlnursestation.errors && (myform.controls.ddlnursestation.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.ddlnursestation.errors.required">
+                      Nursing Station is required.
+                    </div>
+                  </div>
+                  </div>  -->
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                Prescriber NPI
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Prescriber NPI
+                <span class="c1">*</span>
+                <input type="text" class="form-control" formControlName="phynpi" [ngClass]="{
+                      'is-valid':myform.controls.phynpi.valid,
+                      'is-invalid':myform.controls.phynpi.invalid && myform.controls.phynpi.touched
+                    }" [textMask]="{mask: pharmacynpi, guide: false}" (keyup)="checkPhyArray()">
+                <div *ngIf="myform.controls.phynpi.errors && (myform.controls.phynpi.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.phynpi.errors.required">
+                    Prescriber NPI is required.
+                  </div>
+                  <div *ngIf="myform.controls.phynpi.errors.maxlength">
+                    Prescriber Npi should not exceed more than 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.phynpi.errors.minlength">
+                    Prescriber Npi must be 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.phynpi.errors.pattern">
+                    {{config.numericMessage}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Prescriber Last Name
+                <span class="c1">*</span>
+                <input type="text" class="form-control" formControlName="phylastname" [ngClass]="{
+                      'is-valid':myform.controls.phylastname.valid,
+                      'is-invalid':myform.controls.phylastname.invalid && myform.controls.phylastname.touched
+                    }">
+                <div *ngIf="myform.controls.phylastname.errors && (myform.controls.phylastname.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.phylastname.errors.required">
+                    Prescriber LastName is required.
+                  </div>
+                  <div *ngIf="myform.controls.phylastname.errors.maxlength">
+                    Prescriber LastName should not exceed more than 25 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.phylastname.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Prescriber First Name
+                <span class="c1">*</span>
+                <input type="text" class="form-control" formControlName="phyfirstname" [ngClass]="{
+                      'is-valid':myform.controls.phyfirstname.valid,
+                      'is-invalid':myform.controls.phyfirstname.invalid && myform.controls.phyfirstname.touched
+                    }">
+                <div *ngIf="myform.controls.phyfirstname.errors && (myform.controls.phyfirstname.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.phyfirstname.errors.required">
+                    Prescriber FirstName is required.
+                  </div>
+                  <div *ngIf="myform.controls.phyfirstname.errors.maxlength">
+                    Prescriber FirstName should not exceed more than 25 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.phyfirstname.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                  </div>
+                </div>
+              </div>
+             
+                <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                    Physician First Name
+                    <span class="c1">*</span>
+                  </div> -->
+             
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Prescriber Address 1
+                <span class="c1">*</span>
+                <input type="text" class="form-control" formControlName="phyadd1" [ngClass]="{
+                      'is-valid':myform.controls.phyadd1.valid,
+                      'is-invalid':myform.controls.phyadd1.invalid && myform.controls.phyadd1.touched
+                    }">
+                <div *ngIf="myform.controls.phyadd1.errors && (myform.controls.phyadd1.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.phyadd1.errors.required">
+                    Prescriber Address 1 is required.
+                  </div>
+                  <div *ngIf="myform.controls.phyadd1.errors.maxlength">
+                    Prescriber Address 1 should not exceed more than 100 characters long.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Prescriber Address 2
+                <input type="text" class="form-control" formControlName="phyadd2" [ngClass]="{
+                  'is-valid':myform.controls.phyadd2.valid,
+                  'is-invalid':myform.controls.phyadd2.invalid && myform.controls.phyadd2.touched
+                }">
+                <div *ngIf="myform.controls.phyadd2.errors && (myform.controls.phyadd2.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.phyadd2.errors.required">
+                    Prescriber Address 2 is required.
+                  </div>
+                  <div *ngIf="myform.controls.phyadd2.errors.maxlength">
+                    Prescriber Address 2 should not exceed more than 100 characters long.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-4">
+                Country
+                <select id="ddlcountry" formControlName="country" class="form-control"
+                 [ngClass]="{  'is-valid':myform.controls.country.valid,
+                            'is-invalid':myform.controls.country.invalid && myform.controls.country.touched
+                          }">
+                  <option value="" disabled selected>Select</option>
+                  <option *ngFor="let item of countries" value="{{item.Country_Id}}">{{item.Country_Code}}</option>
+                </select>
+                <div *ngIf="myform.controls.country.errors && (myform.controls.country.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.country.errors.required">
+                    Country is required.
+                  </div>
+                </div>
+                <div class="valid-feedback feedback-icon">
+                  <i class="fa fa-check"></i>
+                </div>
+                <div class="invalid-feedback feedback-icon customFeedback">
+                  <i class="fa fa-times"></i>
+                </div>
+              </div>
+
+              <div class="col-sm-2 col-md-2 col-lg-4">
+                State
+                <span class="c1">*</span>
+                <input type="text" id="txtstate" formControlName="state" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.state.valid ,
+                    'is-invalid':myform.controls.state.invalid && myform.controls.state.touched
+                  }">
+                <div *ngIf="myform.controls.state.errors && (myform.controls.state.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.state.errors.required">
+                    State is required.
+                  </div>
+                  <div *ngIf="myform.controls.state.errors.maxlength">
+                    State must be 2 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.state.errors.minlength">
+                    State must be 2 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.state.errors.pattern">
+                    {{config.alphabetsMessage}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                City
+                <span class="c1">*</span>
+                <input type="text" id="txtcity" formControlName="city" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.city.valid ,
+                        'is-invalid':myform.controls.city.invalid && myform.controls.city.touched
+                      }">
+                <div *ngIf="myform.controls.city.errors && (myform.controls.city.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.city.errors.required">
+                    City is required.
+                  </div>
+                  <div *ngIf="myform.controls.city.errors.maxlength">
+                    City cannot be more than 50 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.city.errors.pattern">
+                    {{config.alphaNumericFewSpecialCharactersMessage5}}
+                  </div>
+                </div>
+              </div>
+                            
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Zip Code
+                <span class="c1">*</span>
+                <input type="text" id="txtzipcode"  [(ngModel)]="zipcodeValue" formControlName="zipcode" class="form-control"
+                  placeholder="00000-0000" (keyup)="zipcodeChange($event.target.value)" [ngClass]="{
+                                        'is-valid':myform.controls.zipcode.valid  ,
+                                        'is-invalid':myform.controls.zipcode.invalid && myform.controls.zipcode.touched
+                                      }" />
+                <div *ngIf="myform.controls.zipcode.errors && (myform.controls.zipcode.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.zipcode.errors.maxlength">
+                    Zip Code must be 10 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.zipcode.errors.minlength">
+                    Zip Code must be 5 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.zipcode.errors.pattern">
+                    Zi Code Only Numbers(0-9), special characters(-) are allowed.
+                  </div>
+                  <div *ngIf="zipcodeisvalid==false && zipcodeValue!=''">
+                    Zip Code should be either 5 or 9 digits.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Phone
+                <span class="c1">*</span>
+                    <input type="text" formControlName="phone" class="form-control" 
+                      placeholder="(000)-000-0000" [textMask]="{mask: mobileNumberMask, guide: false}" [ngClass]="{
+                      'is-valid':myform.controls.phone.valid && myform.controls.phone.dirty,
+                      'is-invalid':myform.controls.phone.invalid && myform.controls.phone.touched
+                    }" />
+                    <div *ngIf="myform.controls.phone.errors && (myform.controls.phone.touched)" class="errorMessage">
+                      <div *ngIf="myform.controls.phone.errors.pattern">
+                        Invalid Phone Number
+                      </div>
+                      <div *ngIf="myform.controls.phone.errors.required">
+                        Phone is required.
+                      </div>
+                      <div *ngIf="myform.controls.phone.errors.maxlength">
+                        Phone must be 10 characters long.
+                      </div>
+                      <div *ngIf="myform.controls.phone.errors.minlength">
+                        Phone must be 10 characters long.
+                      </div>
+                    </div>
+              </div>
+             
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Credentials/degree
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="credentials" [data]="credentialsList"
+                [(ngModel)]="selectedCredentialItems" (onSelect)="onCredentialsChange($event)"
+                (onDeSelect)="onCredentialsChange($event)" [settings]="dropdownSettings_credentials"[ngClass]="{
+                  'is-valid':myform.controls.credentials.valid ,
+                  'is-invalid':myform.controls.credentials.invalid && myform.controls.credentials.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.credentials.errors && (myform.controls.credentials.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.credentials.errors.required">
+                    Credentials is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-4 col-md-4 col-lg-6">
+                Primary Specialty
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="primarySpeciality" [data]="primarySpecialityList"
+                [(ngModel)]="primarySpecialityItems" (onSelect)="onPrimarySpecialityChange($event)"
+                (onDeSelect)="onPrimarySpecialityChange($event)" [settings]="dropdownSettings_primarySpeciality"[ngClass]="{
+                  'is-valid':myform.controls.primarySpeciality.valid ,
+                  'is-invalid':myform.controls.primarySpeciality.invalid && myform.controls.primarySpeciality.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.primarySpeciality.errors && (myform.controls.primarySpeciality.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.primarySpeciality.errors.required">
+                    Primary Speciality is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-6">
+                Supervising Physician
+                <span class="c1" *ngIf=superCredentialFlag>*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="supervisingPhysician"   [(ngModel)]="supervisingPhysicianList"
+              [data]="updatedSuperphyst" (onSelect)="onsupervisingPhysicianSelect($event)"
+                (onDeSelect)="onsupervisingPhysicianDeSelect($event)" [settings]="dropdownSettings_supervisingPhysician"[ngClass]="{
+                  'is-valid':myform.controls.supervisingPhysician.valid ,
+                  'is-invalid':myform.controls.supervisingPhysician.invalid && myform.controls.supervisingPhysician.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.supervisingPhysician.errors && (myform.controls.supervisingPhysician.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.supervisingPhysician.errors.required && superCredentialFlag">
+                    Primary Speciality is required.
+                  </div>
+                </div>
+              </div>
+            </div>        
+            
+            <div class="row form-group" formGroupName="licenseform" name="licenseform">
+               
+                <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                  License Type
+                  <ng-multiselect-dropdown class="form-control" formControlName="license" [data]="licenseList"
+                  [(ngModel)]="licenseItems" (onSelect)="onLicenseSelect($event)" 
+  
+                  (onDeSelect)="onLicenseDeSelect($event)" [settings]="dropdownSettings_license"[ngClass]="{
+                    'is-valid':myform.controls.licenseform.controls.license.valid ,
+                    'is-invalid':myform.controls.licenseform.controls.license.invalid && myform.controls.licenseform.controls.license.touched}">
+                  </ng-multiselect-dropdown>
+                 
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  State/DEA
+                  <span class="c1">*</span>
+                  <ng-multiselect-dropdown class="form-control" formControlName="State" [data]="Statelist"
+                  [(ngModel)]="Stateitems" (onSelect)="onStateSelect($event)"
+                  (onDeSelect)="onStateDeSelect($event)" [settings]="dropdownSettings_State"[ngClass]="{
+                    'is-valid': myform.get('licenseform.State')?.valid,
+                    'is-invalid': myform.get('licenseform.State')?.invalid && myform.get('licenseform.State')?.touched
+                  }">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.get('licenseform.State')?.errors && myform.get('licenseform.State')?.touched" class="errorMessage"
+                  class="errorMessage">
+                  <div *ngIf="myform.get('licenseform.State')?.errors.required ">
+                      State is required.
+                    </div>
+                  </div>
+                </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Number
+                <span class="c1">*</span>
+                <input type="text" id="txtnumber" formControlName="Number" [(ngModel)]="newRecord"  class="form-control" [ngClass]="{
+                  'is-valid':myform.get('licenseform.Number')?.valid && myform.get('licenseform.Number')?.dirty,
+                  'is-invalid':myform.get('licenseform.Number')?.invalid && myform.get('licenseform.Number')?.touched
+                }">
+                <div *ngIf="myform.get('licenseform.Number')?.errors && (myform.get('licenseform.Number')?.touched) " class="errorMessage">
+                  <div *ngIf="myform.get('licenseform.Number')?.errors.required && Number==false">
+                    Number is required.
+                  </div>
+                
+                  
+                </div>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <button
+                type="button"  class="btn btn-success" 
+                (click)="submitLicenseForm()"  [disabled]="!myform.get('licenseform').valid || (( myform.value.licenseform.State == null) ||( myform.value.licenseform.Number == null) || licensearray.length>=3 )" >
+            Add License
+        </button>
+              <!-- <input type="submit" class="btn btn-success" value="Add License" [disabled]="records.length >= 3" (click)="addNumber()"  /> -->
+              </div>
+              </div>
+          
+              <div class="row form-group">
+                <!-- <ul>
+                <li *ngFor="let record of licensearray; let i = index">
+                  {{ record.State[0].item_name }}
+                  
+                  <input type="button"  class="btn btn-danger" value="Remove" (click)="removeNumber(i)"  />
+                </li>
+              </ul> -->
+              <table class="table"  *ngIf = hidelicenseArray>
+                <tr *ngFor="let record of licensearray; let i = index">
+                  <!-- <td class="custom-td col-sm-4 col-md-4 col-lg-4" >
+                    {{ (fetchlicenseArray ? record[i].State :record.State[0].State_Code)}}
+                  </td> -->
+                  <td class="custom-td col-sm-4 col-md-4 col-lg-4">
+                    <!-- <ng-container *ngIf="fetchlicenseArray">
+                      {{ record.State }}
+                    </ng-container> -->
+                     
+                      {{ record.State }}
+                  
+                   
+                    <!-- <ng-container *ngIf="insertlicenseArray">
+                      {{ record.State[0].State_Code }}
+                    </ng-container> -->
+                    <!-- <ng-template #stateCode>
+                      {{ record.State[0].State_Code }}
+                    </ng-template> -->
+                  </td>
+                  
+                  <!-- <td class="custom-td col-sm-2 col-md-2 col-lg-2">
+                    {{record.license[0].item_name}}
+                  </td> -->
+                  <!-- <td class="custom-td col-sm-4 col-md-4 col-lg-4">
+                    {{ (fetchlicenseArray ? this.licenseNumber : record.number)}}
+                  </td> -->
+                  <td class="custom-td col-sm-4 col-md-4 col-lg-4">
+                    
+                      {{ record.Number }}
+                   
+                   
+                    <!-- <ng-template #stateCodes>
+                      {{ record.number }}
+                    </ng-template> -->
+                  </td>
+                  
+                  <td class="custom-td" ><input type="button"  class="btn btn-danger" value="Remove" (click)="removeNumber(i)"/></td>
+                </tr>
+
+              </table>
+              </div>
+           
+            <div class="row form-group">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+              <div style="text-align: right">
+                <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Save" [disabled]="myform.invalid || savedisable==true ||  (zipcodeisvalid==false && zipcodeValue!='') || licensearray.length === 0 "
+                  (click)="insertPhysicianDetails()" class="btn btn-success" /> &nbsp;
+                <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+              </div>
+          </div>
+          </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Prescriber Details View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                  <p>This is a large modal.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Prescriber History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-3">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive
+                Prescriber</b></label></span>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-7">
+              <div class="color-container">
+                <p>Note:</p>
+               <div class="color-wrapper">
+                <div class="red-container">
+                  <span class="box-red"></span>
+                  <p>Prescriber with Invalid Details </p>
+                </div>
+                <div class="peach-container">
+                  <span class="box-peach"></span>
+                  <p>Prescriber's Supervising physician have Invalid details</p>
+                </div>
+               </div>
+              </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+              <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']"  value="Update Status" (click)="updatePhysicianStatus()"
+                [disabled]="UpdateStatus" class="btn btn-danger" />
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                      (change)="onCheckAll($event.target.checked?true:false)"></th>
+                  <th>Facility</th> 
+                  <!-- <th>Nursing Station Name</th>  -->
+                  <th>Prescriber NPI</th>
+                  <th>Prescriber Name</th>
+                  <!-- <th>Address1</th>
+                  <th>Address2</th> -->
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Country</th>
+                  
+                 
+                  <th>Zip Code</th>
+                  <!-- <th>Status</th>
+                  <th>Created By</th>
+                  <th>Created Date</th> -->
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <th style="display: none"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of phyisicianList | gridFilter:searchText:'PhysicianDetails' | paginate: { itemsPerPage: gridPagination, currentPage: p };" [ngStyle]="{'background': item.ColorFlag == 1 ? '#e7503c' : item.ColorFlag == 2? 'peachpuff' : 'white'}">
+                  <td> <input type="checkbox" [checked]="CheckAll" value="{{item.Physician_Id}}"
+                      name="{{ item.Physician_Id }}" id="{{item.Physician_Id}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                      <td>{{item.Facility_Name}}</td>
+                  <!-- <td>{{item.NurseStation_Name}}</td> -->
+                  <td>{{item.PhysicianNPI}}</td>
+                  <td> {{item.PhysicianName}}</td>
+                  <td>{{item.PhysicianCity}}</td>
+                  <td>{{item.PhysicianState}}</td>
+                  <!-- <td>{{item.PhysicianAddress1}}</td>
+                  <td>{{item.PhysicianAddress2}}</td> -->
+                  <td>{{item.PhysicianCountry}}</td>
+                  <td>{{item.PhysicianZip}}</td>
+                  <!--   <td *ngIf="item.Physician_Status==1">Active</td>
+                  <td *ngIf="item.Physician_Status==0">InActive</td>
+               <td>{{item.CreatedBy}}</td>
+                  <td>{{item.Physician_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon" (click)="getPhysicianDetailsById(item.PhysicianNPI,1,item.Facility_Status,item.Facility_Id )">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                  <td style="display: none">
+                    <a class="btn editicon"  (click)="getHistoryById(item.Physician_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+                  <!-- <td>
+                    <input type="button" class="btn btn-primary" value="Add New Facility" (click)="addNewFacility(item.Company_Id)" />
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+  <div class="modal fade modalstyle" ngDraggable id="exampleModal" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': supervisingInactiveModal ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+    <div class="modal-content" style="
+    margin-top: 61px;
+">
+      <div #DemoHandle19 class="modal-header" style="background-color:#ffdf62">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:black">Warning!</h5>
+      </div>
+      <div class="modal-body">
+        <strong>{{physicianAlertMsg}} </strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="HandlePrescriber()" style="font-weight: 700;
+        padding: 0.375rem 0.75rem !important;">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

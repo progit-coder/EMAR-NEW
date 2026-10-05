@@ -1,0 +1,198 @@
+<!-- <div class="content-wrapper" style="margin-left: 20px !important;">
+  <app-commondashboard *ngIf="dashboardType" [LoadDashboard]="dashboardType"></app-commondashboard>  
+  </div> -->
+
+  <section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <form [formGroup]="dashboardForm" name="dashboardForm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-3">
+              <h3 class="card-title">Scheduled Order Report</h3>
+            </div>
+            <!-- <div class="col-sm-2" style="display: none">
+                      <select id="ddlcharttype" formControlName="chartType" class="form-control" (change)="chartTypechange()">
+                        <option value="column" selected>Column</option>
+                        <option value="line">Line</option>
+                      </select>
+                    </div> -->
+            <div class="col-sm-3">
+                <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="facilityName"
+                  [data]="facilities" [settings]="dropdownSettings_FacID" [placeholder]="'Select facilities'"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-3">
+              <ng-multiselect-dropdown class="form-control" formControlName="nursestationName"
+                [data]="nurseStations" [settings]="dropdownSettings_ID" [placeholder]="'Nursing Stations'"
+                (onSelect)="onNurseStationSelect($event)" (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+                (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <!-- <div class="col-sm-2" style="display: none">
+                      <ng-multiselect-dropdown class="form-control" formControlName="compare" style="padding: 4px;border:0px solid #ced4da" [data]="comparedropdownList"
+                        [settings]="dropdownSettings_Compare" [(ngModel)]="selectedCompareItems" [placeholder]="'Compare'" (onSelect)="onCompareSelect($event)"
+                        (onSelectAll)="onCompareSelectAll($event)" (onDeSelect)="onCompareDeSelect($event)" (onDeSelectAll)="onCompareDeSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                    </div> -->
+
+           <!--  <div class="col-sm-2">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" placeholder="Search"> 
+            </div>-->
+            <div class="col-sm-1">
+              <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;z-index: auto;cursor: pointer;">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown"  (click)="showHideToggle('.test')">
+                      <i class="fa fa-filter"></i>
+                      <span class="badge badge-warning navbar-badge"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:999 !important">
+                      <span class="dropdown-item dropdown-header">Filters</span>
+                      <div class="dropdown-divider"></div>
+                                 
+                      <!-- <div class="dropdown-item" style="display: none">
+                                    Report Category
+                                    <select id="ddlcategory" formControlName="ddlcategory" class="form-control">
+                                      <option value="1">Active Residents</option>
+                                      <option value="2">Discharge Residents</option>
+                                      <option value="3">Census with Allergy</option>
+                                    </select>
+                                  </div> -->
+                      <!-- <div class="dropdown-divider" style="display: none"></div>
+                                  <div class="dropdown-item" style="display: none">
+                                    Select Type
+                                    <select id="ddlCalender" formControlName="ddlCalender" class="form-control" (change)="calenderFilters($event.target.value)">
+                                      <option value="1">Month</option>
+                                      <option value="2">Quarter</option>
+                                      <option value="3">Year</option>
+                                    </select>
+                                  </div> -->
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        From Date
+                        <input type="date" class="form-control" formControlName="txtFromDate" />
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        To Date
+                        <input type="date" class="form-control" formControlName="txtToDate" />
+                      </div>
+                     <div class="dropdown-divider"></div>
+                     <div class="dropdown-item" style="width:230px">
+                      Residents
+                      <ng-multiselect-dropdown formControlName="ddlresidents" class="form-control"
+                        [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                        (onSelect)="onResidentSelect($event)" (onSelectAll)="onResidentSelectAll($event)"
+                          (onDeSelect)="onResidentDeSelect($event)" (onDeSelectAll)="onResidentDeSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                    </div>
+                      <!-- <div class="dropdown-item" >
+                       Pass Time
+                        <ng-multiselect-dropdown formControlName="time" [data]="hoursList"
+                        [settings]="dropdownSettings_Time" [(ngModel)]="timeselectedItems" class="form-control">
+                      </ng-multiselect-dropdown>
+                      </div> -->
+                        <!-- <select class="form-control" formControlName="time">
+                          <option value=0>Select</option>
+                          <option value="01:00">01:00</option>
+                          <option value="02:00">02:00</option>
+                          <option value="03:00">03:00</option>
+                          <option value="04:00">04:00</option>
+                          <option value="05:00">05:00</option>
+                          <option value="06:00">06:00</option>
+                          <option value="07:00">07:00</option>
+                          <option value="08:00">08:00</option>
+                          <option value="09:00">09:00</option>
+                          <option value="10:00">10:00</option>
+                          <option value="11:00">11:00</option>
+                          <option value="12:00">12:00</option>
+                          <option value="13:00">13:00</option>
+                          <option value="14:00">14:00</option>
+                          <option value="15:00">15:00</option>
+                          <option value="16:00">16:00</option>
+                          <option value="17:00">17:00</option>
+                          <option value="18:00">18:00</option>
+                          <option value="19:00">19:00</option>
+                          <option value="20:00">20:00</option>
+                          <option value="21:00">21:00</option>
+                          <option value="22:00">22:00</option>
+                          <option value="23:00">23.00</option>
+                          <option value="24:00">24:00</option>                        </select> -->
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item" >
+                        Order Type
+                        <ng-multiselect-dropdown  class="form-control"  formControlName="ordertype" [data]="orderTypedropdownList" [(ngModel)]="orderTypeselectedItems" [settings]="orderTypedropdownSettings">
+</ng-multiselect-dropdown>
+                        <!-- <select class="form-control" formControlName="ordertype">
+                          <option value="1">Drug</option>
+                          <option value="2">Literal</option>
+                                                  </select> -->
+                      </div>
+                      <!-- <div class="dropdown-divider"></div>
+                                  <div class="dropdown-item" *ngIf="selectedOption === 'Compare'">
+                                    Compare Year1
+                                    <input type="number" formControlName="txtYear1" class="form-control" min="1900" max="2099" step="1" value="2016" style="width:162px"
+                                    />
+                                  </div>
+                                  <div class="dropdown-divider"></div>
+                                  <div class="dropdown-item" *ngIf="selectedOption === 'Compare'">
+                                    Compare Year2
+                                    <input type="number" formControlName="txtYear2" class="form-control" min="1900" max="2099" step="1" value="2017" style="width:162px"
+                                    />
+                                  </div> -->
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        <input type="button" class="btn btn-info1" value="OK" (click)="loadChart()">&nbsp;
+                        <input type="button" class="btn btn-danger1" value="Close" (click)="close('.test')">
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+              <div class="right" style=" display: table-cell;width: 10%; float:left; margin: 0px;">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="getReport()" title="Export To PDF">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+              <div class="right" style=" display: table-cell;width: 80%; float:left; margin: 0px;"></div>
+              <div class="right" style=" display: table-cell;width: 10%; float:right; margin: 0px;">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintExcel']" (click)="getExcel()" title="Export To Excel">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+              </div>
+          </div>
+        </div>
+        <div class="card-body">         
+          <div class=" table table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let cols of gridColumns">
+                    <th *ngIf="cols.display">{{ cols.displayName }}</th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of gridData | paginate: { itemsPerPage: gridPagination, currentPage: p,totalItems: totalRecords  };">
+                  <td *ngFor="let col of gridColumns">
+                    {{item[col.name]}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="getGridDataOnPageChange($event)" *ngIf="gridData.length > 0"></pagination-controls>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section>

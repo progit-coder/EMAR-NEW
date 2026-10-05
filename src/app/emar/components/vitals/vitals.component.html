@@ -1,0 +1,335 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+        </div>
+        
+      </div>
+    </div> 
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary sticky">
+        <div class="card-body" style="padding-bottom: inherit;padding-top: inherit;">
+          <div class="row form-group">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+            <h3 class="card-title">Vitals Details</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+              (onDeSelect)="onNurseStationDeSelect($event)">
+          </ng-multiselect-dropdown>
+            </div>
+        </div>
+            <div *ngIf="residentID!=0" >
+                <div *ngIf="demographicInfoData!={}">
+                    <div class="row form-group">
+                          <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;cursor: pointer;" >
+                            <a ><span class="info-box-icon">
+                              <img  container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"   (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="demographicInfoData.ImageLocation!=undefined" [src]="sanitize(demographicInfoData.ImageLocation)" [src]="sanitize(demographicInfoData.ImageLocation)" class="zoom">
+                            </span></a><br /> 
+                          </div>  
+                          <div class="col-sm-10 col-md-10 col-lg-10">
+                              <div class="row form-group">
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                      <strong>Residents</strong> 
+                                      <ng-multiselect-dropdown class="form-control"
+                          [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                          (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                                    <!-- <select class="form-control" id="ddlresident" [(ngModel)]="residentID" (change)="changeResident()">
+                                      <option *ngFor="let item of residents" value="{{item.Patient_Id}}">{{item.PatientLastName}},{{item.PatientFirstName}} {{item.PatientMiddleInitial}}</option>
+                                    </select> -->
+                                  </div>
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                      <strong>Admit Date</strong> 
+                                      <select class="form-control" id="ddladmindate">
+                                          <option *ngFor="let item of residentAdmitDate" value="{{item.PVisit_Id}}">{{item.AdmitDate|date
+                                            :'MM/dd/yyyy'}}</option>
+                                        </select>
+                                    </div>
+
+                                  </div>
+                                  <div class="row clearfix">
+                                      <!-- <div class="col-sm-2 col-6"><strong>MR#:</strong><span>{{demographicInfoData.PatientMRNumber}}</span></div> -->
+                                      <div class="col-sm-3 col-md-3 col-lg-3"><strong>DOB:&nbsp;</strong><span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span></div>
+                                      <div class="col-sm-3 col-md-2 col-lg-2" ><strong>Gender:&nbsp;</strong><span>{{demographicInfoData.AdministrativeSex}}</span></div>
+                                      <div class="col-sm-6 col-md-5 col-lg-5"><strong>Nursing Station Name:&nbsp;</strong><span>{{nurseStationName}}</span></div>
+                                    </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+                      </div>
+                    </div>
+                    <div class="card card-default">
+                      <div class="card-body">
+                        <div *ngIf="residentID!=0">
+                          <form [formGroup]="myform" name="vitalsForm" autocomplete="off">
+                        <div class="row form-group clearfix">
+                            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Date
+                                
+                            </div> -->
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                              Date
+                              <input type="date"  class="form-control"  formControlName="date" readonly/>
+                              </div>
+                             
+                               <!-- <div class="col-sm-2 col-md-2 col-lg-2 offset-md-2 offset-lg-2">Initial
+                                <span class="c1">*</span>
+                            </div> -->
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                              Initial
+                                <span class="c1">*</span>
+                                <input type="text" id="txtinitial" class="form-control" formControlName="initial"  readonly/>
+                             </div>
+                             <!-- <div class="col-sm-2 col-md-2 col-lg-2">Temperature
+                              <span class="c1">*</span>
+                          </div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Temperature
+                              <!-- <span class="c1">*</span> -->
+                            <input type="text" id="txttemperature" class="form-control" formControlName="temperature" placeholder="°F (96-101)"  [ngClass]="{
+                              'is-valid':myform.controls.temperature.valid,
+                              'is-invalid':myform.controls.temperature.invalid && myform.controls.temperature.touched
+                            }" />
+                            <div *ngIf="myform.controls.temperature.errors && (myform.controls.temperature.touched)" class="errorMessage">
+                              <div *ngIf="myform.controls.temperature.errors.required">
+                                Temperature is required.
+                              </div>
+                              <div *ngIf="myform.controls.temperature.errors.maxlength">
+                                Temperature cannot be more than 4 characters long.
+                              </div>
+                              <div *ngIf="myform.controls.temperature.errors.pattern">
+                               {{config.decimalMessage}}
+                              </div>
+                              </div>
+                      
+                            </div>
+                          </div>
+                            <div class="row form-group">
+                              <!-- <div class="col-sm-2 col-md-2 col-lg-2 offset-md-2 offset-lg-2">Respiration
+                                <span class="c1">*</span>
+                            </div> -->
+                            <div class="col-sm-4 col-md-4 col-lg-4">
+                              Respiration
+                                <!-- <span class="c1">*</span> -->
+                                <input type="text" id="txtrespiration" class="form-control" formControlName="respiration" placeholder="breaths per min(12-24)" [ngClass]="{
+                                  'is-valid':myform.controls.respiration.valid,
+                                  'is-invalid':myform.controls.respiration.invalid && myform.controls.respiration.touched
+                                }" />
+                                <div *ngIf="myform.controls.respiration.errors && (myform.controls.respiration.touched)" class="errorMessage">
+                                  <div *ngIf="myform.controls.respiration.errors.required">
+                                    Respiration is required.
+                                  </div>
+                                  <div *ngIf="myform.controls.respiration.errors.maxlength">
+                                    Respiration cannot be more than 2 characters long.
+                                  </div>
+                                  <div *ngIf="myform.controls.respiration.errors.pattern">
+                                    {{config.numericMessage}}
+                                  </div>
+                                  </div>
+                             </div>
+                                <!-- <div class="col-sm-2 col-md-2 col-lg-2">Blood Sugar
+                                    <span class="c1">*</span>
+                                </div> -->
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                  Blood Glucose
+                                    <!-- <span class="c1">*</span> -->
+                                  <input type="text" id="txtbloodsugar" class="form-control" formControlName="bloodsugar" placeholder="mg/dL(70-99)" [ngClass]="{
+                                    'is-valid':myform.controls.bloodsugar.valid,
+                                    'is-invalid':myform.controls.bloodsugar.invalid && myform.controls.bloodsugar.touched
+                                  }" />
+                                  <div *ngIf="myform.controls.bloodsugar.errors && (myform.controls.bloodsugar.touched)" class="errorMessage">
+                                    <div *ngIf="myform.controls.bloodsugar.errors.required">
+                                      Blood Glucose is required.
+                                    </div>
+                                    <div *ngIf="myform.controls.bloodsugar.errors.maxlength">
+                                      Blood Glucose cannot be more than 3 characters long.
+                                    </div>
+                                    <div *ngIf="myform.controls.bloodsugar.errors.pattern">
+                                       {{config.numericMessage}}
+                                    </div>
+                                    </div>
+                              
+                                  </div>
+                                  <!-- <div class="col-sm-2 col-md-2 col-lg-2 offset-md-2 offset-lg-2">Pulse Oximetry
+                                      <span class="c1">*</span>
+                                  </div> -->
+                                  <div class="col-sm-4 col-md-4 col-lg-4">
+                                    Pulse Oximetry
+                                      <!-- <span class="c1">*</span> -->
+                                      <input type="text" id="txtpulseoximetry" class="form-control" formControlName="pulseoximetry" placeholder="% (95-100)" [ngClass]="{
+                                        'is-valid':myform.controls.pulseoximetry.valid,
+                                        'is-invalid':myform.controls.pulseoximetry.invalid && myform.controls.pulseoximetry.touched
+                                      }" />
+                                      <div *ngIf="myform.controls.pulseoximetry.errors && (myform.controls.pulseoximetry.touched)" class="errorMessage">
+                                        <div *ngIf="myform.controls.pulseoximetry.errors.required">
+                                          Pulse Oximetry is required.
+                                        </div>
+                                        <div *ngIf="myform.controls.pulseoximetry.errors.maxlength">
+                                          Pulse Oximetry cannot be more than 3 characters long.
+                                        </div>
+                                        <div *ngIf="myform.controls.pulseoximetry.errors.pattern">
+                                          
+                                          {{config.numericMessage}}
+                                        </div>
+                                        </div>
+                                   </div>
+                              </div>
+            
+                              <div class="row form-group">
+                                  <!-- <div class="col-sm-2 col-md-2 col-lg-2">Heart Rate
+                                      <span class="c1">*</span>
+                                  </div> -->
+                                  <div class="col-sm-4 col-md-4 col-lg-4">
+                                    Heart Rate
+                                      <!-- <span class="c1">*</span> -->
+                                    <input type="text" id="txtheartrate" class="form-control" formControlName="heartrate" placeholder="beats per min(60-100)" [ngClass]="{
+                                      'is-valid':myform.controls.heartrate.valid,
+                                      'is-invalid':myform.controls.heartrate.invalid && myform.controls.heartrate.touched
+                                    }" />
+                                    <div *ngIf="myform.controls.heartrate.errors && (myform.controls.heartrate.touched)" class="errorMessage">
+                                      <div *ngIf="myform.controls.heartrate.errors.required">
+                                        Heart Rate is required.
+                                      </div>
+                                      <div *ngIf="myform.controls.heartrate.errors.maxlength">
+                                        Heart Rate cannot be more than 3 characters long.
+                                      </div>
+                                      <div *ngIf="myform.controls.heartrate.errors.pattern">
+                                         {{config.numericMessage}}
+                                      </div>
+                                      </div>
+                                
+                                    </div>
+                                   <!-- <div class="col-sm-2 col-md-2 col-lg-2 offset-md-2 offset-lg-2">BP
+                                  <span class="c1">*</span>
+                                </div> -->
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                  Blood Pressure
+                                  <!-- <span class="c1">*</span> -->
+                                    <input type="text" id="txtbp" class="form-control" formControlName="bp" placeholder="mmHg(110/70-130/80)" [textMask]="{mask: BPMask, guide: false}" [ngClass]="{
+                                      'is-valid':myform.controls.bp.valid,
+                                      'is-invalid':myform.controls.bp.invalid && myform.controls.bp.touched
+                                    }" />
+                                    <div *ngIf="myform.controls.bp.errors && (myform.controls.bp.touched)" class="errorMessage">
+                                    <div *ngIf="myform.controls.bp.errors.required">
+                                      Blood Pressure is required.
+                                    </div>
+                                    <div *ngIf="myform.controls.bp.errors.maxlength">
+                                      Blood Pressure can be atleast 5 characters long.
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <!-- <div class="col-sm-2 col-md-2 col-lg-2">NurseNotes
+                                  <span class="c1">*</span>
+                              </div> -->
+                              <div class="col-sm-4 col-md-4 col-lg-4">
+                                Nurse Notes
+                                  <!-- <span class="c1">*</span> -->
+                                <textarea  class="form-control" cols="4" rows="1" formControlName="nursenotes" [ngClass]="{
+                                  'is-valid':myform.controls.nursenotes.valid,
+                                  'is-invalid':myform.controls.nursenotes.invalid && myform.controls.nursenotes.touched
+                                }"></textarea>
+                                <div *ngIf="myform.controls.nursenotes.errors && (myform.controls.nursenotes.touched)" class="errorMessage">
+                                  <div *ngIf="myform.controls.nursenotes.errors.required">
+                                    Nurse Note is required.
+                                  </div>
+                                  <div *ngIf="myform.controls.nursenotes.errors.maxlength">
+                                    Nurse Note cannot be more than 8000 characters long.
+                                  </div>
+                                </div>
+                           
+                                </div>
+                              </div>
+                                  <div class="row form-group">
+                                    <div class="col-sm-12" style="text-align: right">
+                                        <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-success"  value="Save" [disabled]="myform.invalid || saveDisable==true" (click)="insertVitals()"/>&nbsp;
+                                        <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-danger" value="Reset" (click)="resetScreen()" />
+                                      </div>
+                                    </div>
+                                    </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                              <div class="card-header">
+                                  <div class="row clearfix">
+                                      <div class="col-sm-6">
+                                          <h3 class="card-title">Vitals Grid</h3>
+                                      </div>
+                                      <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                                     <div class="col-sm-3 col-md-4 col-lg-3">
+                                        <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                                          placeholder="Search">
+                                      </div> 
+                                    </div>
+                               
+                              </div>
+                              <div class="card-body">
+                                  <div class="table-responsive">
+                              <table id="tbltable" class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>BP (mmHg)</th>
+                              <th>Blood Sugar (mg/dL)</th>
+                              <th>Temperature (°F)</th>
+                              <th>Pulse Oximetry</th>
+                              <th>Heart Rate (BPM)</th>
+                              <th>Respiration Rate</th> 
+                              <th>Nurse Notes</th>
+                              <th>Taken By</th>
+                              <th>Taken Date</th>
+                              <th *ngIf="pageConfig['AccessWrite']"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of vitalDetails|gridFilter:searchText:'Vitals'| paginate: { itemsPerPage: gridPagination, currentPage: p };let i = index">
+                              <td>{{i+1}}</td>
+                                <td>{{item.CistolicBP}}<span *ngIf="item.CistolicBP!=undefined && item.CistolicBP!=null && item.CistolicBP!=''">/</span>{{item.DiastolicBP}}</td>
+                                <td>{{item.BloodSugar}}</td>
+                                <td>{{item.Temperature}}</td>
+                                <td>{{item.PulseRate}}</td>
+                                <td>{{item.HeartRate}}</td>
+                                <td>{{item.RespiratoryRate}}</td>
+                                <td>{{item.Remark}}</td>
+                                <td>{{item.UserName}}</td>
+                                <td>{{item.VitalSigns_CreatedOn|date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                 <td *ngIf="pageConfig['AccessWrite']">
+                                  <div *ngIf="checkVisitVitalDetailsByID(item.VitalDate);else Lock_content">
+                                    <a class="btn editicon" (click)="getVisitVitalDetailsByID(item.Vitals_ID,item.VitalDate)">
+                                      <i class="icon"></i>
+                                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                                    </a>
+                                    </div>
+                                    <ng-template #Lock_content><a class="btn editicon">
+                                      <i class="icon"></i>
+                                      <span class=" fa fa-lock (alias) LockiconColor" title="Lock"></span>
+                                    </a></ng-template>
+                                  </td> 
+
+                            </tr>
+                          </tbody>
+                        </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event" *ngIf="vitalDetails.length > 0"></pagination-controls>
+                      </div>
+                    </div>
+                   </div>
+                   <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000" ></ng4-loading-spinner> 
+                  </section>
