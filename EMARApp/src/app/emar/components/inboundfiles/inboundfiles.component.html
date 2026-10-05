@@ -1,0 +1,279 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getInboundFilesByStatus(2)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Total</b></h6></span>
+                            <span class="info-box-number">
+                      <h6>{{total}}</h6>
+                  </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3 id="totalreceived">{{total}}</h3>
+              <p>Total</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getInboundFilesByStatus(2)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getInboundFilesByStatus(0)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success elevation-1">AA</span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Application Accept</b></h6></span>
+                            <span class="info-box-number">
+                    <h6>{{success}}</h6>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3 id="totalsuccess">{{success}}</h3>
+              <p>Success</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getInboundFilesByStatus(0)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getInboundFilesByStatus(1)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger elevation-1">AE</span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Application Error</b></h6></span>
+                            <span class="info-box-number">
+                    <h6>{{error}}</h6>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3 id="totalsuccess">{{error}}</h3>
+              <p>Error</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getInboundFilesByStatus(1)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getInboundFilesByStatus(3)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning elevation-1">AR</span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Application Reject</b></h6></span>
+                            <span class="info-box-number">
+                    <h6>{{rejected}}</h6>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3 id="totalsuccess">{{rejected}}</h3>
+              <p>Rejected</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-loop-strong"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getInboundFilesByStatus(3)" class="small-box-footer" id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div #livechart style="height: 150px;">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div #livechartwin style="height: 150px;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6"><label style="color: red">Last Transaction - {{lastAccess}}</label></div>
+                <div class="col-sm-6"><label style="color: red">Last Transaction - {{lastAccessImp}} || Pending Files - {{Pendingfiles}}</label></div>
+            </div>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">Inbound File Details</h3>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-3">
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" (input)="onSearchChange($event.target.value)" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-header"  style="display:none">
+          <h3 class="card-title" >Inbound File Details</h3>
+        </div> -->
+                <div class="card-body">
+                    <form [formGroup]="myform">
+                        <div class=" row form-group clearfix">
+                            <div class="col-sm-6 col-md-6 col-lg-4" *ngIf="display==true">
+                                <div class="right">
+                                    <label>Company</label>
+                                </div>
+                                <div class="right">
+                                    <ng-multiselect-dropdown class="form-control" [(ngModel)]="selectedComItem" formControlName="company" [data]="companyMaster" [settings]="dropdownSettings_Company" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-3" *ngIf="display==true">
+                                <div class="right">
+                                    <label>Residents</label>
+                                </div>
+                                <div class="right">
+                                    <ng-multiselect-dropdown class="form-control" [(ngModel)]="selectedResItem" formControlName="resident" [data]="residents" [settings]="dropdownSettings_Resident" (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-2">
+                                <div class="right">
+                                    <label>From Date</label>
+                                </div>
+                                <div class="right">
+                                    <input type="date" class="form-control" [(ngModel)]="fromDate" maxlength="10" [max]="maxSelectDate" (change)="loadGridData()" [ngModelOptions]="{standalone: true}" />
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-2">
+                                <div class="right">
+                                    <label>To Date</label>
+                                </div>
+                                <div class="right">
+                                    <input type="date" class="form-control" [(ngModel)]="toDate" maxlength="10" [max]="maxSelectDate" (change)="loadGridData()" [ngModelOptions]="{standalone: true}" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1" style="padding-top: 28px; text-align: right;cursor: pointer;">
+                                <div class="right">
+                                    <a  (click)="loadGridData()" class="small-box-footer" id="btntotal" data-toggle="tooltip" title="Refresh">
+                                        <i class="fa fa-refresh iconColor" style="font-size:24px"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table id="tblInboundfile1" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- <th style="display:none"></th>
+                  <th>Category</th> -->
+                                    <th>File Name</th>
+                                    <th>Event</th>
+                                    <th>Status</th>
+                                    <!-- <th>File Refreshed By</th> -->
+                                    <th>File Inserted Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of savedFiles| paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords };">
+                                    <!-- <td style="display:none"> <input type="checkbox" value="{{item.File_Id}}" name="{{ item.File_Id }}"
+                      id="{{item.File_Id}}" (change)="onChangeCategorydown($event, item)" /></td>
+                  <td *ngIf="item.File_Category===1">Inbound</td>
+                  <td *ngIf="item.File_Category===2">Outbound</td> -->
+                                    <td>{{item.File_Name}}</td>
+                                    <td>{{item.Event}}</td>
+                                    <!-- <td *ngIf="item.File_Error === 1 ">Error</td>
+                  <td *ngIf="item.File_Error === 0 || item.File_Error === ''">Success</td> -->
+                                    <td>{{item.File_ErrorDesc}}</td>
+                                    <!-- <td *ngIf="item.File_Error==1">Error</td>
+                  <td *ngIf="item.File_Error==0">Success</td> -->
+                                    <!-- <td>{{item.File_CreatedBy}}</td> -->
+                                    <td>{{item.File_CreatedDate | date: 'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                    <!-- <td><a href="javscript:void(0)" class="iconColor" (click)="GetFileAckData(item.File_Id,item.File_Name)"><u>View</u></a></td> -->
+                                    <td><input type="button" class="btn btn-primary" value="View" (click)="GetFileAckData(item.File_Id,item.File_Name)"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls (pageChange)="getSavedFilesByFilter($event)" *ngIf="savedFiles.length > 0"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" role="dialog" id="modalview" [ngStyle]="{'display': modalEditIsOpen ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 95%;">
+            <div class="modal-content">
+                <div #DemoHandle1 class="modal-header" style="height: max-content ">
+                    <h5 class="modal-title">File Information ({{viewTitle}})</h5>
+                    <button type="button" class="close" data-dismiss="modal" (click)="Modalclose()">&times;</button>
+                </div>
+                <div class="modal-body bodystyle">
+                    <h3>File Data</h3>
+                    <div class="row form-group" *ngIf="fileViewData">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" cols="10" [(ngModel)]="fileData" rows="6">{{fileViewData.FileData}}</textarea>
+                        </div>
+                        <div class="col-sm-12">
+                            <h3>{{fileAck}}</h3>
+                            <textarea class="form-control" cols="10" rows="3">{{fileViewData.FileAckData}}</textarea>
+                        </div>
+                        <div class="col-sm-12" *ngIf="fileError.length>0">
+                            <h3>File Error</h3>
+                            <table style="border: 1px  lightgrey">
+                                <tbody>
+                                    <tr *ngFor="let item of fileError">
+                                        <td>{{item}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <div style="width: 100%" *ngFor="let item of hlFieldsinfo">
+              <div *ngIf="item.IsMandatory==1">
+              <label class="col-sm-4 control-label">{{item.FieldName}} </label>
+              <div class="col-sm-5">
+              <input  type="text" value="{{item.FieldValue=='NULL'?'':item.FieldValue}}" readonly placeholder="" class="form-control">                
+              </div>
+            </div>
+            </div> -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" [disabled]="fileData==''" (click)="resendFile()">Resend</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="Modalclose()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

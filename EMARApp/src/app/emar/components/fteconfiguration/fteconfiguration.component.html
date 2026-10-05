@@ -1,0 +1,283 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>FTE Configuration</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">FTP Configuration</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">FT Configuration Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="fteconfigform">
+            <div class="row form-group">
+
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Company
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="iconed-input">
+                  <select formControlName="company"class="form-control chosen-select"
+                    [ngClass]="{ 
+                    'is-valid':myform.controls.company.valid,
+                    'is-invalid':myform.controls.company.invalid && myform.controls.company.touched}">
+                    <option value="" disabled selected>Select</option>
+                    <option *ngFor="let item of companies" value="{{item.Company_Id}}">{{item.Company_Name}}</option>
+                  </select>
+                  <div *ngIf="myform.controls.company.errors && (myform.controls.company.touched)" class="errorMessage">
+                      <div *ngIf="myform.controls.company.errors.required">
+                          Company is required.
+                      </div>
+                  
+                    </div>
+                </div>
+              </div> -->
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Category
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Category
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <select formControlName="category" class="form-control chosen-select"
+                    [ngClass]="{
+                    'is-valid':myform.controls.category.valid,
+                    'is-invalid':myform.controls.category.invalid && myform.controls.category.touched}">
+                    <option value="" disabled selected>Select</option>
+                    <option *ngFor="let item of FTECategories" value="{{item.FteCategory_Id}}">{{item.FteCategory_Desc}}</option>
+
+                  </select>
+                  <div *ngIf="myform.controls.category.errors && (myform.controls.category.touched)" class="errorMessage">
+                      <div *ngIf="myform.controls.category.errors.required">
+                          Category is required.
+                      </div>
+                  
+                    </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Server IP
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Server IP
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtserverIp" formControlName="serverIp" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.serverIp.valid,
+                    'is-invalid':myform.controls.serverIp.invalid && myform.controls.serverIp.touched}" />
+                    <div *ngIf="myform.controls.serverIp.errors && (myform.controls.serverIp.touched)" class="errorMessage">
+                        <div *ngIf="myform.controls.serverIp.errors.required">
+                            Server IP is required.
+                        </div>
+                        <div *ngIf="myform.controls.serverIp.errors.maxlength">
+                            Server IP cannot be more than 15 characters long.
+                        </div>
+                        <div *ngIf="myform.controls.serverIp.errors.pattern">
+                            {{config.numbersFewSpecialCharactersMessage}}
+                      </div>
+                      </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                Connection Type
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Connection Type
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <select formControlName="connectionType" class="form-control chosen-select"
+                    [ngClass]="{
+                    'is-valid':myform.controls.connectionType.valid,
+                    'is-invalid':myform.controls.connectionType.invalid && myform.controls.connectionType.touched}">
+                    <option value="" disabled selected>Select</option>
+                    <option *ngFor="let item of FTEConnections" value="{{item.FteConn_Id}}">{{item.FteConn_Desc}}</option>
+                  </select>
+                  <div *ngIf="myform.controls.connectionType.errors && (myform.controls.connectionType.touched)" class="errorMessage">
+                      <div *ngIf="myform.controls.connectionType.errors.required">
+                          Connection Type is required.
+                      </div>
+                  
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Port
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Port
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtPort" formControlName="port" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.port.valid,
+                    'is-invalid':myform.controls.port.invalid && myform.controls.port.touched}" />
+                    <div *ngIf="myform.controls.port.errors && (myform.controls.port.touched)" class="errorMessage">
+                        <div *ngIf="myform.controls.port.errors.required">
+                            Port is required.
+                        </div>
+                        <div *ngIf="myform.controls.port.errors.maxlength">
+                            Port Must be 10 characters long.
+                        </div>
+                        <div *ngIf="myform.controls.port.errors.pattern">
+                          {{config.numericMessage}}
+                        </div>
+                      </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+                
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row form-group">
+               <div class="col-sm-2 col-md-2 col-lg-2">Password
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="iconed-input">
+                  <input type="text" id="txtpassword" formControlName="password" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.password.valid,
+                    'is-invalid':myform.controls.password.invalid && myform.controls.password.touched}" />
+                    <div *ngIf="myform.controls.password.errors && (myform.controls.password.touched)" class="errorMessage">
+                        <div *ngIf="myform.controls.password.errors.required">
+                            Password is required.
+                        </div>  
+                        <div *ngIf="myform.controls.password.errors.maxlength">
+                            Password Must be 50 characters long.
+                        </div>
+                      </div>
+                  <div class="valid-feedback feedback-icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="invalid-feedback feedback-icon customFeedback">
+                    <i class="fa fa-times"></i>
+                  </div>
+                </div>
+              </div> 
+       
+            </div>-->
+
+            <div style="text-align: right">
+              <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']" [disabled]="myform.invalid" (click)="insertFTEConfig()" class="btn btn-success" /> &nbsp;
+              <input type="button" value="Reset" class="btn btn-danger" (click)="reSet()" />
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="card-title">FT Configuration View</h3>
+                </div>
+                <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                <div class="col-sm-3 col-md-4 col-lg-3">
+                  <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+                </div>
+              </div>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+              <table id="tblFTEConfigMaster" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <!-- <th>Company</th> -->
+                    <th>Category</th>
+                    <th>Server IP</th>
+                    <th>Connection Type</th>
+                    <th>Port</th>
+                    <th>Connection Status</th>
+                     <!--<th>Status</th>
+                    <th>Created By </th>
+                    <th>Created Date </th> -->
+                    <th *ngIf="pageConfig['AccessWrite']"></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of FTEConfigMaster|gridFilter:searchText:'FTPConfig'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                    <!-- <td>{{item.Company.Company_Name}}</td> -->
+                    <td>{{item.Category}}</td>
+                    <td>{{item.ServerIp}}</td>
+                    <td>{{item.ConnectionType}}</td>
+                    <td>{{item.Port}}</td>
+                    <td *ngIf="item.Category=='OutBound'">Service Running <img src="./assets/img/green-dot.png" height="20px"/></td>
+                    <td *ngIf="item.Category!='OutBound' && item.ConnectionStatus==='Service Running'">{{item.ConnectionStatus}} <img src="./assets/img/green-dot.png" height="20px"/></td>
+                    <td *ngIf="item.Category!='OutBound' && item.ConnectionStatus==='Service Not Running'">{{item.ConnectionStatus}} <img src="./assets/img/red-dot.png" height="13px"/></td>
+                    <td *ngIf="item.Category!='OutBound' && item.ConnectionStatus=== 'connectionerror'">Not able to connect to server</td>
+                    <td *ngIf="item.Category!='OutBound' && item.ConnectionStatus=== ''"></td>
+                      <!--  <td *ngIf="item.FteConfig_Status===1">Active</td>
+                    <td *ngIf="item.FteConfig_Status===0">Inactive</td>
+                 <td>{{item.User.User_DisplayName}}</td>
+                    <td>{{item.FteConfig_CreatedDate|date:'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                    <td *ngIf="pageConfig['AccessWrite']">
+                      <a class="btn editicon"  (click)="getFTEConfigDetailsByID(item.FteConfig_Id)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                      </a>
+                      <!-- <input type="button" value="Connect" class="btn btn-success" (click)="connectService(item.FteConfig_Id)"/> -->
+                      <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="getFTEConfigDetailsByID(item.FteConfig_Id)" /> -->
+                    </td>
+                    <td>
+                      <!-- <a class="btn editicon" style="color:gray;" *ngIf="item.ConnectionStatus==='Service Running'">
+                        <i class="icon"></i>
+                        <span class=" fa fa-link fa-lg" title="Connect"></span>
+                      </a> -->
+                      <a class="btn editicon" *ngIf="item.Category!='OutBound' && item.ConnectionStatus==='Service Not Running' && pageConfig['AccessWrite']" (click)="connectService(item.FteConfig_Id)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-link fa-lg iconColor" title="Connect"></span>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <pagination-controls (pageChange)="p = $event" *ngIf="FTEConfigMaster.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

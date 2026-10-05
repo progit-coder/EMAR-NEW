@@ -1,0 +1,155 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Refill/Discontinue Rejection Mail Configuration</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="refillForm" autocomplete="off">
+            <div class="row from-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name<span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Facility Name<span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="facilityName"
+                  [(ngModel)]="selectedfaItems" [data]="facilities" [settings]="dropdownSettings_Facilities"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                          'is-valid':myform.controls.facilityName.valid ,
+                          'is-invalid':myform.controls.facilityName.invalid && myform.controls.facilityName.touched
+                        }">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.facilityName.errors && (myform.controls.facilityName.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.facilityName.errors.required">
+                    Facility Name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Nursing Station Name
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="nursestationname"
+                  [(ngModel)]="selectednItems" [data]="nurseStations" [settings]="dropdownSettings_NurseStations" [ngClass]="{
+                          'is-valid':myform.controls.nursestationname.valid ,
+                          'is-invalid':myform.controls.nursestationname.invalid && myform.controls.nursestationname.touched
+                        }">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.nursestationname.errors && (myform.controls.nursestationname.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.nursestationname.errors.required">
+                    Nursing Station Name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Time<span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Time<span class="c1">*</span>
+                <ng-multiselect-dropdown formControlName="hours" class="form-control" 
+                  [(ngModel)]="selectedTimeItems" [data]="hoursList" [settings]="dropdownSettings_Times">
+                </ng-multiselect-dropdown>
+              </div>
+              </div>
+              <br/>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">To Email ID<span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                To Email address<span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtemailid" placeholder="test@mail.com" formControlName="tomail"
+                    class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.tomail.valid,
+                    'is-invalid':myform.controls.tomail.invalid && myform.controls.tomail.touched
+                  }" />
+                  <div *ngIf="myform.controls.tomail.errors && (myform.controls.tomail.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.tomail.errors.required">
+                      To Email address is required
+                    </div>
+                    <div *ngIf="myform.controls.tomail.errors.pattern">
+                      {{config.emailMessage}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">CC Email ID
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                CC Email address
+                <div class="iconed-input">
+                  <input type="text" id="txtemailid" placeholder="test@mail.com" formControlName="ccmail"
+                    class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.ccmail.valid,
+                    'is-invalid':myform.controls.ccmail.invalid && myform.controls.ccmail.touched
+                  }" />
+                  <div *ngIf="myform.controls.ccmail.errors && (myform.controls.ccmail.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.ccmail.errors.pattern">
+                      {{config.emailMessage}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align:right">
+              <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']" [disabled]="myform.invalid" (click)="insertRefillConfig()"
+                class="btn btn-success" />&nbsp;
+              <input type="button" value="Reset" class="btn btn-danger" (click)="reSet()" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Refill/Discontinue Rejection Mail Configuration View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tblRoleMaster" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Facility Name</th>
+                  <th>Nursing Station Name</th>
+                  <th>Times</th>
+                  <th>To Email address</th>
+                  <th>CC Email address</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of refillMailConfigList|gridFilter:searchText:'RefillMailConfigMaster'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                  <td>{{item.FacilityName}}</td>
+                  <td>{{item.NursingStationNames}}</td>
+                  <td>{{item.TimeText}}</td>
+                  <td>{{item.MailTo}}</td>
+                  <td>{{item.MailCC}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a  class="btn editicon" (click)="getRefillConfigs(item.Facility_Id,item.NurseStation_Id,item.TimeIds,item.MailTo,item.MailCC)"><i
+                        class="icon"></i><span class=" fa fa-edit (alias) iconColor" title="Edit"></span> </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="refillMailConfigList.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

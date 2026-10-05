@@ -1,0 +1,236 @@
+<!-- <ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+
+  <div class="form-inline row-item">
+    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
+      [class.fa-caret-down]="!item.collapsed"></i>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled"
+        [indeterminate]="item.indeterminate" />
+      <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
+        {{item.text}}
+      </label>
+      <label class="form-check-label">
+        <i class="fa fa-trash" aria-hidden="true" title="Remove" (click)="removeItem(item)"></i>
+      </label>
+    </div>
+  </div>
+</ng-template> -->
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+    <div class="form-inline row-item">
+        <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
+        <label class="form-check-label" (click)="select(item)">{{ item.text }}</label>
+    </div>
+</ng-template>
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <form [formGroup]="myform" name="docManagerForm" autocomplete="off">
+                    <div class="card-header">
+                        <div class="row form-group clearfix">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <h3 class="card-title">Document Manager Details</h3>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <!-- <label>Facility</label> -->
+                                <ng-multiselect-dropdown formControlName="ddlfacilities" class="form-control" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <!-- <label>Nursing Station</label> -->
+                                <ng-multiselect-dropdown formControlName="ddlnursestations" class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                                    (onDeSelect)="onNurseStationDeSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6" style="float: right;">
+                                <ng-multiselect-dropdown formControlName="ddlresidents" class="form-control" [data]="residents" [settings]="dropdownSettings_Residents" (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class=" row form-group">
+                            <div class="col-lg-2 col-sm-2" [ngStyle]="{'display':showTreeView== true?'block':'none'}">
+                                <ngx-treeview [config]="config" [items]="items" [itemTemplate]="itemTemplate" (filterChange)="onFilterChange($event)">
+                                </ngx-treeview>
+                            </div>
+                            <div class="col-sm-10" [ngStyle]="{'display':showControls === true ?'block':'none'}">
+                                <div class="row form-group clearfix">
+                                    <!-- <div class="col-sm-2">Selected Folder
+                  </div> -->
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        Selected Folder
+                                        <input type="text" class="form-control" readonly formControlName="selectedFolder">
+                                    </div>
+                                    <div class="col-sm-1" *ngIf="pageConfig['AccessWrite']">
+                                        <a class="btn" style="margin-top: 5px;text-align: left;padding-left: 0%;" data-toggle="modal" data-dismiss="modal" data-cache="false" data-target="#folders">
+                                            <i class="icon"></i>
+                                            <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Folder"></span>
+                                        </a>
+                                    </div>
+                                    <!-- <div class="col-sm-2">
+                    Date
+                    <span class="c1">*</span>
+                  </div> -->
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        Date
+                                        <span class="c1">*</span>
+                                        <input type="date" class="form-control" formControlName="date" [ngClass]="{
+                'is-valid':myform.controls.date.valid,
+                'is-invalid':myform.controls.date.invalid && myform.controls.date.touched
+              }">
+                                        <div *ngIf="myform.controls.date.errors && (myform.controls.date.touched)" class="errorMessage">
+                                            <div *ngIf="myform.controls.date.errors.required">
+                                                Date is required.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row form-group clearfix">
+                                    <!-- <div class="col-sm-2">Upload File
+                    <span class="c1">*</span>
+                  </div> -->
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        Upload File
+                                        <span class="c1">*</span>
+                                        <input type="file" formControlName="filedata" (change)="fileUploadChange($event)">
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+                                    <!-- <div class="col-sm-2">
+                    Description
+                    <span class="c1">*</span>
+                  </div> -->
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        Description
+                                        <span class="c1">*</span>
+                                        <input type="text" class="form-control" formControlName="description" [ngClass]="{
+                'is-valid':myform.controls.description.valid,
+                'is-invalid':myform.controls.description.invalid && myform.controls.description.touched
+              }">
+                                        <div *ngIf="myform.controls.description.errors && (myform.controls.description.touched)" class="errorMessage">
+                                            <div *ngIf="myform.controls.description.errors.required">
+                                                Description is required.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div style="text-align: right">
+                                    <input type="button" value="Upload" *ngIf="pageConfig['AccessWrite']" class="btn btn-success" [disabled]="myform.invalid" (click)="uploadDocument()"> &nbsp;
+                                    <input type="button" value="Reset" class="btn btn-danger" (click)="resetScreen()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">Document Manager View</h3>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                        <div class="col-sm-3 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class=" row form-group">
+                        <div class="table-responsive">
+                            <table id="tbltable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>File Name</th>
+                                        <th>Folder Name</th>
+                                        <th>Description</th>
+                                        <th style="width: 10px">Download</th>
+                                        <th style="width: 10px">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of residentDocs|gridFilter:searchText:'DocumentManager'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                                        <td>{{item.DocName}}</td>
+                                        <td>{{item.FolderName}}</td>
+                                        <td>{{item.DocDescription}}</td>
+                                        <td>
+                                            <a class="btn editicon" style="height: 8px;" (click)="downLoadFile(item.PatientDoc_Id,item.DocName)">
+                                                <i class="icon"></i>
+                                                <span class=" fa fa-download (alias) iconColor" title="Download"></span>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn editicon" *ngIf="pageConfig['AccessWrite']" style="color: red;height: 8px;" (click)="DeleteDocument(item.PatientDoc_Id,item.Patient_Id)">
+                                                <i class="icon"></i>
+                                                <span class=" fa fa-close (alias)" title="Delete"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event" *ngIf="residentDocs.length > 0"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade in modalstyle" ngDraggable [handle]="DemoHandle1" id="folders" role="dialog">
+            <div class="modal-dialog modal-lg" style="max-width: 70%;">
+                <div class="modal-content">
+                    <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                        <h5>Folder Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" (click)="closemodal()" aria-hidden="true">&times;</button>
+
+                    </div>
+                    <div class="modal-body bodystyle">
+                        <form [formGroup]="folderform">
+                            <div class="row form-group">
+                                <div class="col-sm-6" style="padding-right:54px">
+                                    <a id="btnMore" (click)="mainfolder()">
+                                        <i class="fa fa-fw fa-hand-o-right iconColor" style="font-size:1.60em;cursor: pointer;">MainFolder</i>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6" [ngStyle]="{'display':selectstyle==1?'block':'none'}">
+                                    <input type="text" class="form-control" formControlName="mainfolder" placeholder="Please Enter Main Folder Name">
+                                </div>
+                                <div class="col-sm-6" [ngStyle]="{'display':selectstyle==2?'block':'none'}">
+                                    <select id="ddlfolders" formControlName="ddlFolders" class="form-control">
+                    <option value="0" disabled> Please Select FolderNames </option>
+                    <option *ngFor="let item of foldersList" value="{{item.FolderID}}">{{item.FolderName}}</option>
+                  </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6" style="padding-right:54px">
+                                    <a id="btnMore" (click)="childfolder()">
+                                        <i class="fa fa-fw fa-hand-o-right iconColor" style="font-size:1.60em;cursor: pointer">ChildFolder</i>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6" [ngStyle]="{'display':selectstyle==2?'block':'none'}">
+                                    <input type="text" formControlName="childfolder" class="form-control" placeholder="Please Enter Child Folder Name">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row form-group" style="text-align: right">
+                            <input *ngIf="(selectstyle==1 && pageConfig['AccessWrite'])" type="button" id="btnsave" value="Save" (click)="insertmainfolder()" class="btn btn-success" data-dismiss="modal" />&nbsp;&nbsp;
+                            <input *ngIf="(selectstyle==2  && pageConfig['AccessWrite'])" type="button" id="btnsav" value="Save" (click)="insertchildfolder()" class="btn btn-success" data-dismiss="modal" />&nbsp;&nbsp;
+                            <input type="button" class="btn btn-danger" data-dismiss="modal" (click)="closemodal()" value="Close" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+    </section>
+</div>

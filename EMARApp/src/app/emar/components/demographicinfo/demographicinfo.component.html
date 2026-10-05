@@ -1,0 +1,2244 @@
+<app-commonmodal title="New Resident Details">
+  <div class="modal-body bodystyle">
+    <form [formGroup]="censusform" name="census" *ngIf="Hlsevenconfig">
+      <div class="row form-group">
+        <div class="col-sm-6 col-md-6 col-lg-4">
+          <div class="right">
+            <label>Facility Name</label>
+          </div>
+          <div class="left">
+            <!-- <input type="text" id="txtfacilityid" formControlName="FacilityId" class="form-control" readonly/> -->
+            <!-- <select class="form-control" id="ddlfacilityid" formControlName="FacilityId" [ngClass]="{
+                                                  'is-valid':censusform.controls.FacilityId.valid && censusform.controls.FacilityId.dirty,
+                                                  'is-invalid':censusform.controls.FacilityId.invalid && censusform.controls.FacilityId.touched
+                                                }">
+                <option value="0">Select Facility</option>
+                <option *ngFor="let item of userfacilitydrop" value="{{item.Facility_Id}}">
+
+                  {{item.Facility_Name}}</option>
+              </select> -->
+            <ng-multiselect-dropdown  class="form-control"  formControlName="FacilityId" [data]="userfacilitydrop"
+              [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities"
+              (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                'is-valid':censusform.controls.FacilityId.valid ,
+                'is-invalid':censusform.controls.FacilityId.invalid && censusform.controls.FacilityId.touched
+              }">
+            </ng-multiselect-dropdown>
+            <div
+              *ngIf="censusform.controls.FacilityId.errors && (censusform.controls.FacilityId.dirty || censusform.controls.FacilityId.touched)"
+              class="errorMessage">
+              <div *ngIf="censusform.controls.FacilityId.errors.required">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-4">
+          <div class="right">
+            <label>Nursing Station Name</label>
+          </div>
+          <div class="left">
+            <!-- <select class="form-control" id="ddlnursestation" formControlName="NursingStationId"  [ngClass]="{
+                                                  'is-valid':censusform.controls.NursingStationId.valid && censusform.controls.NursingStationId.dirty,
+                                                  'is-invalid':censusform.controls.NursingStationId.invalid && censusform.controls.NursingStationId.touched
+                                                }" >
+                <option value="0">Select NurseStation</option>
+                <option *ngFor="let item of nurseStations" value="{{item.NurseStation_Id}}"> {{item.NurseStation_Name}}</option>
+              </select> -->
+            <ng-multiselect-dropdown  class="form-control"  formControlName="NursingStationId" [data]="nurseStations"
+              [(ngModel)]="selectednItems" (onSelect)="onNurseStationSelect($event)" 
+              (onDeSelect)="onNurseStationDeSelect($event)"[settings]="dropdownSettings_NurseStations"
+              [ngClass]="{
+                'is-valid':censusform.controls.NursingStationId.valid ,
+                'is-invalid':censusform.controls.NursingStationId.invalid && censusform.controls.NursingStationId.touched
+              }">
+            </ng-multiselect-dropdown>
+            <div
+              *ngIf="censusform.controls.NursingStationId.errors && (censusform.controls.NursingStationId.dirty || censusform.controls.NursingStationId.touched)"
+              class="errorMessage">
+              <div *ngIf="censusform.controls.NursingStationId.errors.required">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4 class="card-title">Demographic Details</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="myform" name="Demographic">
+              <div class="row">
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SetID">
+                                                <div class="right"><label>Set ID</label></div>
+                                                <div class="left"><input type="text" id="txtsetid" formControlName="SetID" class="form-control" />
+                                                </div>
+                                            </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="residentUniqueId !== 'ExternalPatientId'" style="display: none;">
+                  <div class="right"><label>External PatientId</label></div>
+                  <div class="left"><input type="text" id="txtexternalpatientid" formControlName="ExternalPatientId"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.ExternalPatientId.valid && myform.controls.ExternalPatientId.dirty,
+                            'is-invalid':myform.controls.ExternalPatientId.invalid && myform.controls.ExternalPatientId.touched
+                                                  }" />
+                    <div *ngIf="myform.controls.ExternalPatientId.errors && (myform.controls.ExternalPatientId.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.ExternalPatientId.errors.pattern">
+                        {{config.numericMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.ExternalPatientId.errors.maxlength">
+                        ExternalPatientId cannot be more than 50 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Facility PatientId</label> </div>
+                  <div class="left">
+                    <input type="text" id="txtexternalfacilitypatientid" formControlName="ExternalFacPatientId"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.ExternalFacPatientId.valid && myform.controls.ExternalFacPatientId.dirty,
+                            'is-invalid':myform.controls.ExternalFacPatientId.invalid && myform.controls.ExternalFacPatientId.touched
+                                                  }" />
+                    <div
+                      *ngIf="myform.controls.ExternalFacPatientId.errors && (myform.controls.ExternalFacPatientId.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.ExternalFacPatientId.errors.pattern">
+                        {{config.numericMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.ExternalFacPatientId.errors.maxlength">
+                        ExternalFacPatientId cannot be more than 50 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>External Facility ShortName </label></div>
+                  <div class="left">
+                    <input type="text" id="txtexternalfacshot" formControlName="ExternalFacShortName"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.ExternalFacShortName.valid && myform.controls.ExternalFacShortName.dirty,
+                            'is-invalid':myform.controls.ExternalFacShortName.invalid && myform.controls.ExternalFacShortName.touched
+                                                  }" />
+                    <div
+                      *ngIf="myform.controls.ExternalFacShortName.errors && (myform.controls.ExternalFacShortName.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.ExternalFacShortName.errors.maxlength">
+                        ExternalFacShortName cannot be more than 50 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Alternate PatientId</label></div>
+                  <div class="left">
+                    <input type="text" id="txtalernatepatientid" formControlName="AlternatePatientId"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.AlternatePatientId.valid && myform.controls.AlternatePatientId.dirty,
+                            'is-invalid':myform.controls.AlternatePatientId.invalid && myform.controls.AlternatePatientId.touched
+                                                  }" />
+                    <div
+                      *ngIf="myform.controls.AlternatePatientId.errors && (myform.controls.AlternatePatientId.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.AlternatePatientId.errors.maxlength">
+                        AlternatePatientId cannot be more than 50 characters long.
+                      </div>
+                      <div *ngIf="myform.controls.AlternatePatientId.errors.pattern">
+                        {{config.numericMessage}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4"  *ngIf="(displayfield.PatientFirstName == 1 || displayfield.PatientFirstName == 2)">
+                  <div class="right"><label>First Name <span class="c1">*</span></label></div>
+                  <div class="left">
+                    <input type="text" id="txtresidentfirstname" #firstNameFocus ngbAutofocus [readonly]="displayfield.PatientFirstName === 2" formControlName="PatientFirstName"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.PatientFirstName.valid && myform.controls.PatientFirstName.dirty,
+                            'is-invalid':myform.controls.PatientFirstName.invalid && myform.controls.PatientFirstName.touched
+                                                  }" />
+                    <div *ngIf="myform.controls.PatientFirstName.errors && (myform.controls.PatientFirstName.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PatientFirstName.errors.required">
+                        First Name is required.
+                      </div>
+                      <div *ngIf="myform.controls.PatientFirstName.errors.pattern">
+                        {{config.alphaNumericFewSpecialCharactersMessage3}}
+                      </div>
+                      <div *ngIf="myform.controls.PatientFirstName.errors.maxlength">
+                        PatientFirstName cannot be more than 50 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" *ngIf="(displayfield.PatientMiddleInitial == 1 || displayfield.PatientMiddleInitial == 2)">
+                  <div class="right"><label>Middle Name</label></div>
+                  <div class="left">
+                    <input type="text" id="txtresidentmiddlename" [readonly]="displayfield.PatientMiddleInitial === 2" formControlName="PatientMiddleInitial"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.PatientMiddleInitial.valid && myform.controls.PatientMiddleInitial.dirty,
+                            'is-invalid':myform.controls.PatientMiddleInitial.invalid && myform.controls.PatientMiddleInitial.touched
+                                                  }" />
+                    <div
+                      *ngIf="myform.controls.PatientMiddleInitial.errors && (myform.controls.PatientMiddleInitial.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.PatientMiddleInitial.errors.pattern">
+                        Alphabets(a-z). And special characters(- _ ’ `space) are allowed
+                      </div>
+                      <div *ngIf="myform.controls.PatientMiddleInitial.errors.maxlength">
+                        PatientMiddleInitial cannot be more than 1 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" *ngIf="(displayfield.PatientLastName == 1 || displayfield.PatientLastName == 2)">
+                  <div class="right"><label>Last Name<span class="c1">*</span></label></div>
+                  <div class="left">
+                    <input type="text" id="txtresidentlastname" [readonly]="displayfield.PatientLastName === 2" formControlName="PatientLastName" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.PatientLastName.valid && myform.controls.PatientLastName.dirty,
+                            'is-invalid':myform.controls.PatientLastName.invalid && myform.controls.PatientLastName.touched
+                                                  }" />
+                    <div *ngIf="myform.controls.PatientLastName.errors && (myform.controls.PatientLastName.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PatientLastName.errors.required">
+                        Last Name is required.
+                      </div>
+                      <div *ngIf="myform.controls.PatientLastName.errors.pattern">
+                        {{config.alphaNumericFewSpecialCharactersMessage3}}
+                      </div>
+                      <div *ngIf="myform.controls.PatientLastName.errors.maxlength">
+                        PatientLastName cannot be more than 50 characters long.
+                      </div>
+                      <div *ngIf="myform.controls.PatientLastName.errors.minlength">
+                        PatientLastName cannot be less than 2 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Name Type Code</label></div>
+                  <div class="left">
+                    <input type="text" id="txtnametypecode" formControlName="NameTypeCode" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.NameTypeCode.valid && myform.controls.NameTypeCode.dirty,
+                            'is-invalid':myform.controls.NameTypeCode.invalid && myform.controls.NameTypeCode.touched
+                                              }" />
+                    <div *ngIf="myform.controls.NameTypeCode.errors  && (myform.controls.NameTypeCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.NameTypeCode.errors.pattern">
+                        {{config.alphabetsMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.NameTypeCode.errors.maxlength">
+                        NameTypeCode cannot be more than 1 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Mother Maiden Name</label></div>
+                  <div class="left">
+                    <input type="text" id="txtmothermaidenname" formControlName="MotherMaidenName" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.MotherMaidenName.valid && myform.controls.MotherMaidenName.dirty,
+                            'is-invalid':myform.controls.MotherMaidenName.invalid && myform.controls.MotherMaidenName.touched
+                                                  }" />
+                    <div *ngIf="myform.controls.MotherMaidenName.errors && (myform.controls.MotherMaidenName.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.MotherMaidenName.errors.maxlength">
+                        MotherMaidenName cannot be more than 100 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" *ngIf="(displayfield.DOB == 1 || displayfield.DOB == 2)">
+                  <div class="right"><label>DOB <span class="c1">*</span></label></div>
+                  <div class="left">
+                    <input type="date" id="txtdob" [readonly]="displayfield.DOB === 2" formControlName="DOB" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.DOB.valid && myform.controls.DOB.dirty,
+                          'is-invalid':myform.controls.DOB.invalid && myform.controls.DOB.touched
+                                              }" />
+                    <div *ngIf="myform.controls.DOB.errors && (myform.controls.DOB.touched)" class="errorMessage">
+                      <div *ngIf="myform.controls.DOB.errors.required">
+                        DOB is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4" *ngIf="(displayfield.AdministrativeSex == 1 || displayfield.AdministrativeSex == 2)">
+                  <div class="right"><label>Gender <span class="c1">*</span></label></div>
+                  <div class="left">
+                    <div class="iconed-input">
+                      <select id="ddlgender"   [attr.disabled]="displayfield.AdministrativeSex ==2 ? '' : null" class="form-control" formControlName="AdministrativeSex" [ngClass]="{
+                                'is-valid':myform.controls.AdministrativeSex.valid && myform.controls.AdministrativeSex.dirty,
+                                'is-invalid':myform.controls.AdministrativeSex.invalid && myform.controls.AdministrativeSex.touched
+                              }">
+                        <option value="" disabled selected>Select</option>
+                        <option *ngFor="let item of genders" value="{{item.Gender_Code}}">{{item.Gender_Desc}}</option>
+                      </select>
+                      <div
+                        *ngIf="myform.controls.AdministrativeSex.errors && (myform.controls.AdministrativeSex.touched)"
+                        class="errorMessage">
+                        <div *ngIf="myform.controls.AdministrativeSex.errors.required">
+                          Gender is required.
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Patient Alias</label></div>
+                  <div class="left">
+                    <input type="text" id="txtalias" formControlName="PatientAlias" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.PatientAlias.valid && myform.controls.PatientAlias.dirty,
+                          'is-invalid':myform.controls.PatientAlias.invalid && myform.controls.PatientAlias.touched
+                                              }" />
+                    <div *ngIf="myform.controls.PatientAlias.errors && (myform.controls.PatientAlias.touched)  "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.PatientAlias.errors.maxlength">
+                        PatientAlias cannot be more than 100 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Race</label></div>
+                  <div class="left">
+                    <input type="text" id="txtrace" formControlName="Race" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.Race.valid && myform.controls.Race.dirty,
+                          'is-invalid':myform.controls.Race.invalid && myform.controls.Race.touched
+                                              }" />
+                    <div *ngIf="myform.controls.Race.errors  && (myform.controls.Race.touched) " class="errorMessage">
+
+                      <div *ngIf="myform.controls.Race.errors.maxlength">
+                        Race cannot be more than 100 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label> Address 1</label></div>
+                  <div class="left">
+                    <input type="text" id="txtaddress1" formControlName="PatientAddress1" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.PatientAddress1.valid && myform.controls.PatientAddress1.dirty,
+                            'is-invalid':myform.controls.PatientAddress1.invalid && myform.controls.PatientAddress1.touched
+                                              }" />
+                    <div *ngIf="myform.controls.PatientAddress1.errors && (myform.controls.PatientAddress1.touched)  "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.PatientAddress1.errors.maxlength">
+                        PatientAddress1 cannot be more than 100 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label> Address 2</label></div>
+                  <div class="left">
+                    <input type="text" id="txtaddress2" formControlName="PatientAddress2" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.PatientAddress2.valid && myform.controls.PatientAddress2.dirty,
+                            'is-invalid':myform.controls.PatientAddress2.invalid && myform.controls.PatientAddress2.touched
+                                              }" />
+                    <div *ngIf="myform.controls.PatientAddress2.errors && (myform.controls.PatientAddress2.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.PatientAddress2.errors.maxlength">
+                        PatientAddress2 cannot be more than 100 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Country</label></div>
+                  <div class="left">
+                    <input type="text" id="txtcountry" formControlName="CountyCode" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.CountyCode.valid && myform.controls.CountyCode.dirty,
+                          'is-invalid':myform.controls.CountyCode.invalid && myform.controls.CountyCode.touched
+                                              }" />
+                    <div *ngIf="myform.controls.CountyCode.errors && (myform.controls.CountyCode.touched) "
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.CountyCode.errors.pattern">
+                        {{config.alphabetsMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.CountyCode.errors.maxlength">
+                        CountyCode cannot be more than 10 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>State</label></div>
+                  <div class="left">
+                    <input type="text" id="txtstate" formControlName="PatientState" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.PatientState.valid && myform.controls.PatientState.dirty,
+                          'is-invalid':myform.controls.PatientState.invalid && myform.controls.PatientState.touched
+                                              }" />
+                    <div *ngIf="myform.controls.PatientState.errors && (myform.controls.PatientState.touched) "
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PatientState.errors.pattern">
+                        {{config.alphabetsMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.PatientState.errors.maxlength">
+                        PatientState cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>City</label></div>
+                  <div class="left">
+                    <input type="text" id="txtcity" formControlName="PatientCity" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.PatientCity.valid && myform.controls.PatientCity.dirty,
+                          'is-invalid':myform.controls.PatientCity.invalid && myform.controls.PatientCity.touched
+                                              }" />
+                    <div *ngIf="myform.controls.PatientCity.errors && (myform.controls.PatientCity.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PatientCity.errors.pattern">
+                        {{config.alphabetsMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.PatientCity.errors.maxlength">
+                        PatientCity cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Zipcode</label></div>
+                  <div class="left">
+                    <input type="text" id="txtzipcode" formControlName="PatientZipCode" class="form-control"
+                      [textMask]="{mask: config.zipcode, guide: false}" [ngClass]="{
+                            'is-valid':myform.controls.PatientZipCode.valid && myform.controls.PatientZipCode.dirty,
+                            'is-invalid':myform.controls.PatientZipCode.invalid && myform.controls.PatientZipCode.touched
+                                              }" />
+                    <div *ngIf="myform.controls.PatientZipCode.errors && (myform.controls.PatientZipCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.PatientZipCode.errors.maxlength">
+                        Zipcode must be 10 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Phone</label></div>
+                  <div class="left">
+                    <input type="text" id="txtphone" formControlName="PhoneHome" class="form-control"
+                      placeholder="(000)-000-0000" [textMask]="{mask: config.mobileNumberMask, guide: false}" [ngClass]="{
+                            'is-valid':myform.controls.PhoneHome.valid && myform.controls.PhoneHome.dirty,
+                            'is-invalid':myform.controls.PhoneHome.invalid && myform.controls.PhoneHome.touched
+                                          }" />
+                    <div *ngIf="myform.controls.PhoneHome.errors && (myform.controls.PhoneHome.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PhoneHome.errors.minlength">
+                        Phone must be 14 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Phone Business</label></div>
+                  <div class="left">
+                    <input type="text" id="txtphnbusiness" formControlName="PhoneBusiness" class="form-control"
+                      placeholder="(000)-000-0000" [textMask]="{mask: config.mobileNumberMask, guide: false}" [ngClass]="{
+                            'is-valid':myform.controls.PhoneBusiness.valid && myform.controls.PhoneBusiness.dirty,
+                            'is-invalid':myform.controls.PhoneBusiness.invalid && myform.controls.PhoneBusiness.touched
+                                          }" />
+                    <div *ngIf="myform.controls.PhoneBusiness.errors && (myform.controls.PhoneBusiness.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PhoneBusiness.errors.minlength">
+                        Phone must be 14 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Primary Language</label></div>
+                  <div class="left">
+                    <input type="text" id="txtprimarylang" formControlName="PrimaryLanguage" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.PrimaryLanguage.valid && myform.controls.PrimaryLanguage.dirty,
+                            'is-invalid':myform.controls.PrimaryLanguage.invalid && myform.controls.PrimaryLanguage.touched
+                                            }" />
+                    <div *ngIf="myform.controls.PrimaryLanguage.errors && (myform.controls.PrimaryLanguage.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.PrimaryLanguage.errors.maxlength">
+                        PrimaryLanguage cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Marital Status</label></div>
+                  <div class="left">
+                    <input type="text" id="txtmaritalstatus" formControlName="MaritalStatus" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.MaritalStatus.valid && myform.controls.MaritalStatus.dirty,
+                            'is-invalid':myform.controls.MaritalStatus.invalid && myform.controls.MaritalStatus.touched
+                                            }" />
+                    <div *ngIf="myform.controls.MaritalStatus.errors && (myform.controls.MaritalStatus.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.MaritalStatus.errors.maxlength">
+                        MaritalStatus cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Religion</label></div>
+                  <div class="left">
+                    <input type="text" id="txtreligiion" formControlName="Religion" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.Religion.valid && myform.controls.Religion.dirty,
+                          'is-invalid':myform.controls.Religion.invalid && myform.controls.Religion.touched
+                                            }" />
+                    <div *ngIf="myform.controls.Religion.errors && (myform.controls.Religion.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.Religion.errors.maxlength">
+                        Religion cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="residentUniqueId !== 'PatientMRNumber'" style="display: none;">
+                  <div class="right"><label>MR Number</label></div>
+                  <div class="left">
+                    <input type="text" id="txtmrnumber" formControlName="PatientMRNumber" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.PatientMRNumber.valid && myform.controls.PatientMRNumber.dirty,
+                            'is-invalid':myform.controls.PatientMRNumber.invalid && myform.controls.PatientMRNumber.touched
+                                            }" />
+                    <div *ngIf="myform.controls.PatientMRNumber.errors && (myform.controls.PatientMRNumber.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.PatientMRNumber.errors.pattern">
+                        {{config.alphaNumericMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.PatientMRNumber.errors.minlength">
+                        PatientMRNumber cannot be more than 5 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>SSN</label></div>
+                  <div class="left">
+                    <input type="text" id="txtssn" formControlName="SSN" class="form-control" placeholder="000-00-0000"
+                      [textMask]="{mask: config.ssn, guide: false}" [ngClass]="{
+                          'is-valid':myform.controls.SSN.valid && myform.controls.SSN.dirty,
+                          'is-invalid':myform.controls.SSN.invalid && myform.controls.SSN.touched
+                                            }" />
+                    <div *ngIf="myform.controls.SSN.errors && (myform.controls.SSN.touched)" class="errorMessage">
+
+                      <div *ngIf="myform.controls.SSN.errors.maxlength">
+                        SSN cannot be more than 20 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Driver License</label></div>
+                  <div class="left">
+                    <input type="text" id="txtdriverlicense" formControlName="DriverLicense" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.DriverLicense.valid && myform.controls.DriverLicense.dirty,
+                            'is-invalid':myform.controls.DriverLicense.invalid && myform.controls.DriverLicense.touched
+                                            }" />
+                    <div *ngIf="myform.controls.DriverLicense.errors && (myform.controls.DriverLicense.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.DriverLicense.errors.maxlength">
+                        DriverLicense cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Mother Identifier</label></div>
+                  <div class="left">
+                    <input type="text" id="txtmotheridentifier" formControlName="MotherIdentifier" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.MotherIdentifier.valid && myform.controls.MotherIdentifier.dirty,
+                            'is-invalid':myform.controls.MotherIdentifier.invalid && myform.controls.MotherIdentifier.touched
+                                                }" />
+                    <div *ngIf="myform.controls.MotherIdentifier.errors && (myform.controls.MotherIdentifier.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.MotherIdentifier.errors.maxlength">
+                        MotherIdentifier cannot be more than 100 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label> Ethnic Group</label></div>
+                  <div class="left">
+                    <input type="text" id="txtethnicgroup" formControlName="EthnicGroup" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.EthnicGroup.valid && myform.controls.EthnicGroup.dirty,
+                          'is-invalid':myform.controls.EthnicGroup.invalid && myform.controls.EthnicGroup.touched
+                                            }" />
+                    <div *ngIf="myform.controls.EthnicGroup.errors && (myform.controls.EthnicGroup.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.EthnicGroup.errors.maxlength">
+                        EthnicGroup cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Birth Place</label></div>
+                  <div class="left">
+                    <input type="text" id="txtbirthplace" formControlName="BirthPlace" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.BirthPlace.valid && myform.controls.BirthPlace.dirty,
+                          'is-invalid':myform.controls.BirthPlace.invalid && myform.controls.BirthPlace.touched
+                                            }" />
+                    <div *ngIf="myform.controls.BirthPlace.errors && (myform.controls.BirthPlace.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.BirthPlace.errors.maxlength">
+                        BirthPlace cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Multiple Birth Indicator</label></div>
+                  <div class="left">
+                    <input type="text" id="txtmulbirthindi" formControlName="MultipleBirthIndicator"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.MultipleBirthIndicator.valid && myform.controls.MultipleBirthIndicator.dirty,
+                            'is-invalid':myform.controls.MultipleBirthIndicator.invalid && myform.controls.MultipleBirthIndicator.touched
+                                                }" />
+                    <div
+                      *ngIf="myform.controls.MultipleBirthIndicator.errors   && (myform.controls.MultipleBirthIndicator.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.MultipleBirthIndicator.errors.maxlength">
+                        MultipleBirthIndicator cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Birth Order</label></div>
+                  <div class="left">
+                    <input type="text" id="txtbirthorder" formControlName="BirthOrder" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.BirthOrder.valid && myform.controls.BirthOrder.dirty,
+                          'is-invalid':myform.controls.BirthOrder.invalid && myform.controls.BirthOrder.touched
+                                            }" />
+                    <div *ngIf="myform.controls.BirthOrder.errors && (myform.controls.BirthOrder.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.BirthOrder.errors.maxlength">
+                        BirthOrder cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Citizenship</label></div>
+                  <div class="left">
+                    <input type="text" id="txtcitizenship" formControlName="Citizenship" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.Citizenship.valid && myform.controls.Citizenship.dirty,
+                          'is-invalid':myform.controls.Citizenship.invalid && myform.controls.Citizenship.touched
+                                            }" />
+                    <div *ngIf="myform.controls.Citizenship.errors  && (myform.controls.Citizenship.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.Citizenship.errors.maxlength">
+                        Citizenship cannot be more than 50 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Military Status</label></div>
+                  <div class="left">
+                    <input type="text" id="txtmilitystatus" formControlName="MilitaryStatus" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.MilitaryStatus.valid && myform.controls.MilitaryStatus.dirty,
+                            'is-invalid':myform.controls.MilitaryStatus.invalid && myform.controls.MilitaryStatus.touched
+                                            }" />
+                    <div *ngIf="myform.controls.MilitaryStatus.errors && (myform.controls.MilitaryStatus.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.MilitaryStatus.errors.maxlength">
+                        MilitaryStatus cannot be more than 50 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Nationality</label></div>
+                  <div class="left">
+                    <input type="text" id="txtnationality" formControlName="Nationality" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.Nationality.valid && myform.controls.Nationality.dirty,
+                          'is-invalid':myform.controls.Nationality.invalid && myform.controls.Nationality.touched
+                                            }" />
+                    <div *ngIf="myform.controls.Nationality.errors && (myform.controls.Nationality.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.Nationality.errors.maxlength">
+                        Nationality cannot be more than 50 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Death Date Tme</label></div>
+                  <div class="left">
+                    <input type="date" id="txtdeathdatetime" formControlName="DeathDateTime" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.DeathDateTime.valid && myform.controls.DeathDateTime.dirty,
+                            'is-invalid':myform.controls.DeathDateTime.invalid && myform.controls.DeathDateTime.touched
+                                            }" />
+                    <div *ngIf="myform.controls.DeathDateTime.errors  && (myform.controls.DeathDateTime.touched)"
+                      class="errorMessage">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Death Indicator</label></div>
+                  <div class="left">
+                    <input type="text" id="txtdeathindicator" formControlName="DeathIndicator" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.DeathIndicator.valid && myform.controls.DeathIndicator.dirty,
+                            'is-invalid':myform.controls.DeathIndicator.invalid && myform.controls.DeathIndicator.touched
+                                                }" />
+                    <div *ngIf="myform.controls.DeathIndicator.errors && (myform.controls.DeathIndicator.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.DeathIndicator.errors.pattern">
+                        {{config.alphabetsMessage}}
+                      </div>
+                      <div *ngIf="myform.controls.DeathIndicator.errors.maxlength">
+                        DeathIndicator cannot be more than 1 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Identity Indicator</label></div>
+                  <div class="left">
+                    <input type="text" id="txtidentityindicator" formControlName="IdentityIndicator"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.IdentityIndicator.valid && myform.controls.IdentityIndicator.dirty,
+                            'is-invalid':myform.controls.IdentityIndicator.invalid && myform.controls.IdentityIndicator.touched
+                                                }" />
+                    <div
+                      *ngIf="myform.controls.IdentityIndicator.errors && (myform.controls.IdentityIndicator.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.IdentityIndicator.errors.maxlength">
+                        IdentityIndicator cannot be more than 1 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Identity Reliability</label></div>
+                  <div class="left">
+                    <input type="text" id="txtidentityindicator" formControlName="IdentityReliability"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.IdentityReliability.valid && myform.controls.IdentityReliability.dirty,
+                            'is-invalid':myform.controls.IdentityReliability.invalid && myform.controls.IdentityReliability.touched
+                                                }" />
+                    <div
+                      *ngIf="myform.controls.IdentityReliability.errors && (myform.controls.IdentityReliability.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.IdentityReliability.errors.maxlength">
+                        IdentityReliability cannot be more than 1 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Last Update</label></div>
+                  <div class="left">
+                    <input type="text" id="txtlastupdate" formControlName="LastUpdate" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.LastUpdate.valid && myform.controls.LastUpdate.dirty,
+                          'is-invalid':myform.controls.LastUpdate.invalid && myform.controls.LastUpdate.touched
+                                            }" />
+                    <div *ngIf="myform.controls.LastUpdate.errors && (myform.controls.LastUpdate.touched)  "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.LastUpdate.errors.maxlength">
+                        LastUpdate cannot be more than 25 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Last Facility Update</label></div>
+                  <div class="left">
+                    <input type="text" id="txtlastfacilityupdate" formControlName="LastFacilityUpdate"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.LastFacilityUpdate.valid && myform.controls.LastFacilityUpdate.dirty,
+                            'is-invalid':myform.controls.LastFacilityUpdate.invalid && myform.controls.LastFacilityUpdate.touched
+                                                }" />
+                    <div
+                      *ngIf="myform.controls.LastFacilityUpdate.errors && (myform.controls.LastFacilityUpdate.touched) "
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.LastFacilityUpdate.errors.maxlength">
+                        LastFacilityUpdate cannot be more than 50 character long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Species Code</label></div>
+                  <div class="left">
+                    <input type="text" id="txtspeciescode" formControlName="SpeciesCode" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.SpeciesCode.valid && myform.controls.SpeciesCode.dirty,
+                          'is-invalid':myform.controls.SpeciesCode.invalid && myform.controls.SpeciesCode.touched
+                                            }" />
+                    <div *ngIf="myform.controls.SpeciesCode.errors  && (myform.controls.SpeciesCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.SpeciesCode.errors.maxlength">
+                        SpeciesCode cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Breed Code</label></div>
+                  <div class="left">
+                    <input type="text" id="txtbreedcode" formControlName="BreedCode" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.BreedCode.valid && myform.controls.BreedCode.dirty,
+                          'is-invalid':myform.controls.BreedCode.invalid && myform.controls.BreedCode.touched 
+                                            }" />
+                    <div *ngIf="myform.controls.BreedCode.errors && (myform.controls.BreedCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.BreedCode.errors.maxlength">
+                        BreedCode cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Strain</label></div>
+                  <div class="left">
+                    <input type="text" id="txtstrain" formControlName="Strain" class="form-control" [ngClass]="{
+                          'is-valid':myform.controls.Strain.valid && myform.controls.Strain.dirty,
+                          'is-invalid':myform.controls.Strain.invalid && myform.controls.Strain.touched 
+                                            }" />
+                    <div *ngIf="myform.controls.Strain.errors  && (myform.controls.Strain.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.Strain.errors.maxlength">
+                        Strain cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Production Class Code</label></div>
+                  <div class="left">
+                    <input type="text" id="txtproclasscode" formControlName="ProductionClassCode" class="form-control"
+                      [ngClass]="{
+                            'is-valid':myform.controls.ProductionClassCode.valid && myform.controls.ProductionClassCode.dirty,
+                            'is-invalid':myform.controls.ProductionClassCode.invalid && myform.controls.ProductionClassCode.touched 
+                                                }" />
+                    <div
+                      *ngIf="myform.controls.ProductionClassCode.errors  && (myform.controls.ProductionClassCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.ProductionClassCode.errors.maxlength">
+                        ProductionClassCode cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right"><label>Tribal Citizenship</label></div>
+                  <div class="left">
+                    <input type="text" id="txttribalcitizenship" formControlName="TribalCitizenship"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.TribalCitizenship.valid && myform.controls.TribalCitizenship.dirty,
+                            'is-invalid':myform.controls.TribalCitizenship.invalid && myform.controls.TribalCitizenship.touched 
+                                                }" />
+                    <div *ngIf="myform.controls.TribalCitizenship.errors && (myform.controls.TribalCitizenship.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="myform.controls.TribalCitizenship.errors.maxlength">
+                        TribalCitizenship cannot be more than 50 character long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4 class="card-title">Admit / Visit Info Details</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="censusform" name="census" *ngIf="AdmitvisitInfoHlsevenconfig">
+              <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display:none">
+                  <div class="right">
+                    <label>PVisit Id</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPVisit_Id" formControlName="PVisit_Id" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display:none">
+                  <div class="right">
+                    <label>Patient Id</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPatient_Id" formControlName="Patient_Id" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Patient Class</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPatientClass" formControlName="PatientClass" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.PatientClass.valid && censusform.controls.PatientClass.dirty,
+                                                                          'is-invalid':censusform.controls.PatientClass.invalid && censusform.controls.PatientClass.touched ,'errmsg' : 'validmsg'
+                                                                        }" />
+                    <div *ngIf="censusform.controls.PatientClass.errors && (censusform.controls.PatientClass.touched)"
+                      class="errorMessage">
+
+
+                      <div *ngIf="censusform.controls.PatientClass.errors.maxlength">
+                        Patient Class cannot be more than 1 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                  <div class="right">
+                                                                      <label>Nursing Station Id</label>
+                                                                  </div>
+                                                                  <div class="left">
+                                                                      <input type="text" id="txtNursingStationId" formControlName="NursingStationId" class="form-control" />
+                                                                  </div>
+                                                              </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="companyToBed===1 && (AdmitvisitInfodisplayfield.Room == 1 || AdmitvisitInfodisplayfield.Room == 2)" >
+                  <div class="right">
+                    <label>Room</label>
+                  </div>
+                  <div class="left">
+                    <select class="form-control" [attr.disabled]="AdmitvisitInfodisplayfield.Room ==2 ? '' : null" id="ddlroom" formControlName="Room" [ngClass]="{
+                                                                        'is-valid':censusform.controls.Room.valid && censusform.controls.Room.dirty,
+                                                                        'is-invalid':censusform.controls.Room.invalid && censusform.controls.Room.touched
+                                                                      }">
+                      <option value="">Select Room</option>
+                      <option *ngFor="let item of rooms" value="{{item.Room_Id}}">
+
+                        {{item.Room_Name}}</option>
+                    </select>
+                    <div *ngIf="censusform.controls.Room.errors && (censusform.controls.Room.touched)">
+
+                    </div>
+
+                  </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="companyToBed===1" style="display: none">
+                  <div class="right">
+                    <label>Wing</label>
+                  </div>
+                  <div class="left">
+                    <select class="form-control" id="ddlwing" formControlName="Wing" [ngClass]="{
+                                                                        'is-valid':censusform.controls.Wing.valid && censusform.controls.Wing.dirty,
+                                                                        'is-invalid':censusform.controls.Wing.invalid && censusform.controls.Wing.touched
+                                                                      }">
+                      <option value="">Select Wing</option>
+                      <option *ngFor="let item of wings" value="{{item.Wing_Id}}">
+
+                        {{item.Wing_Desc}}</option>
+                    </select>
+                    <div *ngIf="censusform.controls.Wing.errors && (censusform.controls.Wing.touched)">
+
+                    </div>
+
+                  </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="companyToBed===1 && (AdmitvisitInfodisplayfield.Bed == 1 || AdmitvisitInfodisplayfield.Bed == 2)">
+                  <div class="right">
+                    <label>Bed</label>
+                  </div>
+                  <div class="left">
+                    <select class="form-control" [attr.disabled]="AdmitvisitInfodisplayfield.Bed ==2 ? '' : null" id="ddlBed" formControlName="Bed" [ngClass]="{
+                                                                        'is-valid':censusform.controls.Bed.valid && censusform.controls.Bed.dirty,
+                                                                        'is-invalid':censusform.controls.Bed.invalid && censusform.controls.Bed.touched
+                                                                      }">
+                      <option value="">Select Bed</option>
+                      <option *ngFor="let item of beds" value="{{item.Bed_Id}}">
+
+                        {{item.Bed_Name}}</option>
+                    </select>
+                    <div *ngIf="censusform.controls.Bed.errors && (censusform.controls.Bed.touched)">
+
+                    </div>
+
+                  </div>
+                </div> -->
+
+
+
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="companyToBed===1 && (AdmitvisitInfodisplayfield.Floor == 1 || AdmitvisitInfodisplayfield.Floor == 2)" >
+                  <div class="right">
+                    <label>Floor</label>
+                  </div>
+                  <div class="left">
+                    <select class="form-control" [attr.disabled]="AdmitvisitInfodisplayfield.Floor ==2 ? '' : null" id="ddlfloor" formControlName="Floor" [ngClass]="{
+                                                                        'is-valid':censusform.controls.Floor.valid && censusform.controls.Floor.dirty,
+                                                                        'is-invalid':censusform.controls.Floor.invalid && censusform.controls.Floor.touched
+                                                                      }">
+                      <option value="">Select Floor</option>
+                      <option *ngFor="let item of floors" value="{{item. Floor_Id}}">
+
+                        {{item.Floor_Name}}</option>
+                    </select>
+                    <div *ngIf="censusform.controls.Floor.errors && (censusform.controls.Floor.touched)">
+
+                    </div>
+
+                  </div>
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Admission Type</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtAdmissionType" formControlName="AdmissionType" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.AdmissionType.valid && censusform.controls.AdmissionType.dirty,
+                                                                          'is-invalid':censusform.controls.AdmissionType.invalid && censusform.controls.AdmissionType.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.AdmissionType.errors && (censusform.controls.AdmissionType.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AdmissionType.errors.maxlength">
+                        Admission Type cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Pre Admit Number</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPreAdmitNumber" formControlName="PreAdmitNumber" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.PreAdmitNumber.valid && censusform.controls.PreAdmitNumber.dirty,
+                                                                          'is-invalid':censusform.controls.PreAdmitNumber.invalid && censusform.controls.PreAdmitNumber.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PreAdmitNumber.errors && (censusform.controls.PreAdmitNumber.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PreAdmitNumber.errors.maxlength">
+                        Pre Admit Number cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Prior Nursing Station Name</label>
+                  </div>
+                  <div class="left">
+                    <!-- <input type="text" id="txtPriorNursingStationId" formControlName="PriorNursingStationId" class="form-control" readonly/> -->
+                    <select class="form-control" id="ddlPriorNursingStationId" formControlName="PriorNursingStationId"
+                      [ngClass]="{
+                                                                        'is-valid':censusform.controls.PriorNursingStationId.valid && censusform.controls.PriorNursingStationId.dirty,
+                                                                        'is-invalid':censusform.controls.PriorNursingStationId.invalid && censusform.controls.PriorNursingStationId.touched
+                                                                      }">
+                      <option value="0">Select Prior Nursing Station</option>
+                      <option *ngFor="let item of nurseStation" value="{{item.NurseStation_Id}}">
+                        {{item.NurseStation_Name}}</option>
+                    </select>
+                    <div
+                      *ngIf="censusform.controls.PriorNursingStationId.errors && (censusform.controls.PriorNursingStationId.touched)">
+
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Prior Room</label>
+                  </div>
+                  <div class="left">
+                    <!-- <input type="text" id="txtPriorRoom" formControlName="PriorRoom" class="form-control" readonly/> -->
+                    <select class="form-control" id="ddlpriorroom" formControlName="PriorRoom" [ngClass]="{
+                                                                        'is-valid':censusform.controls.PriorRoom.valid && censusform.controls.PriorRoom.dirty,
+                                                                        'is-invalid':censusform.controls.PriorRoom.invalid && censusform.controls.PriorRoom.touched
+                                                                      }">
+                      <option value="0">Select Prior Room</option>
+                      <option *ngFor="let item of rooms" value="{{item.Room_Id}}">
+                        - {{item.Room_Name}}
+                      </option>
+                    </select>
+                    <div *ngIf="censusform.controls.PriorRoom.errors && (censusform.controls.PriorRoom.touched)">
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Prior Bed</label>
+                  </div>
+                  <div class="left">
+                    <!-- <input type="text" id="txtPriorBed" formControlName="PriorBed" class="form-control" readonly />  -->
+                    <select class="form-control" id="ddlPriorBed" formControlName="PriorBed" [ngClass]="{
+                                                                        'is-valid':censusform.controls.PriorBed.valid && censusform.controls.PriorBed.dirty,
+                                                                        'is-invalid':censusform.controls.PriorBed.invalid && censusform.controls.PriorBed.touched
+                                                                      }">
+                      <option value="0">Select Prior Bed</option>
+                      <option *ngFor="let item of beds" value="{{item.Bed_Id}}">
+
+                        {{item.Bed_Name}}</option>
+                    </select>
+                    <div *ngIf="censusform.controls.PriorBed.errors && (censusform.controls.PriorBed.touched)">
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Prior Facility Name</label>
+                  </div>
+                  <div class="left">
+                    <!-- <input type="text" id="txtPriorFacilityId" formControlName="PriorFacilityId" class="form-control"  readonly/> -->
+                    <select class="form-control" id="ddlPriorFacilityId" formControlName="PriorFacilityId" [ngClass]="{
+                                                                        'is-valid':censusform.controls.PriorFacilityId.valid && censusform.controls.PriorFacilityId.dirty,
+                                                                        'is-invalid':censusform.controls.PriorFacilityId.invalid && censusform.controls.PriorFacilityId.touched
+                                                                      }">
+                      <option value="0">Select Prior Facility</option>
+                      <option *ngFor="let item of facilityDrop" value="{{item.Facility_Id}}">
+
+                        {{item.Facility_Name}}</option>
+                    </select>
+                    <div
+                      *ngIf="censusform.controls.PriorFacilityId.errors && (censusform.controls.PriorFacilityId.touched)">
+
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Prior Floor</label>
+                  </div>
+                  <div class="left">
+                    <!-- <input type="text" id="txtPriorFloor" formControlName="PriorFloor" class="form-control" readonly/> -->
+                    <select class="form-control" id="ddlPriorfloor" formControlName="PriorFloor" [ngClass]="{
+                                                                      'is-valid':censusform.controls.PriorFloor.valid && censusform.controls.PriorFloor.dirty,
+                                                                      'is-invalid':censusform.controls.PriorFloor.invalid && censusform.controls.PriorFloor.touched
+                                                                    }">
+                      <option value="0">Select Prior Floor</option>
+                      <option *ngFor="let item of floorMaster" value="{{item. Floor_Id}}">
+
+                        {{item.Floor_Name}}</option>
+                    </select>
+                    <div *ngIf="censusform.controls.PriorFloor.errors && (censusform.controls.PriorFloor.touched)">
+
+                    </div>
+
+                  </div>
+                </div>
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="right">
+                    <label>Primary Physician NPI</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPrimaryPhysicianNPI" formControlName="PrimaryPhysicianNPI"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.PrimaryPhysicianNPI.valid  && censusform.controls.PrimaryPhysicianNPI.dirty,
+                                                                          'is-invalid':censusform.controls.PrimaryPhysicianNPI.invalid && censusform.controls.PrimaryPhysicianNPI.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PrimaryPhysicianNPI.errors && (censusform.controls.PrimaryPhysicianNPI.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PrimaryPhysicianNPI.errors.maxlength">
+                        Primary Physician NPI cannot be more than 10 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="right">
+                    <label>Primary Physician Last Name</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPrimaryPhysicianLName" formControlName="PrimaryPhysicianLName"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.PrimaryPhysicianLName.valid && censusform.controls.PrimaryPhysicianLName.dirty,
+                                                                          'is-invalid':censusform.controls.PrimaryPhysicianLName.invalid && censusform.controls.PrimaryPhysicianLName.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PrimaryPhysicianLName.errors && (censusform.controls.PrimaryPhysicianLName.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PrimaryPhysicianLName.errors.maxlength">
+                        Primary Physician LName cannot be more than 75 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div> -->
+                <!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="right">
+                    <label>Primary Physician First Name</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPrimaryPhysicianFName" formControlName="PrimaryPhysicianFName"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.PrimaryPhysicianFName.valid && censusform.controls.PrimaryPhysicianFName.dirty,
+                                                                          'is-invalid':censusform.controls.PrimaryPhysicianFName.invalid && censusform.controls.PrimaryPhysicianFName.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PrimaryPhysicianFName.errors && (censusform.controls.PrimaryPhysicianFName.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PrimaryPhysicianFName.errors.maxlength">
+                        Primary Physician FName cannot be more than 75 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div> -->
+                <div class="col-sm-4 col-md-6 col-lg-4" *ngIf="(AdmitvisitInfodisplayfield.PrimaryPhysicianNPI == 1 || AdmitvisitInfodisplayfield.PrimaryPhysicianNPI == 2 ||AdmitvisitInfodisplayfield.PrimaryPhysicianLName == 1 || AdmitvisitInfodisplayfield.PrimaryPhysicianLName == 2 ||AdmitvisitInfodisplayfield.PrimaryPhysicianFName == 1 || AdmitvisitInfodisplayfield.PrimaryPhysicianFName == 2)">
+                    <div class="right">
+                      <label>Physician Name <span class="c1">*</span></label>
+                    </div>
+                    <div class="left">
+                        <ng-multiselect-dropdown [disabled]="(AdmitvisitInfodisplayfield.PrimaryPhysicianNPI == 2 ||AdmitvisitInfodisplayfield.PrimaryPhysicianLName == 2 ||AdmitvisitInfodisplayfield.PrimaryPhysicianFName == 2)"  class="form-control"  formControlName="physicianname"
+                        [data]="physiciansdrop"[(ngModel)]="selectedphyItems" [settings]="dropdownSettings_Physician">
+                      </ng-multiselect-dropdown>
+                    </div>
+                  </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Referring Doctor</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtReferringDoctor" formControlName="ReferringDoctor" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.ReferringDoctor.valid  && censusform.controls.ReferringDoctor.dirty,
+                                                                          'is-invalid':censusform.controls.ReferringDoctor.invalid && censusform.controls.ReferringDoctor.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ReferringDoctor.errors && (censusform.controls.ReferringDoctor.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ReferringDoctor.errors.maxlength">
+                        Referring Doctor cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Consulting Doctor</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtConsultingDoctor" formControlName="ConsultingDoctor" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.ConsultingDoctor.valid  && censusform.controls.ConsultingDoctor.dirty,
+                                                                          'is-invalid':censusform.controls.ConsultingDoctor.invalid && censusform.controls.ConsultingDoctor.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ConsultingDoctor.errors && (censusform.controls.ConsultingDoctor.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ConsultingDoctor.errors.maxlength">
+                        Consulting Doctor cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Hospital Service</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtHospitalService" formControlName="HospitalService" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.HospitalService.valid && censusform.controls.HospitalService.dirty,
+                                                                          'is-invalid':censusform.controls.HospitalService.invalid && censusform.controls.HospitalService.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.HospitalService.errors && (censusform.controls.HospitalService.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.HospitalService.errors.maxlength">
+                        Hospital Service cannot be more than 50 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Temporary Location</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtTemporaryLocation" formControlName="TemporaryLocation"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.TemporaryLocation.valid && censusform.controls.TemporaryLocation.dirty,
+                                                                          'is-invalid':censusform.controls.TemporaryLocation.invalid && censusform.controls.TemporaryLocation.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.TemporaryLocation.errors && (censusform.controls.TemporaryLocation.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.TemporaryLocation.errors.maxlength">
+                        Temporary Location cannot be more than 80 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Pre AdmitTest Indicator</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPreAdmitTestIndicator" formControlName="PreAdmitTestIndicator"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.PreAdmitTestIndicator.valid && censusform.controls.PreAdmitTestIndicator.dirty,
+                                                                          'is-invalid':censusform.controls.PreAdmitTestIndicator.invalid && censusform.controls.PreAdmitTestIndicator.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PreAdmitTestIndicator.errors && (censusform.controls.PreAdmitTestIndicator.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PreAdmitTestIndicator.errors.maxlength">
+                        PreAdmit Test Indicator cannot be more than 50 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Re Admission Indicator</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtReAdmissionIndicator" formControlName="ReAdmissionIndicator"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.ReAdmissionIndicator.valid && censusform.controls.ReAdmissionIndicator.dirty,
+                                                                          'is-invalid':censusform.controls.ReAdmissionIndicator.invalid && censusform.controls.ReAdmissionIndicator.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ReAdmissionIndicator.errors && (censusform.controls.ReAdmissionIndicator.touched)"
+                      class="errorMessage">
+                      {{config.alphabetsMessage}}
+                      <div *ngIf="censusform.controls.ReAdmissionIndicator.errors.maxlength">
+                        ReAdmission Indicator cannot be more than 5 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Admit Source</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtAdmitSource" formControlName="AdmitSource" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.AdmitSource.valid && censusform.controls.AdmitSource.dirty,
+                                                                          'is-invalid':censusform.controls.AdmitSource.invalid && censusform.controls.AdmitSource.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.AdmitSource.errors && (censusform.controls.AdmitSource.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AdmitSource.errors.maxlength">
+                        Admit Source cannot be more than 6 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Ambulatory Status</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtAmbulatoryStatus" formControlName="AmbulatoryStatus" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.AmbulatoryStatus.valid  && censusform.controls.AmbulatoryStatus.dirty,
+                                                                          'is-invalid':censusform.controls.AmbulatoryStatus.invalid && censusform.controls.AmbulatoryStatus.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.AmbulatoryStatus.errors && (censusform.controls.AmbulatoryStatus.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AmbulatoryStatus.errors.maxlength">
+                        Ambulatory Status cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>VIP Indicator</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtVIPIndicator" formControlName="VIPIndicator" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.VIPIndicator.valid && censusform.controls.VIPIndicator.dirty,
+                                                                          'is-invalid':censusform.controls.VIPIndicator.invalid && censusform.controls.VIPIndicator.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.VIPIndicator.errors && (censusform.controls.VIPIndicator.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.VIPIndicator.errors.maxlength">
+                        >VIP Indicator cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Admitting Doctor</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtAdmittingDoctor" formControlName="AdmittingDoctor" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.AdmittingDoctor.valid && censusform.controls.AdmittingDoctor.dirty,
+                                                                          'is-invalid':censusform.controls.AdmittingDoctor.invalid && censusform.controls.AdmittingDoctor.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.AdmittingDoctor.errors && (censusform.controls.AdmittingDoctor.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AdmittingDoctor.errors.maxlength">
+                        Admitting Doctor cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Patient Type</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPatientType" formControlName="PatientType" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.PatientType.valid && censusform.controls.PatientType.dirty,
+                                                                          'is-invalid':censusform.controls.PatientType.invalid && censusform.controls.PatientType.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.PatientType.errors && (censusform.controls.PatientType.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PatientType.errors.maxlength">
+                        Patient Type cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Visit Number</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtVisitNumber" formControlName="VisitNumber" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.VisitNumber.valid  && censusform.controls.VisitNumber.dirty,
+                                                                          'is-invalid':censusform.controls.VisitNumber.invalid && censusform.controls.VisitNumber.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.VisitNumber.errors && (censusform.controls.VisitNumber.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.VisitNumber.errors.maxlength">
+                        Visit Number cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Financial Class</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtFinancialClass" formControlName="FinancialClass" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.FinancialClass.valid  && censusform.controls.FinancialClass.dirty,
+                                                                          'is-invalid':censusform.controls.FinancialClass.invalid && censusform.controls.FinancialClass.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.FinancialClass.errors && (censusform.controls.FinancialClass.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.FinancialClass.errors.maxlength">
+                        Financial Class cannot be more than 50 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Charge Price Indicator</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtChargePriceIndicator" formControlName="ChargePriceIndicator"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.ChargePriceIndicator.valid && censusform.controls.ChargePriceIndicator.dirty,
+                                                                          'is-invalid':censusform.controls.ChargePriceIndicator.invalid && censusform.controls.ChargePriceIndicator.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ChargePriceIndicator.errors && (censusform.controls.ChargePriceIndicator.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ChargePriceIndicator.errors.maxlength">
+                        Charge Price Indicator cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Courtesy Code</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtCourtesyCode" formControlName="CourtesyCode" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.CourtesyCode.valid && censusform.controls.CourtesyCode.dirty,
+                                                                          'is-invalid':censusform.controls.CourtesyCode.invalid && censusform.controls.CourtesyCode.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.CourtesyCode.errors && (censusform.controls.CourtesyCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.CourtesyCode.errors.maxlength">
+                        Courtesy Code cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Credit Rating</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtCreditRating" formControlName="CreditRating" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.CreditRating.valid && censusform.controls.CreditRating.dirty,
+                                                                          'is-invalid':censusform.controls.CreditRating.invalid && censusform.controls.CreditRating.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.CreditRating.errors && (censusform.controls.CreditRating.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.CreditRating.errors.maxlength">
+                        Credit Rating cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Contract Code</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtContractCode" formControlName="ContractCode" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.ContractCode.valid && censusform.controls.ContractCode.dirty,
+                                                                          'is-invalid':censusform.controls.ContractCode.invalid && censusform.controls.ContractCode.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.ContractCode.errors && (censusform.controls.ContractCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ContractCode.errors.maxlength">
+                        Credit Rating cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Contract Eff Date</label>
+                  </div>
+                  <div class="left">
+                    <input type="date" id="txtContractEffDate" formControlName="ContractEffDate" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Contract Amount</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtContractAmount" formControlName="ContractAmount" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.ContractAmount.valid && censusform.controls.ContractAmount.dirty,
+                                                                          'is-invalid':censusform.controls.ContractAmount.invalid && censusform.controls.ContractAmount.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ContractAmount.errors && (censusform.controls.ContractAmount.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ContractAmount.errors.maxlength">
+                        Contract Amount cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Contract Period</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtContractPeriod" formControlName="ContractPeriod" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.ContractPeriod.valid && censusform.controls.ContractPeriod.dirty,
+                                                                          'is-invalid':censusform.controls.ContractPeriod.invalid && censusform.controls.ContractPeriod.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ContractPeriod.errors && (censusform.controls.ContractPeriod.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ContractPeriod.errors.maxlength">
+                        Contract Period cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Interest Code</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtInterestCode" formControlName="InterestCode" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.InterestCode.valid && censusform.controls.InterestCode.dirty,
+                                                                          'is-invalid':censusform.controls.InterestCode.invalid && censusform.controls.InterestCode.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.InterestCode.errors && (censusform.controls.InterestCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.InterestCode.errors.maxlength">
+                        Interest Code cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Bad Debit Code</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtBadDebtCode" formControlName="BadDebtCode" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.BadDebtCode.valid && censusform.controls.BadDebtCode.dirty,
+                                                                          'is-invalid':censusform.controls.BadDebtCode.invalid && censusform.controls.BadDebtCode.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.BadDebtCode.errors && (censusform.controls.BadDebtCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.BadDebtCode.errors.maxlength">
+                        BadDebt Code cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Bad Debit Date</label>
+                  </div>
+                  <div class="left">
+                    <input type="date" id="txtBadDebtDate" formControlName="BadDebtDate" class="form-control" [ngClass]="{
+                                                                        'is-valid':censusform.controls.BadDebtDate.valid && censusform.controls.BadDebtDate.dirty,
+                                                                        'is-invalid':censusform.controls.BadDebtDate.invalid && censusform.controls.BadDebtDate.touched
+                                                                      }" />
+                    <div *ngIf="censusform.controls.BadDebtDate.errors && (censusform.controls.BadDebtDate.touched)"
+                      class="errorMessage">
+
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Bad Debit Agency Code</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtBadDebtAgencyCode" formControlName="BadDebtAgencyCode"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.BadDebtAgencyCode.valid  && censusform.controls.BadDebtAgencyCode.dirty,
+                                                                          'is-invalid':censusform.controls.BadDebtAgencyCode.invalid && censusform.controls.BadDebtAgencyCode.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.BadDebtAgencyCode.errors && (censusform.controls.BadDebtAgencyCode.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.BadDebtAgencyCode.errors.maxlength">
+                        Bad Debt Agency Code cannot be more than 10 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Bad Debit Transfer Amount</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtBadDebtTransferAmt" formControlName="BadDebtTransferAmt"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.BadDebtTransferAmt.valid && censusform.controls.BadDebtTransferAmt.dirty,
+                                                                          'is-invalid':censusform.controls.BadDebtTransferAmt.invalid && censusform.controls.BadDebtTransferAmt.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.BadDebtTransferAmt.errors && (censusform.controls.BadDebtTransferAmt.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.BadDebtTransferAmt.errors.maxlength">
+                        Bad Debt Transfer Amount cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Bad Debit Recovery Amount</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtBadDebtRecoveryAmt" formControlName="BadDebtRecoveryAmt"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.BadDebtRecoveryAmt.valid && censusform.controls.BadDebtRecoveryAmt.dirty,
+                                                                          'is-invalid':censusform.controls.BadDebtRecoveryAmt.invalid && censusform.controls.BadDebtRecoveryAmt.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.BadDebtRecoveryAmt.errors && (censusform.controls.BadDebtRecoveryAmt.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.BadDebtRecoveryAmt.errors.maxlength">
+                        BadDebtRecovery Amount cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Delete Acc Indicator</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtDeleteAccIndicator" formControlName="DeleteAccIndicator"
+                      class="form-control" [ngClass]="{
+                                                                        'is-valid':censusform.controls.DeleteAccIndicator.valid  && censusform.controls.DeleteAccIndicator.dirty,
+                                                                        'is-invalid':censusform.controls.DeleteAccIndicator.invalid && censusform.controls.DeleteAccIndicator.touched
+                                                                      }" />
+                    <div
+                      *ngIf="censusform.controls.DeleteAccIndicator.errors && (censusform.controls.DeleteAccIndicator.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.DeleteAccIndicator.errors.maxlength">
+                        Delete Acc Indicator cannot be more than 1 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Delete Acc Date</label>
+                  </div>
+                  <div class="left">
+                    <input type="date" id="txtDeleteAccDate" formControlName="DeleteAccDate" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Discharge Disposition</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtDischargeDisposition" formControlName="DischargeDisposition"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.DischargeDisposition.valid && censusform.controls.DischargeDisposition.dirty,
+                                                                          'is-invalid':censusform.controls.DischargeDisposition.invalid && censusform.controls.DischargeDisposition.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.DischargeDisposition.errors && (censusform.controls.DischargeDisposition.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.DischargeDisposition.errors.maxlength">
+                        Discharge Disposition cannot be more than 3 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Discharged Location</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtDischargedLocation" formControlName="DischargedLocation"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.DischargedLocation.valid && censusform.controls.DischargedLocation.dirty,
+                                                                          'is-invalid':censusform.controls.DischargedLocation.invalid && censusform.controls.DischargedLocation.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.DischargedLocation.errors && (censusform.controls.DischargedLocation.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.DischargedLocation.errors.maxlength">
+                        Discharged Location cannot be more than 47 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-6 col-lg-4" *ngIf="(AdmitvisitInfodisplayfield.DietType == 1 || AdmitvisitInfodisplayfield.DietType == 2)">
+                  <div class="right">
+                    <label>Diet Type</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtDietType" [readonly]="AdmitvisitInfodisplayfield.DietType === 2" formControlName="DietType" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.DietType.valid && censusform.controls.DietType.dirty,
+                                                                          'is-invalid':censusform.controls.DietType.invalid && censusform.controls.DietType.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.DietType.errors && (censusform.controls.DietType.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.DietType.errors.maxlength">
+                        Diet Type cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Servicing Facility</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtServicingFacility" formControlName="ServicingFacility"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.ServicingFacility.valid && censusform.controls.ServicingFacility.dirty,
+                                                                          'is-invalid':censusform.controls.ServicingFacility.invalid && censusform.controls.ServicingFacility.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.ServicingFacility.errors && (censusform.controls.ServicingFacility.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.ServicingFacility.errors.maxlength">
+                        Servicing Facility cannot be more than 2 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Bed Status</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtBedStatus" formControlName="BedStatus" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.BedStatus.valid && censusform.controls.BedStatus.dirty,
+                                                                          'is-invalid':censusform.controls.BedStatus.invalid && censusform.controls.BedStatus.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.BedStatus.errors && (censusform.controls.BedStatus.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.BedStatus.errors.maxlength">
+                        Bed Status cannot be more than 1 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Acc Status</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtAccStatus" formControlName="AccStatus" class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.AccStatus.valid && censusform.controls.AccStatus.dirty,
+                                                                          'is-invalid':censusform.controls.AccStatus.invalid && censusform.controls.AccStatus.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.AccStatus.errors && (censusform.controls.AccStatus.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AccStatus.errors.maxlength">
+                        Acc Status cannot be more than 5 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Pending Location</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPendingLocation" formControlName="PendingLocation" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.PendingLocation.valid  && censusform.controls.PendingLocation.dirty,
+                                                                          'is-invalid':censusform.controls.PendingLocation.invalid && censusform.controls.PendingLocation.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PendingLocation.errors && (censusform.controls.PendingLocation.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PendingLocation.errors.maxlength">
+                        Pending Location cannot be more than 80 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Prior Temporary Location</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtPriorTemporaryLocation" formControlName="PriorTemporaryLocation"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.PriorTemporaryLocation.valid  && censusform.controls.PriorTemporaryLocation.dirty,
+                                                                          'is-invalid':censusform.controls.PriorTemporaryLocation.invalid && censusform.controls.PriorTemporaryLocation.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.PriorTemporaryLocation.errors && (censusform.controls.PriorTemporaryLocation.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.PriorTemporaryLocation.errors.maxlength">
+                        Prior Temporary Location cannot be more than 80 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-6 col-lg-4" *ngIf="(AdmitvisitInfodisplayfield.AdmitDate == 1 || AdmitvisitInfodisplayfield.AdmitDate == 2)">
+                  <div class="right">
+                    <label>Admit Date <span class="c1">*</span></label>
+                  </div>
+                  <div class="left">
+                    <input type="date"  [readonly]="AdmitvisitInfodisplayfield.AdmitDate === 2" id="txtAdmitDate" [max]="getToday()" formControlName="AdmitDate"
+                      class="form-control" [ngClass]="{
+                                'is-valid':censusform.controls.AdmitDate.valid && censusform.controls.AdmitDate.dirty,
+                                'is-invalid':censusform.controls.AdmitDate.invalid && censusform.controls.AdmitDate.touched
+                              }" />
+                    <div *ngIf="censusform.controls.AdmitDate.errors && (censusform.controls.AdmitDate.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AdmitDate.errors.required">
+                        Admit Date is required.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Current Patient Balance</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtCurrentPatientBalance" formControlName="CurrentPatientBalance"
+                      class="form-control" [ngClass]="{
+                                                                          'is-valid':censusform.controls.CurrentPatientBalance.valid && censusform.controls.CurrentPatientBalance.dirty,
+                                                                          'is-invalid':censusform.controls.CurrentPatientBalance.invalid && censusform.controls.CurrentPatientBalance.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.CurrentPatientBalance.errors && (censusform.controls.CurrentPatientBalance.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.CurrentPatientBalance.errors.maxlength">
+                        Current Patient Balance cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Total Charges</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtTotalCharges" formControlName="TotalCharges" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.TotalCharges.valid && censusform.controls.TotalCharges.dirty,
+                                                                          'is-invalid':censusform.controls.TotalCharges.invalid && censusform.controls.TotalCharges.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.TotalCharges.errors && (censusform.controls.TotalCharges.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.TotalCharges.errors.maxlength">
+                        Total Charges cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Total Adjustments</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtTotalAdjustments" formControlName="TotalAdjustments" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.TotalAdjustments.valid && censusform.controls.TotalAdjustments.dirty,
+                                                                          'is-invalid':censusform.controls.TotalAdjustments.invalid && censusform.controls.TotalAdjustments.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.TotalAdjustments.errors && (censusform.controls.TotalAdjustments.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.TotalAdjustments.errors.maxlength">
+                        Total Adjustments cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Total Payments</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtTotalPayments" formControlName="TotalPayments" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.TotalPayments.valid  && censusform.controls.TotalPayments.dirty,
+                                                                          'is-invalid':censusform.controls.TotalPayments.invalid && censusform.controls.TotalPayments.touched
+                                                                        }" />
+                    <div *ngIf="censusform.controls.TotalPayments.errors && (censusform.controls.TotalPayments.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.TotalPayments.errors.maxlength">
+                        Total Payments cannot be more than 20 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Alternate Visit Id</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtAlternateVisitId" formControlName="AlternateVisitId" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.AlternateVisitId.valid && censusform.controls.AlternateVisitId.dirty,
+                                                                          'is-invalid':censusform.controls.AlternateVisitId.invalid && censusform.controls.AlternateVisitId.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.AlternateVisitId.errors && (censusform.controls.AlternateVisitId.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.AlternateVisitId.errors.maxlength">
+                        Alternate VisitId cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Visit Indicator</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtVisitIndicator" formControlName="VisitIndicator" class="form-control"
+                      [ngClass]="{
+                                                                          'is-valid':censusform.controls.VisitIndicator.valid && censusform.controls.VisitIndicator.dirty,
+                                                                          'is-invalid':censusform.controls.VisitIndicator.invalid && censusform.controls.VisitIndicator.touched
+                                                                        }" />
+                    <div
+                      *ngIf="censusform.controls.VisitIndicator.errors && (censusform.controls.VisitIndicator.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.VisitIndicator.errors.maxlength">
+                        Visit Indicator cannot be more than 5 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none;">
+                  <div class="right">
+                    <label>Other Health Provider</label>
+                  </div>
+                  <div class="left">
+                    <input type="text" id="txtOtherHealthProvider" formControlName="OtherHealthProvider"
+                      class="form-control" [ngClass]="{
+                                                                        'is-valid':censusform.controls.OtherHealthProvider.valid  && censusform.controls.OtherHealthProvider.dirty,
+                                                                        'is-invalid':censusform.controls.OtherHealthProvider.invalid && censusform.controls.OtherHealthProvider.touched
+                                                                      }" />
+                    <div
+                      *ngIf="censusform.controls.OtherHealthProvider.errors && (censusform.controls.OtherHealthProvider.touched)"
+                      class="errorMessage">
+
+                      <div *ngIf="censusform.controls.OtherHealthProvider.errors.maxlength">
+                        Other Health Provider cannot be more than 150 characters long.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-sm-5 col-md-5 col-lg-5" style="display: none;">
+                  <div class="right1">
+                    <label>Discharge Date</label>
+                  </div>
+                  <div class="left1">
+                    <input type="datetime-local" id="txtDischargeDate" min="2010-01-
+                                                                    01T00:00:00" formControlName="DischargeDate"
+                      class="form-control" [ngClass]="{
+                                                                      'is-valid':censusform.controls.DischargeDate.valid  && censusform.controls.DischargeDate.dirty,
+                                                                      'is-invalid':censusform.controls.DischargeDate.invalid && censusform.controls.DischargeDate.touched
+                                                                    }" />
+                    <div *ngIf="censusform.controls.DischargeDate.errors && censusform.controls.DischargeDate.touched"
+                      class="errorMessage">
+                      <div *ngIf="censusform.controls.DischargeDate.errors.required  ">
+                        Enter valid Discharge date & time.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-6 col-lg-4 form-group" [formGroup]="form" *ngFor="let field of fields">
+                  <div *ngIf="(field.label=='Floor' && (AdmitvisitInfodisplayfield.Floor == 1 || AdmitvisitInfodisplayfield.Floor == 2)) || (field.label=='Wing' && field.index!=0) || (field.label=='Room' && (AdmitvisitInfodisplayfield.Room == 1 || AdmitvisitInfodisplayfield.Room == 2)) || (field.label=='Bed' && (AdmitvisitInfodisplayfield.Bed == 1 || AdmitvisitInfodisplayfield.Bed == 2))">
+                    <div class="right">  
+                    <label>{{field.label}}</label>
+                    </div>
+                    <div class="left">
+                     <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data" [settings]="field.settings"
+                        [(ngModel)]="field.ngModel" [disabled]="(field.label=='Floor' && AdmitvisitInfodisplayfield.Floor == 2)  || (field.label=='Room' && AdmitvisitInfodisplayfield.Room == 2) || (field.label=='Bed' && AdmitvisitInfodisplayfield.Bed == 2)" [placeholder]="field.placeholder" >
+                      </ng-multiselect-dropdown>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="errorMessage != ''" style="color:red">
+                  <div class="right">
+                    <label>{{errormessage}}</label>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+  <div class="modal-footer">
+    <div class="col-sm-10 col-md-10 col-lg-10" style="color:red">
+      <div style="text-align:center">
+        <label>{{errorMessage}}</label>
+      </div>
+
+    </div>
+      <button type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" [disabled]="censusform.invalid || savedisable==true"
+        (click)="insertNewDemographicDetails()" class="btn btn-success" data-dismiss="modal">Save</button>&nbsp;
+      <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button>
+
+  </div>
+
+</app-commonmodal>

@@ -1,0 +1,268 @@
+<!-- <div class="col-md-6 col-md-offset-3">
+  <h2>Login</h2> -->
+<style>
+
+
+</style>
+<div class="bg">
+
+    <div class="login-box">
+        <div class="login-logo">
+            <!-- <div class="login100-form-title" style="background-image: url(./assets/images/download.jpg);"> -->
+            <!-- <a href="javascript:void(0)">-</a> -->
+
+            <div class="card">
+                    <div class="card-header">
+                            <img src="./assets/images/Pharmalife_logo.png" width="300px"/>
+                        </div>
+                <div class="card-body login-card-body">
+                    <form [formGroup]="myform" name="loginForm" autocomplete="off">
+                        <span style="text-align: center">Login</span>
+                        <br /><br /><br /><br />
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <input type="text" id="txtusername" formControlName="userName" (change)="GetNurseStationsByUser()" class="form-control"
+                                    placeholder="User Name" [ngClass]="{
+                'is-valid':myform.controls.userName.valid,
+                'is-invalid':myform.controls.userName.invalid && myform.controls.userName.touched
+              }" />  
+                                <div *ngIf="myform.controls.userName.errors && (myform.controls.userName.dirty)"
+                                    class="errorMessage">
+                                    <div *ngIf="myform.controls.userName.errors.required">
+                                        <span class="fa">User Name is required.</span>
+                                    </div>
+                                    <div *ngIf="myform.controls.userName.errors.pattern">
+                                        <span class="fa">User Name contians Invalid characters.</span>
+                                    </div>
+                                    <div *ngIf="myform.controls.userName.errors.maxlength">
+                                        <span class="fa">User Name cannot be more than 20 characters long.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <input type="password" id="txtpassword" formControlName="password" (change)="GetNurseStationsByUser()" class="form-control"
+                                    placeholder="Password" [ngClass]="{
+                'is-valid':myform.controls.password.valid,
+                'is-invalid':myform.controls.password.invalid && myform.controls.password.touched
+              }" />
+                                <div *ngIf="myform.controls.password.errors && (myform.controls.password.dirty)"
+                                    class="errorMessage">
+                                    <div *ngIf="myform.controls.password.errors.required">
+                                        <span class="fa">Password is required.</span>
+                                    </div>
+                                    <div *ngIf="myform.controls.password.errors.pattern">
+                                        <span class="fa">Password contians Invalid characters.</span>
+                                    </div>
+                                    <div *ngIf="myform.controls.password.errors.maxlength">
+                                        <span class="fa">Password cannot be more than 20 characters long.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group" *ngIf="display==true"> 
+                            <!-- *ngIf="this.nurseStationList.length!=0" -->
+                        <div class="col-sm-12">
+                            <select id="nurseStation" class="form-control" name="nurseStation" formControlName="nurseStation" (change)="GetComputersListByNsId()"
+                            [ngClass]="{
+                                'is-valid':myform.controls.nurseStation.valid,
+                                'is-invalid':myform.controls.nurseStation.invalid && myform.controls.nurseStation.touched
+                              }">
+                                    <option value="">-Select Nursing Station-</option>
+                                <option *ngFor="let item of nurseStationList" value="{{item.NurseStation_Id}}">{{item.NurseStation_Name}}</option>
+                            </select>
+                            </div>
+                    </div>
+                    <div class="row form-group" *ngIf="computersList.length>0"> 
+                    <div class="col-sm-12">
+                        <select id="computerName" class="form-control" name="computerName" formControlName="computerName"
+                        [ngClass]="{
+                            'is-valid':myform.controls.computerName.valid,
+                            'is-invalid':myform.controls.computerName.invalid && myform.controls.computerName.touched
+                          }">
+                                <option value="">-Select ComputerName-</option>
+                            <option *ngFor="let item of computersList" value="{{item.ProcessKey}}">{{item.ComputerName}}</option>
+                        </select>
+                        </div>
+                </div>
+                        <div>
+                            <input type="button" class="btn btn-lg btn-info btn-block btnlog" id="btnsave" value="Login"
+                                [disabled]="myform.invalid" *ngIf="displayLogin" (click)="loginClick()" class="btn btn-success" />
+                                <a class="btn btn-success" (click)="reloadCurrentPage()" style="float: right;" title="Refresh Page">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </a>
+                                <!-- <input type="button" class="btn btn-lg btn-info btn-block btnlog" value="Reload" style="float: right;"
+                                (click)="reloadCurrentPage()" class="btn btn-success" /> -->
+                            <!-- <img *ngIf="myform.valid" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> -->
+                            <!-- <a [routerLink]="['/register']" class="btn btn-link">Register</a> -->
+                        </div>
+                        <div style="color: red">
+                            <h6> {{errmsg}} <a  *ngIf="clickPassFlag==1&& errmsg === 'The user locked, to Unlock '"
+                                    data-target="#pwdModal" data-toggle="modal" (click)="userUnlock()"
+                                    style="font-size: small;color: black;cursor: pointer;"><u>Click Here</u></a></h6>
+                        </div>
+                    </form>
+                    <div class="container">
+                        <a  data-target="#pwdModal" data-toggle="modal"
+                            (click)="forgotPasswordFlag()" style="font-size: small;color:red;cursor: pointer;"><u>Forgot
+                                my password</u></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+</div>
+<!--modal-->
+<div id="pwdModal" class="modal fade" ngDraggable [handle]="DemoHandle1" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+    data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle1 class="modal-header" style="height: 50px;">
+                <h5 class="text-center">Password Recovery</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+            </div>
+            <div class="modal-body style:max-height:500px overflow-y: auto">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="text-center" *ngIf="forgotPassFlag==0">
+                                <p style="font-size: small">If you have forgotten your password you
+                                    can reset it here.</p>
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <div class="form-group">
+
+                                            <input class="form-control input-lg" placeholder="UserName" name="username"
+                                                [(ngModel)]="userName" (change)="getUserEmailByUserName()">
+                                            <input class="form-control input-lg" placeholder="E-mail Address"
+                                                name="email" type="email" [(ngModel)]="email" readonly>
+                                        </div>
+                                        <input class="btn btn-lg btn-primary btn-block" value="Send OTP" type="submit"
+                                            (click)="forgotPassword()">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="text-center" *ngIf="forgotPassFlag==1">
+                                <app-resetpassword [userId]="userId" [typeFlag]="type" (Note)="NoteDisplay($event)">
+                                </app-resetpassword>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-10 col-md-10 col-lg-10" style="color:red" *ngIf="msg==1">
+                    <div style="text-align:left">
+                        <label>Note: OTP will send to register Email Id</label>
+                    </div>
+                    <div *ngIf="errmsg">
+                        <label style="color:red">{{errmsg}}</label>
+                      </div>
+                </div>
+                <button class="btn pull-right" data-dismiss="modal" (click)="forgotReset()"
+                    aria-hidden="true" class="btn btn-danger">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalstyle" id="exampleModal" ngDraggable [handle]="DemoHandle2" tabindex="-1" role="dialog"
+    [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle2 class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <strong> User already logged in. Do you want to continue?</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="continueLogin()">Ok</button>
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade  modalstyle " ngDraggable [handle]="DemoHandle3" id="myModal" role="dialog" tabindex="-1" role="dialog" aria-hidden="true"
+    data-backdrop="static" [ngStyle]="{'display': modalNewUserIsOpen ? 'block' : 'none', 'opacity': 1}"
+    data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div #DemoHandle3 class="modal-header" style="height: 50px;">
+                <h5>Create New Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                    (click)="forgotReset()">&times;</button>
+
+            </div>
+            <div class="modal-body style:max-height:220px overflow-y: auto">
+                <div class=" col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body" *ngIf="changePwdFlag==0">
+                            <form [formGroup]="changePwdform">
+                                <div style="text-align: left;padding-bottom: 10px;" >Change Password</div>                                <div class="form-group">
+                                    <input type="password" class="form-control" formControlName="resetPass"
+                                        placeholder="Password" [ngClass]="{
+                                'is-valid':changePwdform.controls.resetPass.valid,
+                                'is-invalid':changePwdform.controls.resetPass.invalid && changePwdform.controls.resetPass.touched
+                              }">
+                                    <div *ngIf="changePwdform.controls.resetPass.errors && (changePwdform.controls.resetPass.dirty)"
+                                        class="errorMessage">
+                                        <div *ngIf="changePwdform.controls.resetPass.errors.required">
+                                            <span class="fa">Password is required.</span>
+                                        </div>
+                                        <div *ngIf="changePwdform.controls.resetPass.errors.pattern">
+                                            <span class="fa">Password contians Invalid characters.</span>
+                                        </div>
+                                        <div *ngIf="changePwdform.controls.resetPass.errors.maxlength">
+                                            <span class="fa">Password cannot be more than 20 characters long.</span>
+                                        </div>
+                                        <div *ngIf="changePwdform.controls.resetPass.errors.minlength">
+                                            <span class="fa">Password cannot be less than 4 characters long.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: left;padding-bottom: 10px;">Confirm Password</div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" formControlName="confirmPass"
+                                        placeholder="Password" [ngClass]="{
+                                    'is-valid':changePwdform.controls.confirmPass.valid,
+                                    'is-invalid':changePwdform.controls.confirmPass.invalid && changePwdform.controls.confirmPass.touched
+                                  }">
+                                    <div *ngIf="changePwdform.controls.confirmPass.errors && (changePwdform.controls.confirmPass.dirty)"
+                                        class="errorMessage">
+                                        <div *ngIf="changePwdform.controls.confirmPass.errors.required">
+                                            <span class="fa">Confirm Password is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="mismatch" style="text-align:center">
+                                    <label style="color:red">{{mismatch}}</label>
+                                </div>
+                                <div style="text-align: right">
+                                    <input type="button" value="Reset Password" (click)="resetPWD()"
+                                        [disabled]="changePwdform.invalid" class="btn btn-success" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div *ngIf="changePwdFlag==1" class="col-sm-10 col-md-10 col-lg-10" style="color:red">
+                    <div style="text-align:center">
+                        <label>{{message}}</label>
+                    </div>
+                </div>
+                <button class="btn btn-danger pull-right" data-dismiss="modal" (click)="forgotReset()"
+                    aria-hidden="true">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ng4-loading-spinner [template]="template" style="z-index: 9999;" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

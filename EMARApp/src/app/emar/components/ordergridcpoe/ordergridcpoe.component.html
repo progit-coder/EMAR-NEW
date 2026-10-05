@@ -1,0 +1,263 @@
+<!-- Content Wrapper. Contains page content -->
+<ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+
+      <form [formGroup]="myform">
+        <div class="row form-group clearfix">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Facility</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities"
+              [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'"
+              (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <label>Nursing Station</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations" [data]="nurseStations"
+              [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations"
+              [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+              (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+              (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="col-sm-6 col-md-3 col-lg-3 form-group" [formGroup]="form" *ngFor="let field of fields">
+
+            <label>{{field.label}}</label>
+            <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data"
+              [settings]="field.settings" [(ngModel)]="field.ngModel" [placeholder]="field.placeholder"
+              (onSelect)="onCommonSelectItems($event)" (onSelectAll)="onCommonSelectAllItems($event)"
+              (onDeSelect)="onCommonDeSelectItems($event)" (onDeSelectAll)="onCommonDeSelectAllItems(field.name)">
+            </ng-multiselect-dropdown>
+
+          </div>
+        </div>
+      </form>
+
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+          <div class="row clearfix">
+             <div class="col-sm-2">
+              <h3 class="card-title">All Orders</h3>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <!-- <button *ngIf="pendingOrdersList.length>0" type="button" (click)="openPendingOrdersModal()" class="btn btn-danger btn-xs">Pending</button>&nbsp;
+                          <button *ngIf="orderEndingCount !=1" type="button" (click)="getOrderSendingSoon()" class="btn btn-danger btn-xs">Orders Ending with in 72 hours</button>
+                          <button *ngIf="prnDiplayFlag==true" type="button" (click)="getPRNCheckDetails($event)" class="btn btn-warning btn-xs">PRN-Document</button>&nbsp;
+                          <button *ngIf="seventyTwoHoursDiplayFlag==true" type="button" (click)="getSeventyTwoHourCheckDetails($event)" class="btn btn-warning btn-xs">72Hours Check</button> -->
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+              <form [formGroup]="visitStatusForm">
+                <select class="form-control" id="ddlresidenttype" formControlName="visitStatus"
+                  (change)="getDataByVisitStatus()">
+                  <option value="" disabled selected>Select</option>
+                  <option value="1">Active</option>
+                  <!-- <option value="2">Discharged</option>
+                  <option value="3">Temporary Absent</option> -->
+                </select>
+              </form>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalResidentAllOrderIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header" style="height: 50px ">
+                <h5> Resident All Orders</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+              </div>
+              <div class="modal-body bodystyle">
+                <div class="row from-group" *ngIf="residentOrdersList.length>0">
+                  <div class="col-sm-8" style="color: #4fb633;">
+                    <strong>{{residentOrdersList[0].ResidentName+' ('+(residentOrdersList[0].DOB|date:'MM/dd/yyyy')+')'}}</strong>
+                    &nbsp;&nbsp;
+                    <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="New Order" class="btn btn-sm btn-success"
+                    (click)="onRowSelect(0,residentOrdersList[0].Patient_Id,0)" />
+                  </div>
+                </div><br />
+                <div class="tableFixHead">
+                  <table id="tblAllResidents" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Drug/Literal Order</th>
+                        <th>Qty/Dose</th>
+                        <th>Directions</th>
+                        <th>Review</th>
+                        <th>Prescriber  Name</th>
+                        <th>PRN</th>
+                        <th>On Hold</th>
+                        <th>Refills Left</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let item of residentOrdersList|paginate: { itemsPerPage: 100, currentPage: q,id:'residentOrders' };"
+                        style="cursor:pointer" (click)="onRowSelect(item.porder_Id,item.Patient_Id, item.PQuantity_Id)">
+                        <td><i style="cursor: pointer" title="No Schedule Times"
+                            [ngClass]="item.ScheduleTimeFlag == 1?'fa fa-exclamation-triangle iconColor':''"></i>
+                          {{item.Date|date:'MM/dd/yy'}}
+                        </td>
+                        <td>{{item.EndDate|date:'MM/dd/yy'}}</td>
+                        <td>{{item.Drug}}</td>
+                        <td>{{item.Quantity}}</td>
+                        <td>{{item.Directions}}
+                        </td>
+                        <td *ngIf="visitStatusFlag == 1"
+                          [ngStyle]="{'color': item.POrder_Status=='Pending' ? 'red' : 'black'}">{{item.POrder_Status}}
+                        </td>
+                        <td *ngIf="visitStatusFlag == 2 || visitStatusFlag== 3"></td>
+                        <td>{{item.Physician_Name}}</td>
+                        <td>{{item.PRN}}</td>
+                        <!-- <td>{{item.HoldUntill|date:'MM/dd/yy'}}</td> -->
+                        <td>
+                          <ng-container *ngIf="item.HoldFrom != '' && (item.HoldStatus == 1 || item.HoldStatus == 4 )">
+                            <p style="margin: 0;" [ngStyle]="{'color':item.HoldStatus == 1 ? 'red' : 'black'}">From : {{item.HoldFrom|date:'MM/dd/yy'}}</p>
+                            
+                          </ng-container>
+                          <br>
+                          <ng-container *ngIf="item.HoldUntill != '' && (item.HoldStatus == 1 || item.HoldStatus == 4 )">
+                            <p style="margin: 0;" [ngStyle]="{'color':item.HoldStatus == 1 ? 'red' : 'black'}">To : {{item.HoldUntill|date:'MM/dd/yy'}} </p>
+                            
+                          </ng-container>
+                
+                         
+                        </td>
+                        <td>{{item.NumberOfRefillsRemaining}}</td>   
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls id="residentOrders" (pageChange)="q = $event"
+                    *ngIf="residentOrdersList.length > 0"></pagination-controls>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalPendingOrderIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle2 class="modal-header " style="background-color: #cccccc;height: 50px ">
+                <h5 style="color: #000000;">Pending Orders</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+              </div>
+              <div class="modal-body bodystyle">
+                <div class="row form-group">
+                  <div class="col-sm-1">
+                    <label>Search </label>
+                  </div>
+                  <div class="col-sm-3">
+                    <input style="padding:inherit" type="search" class="form-control input-sm"
+                      [(ngModel)]="pendingOrderSearch" placeholder="Search">
+                  </div>
+                </div>
+                <div class="tableFixHead">
+                  <table id="tblAllResidents" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Resident Name</th>
+                        <th>Drug</th>
+                        <th>Qty/Dose</th>
+                        <th>Directions</th>
+                        <th>Review</th>
+                        <th>Physician Name</th>
+                        <th>PRN</th>
+                        <th>On Hold </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let item of pendingOrdersList|gridFilter:pendingOrderSearch:'PendingOrders'|paginate: { itemsPerPage: 100, currentPage: r,id:'pendingOrders' };"
+                        style="cursor:pointer" (click)="onRowSelect(item.porder_Id,item.Patient_Id, item.PQuantity_Id)">
+                        <td><i style="cursor: pointer" title="No Schedule Times"
+                            [ngClass]="item.ScheduleTimeFlag == 1?'fa fa-exclamation-triangle iconColor':''"></i>
+                          {{item.Date|date:'MM/dd/yy'}}
+                        </td>
+                        <td>{{item.EndDate|date:'MM/dd/yy'}}</td>
+                        <td>
+                          {{item.ResidentName}}
+                        </td>
+                        <td>{{item.Drug}}</td>
+                        <td>{{item.Quantity}}</td>
+                        <td>{{item.Directions}}
+                        </td>
+                        <td *ngIf="visitStatusFlag == 1"
+                          [ngStyle]="{'color': item.POrder_Status=='Pending' ? 'red' : 'black'}">{{item.POrder_Status}}
+                        </td>
+                        <td *ngIf="visitStatusFlag == 2 || visitStatusFlag== 3"></td>
+                        <td>{{item.Physician_Name}}</td>
+                        <td>{{item.PRN}}</td>
+                        <td>{{item.HoldUntill|date:'MM/dd/yy'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls id="pendingOrders" (pageChange)="r = $event"
+                    *ngIf="pendingOrdersList.length > 0"></pagination-controls>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row clearfix">
+            <div class="col-sm-4 col-md-4 col-lg-3"
+              *ngFor="let item of ordersList|gridFilter:searchText:'Orders' |paginate: { itemsPerPage: 100, currentPage: p };">
+              <div style="cursor:pointer"
+                (click)="onResidentSelect(item.porder_Id,item.Patient_Id, item.PQuantity_Id,item.OrderStatus)"
+                [ngClass]="(item.porder_Id == 0 && item.PQuantity_Id == 0)||(item.OrderStatus!=1)?'card card-warning card-outline':'card card-success card-outline'">
+                <div class="card-header">
+                  <b class="card-title">{{item.ResidentName}}</b>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="row">
+                    <!-- <div class="col-sm-4">
+                      <img  container="body"  (mouseenter) ="mouseEnter(item.ImageLocation)"  (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="item.ImageLocation!=undefined" [src]="sanitize(item.ImageLocation)" class="zoom" />
+                    </div> -->
+                    <div class="col-sm-8">
+                      <div class="row form-group">
+                        <div class="col-sm-12">DOB: {{item.DOB}}</div>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-sm-12">Gender: {{item.Gender}}</div>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-sm-12" [ngStyle]="{'color':item.ImgPath == 'Yes'?'black':'Red'}" >Image On File: {{item.ImgPath}}</div>
+                      
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="ordersList.length > 0"></pagination-controls>
+        </div>
+        <div class="col-sm-12" *ngIf="ordersList.length>0">
+          <p><b style="color: red;">Note</b>: <span class=" fa fa-2x fa-square" style="color: #ffdf62;"></span><b>&nbsp;
+              Residents with no Active Orders </b><span class=" fa fa-2x fa-square"
+              style="color: #ade39d;"></span><b>&nbsp; Residents with Active Orders </b> </p>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>

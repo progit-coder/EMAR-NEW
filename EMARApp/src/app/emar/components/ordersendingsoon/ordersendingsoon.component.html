@@ -1,0 +1,42 @@
+<app-commonmodal title="Orders Ending within 72 hours (Click on the order to change end date)">
+    <div class="modal-body">
+        <div class="tableFixHead">
+            <table id="tblOrdersEnd" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" id="chkselectall" [(ngModel)]='checkAll' (change)="onCheckAll($event.target.checked?true:false)">
+                  </th>
+                  <!-- <th></th> -->
+                  <th>Resident Name</th>
+                  <th>Drug Name</th>
+                  <th>Directions</th>
+                  <th>End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of ordersEndingList  | paginate: { itemsPerPage: ordersPopPagination, currentPage: pageNo };"
+                style="cursor:pointer" (click)="onRowSelect(item.porder_Id,item.Patient_Id, item.PQuantity_Id)">
+                  <td> <input #checkboxes type="checkbox"(click)="$event.stopPropagation();" [checked]="checkAll" value="{{item.porder_Id}} + {{item.PQuantity_Id}}" name="{{item.porder_Id}} + {{item.PQuantity_Id}}"
+                      id="{{item.porder_Id}} + {{item.PQuantity_Id}}" (change)="onselectRecord($event.target.checked?true:false, item); $event.stopPropagation()" /></td>
+                  <!-- <td>{{i+1}}</td>-->
+                  <td>{{item.ResidentName}}</td>
+                  <td>{{item.Drug}}</td>
+                  <td>{{item.Directions}}</td>
+                  <td>{{item.EndDate | date:'MM/dd/yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            <pagination-controls (pageChange)="pageNo =$event" *ngIf="ordersEndingList.length > ordersPopPagination">
+            </pagination-controls>
+    </div>
+    <div class="modal-footer">
+      <!-- <span class="errorMessage">{{errorMessage}}</span> -->
+      &nbsp;&nbsp;&nbsp;
+      <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Acknowledge" (click)="confirmClick()" class="btn btn-success"
+      [disabled]="confirmButton" />
+      <!-- <input type="button" id="btncancel" value="Cancel" (click)="cancelClick()" class="btn btn-danger" /> -->
+      <!-- <button type="button" class="btn btn-danger" (click)="activeDefaultModal.close('Close click')">Close</button> -->
+    </div>
+  </app-commonmodal>

@@ -1,0 +1,1985 @@
+<app-commonmodal title="Order Details" style="width: 600px;">
+    <div class="modal-body bodystyle" *ngIf="Hlsevenconfig">
+        <h5 class="tomato">Common Order Details</h5>
+        <form [formGroup]="myform" name="literalOrders">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>Order Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="POrder_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderControl">
+                    <div class="right">
+                        <label>Order Control</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderControl" formControlName="OrderControl"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PlacerOrderNumber">
+                    <div class="right">
+                        <label>Placer Order Number</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtPlacerOrderNumber" formControlName="PlacerOrderNumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.FacilityId">
+                    <div class="right">
+                        <label>Facility Id </label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtFacilityId" formControlName="FacilityId" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PatientId">
+                    <div class="right">
+                        <label>PatientId </label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtPatientId" formControlName="PatientId" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Room">
+                    <div class="right">
+                        <label>Room </label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtRoom" formControlName="Room" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PlacerGroupNumber">
+                    <div class="right">
+                        <label>Placer Group Number </label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtPlacerGroupNumber" formControlName="PlacerGroupNumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderStatus">
+                    <div class="right">
+                        <label>Order Status </label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderStatus" formControlName="OrderStatus"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ResponseFlag">
+                    <div class="right">
+                        <label>Response Flag </label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtResponseFlag" formControlName="ResponseFlag"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.QuantityTiming">
+                    <div class="right">
+                        <label>Quantity Timing</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtQuantityTiming" formControlName="QuantityTiming"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Parent">
+                    <div class="right">
+                        <label>Parent</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtParent" formControlName="Parent" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TransactionDate">
+                    <div class="right">
+                        <label>Transaction Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtTransactionDate" formControlName="TransactionDate"
+                            [value]="myform.get('TransactionDate').value | date: 'MM/dd/yyyy'"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EnteredBy">
+                    <div class="right">
+                        <label>Entered By</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEnteredBy" formControlName="EnteredBy" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EPharmacistLName">
+                    <div class="right">
+                        <label>EPharmacist Last Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEPharmacistLName" formControlName="EPharmacistLName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EPharmacistFName">
+                    <div class="right">
+                        <label>EPharmacist First Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEPharmacistFName" formControlName="EPharmacistFName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.VerifiedBy">
+                    <div class="right">
+                        <label>Verified By</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtVerifiedBy" formControlName="VerifiedBy" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.VPharmacistLName">
+                    <div class="right">
+                        <label>VPharmacist Last Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtvPharmacistLName" formControlName="VPharmacistLName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.VPharmacistFName">
+                    <div class="right">
+                        <label>VPharmacist First Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtVPharmacistFName" formControlName="VPharmacistFName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.VEffectivedate">
+                    <div class="right">
+                        <label>VEffective Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtVerifiedBy" formControlName="VEffectivedate"
+                            [value]="myform.get('VEffectivedate').value |  date: 'MM/dd/yyyy'"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingPhysicianNPI">
+                    <div class="right">
+                        <label>Ordering Physician NPI</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingPhysicianNPI" formControlName="OrderingPhysicianNPI"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OPhysicianLname">
+                    <div class="right">
+                        <label>OPhysician Last Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOPhysicianLname" formControlName="OPhysicianLname"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OPhysicianFname">
+                    <div class="right">
+                        <label>OPhysician First Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOPhysicianFname" formControlName="OPhysicianFname"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EntererLocation">
+                    <div class="right">
+                        <label>Enterer Location</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEntererLocation" formControlName="EntererLocation"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.CallBackPhoneNumber">
+                    <div class="right">
+                        <label>CallBack Phone Number</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtCallBackPhoneNumber" formControlName="CallBackPhoneNumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderEffectiveDate">
+                    <div class="right">
+                        <label>Order Effective Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderEffectiveDate" formControlName="OrderEffectiveDate"
+                            [value]="myform.get('OrderEffectiveDate').value | date :'MM/dd/yyyy'"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderControlCodeReason">
+                    <div class="right">
+                        <label>Order Control Code Reason</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderControlCodeReason"
+                            formControlName="OrderControlCodeReason" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EnteringOrganisation">
+                    <div class="right">
+                        <label>Entering Organisation</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEnteringOrganisation" formControlName="EnteringOrganisation"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EnteringDevice">
+                    <div class="right">
+                        <label>Entering Device</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEnteringDevice" formControlName="EnteringDevice"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AltCodingSystem">
+                    <div class="right">
+                        <label>Alt Coding System</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtAltCodingSystem" formControlName="AltCodingSystem"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdvBeneficiaryNoticeCode">
+                    <div class="right">
+                        <label>Adv Beneficiary Notice Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtAdvBeneficiaryNoticeCode"
+                            formControlName="AdvBeneficiaryNoticeCode" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityName">
+                    <div class="right">
+                        <label>Ordering Facility Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtfacilityname" formControlName="OrderingFacilityName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityAddress1">
+                    <div class="right">
+                        <label>Ordering Facility Address1</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingFacilityAddress1"
+                            formControlName="OrderingFacilityAddress1" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityAddress2">
+                    <div class="right">
+                        <label>Ordering Facility Address2</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingFacilityAddress2"
+                            formControlName="OrderingFacilityAddress2" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityCity">
+                    <div class="right">
+                        <label>Ordering Facility City</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingFacilityCity" formControlName="OrderingFacilityCity"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityState">
+                    <div class="right">
+                        <label>Ordering Facility State</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingFacilityState" formControlName="OrderingFacilityState"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityZip">
+                    <div class="right">
+                        <label>Ordering Facility Zip</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingFacilityZip" formControlName="OrderingFacilityZip"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingFacilityPhone">
+                    <div class="right">
+                        <label>Ordering Facility Phone</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingFacilityPhone" formControlName="OrderingFacilityPhone"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingPhysicianAddress1">
+                    <div class="right">
+                        <label>Ordering Physician Address1</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingPhysicianAddress1"
+                            formControlName="OrderingPhysicianAddress1" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingPhysicianAddress2">
+                    <div class="right">
+                        <label>Ordering Physician Address2</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingPhysicianAddress2"
+                            formControlName="OrderingPhysicianAddress2" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingPhysicianCity">
+                    <div class="right">
+                        <label>Ordering Physician City</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingPhysicianCity" formControlName="OrderingPhysicianCity"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingPhysicianState">
+                    <div class="right">
+                        <label>Ordering Physician State</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingPhysicianState"
+                            formControlName="OrderingPhysicianState" class="form-control" readonly />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingProviderZip">
+                    <div class="right">
+                        <label>Ordering Provider Zip</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderingProviderZip" formControlName="OrderingProviderZip"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderStatusModifier">
+                    <div class="right">
+                        <label>Order Status Modifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderStatusModifier" formControlName="OrderStatusModifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdvBeneficiaryNoticeOverrideReason">
+                    <div class="right">
+                        <label>Adv Beneficiary Notice Override Reason</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtAdvBeneficiaryNoticeOverrideReason"
+                            formControlName="AdvBeneficiaryNoticeOverrideReason" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ExpectedAvailabilityDate">
+                    <div class="right">
+                        <label>Expected Availability Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtExpectedAvailabilityDate"
+                            formControlName="ExpectedAvailabilityDate"
+                            [value]="myform.get('ExpectedAvailabilityDate').value | date:'MM/dd/yyyy'"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ConfidentialityCode">
+                    <div class="right">
+                        <label>Confidentiality Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtConfidentialityCode" formControlName="ConfidentialityCode"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderType">
+                    <div class="right">
+                        <label>OrderType</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtOrderType" formControlName="OrderType" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EntererAuthorizationMode">
+                    <div class="right">
+                        <label>Enterer Authorization Mode</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtEntererAuthorizationMode"
+                            formControlName="EntererAuthorizationMode" class="form-control" readonly />
+                    </div>
+                </div>
+
+            </div>
+
+
+        </form>
+        <h5 class="tomato">Encoded Order Details</h5>
+        <form [formGroup]="myformEncoded">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>PEncOrder Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PEncOrder_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Quantity">
+                    <div class="right">
+                        <label>Quantity</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Quantity" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveCodeIdentifier">
+                    <div class="right">
+                        <label>Give Code Identifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveCodeIdentifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveCodeText">
+                    <div class="right">
+                        <label>Give Code Text</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveCodeText" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AGiveCodeIdentifier">
+                    <div class="right">
+                        <label>AGiveCodeIdentifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AGiveCodeIdentifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveAmountMin">
+                    <div class="right">
+                        <label>Give Amount Min</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveAmountMin" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveAmountMax">
+                    <div class="right">
+                        <label>Give Amount Max</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveAmountMax" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveUnits">
+                    <div class="right">
+                        <label>Give Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveUnits" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveDosageForm">
+                    <div class="right">
+                        <label>Give Dosage Form</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveDosageForm" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ProviderAdminDrugIdentifier">
+                    <div class="right">
+                        <label>Provider Admin Drug Identifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ProviderAdminDrugIdentifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ProviderAdminDrugInsText">
+                    <div class="right">
+                        <label>Provider Admin DrugIns Text</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ProviderAdminDrugInsText"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeliverToLocation">
+                    <div class="right">
+                        <label>Deliver To Location</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DeliverToLocation"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SubstitutionStatus">
+                    <div class="right">
+                        <label>Substitution Status</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="SubstitutionStatus"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispenseAmount">
+                    <div class="right">
+                        <label>Dispense Amount</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispenseAmount" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispenseUnits">
+                    <div class="right">
+                        <label>Dispense Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispenseUnits" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NumberOfRefills">
+                    <div class="right">
+                        <label>Number Of Refills</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NumberOfRefills"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PhysicianDEANumber">
+                    <div class="right">
+                        <label>Physician DEA Number</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PhysicianDEANumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PhysicianLastName">
+                    <div class="right">
+                        <label>Physician LastName</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PhysicianLastName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PhysicianFirstName">
+                    <div class="right">
+                        <label>Physician FirstName</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PhysicianFirstName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TreatmentSupplierVerifierID">
+                    <div class="right">
+                        <label>Treatment Supplier VerifierID</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TreatmentSupplierVerifierID"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PrescriptionNumber">
+                    <div class="right">
+                        <label>Prescription Number</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PrescriptionNumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NumberOfRefillsRemaining">
+                    <div class="right">
+                        <label>Number Of Refills Remaining</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NumberOfRefillsRemaining"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NumberOfRefillsDispensed">
+                    <div class="right">
+                        <label>Number Of Refills Dispensed</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NumberOfRefillsDispensed"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RecentRefillDate">
+                    <div class="right">
+                        <label>Recent Refill Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RecentRefillDate"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TotalDailyDose">
+                    <div class="right">
+                        <label>Total Daily Dose</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TotalDailyDose" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NeedsHumanReview">
+                    <div class="right">
+                        <label>Needs Human Review</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NeedsHumanReview"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SpecialDispensingInstruction">
+                    <div class="right">
+                        <label>Special Dispensing Instruction</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="SpecialDispensingInstruction"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GivePer">
+                    <div class="right">
+                        <label>GivePer</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GivePer" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveRateAmount">
+                    <div class="right">
+                        <label>Give Rate Amount</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveRateAmount" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveRateUnits">
+                    <div class="right">
+                        <label>Give Rate Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveRateUnits" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveStrength">
+                    <div class="right">
+                        <label>Give Strength</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveStrength" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveStrengthUnits">
+                    <div class="right">
+                        <label>Give Strength Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveStrengthUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveIndication">
+                    <div class="right">
+                        <label>Give Indication</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveIndication" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensePackageSize">
+                    <div class="right">
+                        <label>Dispense Package Size</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensePackageSize"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensePackageSizeUnit">
+                    <div class="right">
+                        <label>Dispense Package SizeUnit</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensePackageSizeUnit"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensePackageMethod">
+                    <div class="right">
+                        <label>Dispense Package Method</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensePackageMethod"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SupplementaryCode">
+                    <div class="right">
+                        <label>Supplementary Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="SupplementaryCode"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OriginalOrderDate">
+                    <div class="right">
+                        <label>Original OrderDate</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="OriginalOrderDate"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveDrugStrengthVolume">
+                    <div class="right">
+                        <label>Give Drug Strength Volume</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveDrugStrengthVolume"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.GiveDrugStrengthVolUnits">
+                    <div class="right">
+                        <label>Give Drug Strength Vol Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="GiveDrugStrengthVolUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ControlledSubstanceSchedule">
+                    <div class="right">
+                        <label>Controlled Substance Schedule</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ControlledSubstanceSchedule"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.FormularyStatus">
+                    <div class="right">
+                        <label>Formulary Status</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="FormularyStatus"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PharmaceuticalSubstance">
+                    <div class="right">
+                        <label>Pharmaceutical Substance</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PharmaceuticalSubstance"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PharmacyRecentFill">
+                    <div class="right">
+                        <label>Pharmacy Recent Fill</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PharmacyRecentFill"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.InitialDispenseAmount">
+                    <div class="right">
+                        <label>Initial Dispense Amount</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="InitialDispenseAmount"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyID">
+                    <div class="right">
+                        <label>Dispensing PharmacyID</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyID"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyName">
+                    <div class="right">
+                        <label>Dispensing PharmacyName</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyAddr1">
+                    <div class="right">
+                        <label>Dispensing Pharmacy Addr1</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyAddr1"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyAddr2">
+                    <div class="right">
+                        <label>Dispensing Pharmacy Addr2</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyAddr2"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyCity">
+                    <div class="right">
+                        <label>Dispensing Pharmacy City</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyCity"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyState">
+                    <div class="right">
+                        <label>Dispensing Pharmacy State</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyState"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingPharmacyZip">
+                    <div class="right">
+                        <label>Dispensing Pharmacy Zip</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingPharmacyZip"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeliverToPatientLocation">
+                    <div class="right">
+                        <label>Deliver To Patient Location</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DeliverToPatientLocation"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeliverToAddress">
+                    <div class="right">
+                        <label>Deliver To Address</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DeliverToAddress"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PharmacyOrderType">
+                    <div class="right">
+                        <label>Pharmacy OrderType</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PharmacyOrderType"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <h5 class="tomato">Quantity Details</h5>
+        <form [formGroup]="myformQuantity">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>PQuantity Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PQuantity_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Quantity">
+                    <div class="right">
+                        <label>Quantity</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Quantity" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RepeatPattern">
+                    <div class="right">
+                        <label>Repeat Pattern</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RepeatPattern" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ExplicitTime">
+                    <div class="right">
+                        <label>Explicit Time</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ExplicitTime" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RelativeTimeUnits">
+                    <div class="right">
+                        <label>Relative Time Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RelativeTimeUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ServiceDuration">
+                    <div class="right">
+                        <label>Service Duration</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ServiceDuration"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.StartDate">
+                    <div class="right">
+                        <label>Start Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="StartDate" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.EndDate">
+                    <div class="right">
+                        <label>EndDate</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="EndDate" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Priority">
+                    <div class="right">
+                        <label>Priority</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Priority" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ConditionText">
+                    <div class="right">
+                        <label>Condition Text</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ConditionText" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TextInstruction">
+                    <div class="right">
+                        <label>Text Instruction</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TextInstruction"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Conjunction">
+                    <div class="right">
+                        <label>Conjunction</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Conjunction" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OccuranceDuration">
+                    <div class="right">
+                        <label>Occurance Duration</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="OccuranceDuration"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TotalOccurances">
+                    <div class="right">
+                        <label>Total Occurances</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TotalOccurances"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <h5 class="tomato" *ngIf="orderType==1">Treatment Route Details</h5>
+        <form [formGroup]="myformRoute" *ngIf="orderType==1">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>PRoute Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PRoute_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RouteCode">
+                    <div class="right">
+                        <label>Route Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RouteCode" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RouteText">
+                    <div class="right">
+                        <label>Route Text</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RouteText" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdministrationSite">
+                    <div class="right">
+                        <label>Administration Site</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AdministrationSite"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdministrationDevice">
+                    <div class="right">
+                        <label>Administration Device</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AdministrationDevice"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdministrationMethod">
+                    <div class="right">
+                        <label>Administration Method</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AdministrationMethod"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RoutingInstruction">
+                    <div class="right">
+                        <label>Routing Instruction</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RoutingInstruction"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AdminstrationSiteModifier">
+                    <div class="right">
+                        <label>Adminstration Site Modifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AdminstrationSiteModifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <h5 class="tomato" *ngIf="orderType==1">Treatment Information</h5>
+        <form [formGroup]="myformTreatmentinfo" *ngIf="orderType==1">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>PTreatment Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PTreatment_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ReqGiveCodeIdentifier">
+                    <div class="right">
+                        <label>Reqest Give Code Identifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ReqGiveCodeIdentifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveCode">
+                    <div class="right">
+                        <label>Requested Give Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveCode"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveAmtMin">
+                    <div class="right">
+                        <label>Requested Give Amount Min</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveAmtMin"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveAmtMax">
+                    <div class="right">
+                        <label>Requested Give Amount Max</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveAmtMax"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveUnits">
+                    <div class="right">
+                        <label>Requested Give Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedDosageForm">
+                    <div class="right">
+                        <label>Requested Dosage Form</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedDosageForm"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ProvidersTreatmentInstructions">
+                    <div class="right">
+                        <label>Providers Treatment Instructions</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ProvidersTreatmentInstructions"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ProvidersAdministrationInstructions">
+                    <div class="right">
+                        <label>Providers Administration Instructions</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ProvidersAdministrationInstructions"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeliverToLocation">
+                    <div class="right">
+                        <label>Deliver To Location</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DeliverToLocation"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AllowSubstitutions">
+                    <div class="right">
+                        <label>Allow Substitutions</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AllowSubstitutions"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedDispenseCode">
+                    <div class="right">
+                        <label>Requested Dispense Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedDispenseCode"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedDispenseAmount">
+                    <div class="right">
+                        <label>Requested Dispense Amount</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedDispenseAmount"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedDispenseUnits">
+                    <div class="right">
+                        <label>Requested Dispense Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedDispenseUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NumberOfRefills">
+                    <div class="right">
+                        <label>Number Of Refills</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NumberOfRefills"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OrderingProviderDEANumber">
+                    <div class="right">
+                        <label>Ordering Provider DEA Number</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="OrderingProviderDEANumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TreatmentSupplierVerifierID">
+                    <div class="right">
+                        <label>Treatment Supplier VerifierID</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TreatmentSupplierVerifierID"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NeedsHumanReview">
+                    <div class="right">
+                        <label>Needs Human Review</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NeedsHumanReview"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGivePer">
+                    <div class="right">
+                        <label>Requested GivePer</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGivePer"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveStrength">
+                    <div class="right">
+                        <label>Requested Give Strength</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveStrength"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveStrengthUnits">
+                    <div class="right">
+                        <label>Requested Give Strength Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveStrengthUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IndicationIdentifier">
+                    <div class="right">
+                        <label>Indication Identifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IndicationIdentifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IndicationText">
+                    <div class="right">
+                        <label>Indication Text</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IndicationText" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IndicationCodingSystem">
+                    <div class="right">
+                        <label>Indication Coding System</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IndicationCodingSystem"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AIndicationIdentifier">
+                    <div class="right">
+                        <label>AIndication Identifier</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AIndicationIdentifier"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AIndicationText">
+                    <div class="right">
+                        <label>AIndication Text</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AIndicationText"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.AIndicationCodingSystem">
+                    <div class="right">
+                        <label>AIndication Coding System</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="AIndicationCodingSystem"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveRateAmount">
+                    <div class="right">
+                        <label>Requested Give Rate Amount</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveRateAmount"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedGiveRateUnits">
+                    <div class="right">
+                        <label>Requested Give Rate Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedGiveRateUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TotalDailyDose">
+                    <div class="right">
+                        <label>Total Daily Dose</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TotalDailyDose" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.SupplementaryCode">
+                    <div class="right">
+                        <label>Supplementary Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="SupplementaryCode"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedDrugStrengthVol">
+                    <div class="right">
+                        <label>Requested Drug Strength Vol</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedDrugStrengthVol"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RequestedDrugStrengthVolUnits">
+                    <div class="right">
+                        <label>Requested Drug Strength Vol Units</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RequestedDrugStrengthVolUnits"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PharmacyOrderType">
+                    <div class="right">
+                        <label>Pharmacy Order Type</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PharmacyOrderType"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DispensingInterval">
+                    <div class="right">
+                        <label>Dispensing Interval</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DispensingInterval"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <h5 class="tomato" *ngIf="orderType==1">Additional Instruction Details</h5>
+        <form [formGroup]="myformAddlIns" *ngIf="orderType==1">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>PAddl Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PAddl_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PackageType">
+                    <div class="right">
+                        <label>PackageType</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PackageType" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.NumberOfLabels">
+                    <div class="right">
+                        <label>Number Of Labels</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="NumberOfLabels" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LabelQuantity">
+                    <div class="right">
+                        <label>Label Quantity</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="LabelQuantity" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Zone">
+                    <div class="right">
+                        <label>Zone</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Zone" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Bin">
+                    <div class="right">
+                        <label>Bin</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Bin" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TotalQuantityWritten">
+                    <div class="right">
+                        <label>Total Quantity Written</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TotalQuantityWritten"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TotalQuantityDispensed">
+                    <div class="right">
+                        <label>Total Quantity Dispensed</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TotalQuantityDispensed"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.FillQuantityWritten">
+                    <div class="right">
+                        <label>Fill Quantity Written</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="FillQuantityWritten"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MaxDailyQuantity">
+                    <div class="right">
+                        <label>Max Daily Quantity</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="MaxDailyQuantity"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DaysSupply">
+                    <div class="right">
+                        <label>Days Supply</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DaysSupply" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TimesPerDay">
+                    <div class="right">
+                        <label>Times Per Day</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TimesPerDay" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DateWritten">
+                    <div class="right">
+                        <label>Date Written</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DateWritten" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PrePack">
+                    <div class="right">
+                        <label>Pre Pack</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PrePack" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.CycleFill">
+                    <div class="right">
+                        <label>Cycle Fill</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="CycleFill" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MARGroupLevel">
+                    <div class="right">
+                        <label>MAR Group Level</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="MARGroupLevel" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MARGroup">
+                    <div class="right">
+                        <label>MAR Group</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="MARGroup" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PartialStatus">
+                    <div class="right">
+                        <label>Partial Status</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PartialStatus" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IntendedQuantity">
+                    <div class="right">
+                        <label>Intended Quantity</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IntendedQuantity"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IntendedDaysSupply">
+                    <div class="right">
+                        <label>Intended Days Supply</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IntendedDaysSupply"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.OriginCode">
+                    <div class="right">
+                        <label>Origin Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="OriginCode" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RxGuid">
+                    <div class="right">
+                        <label>RxGuid</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RxGuid" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ToteId">
+                    <div class="right">
+                        <label>ToteId</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ToteId" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.CustomFieldID">
+                    <div class="right">
+                        <label>Custom FieldID</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="CustomFieldID" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.CustomFieldValue">
+                    <div class="right">
+                        <label>Custom Field Value</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="CustomFieldValue"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.CustomFieldName">
+                    <div class="right">
+                        <label>Custom Field Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="CustomFieldName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ACustomFieldID">
+                    <div class="right">
+                        <label>ACustom FieldID</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ACustomFieldID" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ACustomFieldValue">
+                    <div class="right">
+                        <label>ACustom Field Value</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ACustomFieldValue"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ACustomFieldName">
+                    <div class="right">
+                        <label>ACustom Field Name</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ACustomFieldName"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RxType">
+                    <div class="right">
+                        <label>RxType</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RxType" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LinkedReorderNumber">
+                    <div class="right">
+                        <label>Linked Reorder Number</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="LinkedReorderNumber"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ExtraDoseIndicator">
+                    <div class="right">
+                        <label>Extra Dose Indicator</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ExtraDoseIndicator"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LeaveOfAbsenceIndicator">
+                    <div class="right">
+                        <label>Leave Of Absence Indicator</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="LeaveOfAbsenceIndicator"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.DeliveryID">
+                    <div class="right">
+                        <label>DeliveryID</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="DeliveryID" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PartialTabletIndicator">
+                    <div class="right">
+                        <label>Partial Tablet Indicator</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PartialTabletIndicator"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RawAdministrationTimes">
+                    <div class="right">
+                        <label>Raw Administration Times</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ACustomFieldValue"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.ProductType">
+                    <div class="right">
+                        <label>Product Type</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="ProductType" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Treatment">
+                    <div class="right">
+                        <label>Treatment</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Treatment" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.PhRxExpireDate">
+                    <div class="right">
+                        <label>PhRx Expire Date</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PhRxExpireDate" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RxNumber">
+                    <div class="right">
+                        <label>RxNumber</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RxNumber" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <h5 class="tomato" *ngIf="orderType==2">Ancillary Details</h5>
+        <form [formGroup]="myformAncillary" *ngIf="orderType==2">
+            <div class="row form-group">
+                <div class="col-sm-4 col-md-4 col-lg-4" style="display: none">
+                    <div class="right">
+                        <label>PAnc Id</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="PAnc_Id" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LiteralOrderCode">
+                    <div class="right">
+                        <label>Literal Order Code</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="LiteralOrderCode"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.LiteralOrderDesc">
+                    <div class="right">
+                        <label>Literal Order Desc</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="LiteralOrderDesc"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.MAROrderCatSeq">
+                    <div class="right">
+                        <label>MAR Order CatSeq</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="MAROrderCatSeq" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.POOrderCatSeq">
+                    <div class="right">
+                        <label>PO Order CatSeq</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="POOrderCatSeq" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.TAROrderCatSeq">
+                    <div class="right">
+                        <label>TAR Order CatSeq</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="TAROrderCatSeq" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.Filler">
+                    <div class="right">
+                        <label>Filler</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="Filler" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IncludeOnMAR">
+                    <div class="right">
+                        <label>Include On MAR</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IncludeOnMAR" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IncludeOnPO">
+                    <div class="right">
+                        <label>Include On PO</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IncludeOnPO" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.IncludeOnTAR">
+                    <div class="right">
+                        <label>Include On TAR</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="IncludeOnTAR" class="form-control"
+                            readonly />
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="displayfield.RawAdministrationTimes">
+                    <div class="right">
+                        <label>Raw Administration Times</label>
+                    </div>
+                    <div class="left">
+                        <input type="text" id="txtorderid" formControlName="RawAdministrationTimes"
+                            class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button"class="btn btn-danger"  (click)="activeDefaultModal.close('Close click')">Close</button>
+    </div>
+  </app-commonmodal>

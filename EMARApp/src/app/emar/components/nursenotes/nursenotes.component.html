@@ -1,0 +1,189 @@
+<style>
+  .c1 {
+      color: red;
+    }  
+  
+  </style>
+  <ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          </div>
+          
+        </div>
+      </div> /.container-fluid 
+    </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary sticky">
+        <div class="card-body" style="padding-bottom: inherit; padding-top: inherit;">
+          <div class="row form-group">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <h3 class="card-title">Nurse Notes</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+              (onDeSelect)="onNurseStationDeSelect($event)">
+          </ng-multiselect-dropdown>
+            </div>
+        </div>
+            <div  *ngIf="residentID!=0">
+                <div *ngIf="demographicInfoData!={}">
+                    <div class="row form-group">
+                          <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;cursor: pointer;">
+                            <a ><span class="info-box-icon">
+                              <img container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"   (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="demographicInfoData.ImageLocation!=undefined" [src]="sanitize(demographicInfoData.ImageLocation)" class="zoom">
+                            </span></a><br />
+                          </div>  
+                          <div class="col-sm-10 col-md-10 col-lg-10">
+                              <div class="row form-group">
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                      <strong>Residents</strong> 
+                                      <ng-multiselect-dropdown class="form-control"
+                                      [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                                      (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                  </div>
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                      <strong>Admit Date</strong> 
+                                      <select class="form-control" id="ddladmindate">
+                                          <option *ngFor="let item of admitDateDrop" value="{{item.PVisit_Id}}">{{item.AdmitDate|date
+                                            :'MM/dd/yyyy'}}</option>
+                                        </select>
+                                    </div>
+
+                                  </div>
+                                  <div class="row">
+                                      <!-- <div class="col-sm-2 col-6"><strong>MR#:</strong><span>{{demographicInfoData.PatientMRNumber}}</span></div> -->
+                                      <div class="col-sm-3 col-md-3 col-lg-3"><strong>DOB:&nbsp;</strong><span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span></div>
+                                      <div class="col-sm-3 col-md-2 col-lg-2" ><strong>Gender:&nbsp;</strong><span>{{demographicInfoData.AdministrativeSex}}</span></div>
+                                      <div class="col-sm-6 col-md-5 col-lg-5"><strong>Nursing Station Name:&nbsp;</strong><span>{{nurseStationName}}</span></div>
+                                    </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+        </div>
+      </div>
+      <div class="card card-default">
+      <div class="card-body">
+      <div *ngIf="residentID!=0">
+        <form [formGroup]="myform" name="vitalsForm" autocomplete="off">
+          <div class="row form-group">
+            <!-- <div class="col-sm-3 col-md-3 col-lg-3">Nurse Name
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Nurse Name
+              <span class="c1">*</span>
+              <input type="text" id="txtnursename" class="form-control" formControlName="nursename" readonly />
+            </div>
+            <!-- <div class="col-sm-3 col-md-3 col-lg-3">Date
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Date
+              <input type="date" id="date" class="form-control" formControlName="date" readonly />
+            </div>
+            <!-- <div class="col-sm-3 col-md-3 col-lg-3">Description
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Description
+              <span class="c1">*</span>
+              <textarea class="form-control" cols="4" rows="1" id="txtdesc" formControlName="description" [ngClass]="{
+                      'is-valid':myform.controls.description.valid,
+                      'is-invalid':myform.controls.description.invalid && myform.controls.description.touched
+                    }">
+                  </textarea>
+                  <div *ngIf="myform.controls.description.errors && (myform.controls.description.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.description.errors.required">
+                      Description is required.
+                    </div>
+                    <div *ngIf="myform.controls.description.errors.maxlength">
+                      Description cannot be more than 1000 characters long.
+                    </div>
+                    </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12" style="text-align: right">
+              <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-success" value="Save" [disabled]="myform.invalid"
+                (click)="inserNurseNote()" /> &nbsp;
+              <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-danger" value="Reset" (click)="resetScreen()" />
+            </div>
+          </div>
+        </form>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="card-title">Nurse Note Details</h3>
+                </div>
+                <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                <div class="col-sm-3 col-md-4 col-lg-3">
+                  <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                    placeholder="Search">
+                </div>
+              </div>
+          
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tblnursenotes" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Resident Name</th>
+                  <th>Nurse Name</th>
+                  <!-- <th>Created By</th>
+                   -->
+                   <th>Created Date</th>
+                  <th>Description</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+
+                </tr>
+              </thead>
+              <tbody>
+                  
+                <tr *ngFor="let item of nurseNoteDetails|gridFilter:searchText:'NurseNotes'| paginate: { itemsPerPage: gridPagination, currentPage: p };let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{demographicInfoData.PatientLastName+", "+demographicInfoData.PatientFirstName+" "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}</td>
+                  <td>{{item.NurseName}}</td>
+                  <!-- <td>{{item.UserName}}</td>
+                   -->
+                   <td>{{item.VisitNursingNotes_CreatedOn| date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                  <td>{{item.Notes}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon" (click)="getVisitNurseNoteDetailsByID(item.VisitNursingNotes_ID,item.NoteDate)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                </tr>
+            
+              </tbody>
+            </table>
+            </div>
+            <pagination-controls (pageChange)="p = $event" *ngIf="nurseNoteDetails.length > 0"></pagination-controls>
+          
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000" ></ng4-loading-spinner> 
+  </section>

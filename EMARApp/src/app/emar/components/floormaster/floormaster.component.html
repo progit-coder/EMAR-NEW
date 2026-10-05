@@ -1,0 +1,199 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Floor Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Floor Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>  -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Floor Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name<span class="c1">*</span></div>
+                    <div class="col-sm-4 col-md-4 col-lg-4" [ngClass]="{
+                  'has-success has-iconed':myform.controls.facilityName.valid,
+                  'has-error has-iconed':myform.controls.facilityName.invalid && myform.controls.facilityName.touched,
+                  '':myform.controls.facilityName.untouched
+                }">
+                      <div class="iconed-input">
+                        <select id="ddlfacilityname" formControlName="facilityName" class="form-control">
+                          <option [value]="-1">--Select--</option>
+                          <option *ngFor="let item of facilities" [value]="item.Facility_Id">{{item.Facility_Name}}</option>
+                        </select></div>
+                    </div> -->
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Floor Number
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Floor Number
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtfloornumber" formControlName="floorNumber" (change)="checkFloorNumber()"
+                    class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.floorNumber.valid,
+                    'is-invalid':myform.controls.floorNumber.invalid && myform.controls.floorNumber.touched
+                   }" />
+                  <div *ngIf="myform.controls.floorNumber.errors && (myform.controls.floorNumber.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.floorNumber.errors.required">
+                      Floor Number is required.
+                    </div>
+                    <div *ngIf="myform.controls.floorNumber.errors.maxlength">
+                      Floor Number cannot be more than 50 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.floorNumber.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage1}}
+                     </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4" style="text-align: right;margin-top: 1%;">
+                <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']"  value="Save" (click)="insertFloor()" [disabled]="myform.invalid"
+                  class="btn btn-success" />&nbsp;
+                <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Floor View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Floor History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class="table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-5">
+                <span>
+                  <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                    (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+                <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive Floors</b></label></span>
+                    
+              </div>
+              <div class="col-sm-4 col-md-3 col-lg-4"></div>
+              <div class="col-sm-2 col-md-2 col-lg-3">
+                    <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateFloorStatus()" [disabled]="UpdateStatus"
+                      class="btn btn-danger" />
+                  </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table id="tblFloor" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                        <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                          (change)="onCheckAll($event.target.checked?true:false)"></th>
+                      <th>Floor Number</th>
+                      <!-- <th>Facility Name</th> -->
+                       <!--<th>Status</th>
+                      <th>Created By</th>
+                      <th>Created Date</th> -->
+                      <th *ngIf="pageConfig['AccessWrite']"></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let item of floorList|gridFilter:searchText:'Floor'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                      <td> <input type="checkbox" [checked]="CheckAll" value="{{item.Floor_Id}}"
+                        name="{{ item.Floor_Id }}" id="{{item.Floor_Id}}"
+                        (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                      <td>{{item.Floor_Name}}</td>
+                      <!-- <td>{{item.Facility_Name}}</td> -->
+                      <!--<td *ngIf="item.Floor_Status===1">Active</td>
+                      <td *ngIf="item.Floor_Status===0">Inactive</td>
+                       <td>{{item.User.User_DisplayName}}</td>
+                      <td>{{item.Floor_CreatedDate | date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                      <td *ngIf="pageConfig['AccessWrite']">
+                        <a class="btn editicon" (click)="getFloorDetailsByID(item.Floor_Id)">
+                          <i class="icon"></i>
+                          <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                        </a>
+                        <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="getFloorDetailsByID(item.Floor_Id)"
+                        /> -->
+                      </td>
+                      <td>
+                        <a class="btn editicon" (click)="getHistoryById(item.Floor_Id)">
+                          <i class="icon"></i>
+                          <span class=" fa fa-history iconColor" title="History"></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls (pageChange)="p = $event" *ngIf="floorMaster.length > 0"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>

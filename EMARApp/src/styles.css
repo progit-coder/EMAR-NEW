@@ -1,0 +1,412 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* @import "./assets/css/bootstrap.css"; */
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+/*@import "./assets/css/select2.css";
+@import "./assets/font-awesome/css/font-awesome.css";
+@import "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";*/
+
+@import "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css";
+@import "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css";
+@import "./assets/css/adminlte.min.css";
+@import "./assets/css/icon.css";
+
+/*@import "./assets/css/fonts.googleapis.css";*/
+
+@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700";
+@import "https://unpkg.com/@progress/kendo-theme-default@latest/dist/all.css";
+
+/* @import "~@ng-select/ng-select/themes/default.theme.css"; */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background-color: #ffdf62;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #ade39d;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(90px);
+    -ms-transform: translateX(90px);
+    transform: translateX(90px);
+}
+
+
+/*------ ADDED CSS ---------*/
+
+.on {
+    display: none;
+}
+
+.on,
+.off {
+    color: black;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+input:checked+.slider .on {
+    display: block;
+    color: black;
+}
+
+input:checked+.slider .off {
+    display: none;
+}
+
+
+/*--------- END --------*/
+
+
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+    width: 120PX;
+    border: 1px solid black;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+    left: auto;
+}
+
+.slider.round::after {
+    right: auto;
+}
+
+
+/* cleien serach  dropdown menu */
+
+.search-result {
+    /*border: 1px solid #ccc;*/
+    width: 94.2%;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    max-height: 350px;
+    overflow: auto;
+    position: absolute;
+    z-index: 7;
+}
+
+.search-result ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.search-result ul li {
+    border-bottom: #ccc solid 1px;
+    padding: 5px 0px 5px 10px;
+}
+
+.search-result ul li:hover {
+    background: #f2f2f2;
+}
+
+.customFeedback {
+    bottom: 26px !important;
+}
+
+.table td,
+.table th {
+    padding: .45rem;
+    vertical-align: top;
+    border-top: 1px solid #000000
+}
+
+.erorMessage {
+    color: red;
+}
+
+.form-control {
+    font-size: small !important;
+    border: 1px solid black;
+    /* height: 29px !important; */
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: calc(1.75rem + 2px) !important;
+}
+
+.myCustomModalClass {
+    max-width: 1000px;
+}
+
+.loading {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    background-color: #fff !important;
+    z-index: 99;
+    text-align: center;
+}
+
+.loading-image {
+    /*position: absolute;
+ top: 80px;
+ left: 450px;
+ z-index: 100;*/
+    position: fixed;
+    z-index: 999;
+    height: 5em;
+    width: 6em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    object-fit: cover;
+}
+
+
+/* create a new arrow, because we are going to mess up the native one
+see "List of symbols" below if you want another, you could also try to add a font-awesome icon.. */
+
+input[type="date"]::after {
+    font-family: 'FontAwesome';
+    content: "\f073";
+    color: #555;
+    padding: 5px 15px;
+}
+
+
+/* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
+
+/* adjust increase/decrease button */
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+
+/* adjust clear button */
+
+input[type="date"]::-webkit-clear-button {
+    /* z-index: 1; */
+    display: none;
+}
+
+input[type="date"] {
+    position: relative;
+    padding: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+}
+
+.btn-xs {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    /* border-radius: .2rem */
+    border-radius: 25px;
+}
+
+.modal-header {
+    background-color: #cccccc;
+    color: #000000;
+    cursor: all-scroll;
+}
+
+.bt-lg {
+    color: #000000;
+    background-color: #ade39d;
+    border-color: #000000;
+    font-weight: bold;
+    width: 82px;
+    height: 45px;
+    border-radius: 25px;
+}
+
+.bt-lo {
+    color: #000000;
+    background-color: #ffdf62;
+    border-color: #000000;
+    font-weight: bold;
+    width: 130px;
+    height: 45px;
+    border-radius: 25px;
+}
+
+.iconColor {
+    color: #4fb633;
+}
+
+.btn-info1 {
+    line-height: 0.5rem !important;
+    height: 1.50rem !important;
+    padding: 0.25rem !important;
+    background-color: #ade39d !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 10px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.btn-danger1 {
+    line-height: 0.5rem !important;
+    height: 1.50rem !important;
+    padding: 0.25rem !important;
+    background-color: #ffdf62 !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #000000;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+thead {
+    background-color: #cccccc;
+}
+
+.modal-header,
+h5 {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.iconColor {
+    color: #4fb633;
+}
+
+.btn-info1 {
+    line-height: 0.5rem !important;
+    height: 1.50rem !important;
+    padding: 0.25rem !important;
+    background-color: #ade39d !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 10px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.btn-danger1 {
+    line-height: 0.5rem !important;
+    height: 1.50rem !important;
+    padding: 0.25rem !important;
+    background-color: #ffdf62 !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #000000;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+thead {
+    background-color: #cccccc;
+}
+
+.ngx-pagination .current,
+.btn-info {
+    background-color: #ade39d !important;
+    color: #000000 !important;
+}
+
+.fa-filter {
+    color: #4fb633;
+}
+
+.fa-file-excel-o {
+    color: #4fb633;
+}
+
+.fa-file-pdf-o {
+    color: #4fb633;
+}
+
+.table-bordered thead td,
+.table-bordered thead th {
+    white-space: nowrap
+}
+
+a:hover {
+    color: #4fb633;
+}
+.tableFixHead th {
+    position: sticky;
+    top: -16px;
+    background-color: #cccccc;
+  }
+  .sticky {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    position: -moz-sticky !important;
+    position: -ms-sticky !important;
+    position: -o-sticky !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    background-color: #cccccc;
+    top:55px !important;
+    z-index: 99 !important;
+  }

@@ -1,0 +1,87 @@
+<div *ngIf="tableType == 1">
+  <div class="row form-group" *ngIf="firstCreated">
+    <div class="col-sm-2 col-6"><strong>Created By:</strong></div>
+    <div class="col-sm-3 col-6">{{firstCreated.UpdatedBy}}</div>
+    <div class="col-sm-2 col-6"><strong>Created On:</strong></div>
+    <div class="col-sm-3 col-6">{{firstCreated.UpdatedOn}}</div>
+  </div>
+  <div class="row form-group">
+    <div class="col-sm-12 col-md-12 col-sm-12">
+    <div class="tableFixHead">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr style="background-color: #cccccc;">
+        <th *ngFor="let h of headers">{{h.item_text}}</th>
+      </tr>
+      </thead>
+      <tr class="component-style table-row-component"
+        *ngFor="let item of records  | paginate: { itemsPerPage: 100, currentPage: p,id:'history' };" app-table-row [records]="item"
+        [headers]="headers">
+      </tr>
+    </table>
+    </div>
+  </div>
+    <pagination-controls id="history" (pageChange)="p = $event" *ngIf="records"></pagination-controls>
+  </div>
+</div>
+<div class="row form-group" *ngIf="tableType == 2">
+  <div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr style="background-color: #cccccc;">
+      <ng-container *ngFor="let cols of gridColumns">
+        <th *ngIf="cols.display" [style.text-align]="cols.alignType">{{ cols.displayName }}</th>
+      </ng-container>
+    </tr>
+  </thead>
+    <tr class="component-style table-row-component"
+      *ngFor="let item of records  | paginate: { itemsPerPage: 100, currentPage: p };">
+      <!-- <ng-container *ngFor="let cols of gridColumns"> -->
+      <td *ngFor="let cols of gridColumns" [style.text-align]="cols.alignType"> {{item[cols.name]}}</td>
+      <!-- </ng-container> -->
+    </tr>
+
+  </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event" *ngIf="records"></pagination-controls>
+</div>
+<div class="row form-group" *ngIf="tableType == 3">
+  <div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr style="background-color: #cccccc;">
+      <ng-container *ngFor="let cols of gridColumns">
+        <th *ngIf="cols.display" [style.text-align]="cols.alignType">{{ cols.displayName }}</th>
+      </ng-container>
+    </tr>
+  </thead>
+    <tr class="component-style table-row-component"
+      *ngFor="let item of records  | paginate: { itemsPerPage: 100, currentPage: p };">
+      <td *ngFor="let cols of staticColumns" [style.text-align]="cols.alignType"> {{item[cols.name]}}</td>
+      <td *ngFor="let val of item.data" style="text-align: right;"> {{val}}</td>
+    </tr>
+
+  </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event" *ngIf="records"></pagination-controls>
+</div>
+<div class="row form-group" *ngIf="tableType == 4">
+  <div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr style="background-color: #cccccc;">
+      <ng-container *ngFor="let cols of gridColumns">
+        <th *ngIf="cols.display" [style.text-align]="cols.alignType">{{ cols.displayName }}</th>
+      </ng-container>
+    </tr>
+  </thead>
+    <tr class="component-style table-row-component" style="cursor:pointer" (click)="onRowSelect(item.name)"
+      *ngFor="let item of records  | paginate: { itemsPerPage: 100, currentPage: p };">
+      <td *ngFor="let cols of staticColumns" [style.text-align]="cols.alignType"> {{item[cols.name]}}</td>
+      <td *ngFor="let val of item.data" style="text-align: right;"> {{val}}</td>
+    </tr>
+
+  </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event" *ngIf="records"></pagination-controls>
+</div>

@@ -1,0 +1,50 @@
+.modalstyle
+{
+  z-index: 99999  !important;
+  overflow: hidden;
+}
+.bodystyle
+{
+  height:400px;
+  overflow-y: auto
+}
+.modal.fade .modal-dialog
+{
+  transform: translate(0,0%);
+}
+.cursor
+{
+  cursor: pointer;
+}
+input[type="checkbox"] {
+    display: none;
+}
+
+label:before {
+    background: linear-gradient(to bottom, #fff 0px, #e6e6e6 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #035f8f;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 3px;
+}
+input[type="checkbox"] + label:before {
+    content: '';
+    background: linear-gradient(to bottom, #e6e6e6 0px, #fff 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: #a7a8a6;
+    color: #088d25;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+}
+
+input[type="checkbox"]:disabled + label:before {
+    border-color: #eee;
+    color: #ccc;
+    background: linear-gradient(to top, #e6e6e6 0px, #fff 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+input[type="checkbox"]:checked + label:before {
+    content: '✓';
+}

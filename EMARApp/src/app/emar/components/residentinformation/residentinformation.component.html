@@ -1,0 +1,230 @@
+<ng-template #tipContent><img  class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"  [src] ="sanitize(this.MyImages)"></ng-template>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Resident Information</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Resident Information</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </section> -->
+  <!-- Main content -->
+  <section class="content">
+    <form *ngIf="residentId!=0" [formGroup]="myform" name="residentInfoForm">
+      <div class="container-fluid">
+        <div class="card card-primary sticky">
+          <div class="card-body" style="padding-bottom: inherit;padding-top: inherit;">
+                <div class="row form-group">
+                  <div class="col-sm-3 col-md-3 col-lg-3">
+                    <h3 class="card-title">Resident Details </h3>
+                  </div>
+                  <div class="col-sm-5 col-md-5 col-lg-5">
+                      <h6>{{facilityName}}</h6>
+                    </div>
+                  <div class="col-sm-3 col-md-3 col-lg-3">
+                    <ng-multiselect-dropdown formControlName="nursestationName" class="form-control"
+                      [(ngModel)]="selectedNursestation" [data]="nurseStations" [settings]="dropdownSettings_Nuresestation"
+                      (onSelect)="onNurseStationSelect($event)" (onDeSelect)="onNurseStationDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right">
+                      <button type="button" class="btn btn-primary btn-xs" (click)="back()">
+                          <!-- <img src="./assets/images/navigation-180.png" width="25" height="25"> -->
+                          <strong>Back</strong>
+                      </button>
+                    <!-- <a class="btn editicon" style="color: red;" (click)="back()"><i class="icon"></i><span
+                        class=" fa fa-undo" title="Back To Residents"></span> </a> -->
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;cursor: pointer;" *ngIf="demographicInfoData">
+                    <a >
+                      <span class="info-box-icon">
+                        <img  container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"  (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="demographicInfoData.ImageLocation!=undefined"  [src]="sanitize(demographicInfoData.ImageLocation)" class="zoom">
+                      </span>
+                    </a>
+                    <button *ngIf="pageConfig['AccessWrite'] && residentId!=0" type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                      data-target="#imageUploadModal">Upload</button>
+                  </div>
+                  <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="demographicInfoData">
+                    <div class="row form-group clearfix">
+                      <div class="col-sm-3 col-md-4 col-lg-4">
+                        <strong>Resident Name</strong>
+                        <!-- <select class="form-control" id="ddlresident" formControlName="ddlresidents"
+                          (change)="changeResident()">
+                          <option *ngFor="let item of residents" value="{{item.Patient_Id}}">
+                            {{item.PatientName}}</option>
+                        </select> -->
+                        <ng-multiselect-dropdown formControlName="ddlresidents" class="form-control"
+                          [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                          (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <strong>Color Code</strong>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlColorCode"
+                          [data]="PatientTypeData" style="padding: 2px" [(ngModel)]="selectedColorCodes"
+                           [settings]="dropdownSettings_ColorCode"
+                          (onSelect)="onColorcodeSelect($event)" (onDeSelect)="onColorcodeDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                      </div>
+                      <div class="col-sm-1 col-md-1 col-lg-1" style="margin-top: 2%;">
+                        <input type="button" *ngIf="pageConfig['AccessWrite'] && residentId!=0"  class="btn btn-success btn-xs" value="Save" (click)="SaveColorCode()" />
+                      </div>
+                      <div class="col-sm-4 col-md-4 col-lg-4" style="margin-top: 1%;">
+                        <div *ngFor="let col of colorArray" class="inline">
+                          <div style=" height:20px; width:20px;" [ngStyle]="{'background-color':col}">
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-sm-2">
+                        <a href="javscript:void(0)" (click)="openUpdateVisitInfoModal()">
+                          <span class="blink">Update Visit Info</span>
+                        </a>
+
+                      </div> -->
+                    </div>
+                    <div class="row form-group clearfix">
+                      <div class="col-sm-2 col-md-3 col-lg-2 ">
+                        <strong>DOB: </strong>
+                        <span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span>
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-lg-2">
+                        <strong>Gender: </strong>
+                        <span>{{demographicInfoData.AdministrativeSex}}</span>
+                      </div>
+                      <!-- <div class="col-sm-2 col-6">
+                        <strong>MR#:&nbsp;</strong>
+                        <span>{{demographicInfoData.PatientMRNumber}}</span>
+                      </div> -->
+                      <div class="col-sm-4 col-md-4 col-lg-4">
+                        <strong>Nursing Station Name:&nbsp;</strong>
+                        <span>{{demographicInfoData.HomeFlag == 0? demographicInfoData.NurseStation_Name: demographicInfoData.PatientAddress1 +' '+ demographicInfoData.PatientAddress2 + ','+demographicInfoData.PatientCity + ','+demographicInfoData.PatientState}}</span>
+                      </div>
+                      <div class="col-sm-4 col-md-3 col-lg-4">
+                        <div style="word-break: break-all;">
+                          <strong>Diet Type: </strong><span>{{demographicInfoData.DietType}}</span>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-lg-2" [ngStyle]="{'display':demographicInfoData.PVisit_Status==2?facilityName=='DEPARTMENT OF JUVENILE JUSTICE' ?isUserAdmin==true?'block':'none':'block':'none'}">
+                        <input  type="button" class="btn btn-success btn-xs" value="Re-Admit" (click)="ReAdmit()"/>
+                      </div>
+                      <div class="col-sm-2 col-md-3 col-lg-2">
+                          <input type="button" (click)="getMerge()" class="btn btn-warning btn-xs" *ngIf="pageConfig['AccessWrite'] && residentId!=0 && isUserAdmin==true" value="Merge" />
+                      </div>
+                      <div class="col-sm-4 col-md-2 col-lg-2 ">
+                        <div class="checkbox-female" >
+                          <label class="label" for="Preg_checkbox" style="margin-bottom: 0px !important;">
+                              <strong style="margin:0px !important;" >Pregnancy:</strong>
+                          </label>
+                          <input type="checkbox" id="Preg_checkbox"  [disabled]="demographicInfoData?.AdministrativeSex === 'Male'"
+                           [checked]="demographicInfoData?.Pregnant"  (click) = "updatePregnancy($event.target.checked)" style="
+                          accent-color: #ade39d; "/>
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-md-4 col-lg-2 ">
+                        <div class="checkbox-female">
+                          <label class="label" for="Feed_checkbox" style="margin-bottom: 0px !important;">
+                              <strong style="margin:0px !important;" >Breast Feeding:</strong>
+                          </label>
+                          <input type="checkbox" class="check-bg" id="Feed_checkbox" [disabled]="demographicInfoData?.AdministrativeSex === 'Male'" [checked] = "demographicInfoData?.BreastFeeding" (click) = "updateFeeding($event.target.checked)"  style="
+                          accent-color: #ade39d; "/>
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-2" >
+                        <div class="weight-text">
+                           <strong>Height: </strong>
+                          <p *ngIf="isHeight">{{weightDetails.HeightFeet}}'{{weightDetails.HeightInc}}''</p>
+                            <p *ngIf="!isHeight"></p>
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-2">
+                        <div class="weight-text">
+                         <strong>Weight: </strong>
+                          <p *ngIf="isWeight">{{weightDetails.Weight}} {{weightDetails.Type}} </p>
+                            <p *ngIf="!isWeight"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div>
+          <div *ngIf="(demographicInfoData!=null && demographicInfoData!=undefined) && residentId!=0">
+            <app-demographicinformation  *ngIf="DemographicpageConfig['AccessRead']" [selectedResident]="demographicInfoData" (newResidentId)="getResident($event)"></app-demographicinformation>
+            <app-census  *ngIf="VisitInfopageConfig['AccessRead']" [selectedResident]="residentStatus"(patientId)="getResident($event)"></app-census>
+            <!-- <app-literalorders [selectedResident]="residentId"></app-literalorders> -->
+            <!-- <app-residentmedication [selectedResident]="residentId"></app-residentmedication> -->
+            <app-allergies *ngIf="AllergiespageConfig['AccessRead']"  [selectedResident]="residentStatus"></app-allergies>
+            <app-diagnosis *ngIf="DiagnosispageConfig['AccessRead']"  [selectedResident]="residentStatus"></app-diagnosis>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+  <!-- Modals -->
+  <div class="modal fade" ngDraggable [handle]="DemoHandle1" id="imageUploadModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div #DemoHandle1 class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <input type="file" id="fplogo" (change)="fileUploadChange($event)" accept="image/png, image/jpeg" maxFileSize="50000" />
+            </div>
+            <div class="col-sm-3 col-md3 col-lg-3">
+              <input type="button" class="btn btn-success" value="Upload" (click)="UploadResidentImage()" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button #imageModelClose type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Re-Admission Modals -->
+  <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" id="exampleModal" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': reAdmitModal ? 'block' : 'none', 'opacity': 1}" style="top:5% !important;">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-top: 70px;" >
+        <div #DemoHandle2 class="modal-header" style="height: 60px;padding:7px !important ">
+            <h5 style="margin-top: 10px;">Re-Admission</h5>
+            <button type="button" class="close" (click)="closeReadmitModel()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row form-group">
+            <div class="col-sm-3">Admit Date</div>
+            <div class="col-sm-6">
+              <input type="date" class="form-control" [(ngModel)]="reAdmitDate" [max]="getToday()"/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-8 col-md-8 col-lg-8" *ngIf="errormessage!=''" style="color:red">
+            <div style="text-align:center">
+                <label>{{errormessage}}</label>
+            </div>
+
+        </div>
+          <input type="button" class="btn btn-success" value="Re-Admit" [disabled]="reAdmitDate==''" (click)="PatientReAdmission()"/>
+          <button type="button" class="btn btn-danger" (click)="closeReadmitModel()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,31 @@
+.c1 {
+  color: red;
+}  
+.modalstyle
+{
+  z-index: 99999  !important;
+  overflow: hidden;
+}
+.bodystyle
+{
+  height:400px;
+  overflow-y: auto
+}
+.modal.fade .modal-dialog
+{
+  transform: translate(0,0%);
+}
+.errorMessage
+{
+    color:red;
+}
+input.largerCheckbox { 
+  width: 20px; 
+  height: 20px; 
+} 
+label.checkbox-label {
+  position: relative;
+  vertical-align: middle;
+  bottom: 1px;
+
+}

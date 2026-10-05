@@ -1,0 +1,400 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
+        <div class="container-fluid">
+            <form [formGroup]="filterform">
+                <div class="row form-group">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Facility</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Nursing Station</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations" [data]="nurseStations" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)" (onSelectAll)="onNurseStationSelectAll($event)"
+                            (onDeSelect)="onNurseStationDeSelect($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3 form-group" [formGroup]="form" *ngFor="let field of fields">
+
+                        <label>{{field.label}}</label>
+                        <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data" [settings]="field.settings" [(ngModel)]="field.ngModel" [placeholder]="field.placeholder" (onSelect)="onCommonSelectItems($event)" (onSelectAll)="onCommonSelectAllItems($event)"
+                            (onDeSelect)="onCommonDeSelectItems($event)" (onDeSelectAll)="onCommonDeSelectAllItems(field.name)">
+                        </ng-multiselect-dropdown>
+
+                    </div>
+                    <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Floor</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlfloors" [data]="floors" [settings]="dropdownSettings_Floors"
+              [placeholder]="'Floors'" (onSelect)="onFloorSelect($event)" (onSelectAll)="onFloorSelectAll($event)"
+              (onDeSelect)="onFloorDeSelect($event)" (onDeSelectAll)="onFloorDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+                    <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Wing</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlwings" [data]="wings" [settings]="dropdownSettings_Wings"
+              [placeholder]="'Wings'" (onSelect)="onWingSelect($event)" (onSelectAll)="onWingSelectAll($event)"
+              (onDeSelect)="onWingDeSelect($event)" (onDeSelectAll)="onWingDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+                    <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Room</label>
+            <ng-multiselect-dropdown class="form-control" formControlName="ddlrooms" [data]="rooms" [settings]="dropdownSettings_Rooms"
+              [placeholder]="'Rooms'" (onSelect)="onRoomSelect($event)" (onSelectAll)="onRoomSelectAll($event)"
+              (onDeSelect)="onRoomDeSelect($event)" (onDeSelectAll)="onRoomDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+                    <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+            <label>Bed</label>
+            <ng-multiselect-dropdown  class="form-control" formControlName="ddlbeds" [data]="beds" [settings]="dropdownSettings_Beds"
+              [placeholder]="'Beds'" (onSelect)="onBedSelect($event)" (onSelectAll)="onBedSelectAll($event)"
+              (onDeSelect)="onBedDeSelect($event)" (onDeSelectAll)="onBedDeSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+                </div>
+            </form>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <h3 class="card-title">Controlled Substance Count</h3>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                        <div class="col-sm-3 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="residentddlform">
+                        <div class="row form-group" *ngIf="controlGridData.length>0">
+                            <!-- <div class="col-sm-2 col-md-2 col-lg-2"><strong>Select Resident</strong>
+              </div> -->
+                           <!-- <div class="col-sm-4 col-md-5 col-lg-4">
+                             <strong>Select Resident</strong>
+                                <ng-multiselect-dropdown class="form-control" formControlName="ddlresidents" [placeholder]="'Resident'" [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident" (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div> -->
+                            <div class="col-sm-3 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                      <input type="checkbox" id="chkadminapprove" [(ngModel)]="history"
+                        (click)="ShowChange($event.target.checked)" [ngModelOptions]="{standalone: true}">
+                    </span>
+                                    </div>
+                                    <span class="form-control">Show Last Certified Count</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-3 col-lg-3"></div>
+                                <!-- <div class="col-sm-4 col-md-5 col-lg-5" *ngIf="controlGridData.length>0" style="margin-top: 15px;text-align: right;">
+                                <strong>Note: </strong><b>Records With Red Color can Combine Inventory.Click on Row</b></div>-->
+                            </div>
+                            </form>
+                    <br /><br />
+                    <div class="row form-group">
+                        <div class="table table-responsive">
+                            <table id="tbltable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nursing Station Name</th>
+                                        <th>Resident Name</th>
+                                        <th>DOB</th>
+                                        <th>Drug Name</th>
+                                        <th>Last Certified By</th>
+                                        <th>Last Certified Date</th>
+                                        <th *ngIf="quantityflag">Last certifed count</th>
+                                        <th>Quantity</th>
+                                        <th>Discrepancy Reason</th>
+                                        <th></th>
+                                        <th *ngIf="quantityflag"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of controlGridData|gridFilter:searchText:'ControlSubCount'| paginate: { itemsPerPage: gridPagination, currentPage: p };index as i" [ngStyle]="{'background-color': item.Color}" data-toggle="tooltip" data-placement="top" title="{{controlGridData.length>0 && item.ConsolidateFlag==1?item.Directions:item.Directions}}">
+                                        <td  (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)">{{item.NurseStationName}}</td>
+                                        <td (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)">{{item.ResidentName}}</td>
+                                        <td (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)">{{item.DOB |date :'MM/dd/yyyy'}}</td>
+                                        <td (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)">
+                                            <!-- [ngStyle]="{'color': item.ConsolidateFlag == 1?'#4fb633':item.ConsolidatedAllow==1?'red':'black'}" -->
+                                            <p>
+                                                {{item.Order}}</p>
+                                            <div *ngIf="item.QuantityZeroStatus == 1">
+                                                <p id="bg-text">Order Inactive.Zero Out Remaining Qty</p>
+                                            </div>
+                                        </td>
+                                        <td (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)">{{item.LastCertified}}</td>
+                                        <td (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)">{{item.CertifiedDate}}</td>
+                                        <td (click)="getConsolidateOrders(item.Patient_Id,item.GPI,item.eKitFlag)" *ngIf="quantityflag">{{item.LastCertified=='None'?'':item.InitialQuantity}}</td>
+                                        <td>
+                                            <form [formGroup]="myform" name="quantityForm" autocomplete="off">
+                                                <input id="{{item.eKitFlag==0? item.QuantityId :('ek'+item.Ekit_Id)}}" [ngStyle]="{'width': quantityflag==true?'75px':'75px'}" type="text" pattern="^[0-9]+(\.[0-9]{1,2})?" onKeyPress="if(this.value.length==10) return false;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" step=".01" class="form-control" formControlName="quantity" min="0" (change)="UpdateArray(item,$event.target.value,item.eKitFlag)" />
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <textarea type="text" cols="10" rows="3" style="display: none;margin-top: 0px;margin-bottom: 0px;height: 34px;" id="{{item.eKitFlag==0?('reason'+item.QuantityId) :('ekreason'+item.Ekit_Id)}}" class="form-control" (change)="UpdateReasonArray(item,$event.target.value)" ></textarea>
+                                        </td>
+                                        <td>
+                                            <a *ngIf="item.ConsolidateFlag==1"class="btn editicon" style="font-size: 25px;" (click)="openRemoveConsolidateModal(item.Patient_Id,item.GPI)" data-toggle="tooltip" data-placement="top" title="{{item.Directions}}">
+                                                <i class="icon"></i>
+                                                <span class=" fa fa-pie-chart iconColor" title="Consolidated"></span>
+                                            </a>
+                                        </td>
+                                        <td *ngIf="quantityflag">
+                                            <a class="btn editicon" (click)="getControlSubstaceHistoryById(item.QuantityId,item.eKitFlag,item.Ekit_Id)">
+                                                <i class="icon"></i>
+                                                <span class=" fa fa-history iconColor" title="History"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="p = $event" *ngIf="controlGridData.length > 0"></pagination-controls>
+                        </div>
+                    </div>
+                    <div style="text-align: right" *ngIf="controlGridData.length>0">
+                        <strong>Note: </strong><b>Click on Save to Certify Counts</b> &nbsp;
+                        <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Save" [disabled]="(ControlSubstanceSaveObj.length==0)" (click)="SaveChanges()" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Model Save-->
+    <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" id="modalApproval" role="dialog" [ngStyle]="{'display':modalSave?'block':'none',opacity:'1'}" style="z-index: 999999 !important;margin-top: 30px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div #DemoHandle1 class="modal-header" style="height: 50px ">
+                    <h4 class="modal-title">Certify Controlled Substance Medication </h4>
+                    <button type="button" class="close" (click)="SaveClose()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="saveform">
+                        <h3>Certifier</h3>
+                        <div class="row form-group">
+                            <!-- <div class="col-sm-2">User Name</div> -->
+                            <div class="col-sm-6 col-lg-6 col-md-6">
+                                User Name
+                                <input type="text" #inputFocus class="form-control" formControlName="certUsername" />
+                            </div>
+                            <!-- <div class="col-sm-2">Password</div> -->
+                            <div class="col-sm-6 col-md-6 collg-6">
+                                Password
+                                <input type="password" class="form-control" formControlName="certPass" autocomplete="new-password" />
+                            </div>
+                        </div>
+                        <h3>Witness</h3>
+                        <div class="row form-group">
+                            <!-- <div class="col-sm-2">User Name</div> -->
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                User Name
+                                <input type="text" class="form-control" formControlName="approvalUsername" />
+                            </div>
+                            <!-- <div class="col-sm-2">Password</div> -->
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                Password
+                                <input type="password" class="form-control" formControlName="approvalPass" autocomplete="new-password" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite'] && modalConsolidateIsOpen==true && modalRemoveConsolidate==false" [disabled]="saveform.invalid || saveDisable==true" (click)="saveConsolidate()" class="btn btn-success" /> &nbsp;
+                    <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite'] && modalConsolidateIsOpen==false && modalRemoveConsolidate==true" [disabled]="saveform.invalid || saveDisable==true" (click)="removeConsolidate()" class="btn btn-success" /> &nbsp;
+                    <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite'] && modalConsolidateIsOpen==false && modalRemoveConsolidate==false" [disabled]="saveform.invalid || saveDisable==true" (click)="SaveControlData()" class="btn btn-success" /> &nbsp;
+                    <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="SaveClose()" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Model Show History-->
+    <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" id="modalShow" role="dialog" [ngStyle]="{'display':modalHistroy?'block':'none',opacity:'1'}" style="margin-top: 30px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div #DemoHandle2 class="modal-header" style="height: 50px ">
+                    <h4 class="modal-title">Enter User Credentials</h4>
+                    <button type="button" class="close" (click)="ShowClose()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="showHistroyform">
+                        <h3></h3>
+                        <div class="row form-group">
+                            <!-- <div class="col-sm-2">User Name</div> -->
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                User Name
+                                <input type="text" class="form-control" formControlName="showUsername" />
+                            </div>
+                            <!-- <div class="col-sm-2">Password</div> -->
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                Password
+                                <input type="password" class="form-control" formControlName="showPass" autocomplete="new-password" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" id="btnsave" value="Submit" [disabled]="showHistroyform.invalid" (click)="ShowGrid()" class="btn btn-success" /> &nbsp;
+                    <input type="button" id="btnclose" value="Cancel" class="btn btn-danger" (click)="ShowClose()" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle3" id="myModal" role="dialog" [ngStyle]="{'display': modalControlledSubstanceHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 85%;">
+            <div class="modal-content">
+                <div #DemoHandle3 class="modal-header " style="height: max-content ">
+                    <h5>Controlled Substance Certification History Details</h5>
+                    <button type="button" class="close" (click)="closeModel()">&times;</button>
+                </div>
+                <div class="modal-body bodystyle">
+                    <div class="tableFixHead">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Drug Name</th>
+                                    <th>Reason</th>
+                                    <th>Last certified count</th>
+                                    <th>Last Certified By</th>
+                                    <th>Last Certified Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of certifyControlledMedsHistory| paginate: { itemsPerPage: historyPagination, currentPage: h, id:'history' };">
+                                    <td>{{item.Order}}</td>
+                                    <td>{{item.Reason}}</td>
+                                    <td>{{item.LastCertified=='None'?'':item.InitialQuantity}}</td>
+                                    <td>{{item.LastCertified}}</td>
+                                    <td>{{item.CertifiedDate|date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls id="history" (pageChange)="h = $event" *ngIf="certifyControlledMedsHistory.length > 0"></pagination-controls>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle4" id="myModal" role="dialog" [ngStyle]="{'display': modalConsolidateIsOpen ? 'block' : 'none', 'opacity': 1}" style="margin-top: 30px;z-index: 9999 !important;">
+        <div class="modal-dialog" style="max-width: 75%;">
+            <div class="modal-content">
+                <div #DemoHandle4 class="modal-header " style="height: max-content ">
+                    <h5>Combine Quantity on Hand</h5>
+                    <!-- <button type="button" class="close" (click)="closeConsolidateModel()">&times;</button> -->
+                </div>
+                <div class="modal-body bodystyle">
+                    <div class="row form-group">
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            Total Quantity to Certify
+                            <input type="number" pattern="^[0-9]+(\.[0-9]{1,2})?" onKeyPress="if(this.value.length==10) return false;" (change)="checkConsolidateQty($event.target.value)"
+                                step=".01" class="form-control" id="consolidateQty" [(ngModel)]="consolidateQuantity">
+                        </div>
+                        <div class="col-sm-2 col-lg-2 col-md-2"></div>
+                        <div class="col-sm-6 col-6 iconColor" style="margin-top: 15px;" *ngIf="consolidateOrders.length>0">
+                            <strong>{{consolidateOrders[0].ResidentName}} ({{consolidateOrders[0].DOB |  date: 'MM/dd/yyyy '}})</strong>
+                        </div>
+                    </div>
+                    <div class="tableFixHead">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Drug Name</th>
+                                    <th>Directions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of consolidateOrders| paginate: { itemsPerPage: historyPagination, currentPage: g, id:'consolidate' };">
+                                    <td>
+                                        <input type="checkbox" [checked]="CheckAll"  id="{{item.QuantityId}}"
+                                        (change)="onselectRecord($event.target.checked?true:false, item)" />
+                                    </td>
+                                    <td>{{item.Order}}</td>
+                                    <td>{{item.Directions}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls id="consolidate" (pageChange)="g = $event" *ngIf="consolidateOrders.length > 0"></pagination-controls>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" [disabled]="consolidateBtn || (consolidateQuantity==undefined || consolidateQuantity==null || consolidateQuantity=='')" (click)="confirmConsolidate()">Combine Qty on Hand</button>
+                    <button type="button" class="btn btn-danger" (click)="closeConsolidateModel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle15" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display': consolidateConfirmationModal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div #DemoHandle15 class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red;">Warning!</h5>
+                    <button type="button" class="close" (click)="closeConfirmation()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <strong> Are you sure you want to Combine Inventory?</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="openWitnessModal()">Yes</button>
+                    <button type="button" class="btn btn-danger" (click)="closeConfirmation()">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle6" id="myModal" role="dialog" [ngStyle]="{'display': modalRemoveConsolidate ? 'block' : 'none', 'opacity': 1}" style="margin-top: 30px;">
+        <div class="modal-dialog" style="max-width: 75%;">
+            <div class="modal-content">
+                <div #DemoHandle6 class="modal-header " style="height: max-content ">
+                    <h5>Remove Combine Quantity on Hand</h5>
+                    <!-- <button type="button" class="close" (click)="closeConsolidateModel()">&times;</button> -->
+                </div>
+                <div class="modal-body bodystyle">
+                    <div class="row form-group">
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            Quantity
+                            <input type="number" pattern="^[0-9]+(\.[0-9]{1,2})?" onKeyPress="if(this.value.length==10) return false;"
+                                step=".01" class="form-control" id="consolidateQty" [(ngModel)]="removeconsolidateQuantity" #quantityFocus>
+                        </div>
+                        <div class="col-sm-2 col-lg-2 col-md-2"></div>
+                        <div class="col-sm-6 col-6 iconColor" style="margin-top: 15px;" *ngIf="removeconsolidateOrders.length>0">
+                            <strong>{{removeconsolidateOrders[0].ResidentName}} ({{removeconsolidateOrders[0].DOB |  date: 'MM/dd/yyyy '}})</strong>
+                        </div>
+                    </div>
+                    <div class="tableFixHead">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Drug Name</th>
+                                    <th>Directions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Srikar -->
+                                <tr *ngFor="let item of removeconsolidateOrders| paginate: { itemsPerPage: historyPagination, currentPage: g, id:'removeconsolidate' };">
+                                    <td>
+                                        <input type="checkbox" [checked]="CheckAll" disabled id="{{item.QuantityId}}"
+                                        (change)="onselectRemoveConsolidateRecord($event.target.checked?true:false, item)" />
+                                    </td>
+                                    <td [ngStyle]="{'color':item.DFalg<=0 ? 'black':'red'}">{{item.Order}}</td>
+                                    <td [ngStyle]="{'color':item.DFalg<=0 ? 'black':'red'}">{{item.Directions}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls id="removeconsolidate" (pageChange)="g = $event" *ngIf="removeconsolidateOrders.length > 0"></pagination-controls>
+                </div>
+                <div class="col-sm-6 col-lg-4 col-md-6" style="color: red;">
+                    Note: The color red indicates Discontinued orders.
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-success" [disabled]="removeconsolidateOrdersSave.length==0 || (removeconsolidateQuantity==undefined || removeconsolidateQuantity==null || removeconsolidateQuantity=='')" (click)="removeCombineQty()">Remove Combine Quantity on Hand</button> -->
+                    <button type="button" class="btn btn-danger" (click)="closeConsolidateModel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

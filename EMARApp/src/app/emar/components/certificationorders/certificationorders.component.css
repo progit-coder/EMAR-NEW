@@ -1,0 +1,178 @@
+.zoom {
+    transition: transform .2s !important;
+    margin: 0  !important; 
+    padding: 0  !important;
+    width: 40px;
+    height:35px;
+    border-radius: 50%;
+  }
+  .zoom3 {
+    transition: transform .2s !important;
+    margin: 0  !important; 
+    padding: 0  !important;
+    width: 40px;
+    height:35px;
+    border-radius: 50%;
+  }
+  ::ng-deep .tooltip-inner {
+    max-width: 500px;
+    overflow: hidden;
+    
+   
+  
+   
+  }
+  ::ng-deep .tooltip {
+    opacity: 1;
+    z-index: 9999;
+}
+.ImageAndWidthHeight
+{
+  height: 300px;
+   width: 400px; 
+   z-index: 9999;
+}
+.ImageAndWidthHeight1
+{
+  height: 300px;
+   width: 400px; 
+   z-index: 9999;
+}
+  .zoom1 {
+    transition: transform .2s !important;
+    margin: 0  !important; 
+    padding: 0  !important;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+.zoom:hover {
+    -ms-transform: scale(1.5)!important; /* IE 9 */
+    -webkit-transform: scale(1.5)!important;/* Safari 3-8 */
+    transform: scale(2.0) !important; 
+ } 
+
+/* .zoom1:hover {
+    -ms-transform: scale(1.5)!important; /* IE 9 */
+    /* -webkit-transform: scale(1.5)!important;/* Safari 3-8 */
+    /* transform: scale(2.0) !important;  */ 
+/* } */ 
+:host /deep/ .multiselect-dropdown .dropdown-btn {
+    border:none !important;
+    padding: 0px !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down {
+    border-top: 5px solid black !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up {
+    border-bottom: 5px solid #adadad !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item{
+    overflow: hidden !important; 
+    white-space: nowrap !important;
+    width: 86% !important;  
+    text-overflow: ellipsis !important;
+}
+:host /deep/ .cerDates .multiselect-dropdown  .dropdown-list
+{
+   height: 25Px;
+}
+.row-m-t{
+    margin-top : 20px
+}
+.blink {
+    /* animation: blinker 2s linear infinite; */
+    /* color:#cef307; */
+    font-size: 15px;
+  }
+  
+  @keyframes blinker {  
+    10%{opacity: 0;}
+    50%{opacity: .5;}
+    100%{opacity: 1;}
+  }
+  
+  .infoBoxCustomCss{
+    padding: 0rem;
+  }
+  .formGroupCustomCss{
+    margin-bottom: 1px;
+  }
+  input[type="checkbox"] {
+    display: none;
+}
+
+label:before {
+    background: linear-gradient(to bottom, #fff 0px, #e6e6e6 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #035f8f;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 3px;
+}
+input[type="checkbox"] + label:before {
+    content: '';
+    background: linear-gradient(to bottom, #e6e6e6 0px, #fff 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: #a7a8a6;
+    color: #088d25;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+}
+
+input[type="checkbox"]:disabled + label:before {
+    border-color: #eee;
+    color: #ccc;
+    background: linear-gradient(to top, #e6e6e6 0px, #fff 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+input[type="checkbox"]:checked + label:before {
+    content: '✓';
+}
+.modalstyle
+  {
+    z-index: 99999  !important;
+    overflow: hidden;
+  }
+  .bodystyle
+  {
+    
+    height:400px;
+    overflow-y: auto
+  }
+  .modal.fade .modal-dialog
+  {
+    transform: translate(0,0%);
+  }
+  .errorMessage
+{
+    color:red;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+{
+  border: 2px solid #ade39d !important;
+  background-color: #ade39d !important;
+  color: #000000 !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+{
+  background-color: #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+{
+  border: 2px solid #ade39d !important;
+}
+:host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+{
+  border-color: #000000 !important;
+}
+:host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+{
+  color: #000000 !important;
+  font-weight: bold !important;
+}

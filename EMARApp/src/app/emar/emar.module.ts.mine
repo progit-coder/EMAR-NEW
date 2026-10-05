@@ -1,0 +1,379 @@
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, ModuleWithProviders } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { DragScrollModule } from 'ngx-drag-scroll';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthgaurdService } from "../services/shared/authgaurd.service";
+import { PersistanceService } from "../services/shared/persistance.service";
+import { InterceptorService } from "../services/shared/interceptor.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { DataService } from "../services/shared/dataservice.service";
+import { ReactiveFormsModule } from "@angular/forms";
+import { emarRoutes } from "./emar.routing";
+import { CompanymasterComponent } from "./components/companymaster/companymaster.component";
+import { FacilitymasterComponent } from "./components/facilitymaster/facilitymaster.component";
+import { CompanydetailsontopComponent } from "./components/companydetailsontop/companydetailsontop.component";
+import { DevicemasterComponent } from "./components/devicemaster/devicemaster.component";
+import { EmaruserComponent } from "./components/emaruser/emaruser.component";
+import { FloormasterComponent } from "./components/floormaster/floormaster.component";
+import { NursestationmasterComponent } from "./components/nursestationmaster/nursestationmaster.component";
+import { RoommasterComponent } from "./components/roommaster/roommaster.component";
+import { WingmasterComponent } from "./components/wingmaster/wingmaster.component";
+import { BedmasterComponent } from "./components/bedmaster/bedmaster.component";
+import { SharedService } from "../services/shared/shared.service";
+import { RolemasterComponent } from './components/rolemaster/rolemaster.component';
+import { RoleconfigComponent } from './components/roleconfig/roleconfig.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { APIConfiguration } from "../models/app.constants";
+import { UserfacilityroleconfigComponent } from './components/userfacilityroleconfig/userfacilityroleconfig.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { HlsegmentfieldsconfigComponent } from './components/hlsegmentfieldsconfig/hlsegmentfieldsconfig.component';
+import { FteconfigurationComponent } from './components/fteconfiguration/fteconfiguration.component';
+import { InboundfilesComponent } from './components/inboundfiles/inboundfiles.component';
+import { OutboundfilesComponent } from './components/outboundfiles/outboundfiles.component';
+import { ResidentgridComponent } from './components/residentgrid/residentgrid.component';
+import { CompanydropComponent } from './components/companydrop/companydrop.component';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { ResidentinformationComponent } from './components/residentinformation/residentinformation.component';
+import { AllergymasterComponent } from './components/allergymaster/allergymaster.component';
+import { IcdmasterComponent } from './components/icdmaster/icdmaster.component';
+import { DemographicinformationComponent } from './components/demographicinformation/demographicinformation.component';
+import { AllergiesComponent } from './components/allergies/allergies.component';
+import { DiagnosisComponent } from './components/diagnosis/diagnosis.component';
+import { DocumentmanagerComponent } from './components/documentmanager/documentmanager.component';
+import { CensusComponent } from './components/census/census.component';
+import { LiteralordersComponent } from './components/literalorders/literalorders.component';
+import { ResidentmedicationComponent } from './components/residentmedication/residentmedication.component';
+import { IntegrationsComponent } from './components/integrations/integrations.component';
+import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CompanybedconfigComponent } from './components/companybedconfig/companybedconfig.component';
+import { AdminapprovalComponent } from './components/adminapproval/adminapproval.component';
+import { FrequencymappingComponent } from './components/frequencymapping/frequencymapping.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TreeviewComponent } from './components/treeview/treeview.component';
+import { FluidintakeComponent } from './components/fluidintake/fluidintake.component';
+import { BehaviourComponent } from './components/behaviour/behaviour.component';
+import { WeightComponent } from './components/weight/weight.component';
+import { VitalsComponent } from './components/vitals/vitals.component';
+import { NursenotesComponent } from './components/nursenotes/nursenotes.component';
+import { TableComponent } from './components/table/table.component';
+import { TableRowComponent } from './components/table-row/table-row.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { GridFilterPipe } from '../services/shared/grid-filter.pipe';
+import { ReplacePipe } from '../services/shared/replace.pipe';
+import { PrndocumentationComponent } from './components/prndocumentation/prndocumentation.component';
+import { SeventytwohourchecksComponent } from './components/seventytwohourchecks/seventytwohourchecks.component';
+import { ControlsubstancecountComponent } from './components/controlsubstancecount/controlsubstancecount.component';
+import { DynamicdashboardComponent } from './components/dynamicdashboard/dynamicdashboard.component';
+import { TreeviewModule } from 'ngx-treeview';
+import { VitalsdashboardComponent } from './components/vitalsdashboard/vitalsdashboard.component';
+import { CommondashboardComponent } from './components/commondashboard/commondashboard.component';
+import { CensusdashboardComponent } from './components/censusdashboard/censusdashboard.component';
+// import { MyDetailsComponent } from './components/my-details/my-details.component';
+// import { ChatComponent } from './components/chat/chat.component';
+// import { ChathomeComponent } from './components/chathome/chathome.component';
+import { ControlsubstanceComponent } from './components/controlsubstance/controlsubstance.component';
+import { BedconfigcompanymasterComponent } from './components/bedconfigcompanymaster/bedconfigcompanymaster.component';
+import { BedconfigfacilityComponent } from './components/bedconfigfacility/bedconfigfacility.component';
+import { BedconfignursestationComponent } from './components/bedconfignursestation/bedconfignursestation.component';
+import { BedconfigfloorComponent } from './components/bedconfigfloor/bedconfigfloor.component';
+import { BedconfigwingComponent } from './components/bedconfigwing/bedconfigwing.component';
+import { BedconfigroomComponent } from './components/bedconfigroom/bedconfigroom.component';
+import { BedconfigbedmasterComponent } from './components/bedconfigbedmaster/bedconfigbedmaster.component';
+import { MailindoxComponent } from './components/mailindox/mailindox.component';
+import { SeventytwocheckdrComponent } from './components/seventytwocheckdr/seventytwocheckdr.component';
+import { PrndrComponent } from './components/prndr/prndr.component';
+import { OrderdrComponent } from './components/orderdr/orderdr.component';
+import { BarcodedrComponent } from './components/barcodedr/barcodedr.component';
+import { BiometericdrComponent } from './components/biometericdr/biometericdr.component';
+import { OrdercontrolsubstancedrComponent } from './components/ordercontrolsubstancedr/ordercontrolsubstancedr.component';
+import { OrderwithfavouritiesdrComponent } from './components/orderwithfavouritiesdr/orderwithfavouritiesdr.component';
+import { OrdercontrolsignoffdrComponent } from './components/ordercontrolsignoffdr/ordercontrolsignoffdr.component';
+import { OrderholddrComponent } from './components/orderholddr/orderholddr.component';
+import { RefusedbyresidentsdrComponent } from './components/refusedbyresidentsdr/refusedbyresidentsdr.component';
+import { OrderchangedrComponent } from './components/orderchangedr/orderchangedr.component';
+import { ScanningbypassdrComponent } from './components/scanningbypassdr/scanningbypassdr.component';
+import { DestructiondrComponent } from './components/destructiondr/destructiondr.component';
+import { FloorstockdrComponent } from './components/floorstockdr/floorstockdr.component';
+import { PharmacymedsdrComponent } from './components/pharmacymedsdr/pharmacymedsdr.component';
+import { PsychiatricdrComponent } from './components/psychiatricdr/psychiatricdr.component';
+import { NursenotesdrComponent } from './components/nursenotesdr/nursenotesdr.component';
+import { PrescribernotedrComponent } from './components/prescribernotedr/prescribernotedr.component';
+import { CharttemplateComponent } from './components/charttemplate/charttemplate.component';
+import { MardrComponent } from './components/mardr/mardr.component';
+import { HlseveninbounddrComponent } from "./components/hlseveninbounddr/hlseveninbounddr.component";
+import { HlsevenoutbounderrordrComponent } from './components/hlsevenoutbounderrordr/hlsevenoutbounderrordr.component';
+import { UseractivitydrComponent } from './components/useractivitydr/useractivitydr.component';
+import { AdministrationComponent } from './components/administration/administration.component';
+import { ColorpickerComponent } from './components/colorpicker/colorpicker.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { StockComponent } from './components/stock/stock.component';
+import { EkitComponent } from './components/ekit/ekit.component';
+import { AcknowledgeordersComponent } from './components/acknowledgeorders/acknowledgeorders.component';
+import { ReadmailComponent } from './components/readmail/readmail.component';
+import { ComposemailComponent } from './components/composemail/composemail.component';
+import { AlertsComponent } from './components/alerts/alerts.component';
+import { PhysciandetailsComponent } from './components/physciandetails/physciandetails.component';
+import { OrdergridComponent } from './components/ordergrid/ordergrid.component';
+import { OrderinfoComponent } from './components/orderinfo/orderinfo.component';
+import { EkitdrComponent } from './components/ekitdr/ekitdr.component';
+import { StockdrComponent } from './components/stockdr/stockdr.component';
+import { DrfirstfilesComponent } from './components/drfirstfiles/drfirstfiles.component';
+import { CompanyconfigurationComponent } from './components/companyconfiguration/companyconfiguration.component';
+import { AdminusersdrComponent } from './components/adminusersdr/adminusersdr.component';
+import { SetupconfigdatadrComponent } from './components/setupconfigdatadr/setupconfigdatadr.component';
+import { RefilldrComponent } from './components/refilldr/refilldr.component';
+import { MergeordersComponent } from './components/mergeorders/mergeorders.component';
+import { CommonmodalComponent } from './components/commonmodal/commonmodal.component';
+import { ResidentreactivateComponent } from './components/residentreactivate/residentreactivate.component';
+import { ResidentonleaveComponent } from './components/residentonleave/residentonleave.component';
+import { OrdersendingsoonComponent } from './components/ordersendingsoon/ordersendingsoon.component';
+import { RejectedrefillsComponent } from './components/rejectedrefills/rejectedrefills.component';
+import { SearchDrugNameComponent } from './components/search-drug-name/search-drug-name.component';
+import { DefaultscreenComponent } from './components/defaultscreen/defaultscreen.component';
+import { DemographicinfoComponent } from './components/demographicinfo/demographicinfo.component';
+import { UpdatevisitinfoComponent } from './components/updatevisitinfo/updatevisitinfo.component';
+import { DemographichistorymodalComponent } from './components/demographichistorymodal/demographichistorymodal.component';
+import { VisitinfohistorymodalComponent } from './components/visitinfohistorymodal/visitinfohistorymodal.component';
+import { PatientallergyhistorymodalComponent } from './components/patientallergyhistorymodal/patientallergyhistorymodal.component';
+import { PatientdiagnosishistorymodalComponent } from './components/patientdiagnosishistorymodal/patientdiagnosishistorymodal.component';
+import { LiteralorderseditmodalComponent } from './components/literalorderseditmodal/literalorderseditmodal.component';
+import { ColorGithubModule } from 'ngx-color/github';
+import { DemographiceditmodalComponent } from './components/demographiceditmodal/demographiceditmodal.component';
+import { VistinfoeditmodalComponent } from './components/vistinfoeditmodal/vistinfoeditmodal.component';
+import { PatientallergyeditmodalComponent } from './components/patientallergyeditmodal/patientallergyeditmodal.component';
+import { PatientdiagnosiseditmodalComponent } from './components/patientdiagnosiseditmodal/patientdiagnosiseditmodal.component';
+import { AdminresetpasswordmodalComponent } from './components/adminresetpasswordmodal/adminresetpasswordmodal.component';
+import { ErrorPage404Component } from './components/error-page404/error-page404.component';
+import { ErrorPage500Component } from './components/error-page500/error-page500.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { OutboundhlsegmentfielddisplayconfigComponent } from './components/outboundhlsegmentfielddisplayconfig/outboundhlsegmentfielddisplayconfig.component';
+import { CheckinmedsComponent } from './components/checkinmeds/checkinmeds.component';
+import { TransferresidentmodalComponent } from './components/transferresidentmodal/transferresidentmodal.component';
+import { DischargeresidentmodalComponent } from './components/dischargeresidentmodal/dischargeresidentmodal.component';
+import { UpdateadmitvisitinfoComponent } from './components/updateadmitvisitinfo/updateadmitvisitinfo.component';
+import { ControlledsubstancediscrepancyreasonComponent } from './components/controlledsubstancediscrepancyreason/controlledsubstancediscrepancyreason.component';
+import { EkitmedsdispensingdrComponent } from './components/ekitmedsdispensingdr/ekitmedsdispensingdr.component';
+import { DocumentcheckedordersComponent } from './components/documentcheckedorders/documentcheckedorders.component';
+import { RemovemarmodalComponent } from './components/removemarmodal/removemarmodal.component';
+import { DocadmindrComponent } from './components/docadmindr/docadmindr.component';
+import { AngularDraggableModule } from 'angular2-draggable';
+import { OrdersdiscardComponent } from './components/ordersdiscard/ordersdiscard.component';
+import { ResidentmergeComponent } from './components/residentmerge/residentmerge.component';
+import { ImageCropperComponent } from './image-cropper/image-cropper/image-cropper.component';
+import { PendingforreviewComponent } from './components/pendingforreview/pendingforreview.component';
+import { CompanytobedmapingComponent } from './components/companytobedmaping/companytobedmaping.component';
+import { OrdersgridprndocumentationComponent } from './components/ordersgridprndocumentation/ordersgridprndocumentation.component';
+import { Ordersgrid72hourscheckComponent } from './components/ordersgrid72hourscheck/ordersgrid72hourscheck.component';
+import { CertificationordersComponent } from './components/certificationorders/certificationorders.component';
+import { CertifiedordersdrComponent } from './components/certifiedordersdr/certifiedordersdr.component';
+import { MeasurementsuserinputmasterComponent } from './components/measurementsuserinputmaster/measurementsuserinputmaster.component';
+import { EkitmedscheckinComponent } from './components/ekitmedscheckin/ekitmedscheckin.component';
+import { PharmacymedsexpirydrComponent } from './components/pharmacymedsexpirydr/pharmacymedsexpirydr.component';
+import { EkitmedsexpirationdrComponent } from './components/ekitmedsexpirationdr/ekitmedsexpirationdr.component';
+import { RefillrejectionmailconfigComponent } from './components/refillrejectionmailconfig/refillrejectionmailconfig.component';
+import { OrderinfocpoeComponent } from './components/orderinfocpoe/orderinfocpoe.component';
+import { OrdergridcpoeComponent } from './components/ordergridcpoe/ordergridcpoe.component';
+import { ProfilecertificationordersComponent } from './components/profilecertificationorders/profilecertificationorders.component';
+import { ProfilecertifiedordersdrComponent } from './components/profilecertifiedordersdr/profilecertifiedordersdr.component';
+import { MailconfigComponent } from './components/mailconfig/mailconfig.component';
+import { NgbTooltipModule  } from '@ng-bootstrap/ng-bootstrap';
+import { TherapeuticalComponent } from './components/therapeutical/therapeutical.component';
+import { TherapeuticalorderComponent } from './components/therapeuticalorder/therapeuticalorder.component';
+import { TestComponent } from './components/test/test.component';
+@NgModule({
+  declarations: [
+    CompanymasterComponent,
+    FacilitymasterComponent,
+    CompanydetailsontopComponent,
+    DevicemasterComponent,
+    EmaruserComponent,
+    FloormasterComponent,
+    NursestationmasterComponent,
+    RoommasterComponent,
+    WingmasterComponent,
+    BedmasterComponent,
+    RolemasterComponent,
+    DashboardComponent,
+    RoleconfigComponent,
+    UserfacilityroleconfigComponent,
+    HlsegmentfieldsconfigComponent,
+    FteconfigurationComponent,
+    InboundfilesComponent,
+    OutboundfilesComponent,
+    ResidentgridComponent,
+    CompanydropComponent,
+    ResidentinformationComponent,
+    AllergymasterComponent,
+    IcdmasterComponent,
+    DemographicinformationComponent,
+    AllergiesComponent,
+    DiagnosisComponent,
+    DocumentmanagerComponent,
+    CensusComponent,
+    LiteralordersComponent,
+    ResidentmedicationComponent,
+    IntegrationsComponent,
+    CompanybedconfigComponent,
+    AdminapprovalComponent,
+    FrequencymappingComponent,
+    TreeviewComponent,
+    FluidintakeComponent,
+    BehaviourComponent,
+    WeightComponent,
+    VitalsComponent,
+    NursenotesComponent,
+    HlseveninbounddrComponent,
+    TableComponent,
+    TableRowComponent,
+    GridFilterPipe,
+    ReplacePipe,
+    PrndocumentationComponent,
+    SeventytwohourchecksComponent,
+    ControlsubstancecountComponent,
+    DynamicdashboardComponent,
+    VitalsdashboardComponent,
+    CommondashboardComponent,
+    CensusdashboardComponent
+    //  , MyDetailsComponent, ChatComponent, ChathomeComponent
+    , ControlsubstanceComponent,
+    MailindoxComponent,
+    BedconfigcompanymasterComponent,
+    BedconfigfacilityComponent,
+    BedconfignursestationComponent,
+    BedconfigfloorComponent,
+    BedconfigwingComponent,
+    BedconfigroomComponent,
+    BedconfigbedmasterComponent,
+    SeventytwocheckdrComponent,
+    PrndrComponent,
+    OrderdrComponent,
+    BarcodedrComponent,
+    BiometericdrComponent,
+    OrdercontrolsubstancedrComponent,
+    OrderwithfavouritiesdrComponent,
+    OrdercontrolsignoffdrComponent,
+    OrderholddrComponent,
+    RefusedbyresidentsdrComponent,
+    OrderchangedrComponent,
+    ScanningbypassdrComponent,
+    DestructiondrComponent,
+    FloorstockdrComponent,
+    PharmacymedsdrComponent,
+    PsychiatricdrComponent,
+    NursenotesdrComponent,
+    PrescribernotedrComponent,
+    CharttemplateComponent,
+    MardrComponent,
+    HlseveninbounddrComponent,
+    HlsevenoutbounderrordrComponent,
+    UseractivitydrComponent,
+    AdministrationComponent,
+    ColorpickerComponent,
+    StockComponent,
+    EkitComponent,
+    AcknowledgeordersComponent,
+    ReadmailComponent,
+    ComposemailComponent,
+    AlertsComponent,
+    PhysciandetailsComponent,
+    OrdergridComponent,
+    OrderinfoComponent,
+    EkitdrComponent,
+    StockdrComponent,
+    DrfirstfilesComponent,
+    AdminusersdrComponent,
+    SetupconfigdatadrComponent,
+    CompanyconfigurationComponent,
+    RefilldrComponent,
+    MergeordersComponent,
+    CommonmodalComponent,
+    ResidentreactivateComponent,
+    ResidentonleaveComponent,
+    OrdersendingsoonComponent,
+    RejectedrefillsComponent,
+    SearchDrugNameComponent,
+    DefaultscreenComponent,
+    DemographicinfoComponent,
+    UpdatevisitinfoComponent,
+    DemographichistorymodalComponent,
+    VisitinfohistorymodalComponent,
+    PatientallergyhistorymodalComponent,
+    PatientdiagnosishistorymodalComponent,
+    LiteralorderseditmodalComponent,
+    DemographiceditmodalComponent,
+    VistinfoeditmodalComponent,
+    PatientallergyeditmodalComponent,
+    PatientdiagnosiseditmodalComponent,
+    AdminresetpasswordmodalComponent,
+    ErrorPage404Component,
+    ErrorPage500Component,
+    OutboundhlsegmentfielddisplayconfigComponent,
+    CheckinmedsComponent,
+    ErrorPage500Component,
+    TransferresidentmodalComponent,
+    DischargeresidentmodalComponent,
+    UpdateadmitvisitinfoComponent,
+    ControlledsubstancediscrepancyreasonComponent,
+    EkitmedsdispensingdrComponent,
+    DocumentcheckedordersComponent,
+    RemovemarmodalComponent,
+    DocadmindrComponent,
+    OrdersdiscardComponent,
+    ResidentmergeComponent,
+    ImageCropperComponent,
+    CompanytobedmapingComponent,
+    PendingforreviewComponent,
+    OrdersgridprndocumentationComponent,
+    Ordersgrid72hourscheckComponent,
+    CertificationordersComponent,
+    CertifiedordersdrComponent,
+    MeasurementsuserinputmasterComponent,
+    EkitmedscheckinComponent,
+    PharmacymedsexpirydrComponent,
+    EkitmedsexpirationdrComponent,
+    RefillrejectionmailconfigComponent,
+    OrderinfocpoeComponent,
+    OrdergridcpoeComponent,
+    ProfilecertificationordersComponent,
+    ProfilecertifiedordersdrComponent,
+    MailconfigComponent,
+    TherapeuticalComponent,
+    TherapeuticalorderComponent,
+    TestComponent,
+    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    DragScrollModule,
+    HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxLoadingModule.forRoot({ animationType: ngxLoadingAnimationTypes.circleSwish }),
+    RouterModule.forChild(emarRoutes),
+    ReactiveFormsModule,
+    Ng4LoadingSpinnerModule.forRoot(),
+    NgxPaginationModule,
+    TextMaskModule,
+    TreeviewModule.forRoot(),
+    NgbTooltipModule.forRoot(),
+    ColorPickerModule,
+    ColorGithubModule,
+    NgSelectModule,
+    AngularDraggableModule,  ],
+  exports: [RouterModule,
+    ColorGithubModule ,
+  
+  ],
+ 
+
+  providers: [PersistanceService, AuthgaurdService, SharedService, APIConfiguration,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: InterceptorService,
+    //   multi: true,
+    // },
+  ],
+})
+export class EmarModule { }

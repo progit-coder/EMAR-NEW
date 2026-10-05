@@ -1,0 +1,188 @@
+<!-- Main Sidebar Container -->
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a style="cursor: pointer;" (click)="showAndHideSubMenu('/home/dashboard')" class="brand-link"> 
+    <!-- [routerLink]="['/home/dashboard']" -->
+    <!-- <img src="./assets/img/Emarlogo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"> -->
+    <img src="./assets/images/Menu-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+    <span class="brand-text font-weight-light">
+      <!-- <b>Pharmalife eMAR</b> -->
+      <b style="color: white;">RightMAR</b>
+    </span>
+  </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="./assets/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a class="d-block">{{displayName}}</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview admin" [ngClass]="{'menu-open': selectedItem === 'admin'}" *ngIf="armenu.length > 0">
+          <a href="javascript:void(0)" (click)="showAndHideMenu('admin')" class="nav-link ">
+            <i class="nav-icon fa fa-dashboard"></i>
+            <p>
+              Administration
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" *ngFor="let item of armenu">
+            <li class="nav-item" (click)="selectedSubItem = item.name">
+              <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{item.name}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview io" [ngClass]="{'menu-open': selectedItem === 'io'}"  *ngIf="ioMenu.length > 0">
+          <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('io')">
+            <i class="nav-icon fa fa-external-link"></i>
+            <p>
+              Inbound/Outbound Files
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" *ngFor="let item of ioMenu">
+            <li class="nav-item" (click)="selectedSubItem = item.name">
+              <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                <i class="nav-icon fa fa-circle-o"></i>
+                <p>{{item.name}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- <li class="nav-item has-treeview" *ngIf="showInbound">
+          <a href="javascript:void(0)" class="nav-link" [ngClass]="{'active': selectedSubItem === 'inbound'}" (click)="showAndHideSubMenu('home/inbound')">
+            <i class="nav-icon fa fa-files-o"></i>
+            <p>
+              Inbound Files
+            </p>
+          </a>
+        </li>
+        <li class="nav-item has-treeview" *ngIf="showOutbound">
+          <a href="javascript:void(0)" class="nav-link" [ngClass]="{'active': selectedSubItem === 'outbound'}" (click)="showAndHideSubMenu('home/outbound')">
+            <i class="nav-icon fa fa-external-link"></i>
+            <p>
+              Outbound Files
+            </p>
+          </a>
+        </li> -->
+        <li class="nav-item has-treeview adt" [ngClass]="{'menu-open': selectedItem === 'adt'}"  *ngIf="ADTmenu.length > 0">
+          <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('adt')">
+            <i class="nav-icon fa fa-th-large"></i>
+            <p>
+              ADT
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" *ngFor="let item of ADTmenu">
+            <li class="nav-item" (click)="selectedSubItem = item.name">
+              <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{item.name}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview order" [ngClass]="{'menu-open': selectedItem === 'order'}"   *ngIf="Ordersmenu.length > 0">
+          <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('order')">
+            <i class="nav-icon fa fa-edit"></i>
+            <p>
+              Orders
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" *ngFor="let item of Ordersmenu">
+            <li class="nav-item" (click)="selectedSubItem = item.name">
+              <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}" >
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{item.name}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview emar" [ngClass]="{'menu-open': selectedItem === 'emar'}"   *ngIf="EmarMenu.length > 0">
+          <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('emar')">
+            <i class="nav-icon fa fa-th-large"></i>
+            <p>
+              eMAR
+              <i class="right fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" *ngFor="let item of EmarMenu">
+            <li class="nav-item" (click)="selectedSubItem = item.name">
+              <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                <i class="fa fa-circle-o nav-icon"></i>
+                <p>{{item.name}}</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview assessments" [ngClass]="{'menu-open': selectedItem === 'assessments'}"   *ngIf="AssessmentsMenu.length > 0">
+            <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('assessments')">
+              <i class="nav-icon fa fa-edit"></i>
+              <p>
+                Assessments
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" *ngFor="let item of AssessmentsMenu">
+              <li class="nav-item" (click)="selectedSubItem = item.name">
+                <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>{{item.name}}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview dashboards" [ngClass]="{'menu-open': selectedItem === 'dashboards'}" *ngIf="DashboardsMenu.length > 0">
+            <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('dashboards')">
+              <i class="nav-icon fa fa-th-large"></i>
+              <p>
+                Dashboards
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" *ngFor="let item of DashboardsMenu">
+              <li class="nav-item" (click)="selectedSubItem = item.name">
+                <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>{{item.name}}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview mailbox" [ngClass]="{'menu-open': selectedItem === 'mailbox'}" *ngIf="MailboxMenu.length > 0">
+            <a href="javascript:void(0)" class="nav-link" (click)="showAndHideMenu('mailbox')">
+              <i class="nav-icon fa fa-envelope"></i>
+              <p>
+                Mailbox
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" *ngFor="let item of MailboxMenu">
+              <li class="nav-item" (click)="selectedSubItem = item.name">
+                <a href="javascript:void(0)" (click)="showAndHideSubMenu(item.route)" class="nav-link" [ngClass]="{'active': selectedSubItem === item.name}">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>{{item.name}}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

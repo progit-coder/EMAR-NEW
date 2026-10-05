@@ -1,0 +1,2603 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined"
+    [src]="sanitize(this.MyImages)"></ng-template>
+<ng-template #tipContent1><img class="ImageAndWidthHeigh" *ngIf="this.MyImages!=undefined"
+    [src]="sanitize(this.MyImages)"></ng-template>
+
+<div class="content-wrapper" style="margin-left: 0px !important;">
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-primary" [ngStyle]="{'display':selectstyle==1?'block':'none'}">
+            <form [formGroup]="adminform">
+                <div class="card-header">
+                    <div class="row clearfix">
+                        <div class="col-sm-6 col-md-6 col-lg-2">
+                            <h3 class="card-title">Administration </h3>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-3">
+                            <!-- <span *ngIf="computers.length>0">
+              <a class="btn"  style=" padding: 0%"
+                (click)="openComputerNameModel()">
+                <i class="icon"></i>
+                <span class=" fa fa-desktop (alias) iconfontsize iconColor" title="Biometric Computer Name"></span>
+                            </a>
+                            </span> &nbsp; -->
+                            <input type="button" class="btn btn-danger btn-xs"
+                                *ngIf="pageConfig['PrintPdf'] && (gridList.length > 0 || timeDropList.length > 0)"
+                                value="Residents with Orders Report" (click)="getDayReport()" /> &nbsp;
+                            <span>
+                                <a class="btn"
+                                    *ngIf="pageConfig['PrintPdf'] && gridList.length > 0 && (shiftDisplay == true || timesDisplay==true)"
+                                    style="padding: 0%" (click)="getReport()">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                                </a>
+                            </span>
+
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-1">
+                            <button type="button" *ngIf="pendingOrdersList.length>0"
+                                (click)="openPendingOrdersModal()"
+                                class="btn btn-danger btn-xs">Pending</button>&nbsp;
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 col-lg-3">
+                            <ng-multiselect-dropdown formControlName="ddlfacilities" [data]="facilities"
+                                [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities"
+                                [placeholder]="'Facilities'" class="form-control"
+                                (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-3">
+                            <!-- <select class="form-control" [(ngModel)]="nurseStationvalue"
+            (change)="changeNurseStation($event.target.value)">
+            <option *ngFor="let item of nurseStations" value="{{item.NurseStation_Id}}">{{item.NurseStation_Name}}
+            </option>
+          </select> -->
+                            <ng-multiselect-dropdown [data]="nurseStations" [(ngModel)]="selectednItem"
+                                class="form-control" formControlName="nstationName"
+                                [settings]="dropdownSettings_NurseStation" (onSelect)="changeNurseStation($event)"
+                                (onDeSelect)="changeNurseStation($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="card-body">
+                <form [formGroup]="myform">
+                    <div class="row form-group clearfix">
+                        <!-- <div class="col-sm-6">
+            <div class="row form-group"> -->
+                        <!-- <div class="col-sm-1">Date</div> -->
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            Date
+                            <input type="date" class="form-control" min="{{minDate|date:'yyyy-MM-dd'}}"
+                                [(ngModel)]="administrationDate" formControlName="dateCheck"
+                                (blur)="onDateChange()" />
+                        </div>
+                        <!-- <div class="col-sm-1">
+            Time</div> -->
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            Time
+                            <!-- <select class="form-control" formControlName="nurseSheduleTime"  [attr.disabled]="timesDisplay ? '' : null" (change)="getEmarResidentGridData()">
+              <option value="0" selected>Select</option>
+              <option *ngFor="let item of timeDropList" value="{{item.ScheduleTime}}">{{item.ScheduleTime}}
+              </option>
+            </select> -->
+                            <ng-multiselect-dropdown [data]="timeDropList" [disabled]="timesDisplay"
+                                formControlName="nurseSheduleTime" [settings]="dropdownSettings_Time"
+                                [placeholder]="'Select Time'" class="form-control" (onSelect)="onTimeSelect($event)"
+                                (onDeSelect)="onTimeDeSelect($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4" style="margin-top: 13px;">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <input type="checkbox" formControlName="twoHrsWindow"
+                                            [attr.disabled]="windowCheck ? '' : null"
+                                            (change)="onTwoHoursWindowClick($event.target.checked?true:false)">
+                                    </span>
+                                </div>
+                                <span class="form-control">Two Hour Window</span>
+                            </div>
+                            <!-- </div>
+            </div>                -->
+                        </div>
+                    </div>
+
+                    <div class="row form-group clearfix">
+                        <!-- <div class="row form-group"> -->
+                        <!-- <div class="col-sm-1">
+            Shift Time</div> -->
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            Shift Time
+                            <!-- <select class="form-control" formControlName="nsShiftTime"  [attr.disabled]="shiftDisplay ? '' : null"  (change)="getEmarResidentGridData()">
+              <option value="0" selected>Select</option>
+              <option *ngFor="let item of hoursList" value="{{item.NurseShifts_Id}}">{{item.NurseShifts_Name}}
+              </option>
+            </select> -->
+                            <ng-multiselect-dropdown [data]="shiftsList" [disabled]="shiftDisplay"
+                                formControlName="nsShiftTime" [settings]="dropdownSettings_Shifts"
+                                [placeholder]="'Select Shift'" class="form-control"
+                                (onSelect)="onShiftSelect($event)" (onDeSelect)="onShiftDeSelect($event)">
+                            </ng-multiselect-dropdown>
+
+                        </div>
+                        <!-- <div class="col-sm-1"></div> -->
+                        <div class="col-sm-3 col-md-3 col-lg-3"> <img src="./assets/img/barcode1.jpg"
+                                style="width:75px;cursor:pointer;height:70px;"
+                                (click)="identifyPatientFoodBiometric()"
+                                *ngIf="pageConfig['PrintPdf'] && gridList.length > 0 && (fingerId != null && fingerId != 0)"
+                                alt="Biometric scan"> </div>
+                        <!-- </div> -->
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="display: flex; justify-content: flex-end;">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div [ngStyle]="{'display':pieChartFlag==true?'block':'none'}" #chartTarget>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div [ngStyle]="{'display':pieChartFlag==true?'block':'none'}" #prnchartTarget>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <!-- <div class="row row-m-t">
+        <div class="col-sm-9">
+          <label>
+            <h6>Administration Grid</h6>
+          </label>
+        </div>
+        <div class="col-sm-3" *ngIf="gridList.length>0">
+          <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search" />
+        </div>
+      </div> -->
+
+            </div>
+        </div>
+
+
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" id="myModal" role="dialog"
+            [ngStyle]="{'display': modalPendingOrderIsOpen ? 'block' : 'none', 'opacity': 1}">
+            <div class="modal-dialog" style="max-width: 80%;">
+                <div class="modal-content">
+                    <div #DemoHandle2 class="modal-header " style="background-color: #cccccc;height: 50px ">
+                        <h5 style="color: #000000;">Pending Orders</h5>
+                        <button type="button" class="close" (click)="closeModel()">&times;</button>
+                    </div>
+                    <div class="modal-body bodystyle">
+                        <div class="row form-group">
+                            <div class="col-sm-1">
+                                <label>Search </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input style="padding:inherit" type="search" class="form-control input-sm"
+                                    [(ngModel)]="pendingOrderSearch" #pendingOrderSearchFocus placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="tableFixHead">
+                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Resident Name</th>
+                                        <th>Drug</th>
+                                        <!-- <th>Dosage Form</th> -->
+                                        <th>Qty/Dose</th>
+                                        <th>Directions</th>
+                                        <th>Prescriber Name</th>
+                                        <th>PRN</th>
+                                        <th>On Hold Until</th>
+                                        <!-- <th>Split</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of pendingOrdersList|gridFilter:pendingOrderSearch:'PendingOrders'|paginate: { itemsPerPage: 100, currentPage: r,id:'pendingOrders' };"
+                                        style="cursor:pointer"
+                                        (click)="$event.stopPropagation();openPendingForReviewModalOutside(item.porder_Id,item.PQuantity_Id,item.Patient_Id)">
+                                        <td><i style="cursor: pointer" title="No Schedule Times"
+                                                [ngClass]="item.ScheduleTimeFlag == 1?'fa fa-exclamation-triangle iconColor':''"></i>
+                                            {{item.Date|date:'MM/dd/yy'}}
+                                        </td>
+                                        <td>{{item.EndDate|date:'MM/dd/yy'}}</td>
+                                        <td>
+                                            {{item.ResidentName}}
+                                        </td>
+                                        <td>{{item.Drug}}</td>
+                                        <!-- <td>{{item.Dosage_Form}}</td> -->
+                                        <td>{{item.Quantity}}</td>
+                                        <td>{{item.Directions}}
+                                        </td>
+                                        <td>{{item.Physician_Name}}</td>
+                                        <td>{{item.PRN}}</td>
+                                        <td>{{item.HoldUntill|date:'MM/dd/yy'}}</td>
+                                        <!-- <td>{{item.SplitFlag == 1? 'Yes':item.SplitFlag == 0? 'No':''}}</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls id="pendingOrders" (pageChange)="r = $event"
+                                *ngIf="pendingOrdersList.length > 0"></pagination-controls>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card card-primary" [ngStyle]="{'display':selectstyle==1?'block':'none'}">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-9 col-md-8 col-lg-9">
+                        <h3 class="card-title">Administration Grid</h3>
+                    </div>
+                    <div class="col-sm-3 col-md-4 col-lg-3" *ngIf="gridList.length>0">
+                        <input style="padding:inherit" type="search" class="form-control input-sm"
+                            [(ngModel)]="searchText" placeholder="Search">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Image On File</th>
+                                <th>Resident Name</th>
+                                <th>Resident DOB</th>
+                                <!-- <th>Order Status</th> -->
+                                <th>Scheduled Meds Count</th>
+                                <th>PRN Meds Count</th>
+                                <!-- <th></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of gridList|gridFilter:searchText:'Administration'| paginate: { itemsPerPage: gridPagination, currentPage: p };"
+                                style="cursor:pointer"
+                                (click)="onResidentSelectdForAdminister(item.Patient_Id,item.ExternalPatientId)">
+                                <td style="text-align:center;">
+                                    <img container="body" (mouseenter)="mouseEnter(item.Patient_Id)"
+                                        (mouseleave)="mouseLeave()" [ngbTooltip]="this.tipContent"
+                                        src="assets/img/Defavatar.png" class="zoom" />
+
+                                </td>
+                                <td [ngStyle]="{'color':item.ImgPath == 'Yes'?'black':'Red'}">
+                                    {{item.ImgPath}}
+
+                                </td>
+                                <td>{{item.Resident_Name}}</td>
+                                <td>{{item.DOB |date :'MM/dd/yyyy'}}</td>
+                                <!-- <td>{{item.ReviewFlag != 1? 'Pending for Review':''}}</td> -->
+                                <td>
+                                    <ng-container *ngIf="itemMatchesFilter(item); else multipleBars">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-light" role="progressbar"
+                                                style="width: 100%;">
+                                                0
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #multipleBars>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                [style.width]="((item.Total_Count - item.Pending_count) / item.Total_Count) * 100 + '%'">
+                                                {{ item.Total_Count - item.Pending_count }}
+                                            </div>
+                                            <div class="progress-bar bg-danger" role="progressbar"
+                                                [style.width]="((item.Pending_count - item.MedReasonCount) / item.Total_Count) * 100 + '%'">
+                                                {{ item.Pending_count - item.MedReasonCount }}
+                                            </div>
+                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                [style.width]="(item.MedReasonCount / item.Total_Count) * 100 + '%'">
+                                                {{ item.MedReasonCount }}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </td>
+                                <td>
+
+                                    <ng-container *ngIf="itemMatchesFilterPrn(item); else multipleBarsForPrn">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-light" role="progressbar"
+                                                style="width: 100%;">
+                                                0
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #multipleBarsForPrn>
+                                        <div class="progress">
+
+                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                [style.width]="((item.PRN_Drugs-item.PrnPending)/item.PRN_Drugs)*100 + '%'">
+                                                {{item.PRN_Drugs-item.PrnPending}}</div>
+
+                                            <div class="progress-bar bg-light" role="progressbar"
+                                                [style.width]="((item.PrnPending - item.Prnmedreasoncount)/item.PRN_Drugs)*100 + '%'">
+                                                {{item.PrnPending - item.Prnmedreasoncount}}
+                                            </div>
+                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                [style.width]="((item.Prnmedreasoncount)/item.PRN_Drugs)*100 + '%'">
+                                                {{item.Prnmedreasoncount}}
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </ng-template>
+                                </td>
+                                <!-- <td>
+                <input type="button" style="border-radius: 50px 40px" class="btn btn-info btn-xs" value="ByPass"
+                 *ngIf="fingerId != null && fingerId != 0"
+                  (click)="$event.stopPropagation();byPass(item.Patient_Id)" />
+              </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pagination-controls (pageChange)="p = $event" *ngIf="gridList.length > 0"></pagination-controls>
+            </div>
+        </div>
+        <div class="card card-primary sticky" [ngStyle]="{'display':selectstyle==1?'none':'block'}">
+            <div class="card-body" style="padding-top: inherit;">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <h3 class="card-title">Resident Details</h3>
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <h6 style="text-align: center;">
+                            <strong>Administration Date/Time: </strong>{{administerDate}} <span
+                                *ngIf="myform.value.twoHrsWindow==true">(Two Hours Window)</span>- {{facilityName}}
+                            <span *ngIf="rightTimeFlag == true" class=" fa  fa-check (alias) iconColor"></span>
+                        </h6>
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right;">
+                        <button type="button" class="btn btn-primary btn-xs" (click)="back()">
+                            <!-- <img src="./assets/images/navigation-180.png" width="25" height="25"> -->
+                            <strong>Back</strong>
+                        </button>
+                        <!-- <input type="button" value="Back To Residents" class="btn btn-danger btn-xs" (click)="back()" /> -->
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row form-group formGroupCustomCss">
+                            <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;"
+                                *ngIf="demographicInfoData">
+                                <span>
+                                    <img container="body"
+                                        (mouseenter)="mouseEnterLatest(demographicInfoData.ImageLocation)"
+                                        (mouseleave)="mouseLeave()" [ngbTooltip]="this.tipContent"
+                                        *ngIf="demographicInfoData.ImageLocation!=undefined"
+                                        [src]="sanitize(demographicInfoData.ImageLocation)"
+                                        class="image--cover zoom" alt="User Image">
+                                </span>
+                                <br />
+                            </div>
+                            <div class="col-sm-9 col-md-9 col-lg-9" *ngIf="demographicInfoData">
+                                <div class="row" *ngIf="demographicInfoData">
+                                    <div class="col-sm-3 col-md-3 col-lg-3" *ngIf="demographicInfoData">
+                                        <strong>{{demographicInfoData.PatientLastName+",
+                                            "+demographicInfoData.PatientFirstName+"
+                                            "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}
+                                            <!-- {{demographicInfoData.PatientLastName}}, {{demographicInfoData.PatientFirstName}}
+                                                {{demographicInfoData.PatientMiddleInitial}} -->
+                                        </strong>
+                                        <span class=" fa  fa-check (alias) iconColor"></span>
+                                    </div>
+                                    <!-- <div class="col-sm-2 col-6">
+                                              <strong>MR#: </strong>
+                                              <span>{{demographicInfoData.PatientMRNumber}}</span>
+                                            </div> -->
+                                    <div class="col-sm-2 col-md-3  col-lg-2">
+                                        <strong>Gender: </strong>
+                                        <span>{{demographicInfoData.AdministrativeSex}}</span>
+                                    </div>
+                                    <div class="col-sm-2 col-md-3 col-lg-3">
+                                        <strong>DOB: </strong>
+                                        <span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span>
+                                    </div>
+                                    <div class="col-sm-5 col-md-3 col-lg-4">
+                                        <strong>Nursing Station Name: </strong>
+                                        <span>{{demographicInfoData.NurseStation_Name}}</span>
+                                    </div>
+
+                                    <!-- <div class="col-sm-3" *ngIf="ekitDrop.length==0">
+                                              <label style="color: rgb(248, 12, 12);">No ekit drugs in this Nursing Station.</label>
+                                            </div> -->
+                                </div>
+                                <div class="row row-m-t" *ngIf="patientTypeList.length>0">
+                                    <div *ngFor="let type of patientTypeList"
+                                        style="width: 160px;padding-left: 5px;">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div
+                                                    style="display: table-cell;width: 20%; float:left; margin: 0px;">
+                                                    <div style=" height:20px;
+                                                      width:20px;"
+                                                        [ngStyle]="{'background-color':type.Color_Code}">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    style="display: table-cell;width: 80%; float:left; margin: 0px;">
+                                                    {{type.Color_Description}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <table style="width: 80%">
+                                              <tr>
+                                                <td *ngFor="let type of patientTypeList">
+                                                  <div class="row ">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                      <div style=" height:20px;
+                                                          width:20px;" [ngStyle]="{'background-color':type.Color_Code}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-sm-10 col-md-9 col-lg-10">
+                                                      {{type.Color_Description}}
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            </table> -->
+                                </div>
+                                <div class="row row-m-t"
+                                    *ngIf="ordersInfo.Allergy!= ''|| ordersInfo.Diagnosis!= '' || demographicInfoData.DietType!= ''">
+                                    <div class="col-sm-4" *ngIf="ordersInfo.Allergy!= ''">
+                                        <strong>Allergies: </strong>
+                                        <span class="blink1">{{ordersInfo.Allergy}}</span>
+                                    </div>
+                                    <div class="col-sm-4" *ngIf="ordersInfo.Diagnosis!= ''">
+                                        <strong>Diagnosis: </strong>
+                                        <span class="blink1">{{ordersInfo.Diagnosis}}</span>
+                                    </div>
+                                    <div class="col-sm-4" *ngIf="demographicInfoData">
+                                        <div *ngIf="demographicInfoData.DietType!= ''"
+                                            style="word-break: break-all;">
+                                            <strong>Diet Type: </strong>
+                                            <span>{{demographicInfoData.DietType}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-m-t">
+                                    <div class="col-sm-1 col-md-4 col-lg-3" *ngIf="LiteralorderGridData.length>0">
+                                        <input type="button" value="View Literal Orders"
+                                            class="btn btn-success btn-sm" (click)="OpenLiteralordergridmodal()" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-2" style="text-align: left;">
+                                        <button type="button" *ngIf="pendingOrdersList.length>0"
+                                            (click)="openPendingOrdersModalInside()"
+                                            class="btn btn-danger btn-xs">Pending</button>
+
+                                    </div>
+                                    <div class="col-sm-1 col-lg-3 col-md-3">
+                                        <input type="button" value="Add/View Comments" class="btn btn-danger btn-sm"
+                                            (click)="openAdditionalComments()" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-2" style="text-align: left;">
+                                        <button type="button" class="btn btn-primary btn-xs"
+                                            *ngIf="pageConfig['AccessRead']" (click)="emarModel()">MAR</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [ngStyle]="{'display':selectstyle==1?'none':'block'}">
+            <div class="row form-group clearfix">
+                <!-- <div class="col-sm-1">
+      Barcode
+    </div> -->
+                <div class="col-sm-2 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" [disabled]="passAdminister" [(ngModel)]="barcodevalue"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                        (keyup.enter)="openpanels($event.target.value,$event)" placeholder="Scan Barcode"
+                        #myInput />
+                </div>
+                <div class="col-sm-3 col-md-5 col-lg-5">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <input type="checkbox" (change)="barcodeScanCheckboxChaeck()"
+                                    [(ngModel)]="barcodeScanCheckbox">
+                            </span>
+                        </div>
+                        <span class="form-control">Administer without scanner</span>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-2" *ngIf="barcodeScanCheckbox==true">
+      <form [formGroup]="withoutAdminsterForm">
+        <input type="text" class="form-control" formControlName="reasonForWithoutAdministred"
+          placeholder="Enter Reason" />
+      </form>
+    </div> -->
+                <!-- <div class="col-sm-1 col-md-3 col-lg-2" *ngIf="LiteralorderGridData.length>0">
+                    <input type="button" value="View Literal Orders" class="btn btn-danger btn-sm" (click)="OpenLiteralordergridmodal()" />
+                </div> -->
+                <div class="col-sm-1 col-md-1 col-lg-1"
+                    *ngIf="pageConfig['PrintPdf'] && gridList.length > 0 && (fingerId != null && fingerId != 0) && onemanyCHeck==true">
+                    <img src="./assets/img/barcode1.jpg" style="width:30px;cursor:pointer;height:30px;"
+                        (click)="getResidentBiometricInfo()" alt="Biometric scan"
+                        title="One to One Verification">&nbsp;
+                </div>
+                <div class="col-sm-1 col-md-3 col-lg-2"
+                    *ngIf="fingerId != null && fingerId != 0 && onemanyCHeck==true">
+                    <input type="button" class="btn btn-success btn-sm" value="Biometric ByPass"
+                        (click)="$event.stopPropagation();byPass()" />
+                </div>
+                <!-- <div class="col-sm-1 col-lg-2 col-md-3">
+                    <input type="button" value="Add/View Comments" class="btn btn-danger btn-sm" (click)="openAdditionalComments()" />
+                </div> -->
+                <!-- <div class="col-sm-3" *ngIf="ekitDrop.length>0">
+      <ng-multiselect-dropdown [data]="ekitDrop" [(ngModel)]="ekit" [settings]="dropdownSettings_eKit"
+        [placeholder]="'Administer From eKit'" class="form-control" (onSelect)="onEkitSelect($event)"
+        (onDeSelect)="onEkitDeSelect($event)">
+      </ng-multiselect-dropdown>
+    </div>
+    <div class="col-sm-1" *ngIf="ekitDrop.length>0">
+      <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        class="form-control" pattern="[0-9.]+" [(ngModel)]="quantity" placeholder="Quantity"
+        (change)="getekitQuantity($event.target.value)" min="0" />
+    </div> -->
+            </div>
+            <!-- <div class="col-sm-1">
+      <input type="button" style="height: 30px;" class="btn btn-info" (click)="InsertAdministredwithoutscanning(item.DrugAdminister_Id)" value="OK">
+    </div> -->
+            <br />
+            <div class="row" style="border: 1px solid #CCCCCC;padding-top: inherit">
+                <div class="col-sm-12">
+                    <div class="row" style="text-align: center;">
+                        <span class="center" style="columns: #000000;;background-color:#ade39d">
+                            <u>
+                                <b>Orders Due Now</b>
+                            </u>
+                        </span>
+                    </div>
+                    <br />
+                    <br /><br />
+                    <div *ngIf=apiExecuted>
+                        <div *ngFor=" let item of ordersList;let i=index">
+                            <div class="card  card-light" *ngIf="item.dueflag==0"
+                                style="border: 1px solid white;border-bottom-color: #81bfae;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <h4 class="card-title" style="font-size: initial;">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                    style="cursor: pointer" (click)="expandOrder(i, item,false)">
+                                                    <u>
+                                                        <span
+                                                            [ngClass]="[item.AdministerStatus == 'Administered'? 'strikeCss':'']">
+                                                            <span
+                                                                [ngStyle]="{'color':item.DiscardDays!=null && item.DiscardDays!=0? getTextColorForDiscardDate(item.DiscardDate)==1?'#ff6600':getTextColorForDiscardDate(item.DiscardDate)==2?'red':'black':'black'}">{{item.Drug}}&nbsp;({{item.Quantity}})</span>
+                                                        </span>
+                                                    </u>
+                                                    <span *ngIf="item.PRNFlag == true" style="color:red">
+                                                        <span>&nbsp;PRN</span>
+                                                    </span>
+                                                    <span *ngIf="item.OrderStockFlag == false" style="color:red">
+                                                        <span>&nbsp;Stock</span>
+                                                    </span>
+                                                    &nbsp;
+                                                    <span class="flagText"
+                                                        *ngIf="((item.AdministerStatus == 'Not Administered' || item.AdministerStatus == '') && (item.MedicationReason_Desc=='' || item.MedicationReason_Desc==null))  && (item.PRNFlag == false)">
+                                                        <span
+                                                            style="cursor:pointer; text-decoration: underline;color: #4fb633;"
+                                                            (click)="$event.stopPropagation();openNoShowAdministerModal(i,item)">No
+                                                            Administration</span>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="flagText" *ngIf="item.ReviewFlag != 1">
+                                                        <span style="cursor:pointer; text-decoration: underline"
+                                                            (click)="$event.stopPropagation();openPendingForReviewModal(item.POrder_Id,item.pquantity_Id)">Review
+                                                            Pending</span>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="flagText" style="color: #4fb633;"
+                                                        *ngIf="item.AdministerStatus == 'Not Administered' || item.AdministerStatus == ''">
+                                                        <span style="cursor:pointer; text-decoration: underline"
+                                                            *ngIf="item.Ekit==1"
+                                                            (click)="$event.stopPropagation();openAdminsterFromEkitModal(i,item)">Administer
+                                                            From eKit</span>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="flagText"
+                                                        *ngIf="item.Ekit==2 && (item.AdministerStatus == 'Not Administered' || item.AdministerStatus == '')">Administer
+                                                        From eKit (Certification Needed)
+                                                        &nbsp;&nbsp; </span>
+                                                    <span class="flagText"
+                                                        *ngIf="item.SideEffectFlag!=null && item.SideEffectFlag!=0">
+                                                        <span
+                                                            style="cursor:pointer; text-decoration: underline;color:red;"
+                                                            (click)="$event.stopPropagation();openSideEffectsModal(item.GPI,item.Drug)">Side
+                                                            Effects</span>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span
+                                                        *ngIf="((item.AdministerStatus == 'Not Administered' || item.AdministerStatus == '')) && ((item.ControlSubstanceFlag == 1 && (item.ControlSubstanceCertifiedBy!=null?(item.ControlSubstanceCertifiedBy|gridFilter:userId:'EmarHTMLCertified').length>0?false:true:true))|| item.ControlSubstanceFlag==2)"
+                                                        class="flagText">
+                                                        <span>Controlled Substance Certification Needed</span>
+                                                    </span>
+                                                    <span
+                                                        *ngIf="statusFlag == i || (item.Barcode != null ? (item.Barcode|gridFilter:barcodevalue:'EmarHTMLBarcodes').length==1: false)"
+                                                        style="color: #4fb633" class=" fa  fa-check (alias)"></span>
+                                                    &nbsp;
+                                                    <span style="color:red;font-size: 15px"
+                                                        *ngIf="item.AdministerStatus == 'Not Administered' || item.AdministerStatus == ''">{{item.MedicationReason_Desc}}</span>
+                                                </a>
+                                                <!-- *ngIf="item.AdministerStatus=='Administered' && item.Undo==1" -->
+                                                <input type="button" [disabled]="passAdminister"
+                                                    *ngIf="item.AdministerStatus=='Administered' && item.Undo==1"
+                                                    value="Undo" class="btn btn-success btn-xs"
+                                                    (click)="undoGivenOrder(i,item)" />
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-2"
+                                            *ngIf="item.AdministerStatus=='Not Administered'|| item.AdministerStatus == ''">
+                                            <span
+                                                style="color:red; float: right;font-size: 17px; font-weight: bold;">{{item.AlertText}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="{{'or'+i}}" class="panel-collapse collapse"
+                                    *ngIf="i===orderItem || (item.Barcode != null ? (item.Barcode|gridFilter:barcodevalue:'EmarHTMLBarcodes').length==1: false)"
+                                    [ngStyle]="{'display': 'block', 'opacity': 1}">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-10  col-md-8 col-lg-9">
+                                                <div class="row form-group">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Directions</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.AdditionalInst}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Quantity/Dose</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Quantity}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Route</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Route}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>On Hand</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Inhand}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Maximum Quantity Per Day</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.MaxPerday}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Number Of Refills</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.NumberOfRefills}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Number Of Refills Remaining</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    <h6 class="singleline">
+                                                                        {{item.NumberOfRefillsRemaining}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    </h6>
+                                                                    <input type="button" class="singleline"
+                                                                        *ngIf="item.Refill_Request===1" id="refill"
+                                                                        class="btn btn-success btn-xs"
+                                                                        [disabled]="clicked" value="Refill"
+                                                                        (click)="insertRefill(item); clicked = true;" />
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+                                                                    <!-- <h6 style="color:black" class="singleline" *ngIf="item.Refill_Request===1 && getRefillNotes !=='' && item.POrder_Id ==refillOrderId">{{getRefillNotes}}</h6> -->
+                                                                    <h6 style="color:black" class="singleline"
+                                                                        *ngIf="item.Refill_Request===1 && item.Refill_Note !=='' ">
+                                                                        {{item.Refill_Note}}</h6>
+                                                                    <h6 style="color:red" class="singleline"
+                                                                        *ngIf="item.Refill_Request===2">Refill
+                                                                        request pending with admin approval</h6>
+
+                                                                    <!-- <h6 *ngIf="item.Refill_Request===3 && item.POrder_Id ==refillOrderId" class="singleline" style="color:green;">{{getRefillNotes}}</h6> -->
+                                                                    <h6 *ngIf="item.Refill_Request===3"
+                                                                        class="singleline" style="color:green;">
+                                                                        {{item.Refill_Note}}</h6>
+
+                                                                    <!-- <a (click)="rejectedRefill(item)" class="singleline" style="color:red;cursor: pointer" *ngIf="item.Refill_Request===4">Refill Request
+                                                                            Pending</a> -->
+                                                                    <!-- <a  class="singleline" style="color:green;cursor: pointer" *ngIf="item.Refill_Request===4">Refill submitted
+                                                                                </a> -->
+
+
+                                                                </td>
+                                                            </tr>
+                                                            <!-- <tr style="height:25px;">
+                                                                    <td>
+                                                                        <b>Diagnosis</b>
+                                                                    </td>
+                                                                    <td>:</td>
+                                                                    <td style="width:400px">{{item.Diagnosis}}</td>
+                                                                </tr> -->
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Last Modified</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    {{ timeFormatId == 0?
+                                                                    (item.Last_ModifiedDate|date :'MM/dd/yyyy hh:mm
+                                                                    a'): (item.Last_ModifiedDate|date :'MM/dd/yyyy
+                                                                    HH:mm')}} {{item.Last_Modified}}
+                                                                </td>
+                                                            </tr>
+                                                            <!-- <tr style="height:25px;">
+                          <td>
+                            <b>Administer Schedule</b>
+                          </td>
+                          <td>:</td>
+                          <td>{{item.Administer_Schedule|date :'MM/dd/yyyy HH:mm'}}</td>
+                        </tr> -->
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Pass Time</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Pass_Time}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Last Passed</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    {{timeFormatId == 0? (item.Last_Passed|date
+                                                                    :'MM/dd/yyyy hh:mm a'): (item.Last_Passed|date
+                                                                    :'MM/dd/yyyy HH:mm')}} {{item.Last_PassedBy}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Barcode</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Barcode}}</td>
+                                                            </tr>
+                                                            </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 col-lg-3"
+                                                *ngIf="nurseNotes.length > 0 || insulinComments!=''">
+                                                <div class="row form-group" *ngIf="nurseNotes.length > 0">
+                                                    <div class="small-box"
+                                                        style="height: 250px !important;width: 100% !important;">
+                                                        <div style="padding: 0;">
+                                                            <div calss="table table-responsive"
+                                                                style="height: 250px !important;overflow-x: scroll !important;">
+                                                                <table class="table table-hover"
+                                                                    style="background-color: #ade39d;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Notes</th>
+                                                                            <th>Added Date</th>
+                                                                            <th>Added By</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngFor="let item of nurseNotes">
+                                                                            <td>{{item.Comment}}</td>
+                                                                            <td>{{item.Comment_CreatedOn|date:'MM/dd/yyyy
+                                                                                hh:mm:ss a'}}</td>
+                                                                            <td>{{item.UserName}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div *ngIf="insulinComments!=''">
+                                                        <div class="right"
+                                                            style=" display: table-cell;width: 60%; float:left;color: #4fb633;cursor: pointer;"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="{{insulinCommentsToolTip}}"><strong> Insulin
+                                                                Comments :</strong></div>
+                                                        <div class="left"
+                                                            style=" display: table-cell;width: 40%; float:left;cursor: pointer;"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="{{insulinCommentsToolTip}}">{{insulinComments}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="col-sm-6 col-6">
+                  <div class="row form-group">
+                    <table class="align-top">
+                      <tbody>
+                        <tr
+                          *ngIf="item.AdministerStatus == 'Not Administered' && undoFlag==false && vitalsCheckList.length>0 ">
+                          <td class="formBorder">
+                            <div>
+                              <form [formGroup]="favouritesForm" style="padding-left: 10px">
+                                <div class="row row-m-t" style="padding-right: 5px;"
+                                  *ngFor="let list of vitalsCheckList">
+                                  <div class="col-sm-6">
+                                    <div class="row">
+                                      <div>{{list.OrderFavDesc}}</div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <input type="text" class="form-control" formControlName="comments" [attr.disabled]="orderDueFlag == true?'':null"
+                                      (change)="checkVitalsComment(item.POrder_Id, item.pquantity_Id, list.OrderFavMaster_ID,$event.target.value)" />
+                                  </div>
+                                </div>
+
+                                <div class="row row-m-t">
+                                  <div class="col-sm-10 col-6">
+                                    <div style="text-align:center;color: red;" *ngIf="vitalCheckStatus!=''">
+                                      <label>{{vitalCheckStatus}}</label>
+                                    </div>
+                                  </div>
+                                  <div style="float: right">
+                                    <input type="button" value="Save"  *ngIf="pageConfig['AccessWrite']" [disabled]="favouritesForm.invalid"
+                                      class="btn btn-success btn-xs" (click)="vitalsCheckSave()" />
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="row">
+                              <form [formGroup]="medicationForm">
+                                <div class="row" *ngIf="undoFlag == true">
+                                  <div class="col-sm-6">
+                                    Medication Reason
+                                    <select id="ddlmedication" formControlName="medicationReason"
+                                      class="form-control" (change)="getMedicationReason()">
+                                      <option value="0">--Select--</option>
+                                      <option *ngFor="let item of medicationReasonList"
+                                        value="{{item.MedicationReason_ID}}">
+                                        {{item.MedicationReason_Desc}}</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-5">
+                                    Note
+                                    <input type="text" class="form-control" formControlName="note" />
+                                  </div>
+                                  <div class="col-sm-1">
+                                    <input type="button" value="Submit" class="btn btn-success btn-xs"
+                                      (click)="orderGivenStatus(item.POrder_Id, item.pquantity_Id, item.ReviewFlag, item.Pass_Time)" />
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row" style="text-align: center;">
+                        <span class="center" style="color:#000000;background-color:#ffdf62">
+                            <u>
+                                <b>Orders Not Due Now</b>
+                            </u>
+                        </span>
+                    </div>
+                    <br />
+                    <br /><br />
+                    <div *ngIf=apiExecuted>
+                        <div *ngFor=" let item of ordersList;let i=index">
+                            <div class="card  card-light" *ngIf="item.dueflag==1"
+                                style="border: 1px solid white;border-bottom-color: #81bfae;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <h4 class="card-title" style="font-size: initial;">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                    style="cursor: pointer" (click)="expandOrder(i, item,false)">
+                                                    <u>
+                                                        <span
+                                                            [ngClass]="[item.AdministerStatus == 'Administered'? 'strikeCss':'']">
+                                                            <span
+                                                                style="color:black">{{item.Drug}}&nbsp;({{item.Quantity}})</span>
+                                                        </span>
+                                                        <span *ngIf="item.PRNFlag == true" style="color:#4fb633">
+                                                            <span>&nbsp;PRN</span>
+                                                        </span>
+                                                        <span *ngIf="item.OrderStockFlag == false"
+                                                            style="color:#4fb633">
+                                                            <span>&nbsp;Stock</span>
+                                                        </span>
+                                                    </u>
+                                                    <span
+                                                        *ngIf="statusFlag == i || (item.Barcode != null ? (item.Barcode|gridFilter:barcodevalue:'EmarHTMLBarcodes').length==1: false)"
+                                                        style="color: #4fb633" class=" fa  fa-check (alias)"></span>
+                                                    &nbsp;
+                                                    <span style="color:red;font-size: 15px"
+                                                        *ngIf="item.AdministerStatus == 'Not Administered'|| item.AdministerStatus == ''">{{item.MedicationReason_Desc}}</span>
+                                                </a>
+
+                                                <input type="button" *ngIf="item.AdministerStatus=='Administered'"
+                                                    value="Undo" class="btn btn-success btn-xs"
+                                                    (click)="undoGivenOrder(i,item)" />
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-2 blink"
+                                            *ngIf="item.AdministerStatus=='Not Administered'|| item.AdministerStatus == ''">
+                                            <span
+                                                style="color:red; float: right;font-size: 17px">{{item.AlertText}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="{{'or'+i}}" class="panel-collapse collapse"
+                                    *ngIf="i===orderItem || (item.Barcode != null ? (item.Barcode|gridFilter:barcodevalue:'EmarHTMLBarcodes').length==1: false)"
+                                    [ngStyle]="{'display': 'block', 'opacity': 1}">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row form-group">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Directions</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.AdditionalInst}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Quantity/Dose</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Quantity}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Route</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Route}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>On Hand</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Inhand}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Max Per Day</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.MaxPerday}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Number Of Refills</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.NumberOfRefills}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Number Of Refills Remaining</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    <h6 class="singleline">
+                                                                        {{item.NumberOfRefillsRemaining}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    </h6>
+                                                                    <input type="button" class="singleline"
+                                                                        *ngIf="item.Refill_Request===1" id="refill"
+                                                                        class="btn btn-success btn-xs"
+                                                                        value="Refill" [disabled]="clk"
+                                                                        (click)="insertRefill(item); clk=true;" />
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+                                                                    <!-- <h6 style="color:black" class="singleline" *ngIf="item.Refill_Request===1 && getRefillNotes !=='' && item.POrder_Id ==refillOrderId">{{getRefillNotes}}</h6> -->
+                                                                    <h6 style="color:black" class="singleline"
+                                                                        *ngIf="item.Refill_Request===1 && item.Refill_Note !=='' ">
+                                                                        {{item.Refill_Note}}</h6>
+                                                                    <h6 style="color:red" class="singleline"
+                                                                        *ngIf="item.Refill_Request===2">Refill
+                                                                        request pending with admin approval
+                                                                    </h6>
+                                                                    <h6 *ngIf="item.Refill_Request===3"
+                                                                        class="singleline" style="color:red;">
+                                                                        Pending from pharmacy</h6>
+                                                                    <a (click)="rejectedRefill(item)"
+                                                                        class="singleline"
+                                                                        style="color:red;cursor: pointer"
+                                                                        *ngIf="item.Refill_Request===4">Refill
+                                                                        Request Rejected</a>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- <tr style="height:25px;">
+                                                                    <td>
+                                                                        <b>Diagnosis</b>
+                                                                    </td>
+                                                                    <td>:</td>
+                                                                    <td style="width:400px">{{item.Diagnosis}}</td>
+                                                                </tr> -->
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Last Modified</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    {{ timeFormatId == 0?
+                                                                    (item.Last_ModifiedDate|date :'MM/dd/yyyy hh:mm
+                                                                    a'): (item.Last_ModifiedDate|date :'MM/dd/yyyy
+                                                                    HH:mm')}} {{item.Last_Modified}}
+                                                                </td>
+                                                            </tr>
+                                                            <!-- <tr style="height:25px;">
+                            <td>
+                              <b>Administer Schedule</b>
+                            </td>
+                            <td>:</td>
+                            <td>{{item.Administer_Schedule|date :'MM/dd/yyyy HH:mm'}}</td>
+                          </tr> -->
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Pass Time</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Pass_Time}}</td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Last Passed</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>
+                                                                    {{timeFormatId == 0? (item.Last_Passed|date
+                                                                    :'MM/dd/yyyy hh:mm a'): (item.Last_Passed|date
+                                                                    :'MM/dd/yyyy HH:mm')}} {{item.Last_PassedBy}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="height:25px;">
+                                                                <td>
+                                                                    <b>Barcode</b>
+                                                                </td>
+                                                                <td>:</td>
+                                                                <td>{{item.Barcode}}</td>
+                                                            </tr>
+                                                            </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <!-- <div class="col-sm-6 col-6">
+                    <div class="row form-group">
+                      <table class="align-top">
+                        <tbody>
+                          <tr
+                            *ngIf="item.AdministerStatus == 'Not Administered' && undoFlag==false && vitalsCheckList.length>0 ">
+                            <td class="formBorder">
+                              <div>
+                                <form [formGroup]="favouritesForm" style="padding-left: 10px">
+                                  <div class="row row-m-t" style="padding-right: 5px;"
+                                    *ngFor="let list of vitalsCheckList">
+                                    <div class="col-sm-6">
+                                      <div class="row">
+                                        <div>{{list.OrderFavDesc}}</div>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <input type="text" class="form-control" formControlName="comments" [attr.disabled]="orderDueFlag == true?'':null"
+                                        (change)="checkVitalsComment(item.POrder_Id, item.pquantity_Id, list.OrderFavMaster_ID,$event.target.value)" />
+                                    </div>
+                                  </div>
+
+                                  <div class="row row-m-t">
+                                    <div class="col-sm-10 col-6">
+                                      <div style="text-align:center;color: red;" *ngIf="vitalCheckStatus!=''">
+                                        <label>{{vitalCheckStatus}}</label>
+                                      </div>
+                                    </div>
+                                    <div style="float: right">
+                                      <input type="button" value="Save"  *ngIf="pageConfig['AccessWrite']" [disabled]="favouritesForm.invalid"
+                                        class="btn btn-success btn-xs" (click)="vitalsCheckSave()" />
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="row">
+                                <form [formGroup]="medicationForm">
+                                  <div class="row" *ngIf="undoFlag == true">
+                                    <div class="col-sm-6">
+                                      Medication Reason
+                                      <select id="ddlmedication" formControlName="medicationReason"
+                                        class="form-control" (change)="getMedicationReason()">
+                                        <option value="0">--Select--</option>
+                                        <option *ngFor="let item of medicationReasonList"
+                                          value="{{item.MedicationReason_ID}}">
+                                          {{item.MedicationReason_Desc}}</option>
+                                      </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                      Note
+                                      <input type="text" class="form-control" formControlName="note" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                      <input type="button" value="Submit" class="btn btn-success btn-xs"
+                                        (click)="orderGivenStatus(item.POrder_Id, item.pquantity_Id, item.ReviewFlag, item.Pass_Time)" />
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'"
+        [timeout]="99000"></ng4-loading-spinner>
+</section>
+</div>
+<div class="modal fade" id="modalBypass" ngDraggable [handle]="DemoHandle1" role="dialog"
+[ngStyle]="{'display': modalBypass ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle1 class="modal-header">
+            <h5>Biometric Bypass</h5>
+            <button type="button" class="close" data-dismiss="modal" (click)="modalBypassClose()">&times;</button>
+        </div>
+        <form [formGroup]="biometricForm" name="Biometric">
+            <div class="modal-body">
+                <div class="row">
+                    <!-- <div class="col-sm-1">Reason</div>
+      <div class="col-sm-1"></div> -->
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        Reason
+                        <textarea rows="2" #modalBypassReasonFocus class="form-control"
+                            formControlName="BiometricBypas" (keydown.enter)="false" [(ngModel)]="byPassReason"
+                            [ngClass]="{
+          'is-valid':biometricForm.controls.BiometricBypas.valid && biometricForm.controls.BiometricBypas.dirty,
+          'is-invalid':biometricForm.controls.BiometricBypas.invalid && biometricForm.controls.BiometricBypas.touched
+        }"> </textarea>
+                        <div *ngIf="biometricForm.controls.BiometricBypas.errors && (biometricForm.controls.BiometricBypas.touched)"
+                            class="errorMessage">
+                            <div *ngIf="biometricForm.controls.BiometricBypas.errors.required">
+                                Reason is required.
+                            </div>
+                            <div *ngIf="biometricForm.controls.BiometricBypas.errors.maxlength">
+                                Reason cannot be more than 50 characters long.
+                            </div>
+                            <div *ngIf="biometricForm.controls.BiometricBypas.errors.pattern">
+                                {{config.alphaNumericFewSpecialCharactersMessage1}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="modal-footer">
+            <div style="text-align: right">
+                <input type="button" value="Biometric Bypass" *ngIf="pageConfig['AccessWrite']"
+                    class="btn btn-success btn-xs" data-dismiss="modal"
+                    [disabled]="byPassReason==''?true:false || biometricForm.invalid"
+                    (click)="byPassSubmit()" />&nbsp;
+                <input type="button" class="btn btn-danger btn-xs" data-dismiss="modal" (click)="modalBypassClose()"
+                    value="Close" />
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" role="dialog"
+[ngStyle]="{'display': modalLiterGridIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog" style="min-width: 60%;">
+    <div class="modal-content">
+        <div #DemoHandle2 class="modal-header">
+            <h5>Literal Orders</h5>
+            <button type="button" class="close" (click)="CloseLiteralordergridmodal()">&times;</button>
+        </div>
+        <div class="modal-body bodystyle">
+            <!-- <form [formGroup]="favouritesForm" style="padding-left: 10px"> -->
+            <div class="row row-m-t">
+                <div class="col-sm-12 col-md-12 col-sm-12">
+                    <div class="tableFixHead">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Prescriber Name</th>
+                                    <th>Directions</th>
+                                    <th>Start Date</th>
+                                    <th>Created by</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let list of LiteralorderGridData">
+                                    <td>{{list.PhysicianName}}</td>
+                                    <td>{{list.Directions}}</td>
+                                    <td>{{list.StartDate |date :'MM/dd/yyyy'}}</td>
+                                    <td>{{list.OrderCreatedBy}}</td>
+                                    <td>{{list.OrderCreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div style="text-align: right">
+                <input type="button" value="Close" class="btn btn-danger btn-xs"
+                    (click)="CloseLiteralordergridmodal()">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- <div class="modal fade  modalstyle" id="mdlquantity" role="dialog"
+[ngStyle]="{'display': modalQuantityIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog" style="max-width: 30%;">
+<form [formGroup]="quantityform" name="Quantity">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 style="color: white;"></h5>
+      <button type="button" class="close" (click)="closeModel()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="row form-group">
+        <div class="col-sm-4">Drug Quantity
+        </div>
+        <div class="col-sm-3">
+          <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            class="form-control" pattern="[0-9.]+" class="form-control" pattern="[0-9.]+"
+            formControlName="undoQuantity" placeholder="0" min="0" />
+          <div class="valid-feedback feedback-icon">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="invalid-feedback feedback-icon">
+            <i class="fa fa-times"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div style="text-align: right">
+        <input type="button" value="Close" class="btn btn-danger" (click)="closeModel()">
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+</div> -->
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle3" id="mdlvitals" role="dialog"
+[ngStyle]="{'display': modalVitalsIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <form [formGroup]="favouritesForm" name="Vitals">
+        <div class="modal-content">
+            <div #DemoHandle3 class="modal-header">
+                <h5>User Inputs</h5>
+                <button type="button" class="close" (click)="closeVitalsModel()">&times;</button>
+            </div>
+            <div class="modal-body" style="height: 350px !important;overflow-x: scroll !important;">
+                <!-- <form [formGroup]="favouritesForm" style="padding-left: 10px"> -->
+                <div class="row row-m-t" style="padding-right: 5px;" *ngFor="let list of vitalsCheckList">
+                    <div class="col-sm-5 col-md-4 col-lg-4">
+                        <div class="row">
+                            <div style="padding-left: 5px;">{{list.OrderFavDesc}}<span class="c1">*</span></div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-5 col-md-6 col-lg-6">
+                        <input type="text" maxlength="50"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9 _`@$/.,:]/g, '').replace(/(\..*)\./g, '$1');"
+                            class="form-control" formControlName="comments"
+                            [attr.disabled]="orderDueFlag == true?'':null"
+                            (change)="checkVitalsComment(list.OrderFavMaster_ID,$event.target.value)"
+                            class="form-control" #textFocus />
+                    </div>
+                </div>
+                <!-- <div class="row row-m-t">
+        <div class="col-sm-10 col-6">
+          <div style="text-align:center;color: red;" *ngIf="vitalCheckStatus!=''">
+            <label>{{vitalCheckStatus}}</label>
+          </div>
+        </div>
+      </div> -->
+                <!-- </form> -->
+
+            </div>
+            <div class="modal-footer">
+                <div style="text-align: right">
+                    <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']"
+                        [disabled]="favouritesForm.invalid || (vitalsStatus ==1 && favouritesForm.value.comments=='')"
+                        class="btn btn-success btn-xs" (click)="vitalsCheckSave()" />&nbsp;
+                    <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeVitalsModel()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle4" id="mdlundo" role="dialog"
+[ngStyle]="{'display': modalUndoIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <form [formGroup]="medicationForm" name="Undo">
+        <div class="modal-content">
+            <div #DemoHandle4 class="modal-header ">
+                <h5>Undo Administration</h5>
+                <button type="button" class="close" (click)="closeUndoModel()">&times;</button>
+            </div>
+            <div class="modal-body" *ngIf="undoFlag == true">
+                <div class="row form-group">
+                    <div class="col-sm-5 col-md-4 col-lg-4">
+                        Medication Reason <span class="c1">*</span></div>
+                    <div class="col-sm-5 col-md-7 col-lg-7">
+                        <ng-multiselect-dropdown formControlName="medicationReason" [data]="medicationReasonList"
+                            [settings]="dropdownSettings_MedicationReason"
+                            (onSelect)="onMedicationReasonSelect($event)"
+                            (onDeSelect)="onMedicationReasonDeSelect($event)" [placeholder]="'Medication Reason'"
+                            class="form-control" [ngClass]="{
+              'is-valid':medicationForm.controls.medicationReason.valid && medicationForm.controls.medicationReason.dirty,
+              'is-invalid':medicationForm.controls.medicationReason.invalid && medicationForm.controls.medicationReason.touched
+            }"></ng-multiselect-dropdown>
+                        <div *ngIf="medicationForm.controls.medicationReason.errors && (medicationForm.controls.medicationReason.touched)"
+                            class="errorMessage">
+                            <div *ngIf="medicationForm.controls.medicationReason.errors.required">
+                                Medication Reason is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-5 col-md-4 col-lg-4">
+                        Note <span *ngIf="notestatus == 1" class="c1">*</span></div>
+                    <div class="col-sm-5 col-md-7 col-lg-7">
+                        <input type="text" class="form-control" formControlName="note" [ngClass]="{
+            'is-valid':medicationForm.controls.note.valid && medicationForm.controls.note.dirty,
+            'is-invalid':medicationForm.controls.note.invalid && medicationForm.controls.note.touched
+          }" />
+                        <div *ngIf="medicationForm.controls.note.errors && (medicationForm.controls.note.touched)"
+                            class="errorMessage">
+                            <div *ngIf="medicationForm.controls.note.errors.required">
+                                Note is required.
+                            </div>
+                            <div *ngIf="medicationForm.controls.note.errors.maxlength">
+                                Note cannot be more than 50 characters long.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-5 col-md-4 col-lg-4">Undo Drug Quantity <span class="c1">*</span>
+                    </div>
+                    <div class="col-sm-5 col-md-7 col-lg-7">
+                        <input type="text"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            class="form-control" pattern="[0-9.]+" class="form-control" pattern="[0-9.]+"
+                            formControlName="undoQuantity" />
+                        <div class="valid-feedback feedback-icon">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="invalid-feedback feedback-icon">
+                            <i class="fa fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div style="text-align: right">
+                    <input type="button" value="Submit" *ngIf="pageConfig['AccessWrite']"
+                        class="btn btn-success btn-xs" [disabled]="medicationForm.invalid"
+                        (click)="orderGivenStatus(undoOrderDetails.POrder_Id, undoOrderDetails.pquantity_Id, undoOrderDetails.ReviewFlag, undoOrderDetails.PRNFlag, undoOrderDetails.dueflag, undoOrderDetails.InputTime, undoOrderDetails.ShiftId, undoOrderDetails.Window)" />&nbsp;
+                    <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeUndoModel()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle5" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': modalPRNIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle5 class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            <button type="button" class="close" (click)="closePRNModel()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <strong *ngIf="prnMaxperday==''"> This is a PRN Med which is already given at {{lastPassedTime}}(
+                {{twoHours}} ). Do you still want to Administer this Order again?</strong>
+            <strong *ngIf="prnMaxperday!=''"> {{prnMaxperday}}</strong>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']"
+                (click)="administerPRNOrder(1)">Yes</button>
+            <button type="button" class="btn btn-danger" (click)="closePRNModel()">No</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle6" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': modalPRNCommentIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle6 class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">PRN Order Administration</h5>
+            <!-- <button type="button" class="close" (click)="closePRNCommentModel()">&times;</button> -->
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="PRNReasonForm">
+                <div class="row form-group">
+                    <div class="col-sm-5 col-md-3 col-lg-3">
+                        Reason<span class="c1">*</span></div>
+                    <div class="col-sm-5 col-md-7 col-lg-7">
+                        <input type="text" class="form-control" #prnOrderFocus formControlName="prnReason"
+                            [ngClass]="{
+        'is-valid':PRNReasonForm.controls.prnReason.valid ,
+        'is-invalid':PRNReasonForm.controls.prnReason.invalid && PRNReasonForm.controls.prnReason.touched
+      }" />
+                        <div *ngIf="PRNReasonForm.controls.prnReason.errors && (PRNReasonForm.controls.prnReason.touched)"
+                            class="errorMessage">
+                            <div *ngIf="PRNReasonForm.controls.prnReason.errors.required">
+                                Reason is required.
+                            </div>
+                            <div *ngIf="PRNReasonForm.controls.prnReason.errors.maxlength">
+                                Reason cannot be more than 50 characters long.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']"
+                [disabled]="PRNReasonForm.invalid" (click)="administerPRNOrderReason()">Yes</button>
+            <button type="button" class="btn btn-danger" *ngIf="pageConfig['AccessWrite']"
+                [disabled]="PRNReasonForm.invalid" (click)="closePRNCommentModel()">No</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle7" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': administerFromEkitModal ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle7 class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Administer From eKit</h5>
+            <button type="button" class="close" (click)="closeAdministerFromEkitModel()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="ekitDrugForm">
+                <div class="row form-group">
+                    <div class="col-sm-6 col-md-5 col-lg-5"> Scan e-kit item barcode:<span class="c1">*</span></div>
+                    <div class="col-sm-6 col-md-7 col-lg-7" *ngIf="ekitDrugDrop.length>0">
+                        <input type="text" class="form-control" #ekitItem
+                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                            (change)="barcodeAdministerAlertCheck()" formControlName="barcode">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6 col-md-5 col-lg-5">Administer Without Scanning</div>
+                    <div class="col-sm-6 col-md-7 col-lg-7">
+                        <input type="checkbox" (change)="barcodeEkitScanCheckbox()"
+                            [checked]="barcodeEkitScanCheckboxValue">
+                    </div>
+                </div>
+
+
+                <div class="row form-group" *ngIf="ekitDrugDrop.length>0">
+                    <!-- <div class="col-sm-4 col-md-3 col-lg-3"> eKit <span class="c1">*</span></div>
+                    <div class="col-sm-6 col-md-7 col-lg-7">
+                        <ng-multiselect-dropdown [data]="ekitDrop" [(ngModel)]="ekit" [disabled]="isEkitReadonly" [settings]="dropdownSettings_eKit" [placeholder]="'Administer From eKit'" class="form-control" (onSelect)="onEkitSelect($event)" (onDeSelect)="onEkitDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div> -->
+                    <div class="col-sm-6 col-md-5 col-lg-5">Drug Name:<span class="c1">*</span></div>
+                    <div class="col-sm-6 col-md-7 col-lg-7">
+                        <ng-multiselect-dropdown formControlName="drugSelect" [data]="ekitDrug"
+                            [(ngModel)]="ekitDrug" [settings]="dropdownSettings_DrugeKit"
+                            [placeholder]="'Administer From eKit'" class="form-control"
+                            (onSelect)="onEkitDrugSelect($event)" (onDeSelect)="onEkitDrugDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </form>
+            <!-- <div class="row form-group">
+                <div class="col-sm-4 col-md-3 col-lg-3"> Quantity<span class="c1">*</span></div>
+                <div class="col-sm-6 col-md-7 col-lg-7" *ngIf="ekitDrop.length>0">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" pattern="[0-9.]+" [(ngModel)]="quantity" placeholder="Quantity" (change)="getekitQuantity($event.target.value)" min="0" />
+                </div>
+            </div> -->
+        </div>
+        <div class="modal-footer">
+
+            <!-- <button type="button" class="btn btn-primary" [disabled]="ekitDrugForm.invalid || !barcodeEkitScanCheckboxValue" (click)="SaveAlertEkitAdminister()">Ok</button> -->
+            <button type="button" class="btn btn-danger" (click)="closeAdministerFromEkitModel()">Cancel</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle8" id="mdlundo" role="dialog"
+[ngStyle]="{'display': modalNoShowAdministerIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <form [formGroup]="medicationForm" name="Undo">
+        <div class="modal-content">
+            <div #DemoHandle8 class="modal-header ">
+                <h5> Administration</h5>
+                <button type="button" class="close" (click)="closeNoShowModel()">&times;</button>
+            </div>
+            <div class="modal-body" *ngIf="undoFlag == true">
+                <div class="row form-group">
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        Medication Reason <span class="c1">*</span></div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <ng-multiselect-dropdown formControlName="medicationReason" [data]="medicationReasonList"
+                            [settings]="dropdownSettings_MedicationReason"
+                            (onSelect)="onMedicationReasonSelect($event)"
+                            (onDeSelect)="onMedicationReasonDeSelect($event)" [placeholder]="'Medication Reason'"
+                            class="form-control" [ngClass]="{
+              'is-valid':medicationForm.controls.medicationReason.valid && medicationForm.controls.medicationReason.dirty,
+              'is-invalid':medicationForm.controls.medicationReason.invalid && medicationForm.controls.medicationReason.touched
+            }"></ng-multiselect-dropdown>
+                        <div *ngIf="medicationForm.controls.medicationReason.errors && (medicationForm.controls.medicationReason.touched)"
+                            class="errorMessage">
+                            <div *ngIf="medicationForm.controls.medicationReason.errors.required">
+                                Medication Reason is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        Note <span *ngIf="notestatus == 1" class="c1">*</span></div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" class="form-control" formControlName="note" [ngClass]="{
+            'is-valid':medicationForm.controls.note.valid && medicationForm.controls.note.dirty,
+            'is-invalid':medicationForm.controls.note.invalid && medicationForm.controls.note.touched
+          }" />
+                        <div *ngIf="medicationForm.controls.note.errors && (medicationForm.controls.note.touched)"
+                            class="errorMessage">
+                            <div *ngIf="medicationForm.controls.note.errors.required">
+                                Note is required.
+                            </div>
+                            <div *ngIf="medicationForm.controls.note.errors.maxlength">
+                                Note cannot be more than 50 characters long.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row form-group">
+        <div class="col-sm-5">Undo Drug Quantity  <span class="c1">*</span>
+        </div>
+        <div class="col-sm-5">
+          <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            class="form-control" pattern="[0-9.]+" class="form-control" pattern="[0-9.]+"
+            formControlName="undoQuantity" />
+          <div class="valid-feedback feedback-icon">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="invalid-feedback feedback-icon">
+            <i class="fa fa-times"></i>
+          </div>
+        </div>
+      </div> -->
+            </div>
+            <div class="modal-footer">
+                <div style="text-align: right">
+                    <input type="button" value="Submit" *ngIf="pageConfig['AccessWrite']"
+                        class="btn btn-success btn-xs" [disabled]="medicationForm.invalid"
+                        (click)="orderGivenStatus(undoOrderDetails.POrder_Id, undoOrderDetails.pquantity_Id, undoOrderDetails.ReviewFlag, undoOrderDetails.PRNFlag, undoOrderDetails.dueflag, undoOrderDetails.InputTime, undoOrderDetails.ShiftId, undoOrderDetails.Window)" />&nbsp;
+                    <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeNoShowModel()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle9" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': administerBarcodeMatchModal ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle9 class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Select Order You Are Administering</h5>
+            <button type="button" class="close" (click)="closeAdministerBarcodeMatchModel()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="tableFixHead">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Drug</th>
+                            <th>Quantity</th>
+                            <th>Direction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dueOrdersCheck" style="cursor: pointer;"
+                            (click)="selectDrugstoAdminister(item.POrder_Id,item.pquantity_Id)"
+                            [ngClass]="{'highlight' : (selectedOrderIdForAdminister == item.POrder_Id && duePquantitySelected==item.pquantity_Id) }">
+                            <td>{{item.Drug}}</td>
+                            <td>{{item.Quantity}}</td>
+                            <td>{{item.AdditionalInst}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" [disabled]="selectedOrderIdForAdminister==0"
+                (click)="administerSelectedDrug()">Ok</button>
+            <button type="button" class="btn btn-danger"
+                (click)="closeAdministerBarcodeMatchModel()">Cancel</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle10" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': modalAdditionalCommentsFormIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle10 class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Additional Comments</h5>
+            <button type="button" class="close" (click)="closeCommentsModal()">&times;</button>
+        </div>
+        <div class="modal-body" style="height: 350px;overflow-y: scroll !important;">
+            <form [formGroup]="additionalComForm">
+                <div class="row form-group">
+                    <div class="col-sm-5">
+                        Additional Comments<span class="c1">*</span></div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" #AdditionalCommentsFocus formControlName="addCom"
+                            [ngClass]="{
+        'is-valid':additionalComForm.controls.addCom.valid ,
+        'is-invalid':additionalComForm.controls.addCom.invalid && additionalComForm.controls.addCom.touched
+      }" />
+                        <div *ngIf="additionalComForm.controls.addCom.errors && (additionalComForm.controls.addCom.touched)"
+                            class="errorMessage">
+                            <div *ngIf="additionalComForm.controls.addCom.errors.required">
+                                Additional Comments is required.
+                            </div>
+                            <div *ngIf="additionalComForm.controls.addCom.errors.maxlength">
+                                Additional Comments cannot be more than 50 characters long.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-success btn-xs" *ngIf="pageConfig['AccessWrite']"
+                            [disabled]="additionalComForm.invalid" (click)="nurseCommentsSave()">Save</button>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <div class="tableFixHead">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Comments</th>
+                                        <th>Added Date</th>
+                                        <th>Added By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of nurseComments">
+                                        <td>{{item.Comment}}</td>
+                                        <td>{{item.Comment_CreatedOn|date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                        <td>{{item.UserName}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-xs" (click)="closeCommentsModal()">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle11" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': modalAdministerWithoutBarcodeOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog modal-lg" style="max-width: 90%;">
+    <div class="modal-content">
+        <div #DemoHandle11 class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Administer Without Scanner</h5>
+            <button type="button" class="close" (click)="closeAdministerWithoutBarcodeModal()">&times;</button>
+        </div>
+        <div class="modal-body" style="height: 350px !important;overflow-x: auto;">
+            <div class="row form-group" *ngIf="ordersListWithoutScanner.length>0">
+                <div class="col-sm-10">
+                    <form [formGroup]="withoutAdminsterForm" *ngIf="barcodeScanCheckbox==true">
+                        Reason for Without Scanner<span style="color: red;">*</span>: <input type="text"
+                            class="form-control" formControlName="reasonForWithoutAdministred"
+                            placeholder="Enter Reason" #reasonForWithOutScannerFocus required />
+                    </form>
+                </div>
+                <!-- <div class="col-sm-2" *ngIf="withoutScannerDisplayVitals.length>0">
+                    <input type="button" style="margin-top: 12px;" value="User Inputs" *ngIf="pageConfig['AccessWrite']" class="btn btn-success btn-xs" (click)="userInputsOpen()" />
+                </div> -->
+            </div>
+            <div class="tableFixHead">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox"
+                                    *ngIf="ordersListWithoutScanner.length>0 && withoutScannerDisplayVitals.length==0 && wsDiscard==1"
+                                    [(ngModel)]="CheckAll" name="0" id="wsCheckAll"
+                                    (change)="onCheckAll($event.target.checked?true:false)">
+                            </th>
+                            <th>Drug</th>
+                            <th>Qty/dose</th>
+                            <th>Route</th>
+                            <th>Total Administered/MaxPerDay</th>
+                            <th>New Package Open</th>
+                            <th>Manually Set Discard After Date</th>
+                            <th>Discard Date</th>
+                            <th>Administration Site</th>
+                            <th>PRN Reason for Administration</th>
+                            <th>User Inputs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of ordersListWithoutScanner; let i = index">
+                        <tr *ngIf="item.AdministerStatus != 'Administered'"
+                            id="{{'WSOrderRow'+i+item.pquantity_Id}}">
+                            <td *ngIf="item.AdministerStatus != 'Administered'">
+
+                                <input type="checkbox" [checked]="CheckAll" value="{{item.POrder_Id}}"
+                                    name="{{ item.POrder_Id }}" id="{{item.pquantity_Id}}"
+                                    (change)="onselectRecord($event.target.checked?true:false, item)">
+
+                            </td>
+                            <td *ngIf="item.AdministerStatus == 'Administered'">
+
+
+                            </td>
+                            <td>{{item.Drug}} <span *ngIf="item.PRNFlag == true" style="color:red">
+                                    <span>&nbsp;PRN</span>
+                                </span>
+                                <span *ngIf="item.OrderStockFlag == false" style="color:red">
+                                    <span>&nbsp;Stock</span>
+                                </span>
+                            </td>
+                            <td>{{item.Quantity}}</td>
+                            <td>{{item.Route}}</td>
+                            <td><span
+                                    *ngIf="item.PRNFlag == true">{{item.PRNAdministered}}/{{item.MaxPerday}}</span>
+                            </td>
+                            <td>
+                                <input type="checkbox" value="{{item.POrder_Id}}"
+                                    *ngIf="item.DiscardDays!=null && item.DiscardDays!=0"
+                                    name="{{ item.POrder_Id }}" id="{{'newpr'+item.pquantity_Id}}"
+                                    (change)="onselectNewProductOpenWS($event.target.checked?true:false, item,i)">
+                            </td>
+                            <td><input type="checkbox" value="{{item.POrder_Id}}"
+                                    *ngIf="item.DiscardDays!=null && item.DiscardDays!=0"
+                                    name="{{ item.POrder_Id }}" id="{{'manset'+item.pquantity_Id}}"
+                                    (change)="onselectManSetDiscardWS($event.target.checked?true:false, item,i)">
+                            </td>
+                            <td>
+                                <form [formGroup]="WsDiscardDate">
+                                    <input type="date" [min]="today"
+                                        *ngIf="item.DiscardDays!=null && item.DiscardDays!=0"
+                                        id="{{'disca'+item.pquantity_Id}}" class="form-control"
+                                        [value]="item.DiscardDate|date:'yyyy-MM-dd'"
+                                        (blur)="changeDiscardDateWS($event.target.value,item,i)"
+                                        formControlName="WSDiscard" style="height: 10px;">
+                                </form>
+                            </td>
+                            <td>
+                                <a class="btn editicon" style="font-size: 20px; color: #000000;"
+                                    *ngIf="item.Route==='SC' || item.Route==='IM' || item.Route==='TD'"
+                                    (click)="openInsulinSiteWithoutScannerModal(item.pquantity_Id,item.Route,item.AdministerSites)">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-eyedropper" title="Administration Sites"></span>
+                                </a>
+                                <!-- <button type="button" *ngIf="item.Route==='SC' || item.Route==='IM' || item.Route==='TD'" class="btn btn-primary btn-xs" (click)="openInsulinSiteWithoutScannerModal(item.POrder_Id,item.Route,item.AdministerSites)">Insulin Sites</button> -->
+                            </td>
+                            <td>
+                                <form [formGroup]="WsPRN">
+                                    <input *ngIf="item.PRNFlag == true" type="text" class="form-control"
+                                        formControlName="WSPrnReason" id="{{'PRN'+item.pquantity_Id}}"
+                                        (change)="prnReasonUpdate(item.POrder_Id,item.pquantity_Id,$event.target.value)" />
+                                </form>
+                            </td>
+                            <td><span id="edit{{item.pquantity_Id}}" style="color:red" [hidden]='cllk'
+                                    (click)="RowClickwithoutScannerVitals(item.pquantity_Id)"><i class="icon"><span
+                                            class="fa fa-pencil-square-o aria-hidden=true"
+                                            title="User Inputs"></span></i>
+                                </span></td>
+                        </tr>
+                       </ng-container>
+
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <!-- <div class="col-sm-12" *ngIf="barcodeScanCheckbox==true">
+                <form [formGroup]="withoutAdminsterForm" *ngIf="barcodeScanCheckbox==true">
+                    Reason for Without Scanner<span style="color: red;">*</span>: <input type="text" class="form-control" formControlName="reasonForWithoutAdministred" placeholder="Enter Reason" required />
+                </form>
+            </div> -->
+        </div>
+        <div class="modal-footer" style="height: max-content;">
+            <div class="row">
+                <div class="col-sm-12 col-md-5 col-lg-5">
+                    <b style="color: red;">Note</b>: <span class=" fa fa-square"
+                        style="color:#ffdf62;"></span><b>&nbsp; This drug package should no longer be used, open a
+                        new package</b>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <span class=" fa fa-square" style="color:#ade39d;"></span><b>&nbsp; Drug must be discarded soon,
+                        reorder promptly </b>
+
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <input type="button" value="Adminster"
+                        *ngIf="ordersListSelected.length>0 && withoutAdminsterForm.value.reasonForWithoutAdministred!=''"
+                        class="btn btn-success btn-sm" (click)="AdminsterWithoutScanner()" />&nbsp;
+                    <button type="button" class="btn btn-danger btn-sm"
+                        (click)="closeAdministerWithoutBarcodeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle12" id="mdlvitals" role="dialog"
+[ngStyle]="{'display': modalAdministerWithoutScannerVitalsIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <form [formGroup]="favouritesForm" name="Vitals" autocomplete="off">
+        <div class="modal-content">
+            <div #DemoHandle12 class="modal-header">
+                <h5>User Inputs</h5>
+                <button type="button" class="close" (click)="closeWithoutScannerVitalsModel()">&times;</button>
+            </div>
+            <div class="modal-body" style="height: 350px !important;overflow-x: scroll !important;">
+                <!-- <form [formGroup]="favouritesForm" style="padding-left: 10px"> -->
+                <div class="row" *ngFor="let order of withoutScannerOrderVitals">
+                    <strong style="color: red;">{{order.Drug}}</strong>
+                    <br />
+                </div>
+                <div *ngFor="let list of withoutScannerDisplayVitals;let i=index">
+                    <!-- <div class="row" *ngFor="let order of withoutScannerOrderVitals">
+          <strong style="color: red;" *ngIf="(i==0 && withoutScannerDisplayVitals[i].PQuantity_Id==order.qtyId) || (i>0 && withoutScannerDisplayVitals[i].PQuantity_Id!=withoutScannerDisplayVitals[i-1].PQuantity_Id && list.PQuantity_Id==order.qtyId)">{{order.Drug}}</strong>
+        </div> -->
+                    <div class="row row-m-t" style="padding-right: 5px;">
+                        <div class="col-sm-5 col-md-4 col-lg-4">
+                            <div class="row">
+                                <div style="padding-left: 5px;">{{list.OrderFavDesc}}<span class="c1">*</span></div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-md-6 col-lg-6">
+                            <input type="text" maxlength="50"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z0-9 _`@$/.,:]/g, '').replace(/(\..*)\./g, '$1');"
+                                class="form-control" formControlName="comments"
+                                [attr.disabled]="orderDueFlag == true?'':null"
+                                (change)="checkVitalsComment(list.OrderFavMaster_ID,$event.target.value)"
+                                class="form-control" />
+                        </div>
+                        <!-- <div class="col-sm-2" *ngFor="let order of withoutScannerOrderVitals">
+          <strong *ngIf="i==0 || (withoutScannerDisplayVitals[i].PQuantity_Id!=withoutScannerDisplayVitals[i-1].PQuantity_Id && list.PQuantity_Id==order.qtyId)">{{order.Drug}}</strong>
+        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div style="text-align: right">
+                    <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']"
+                        class="btn btn-success btn-xs" (click)="withoutScannervitalsCheckSave()" />&nbsp;
+                    <input type="button" value="Close" class="btn btn-danger btn-xs"
+                        (click)="closeWithoutScannerVitalsModel()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle13" style="padding-top: 35px;" id="modaldes"
+role="dialog" [ngStyle]="{'display': modalBiometricComputerName ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle13 class="modal-header " style="height: 35px;padding:7px !important;">
+            <h5>Biometric Computer Name</h5>
+            <button type="button" class="close" (click)="closeBiometricModel()">&times;</button>
+
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="computernameform">
+                <div class="row form-group">
+                    <!-- <div class="col-sm-4 col-md-4 col-lg-4">Computer Name
+          </div> -->
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        Computer Name
+                        <ng-multiselect-dropdown class="form-control" formControlName="computerName"
+                            [data]="computers" [(ngModel)]="selectedComItems"
+                            [settings]="dropdownSettings_ComputerName"></ng-multiselect-dropdown>
+                        <div *ngIf="computernameform.controls.computerName.errors && (computernameform.controls.computerName.touched)"
+                            class="errorMessage">
+                            <div *ngIf="computernameform.controls.computerName.errors.required">
+                                Computer Name is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" [disabled]="computernameform.invalid"
+                (click)="closeComputerModel()">Ok</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle14" style="padding-top: 35px;" id="modaldes"
+role="dialog" [ngStyle]="{'display': modalDiscardDateIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div #DemoHandle14 class="modal-header " style="height: 35px;padding:7px !important;">
+            <h5>Discard Date</h5>
+            <button type="button" class="close" (click)="closeDiscardModel()">&times;</button>
+
+        </div>
+        <div class="modal-body">
+            <div class="row form-group" *ngIf="discardAlertMsg!=''">
+                <strong
+                    [ngStyle]="{'color':discardAlertColorFlag==1?'darkorange':'red'}">{{discardAlertMsg}}</strong>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <input type="checkbox"
+                                    (change)="newProductIsOpenCheck($event.target.checked?true:false)"
+                                    [(ngModel)]="newProductIsOpen">
+                            </span>
+                        </div>
+                        <span class="form-control" style="height: max-content;">Check if new product is opened
+                            during this medication administration</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6 col-md-7 col-lg-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <input type="checkbox" [(ngModel)]="manuallySetDiscard"
+                                    (change)="manuallySetCheck($event.target.checked?true:false)"
+                                    [attr.disabled]="discardform.value.discardDate==null || discardform.value.discardDate==''?'':null">
+                            </span>
+                        </div>
+                        <span class="form-control">Manually set "Discard After" date</span>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-5 col-lg-6">
+                    <form [formGroup]="discardform">
+                        <input type="date" [min]="today" class="form-control"
+                            [attr.disabled]="manuallySetDiscard==false?'':null"
+                            (blur)="discardDateChange($event.target.value)" formControlName="discardDate" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary"
+                [disabled]="discardform.invalid || discardAlertColorFlag==2"
+                (click)="setDiscardAfterDate()">Ok</button>
+            <button type="button" class="btn btn-danger" (click)="closeDiscardModel()">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle15" id="mdlsideeffects" role="dialog"
+[ngStyle]="{'display': modalSideEffectsIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div #DemoHandle15 class="modal-header " style="height: max-content;">
+            <h5> Side Effects ( {{sideEffectsDrugName}} )</h5>
+            <button type="button" class="close" (click)="closeSideEffectsModel()">&times;</button>
+        </div>
+        <div class="modal-body" style="height: 350px !important;overflow-x: scroll !important;">
+            <!-- <div class="row" style="color: blue;"><strong>{{sideEffectsDrugName}}</strong></div><br/> -->
+            <li *ngFor="let item of sideEffects.split('*')">
+                {{item}}
+            </li>
+        </div>
+        <div class="modal-footer">
+            <div style="text-align: right">
+                <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeSideEffectsModel()">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="modal fad modalstyl" ngDraggable [handle]="DemoHandle10" id="modalemar" role="dialog"
+[ngStyle]="{'display': modaleMar1 == true ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialo" style="max-width: 100%;padding-top: 10px">
+    <div class="modal-content">
+        <div #DemoHandle10 class="modal-header"
+            style="background-color:#cccccc;height: 35px;padding:7px !important ">
+            <h5 style="color:#000000">MAR Preview</h5>
+            <button type="button" class="close" (click)="closeModelEmarPrVIew()">&times;</button>
+        </div>
+        <div class="modal-body bodystyle" style="height: 500px;">
+            <div class="card card-primary">
+                <form *ngIf="residentId!=0" [formGroup]="emarform">
+                    <div class="card-body">
+                        <div class="row form-group">
+                            <div class="col-sm-2 col-md-2 col-lg-2" style="padding-top: 8px;">
+                                <label>Name:</label>
+                                &nbsp;&nbsp;<strong>{{demographicInfoData.PatientLastName+",
+                                    "+demographicInfoData.PatientFirstName+"
+                                    "+(demographicInfoData.PatientMiddleInitial==null?'':demographicInfoData.PatientMiddleInitial)}}</strong>
+                            </div>
+                            <div class="col-sm-1 col-md-2 col-lg-1" style="padding-top: 8px; text-align: right;">
+                                Month
+                            </div>
+                            <div class="col-sm-1 col-md-2 col-lg-1">
+                                <select id="ddlmonth" formControlName="month" class="form-control"
+                                    (change)="getEMARDetails()">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="" style="padding-top: 8px; text-align: right;">Year
+                            </div>
+                            <div class="col-sm-1 col-md-2 col-lg-1">
+                                <select id="ddlyear" formControlName="year" class="form-control"
+                                    (change)="getEMARDetails()">
+                                    <option value="0" disabled selected>Select</option>
+                                    <option *ngFor="let item of yearDrop" value="{{item}}">{{item}}</option>
+                                </select>
+                            </div>
+                            <!-- <div class="col-sm-1"></div> -->
+                            <div class="col-sm-2 col-md-3 col-lg-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" id="chkselect" formControlName="hidechk"
+                                                (change)="HideInactiveOrders($event.target.checked?true:false)">
+                                        </span>
+                                    </div>
+                                    <span class="form-control">&nbsp; Hide Inactive Orders</span>
+                                </div>
+                            </div>
+                            <div class="Aliment">
+                                <p class="foo Color1"></p> <b class="foo1">&#8594; Discontinued</b>
+                            </div>
+                            <div style="padding-right: 3px;"></div>
+                            <div class="Aliment">
+                                <p class="foo Color3"></p> <b class="foo1">&#8594; Order not scheduled </b>
+                            </div>
+                            <div style="padding-right: 3px;"></div>
+                            <div class="Aliment">
+                                <p class="foo Color9"></p> <b class="foo1">&#8594; Order scheduled</b>
+                            </div>
+                            <div style="padding-right: 3px;"></div>
+                            <div class="Aliment">
+                                <p class="foo Color9" style="text-align: center;">&#9913;</p><b class="foo1">&#8594;
+                                    Pending</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>DOB: </label>
+                                &nbsp;&nbsp;<strong>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</strong>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Gender: </label>
+                                &nbsp;&nbsp;<strong>{{demographicInfoData.AdministrativeSex}}</strong>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="ordersInfo.Allergy!=''">
+                            <div class="col-sm-12">
+                                <label>Allergies (may be incomplete): </label>
+                                &nbsp;&nbsp;<strong data-toggle="tooltip" data-placement="top"
+                                    title="{{ordersInfo.Allergy}}">{{ordersInfo.Allergy}}</strong>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="ordersInfo.Diagnosis!=''">
+                            <div class="col-sm-12">
+                                <label>Medical Conditions: </label>
+                                &nbsp;&nbsp;<strong data-toggle="tooltip" data-placement="top"
+                                    title="{{ordersInfo.Diagnosis}}">{{ordersInfo.Diagnosis}}</strong>
+                            </div>
+                        </div>
+                        <div class="tableFixHead">
+                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>Patient Name</th> -->
+                                        <th>Drug Name</th>
+                                        <th>Time</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>10</th>
+                                        <th>11</th>
+                                        <th>12</th>
+                                        <th>13</th>
+                                        <th>14</th>
+                                        <th>15</th>
+                                        <th>16</th>
+                                        <th>17</th>
+                                        <th>18</th>
+                                        <th>19</th>
+                                        <th>20</th>
+                                        <th>21</th>
+                                        <th>22</th>
+                                        <th>23</th>
+                                        <th>24</th>
+                                        <th>25</th>
+                                        <th>26</th>
+                                        <th>27</th>
+                                        <th *ngIf="days>=28">28</th>
+                                        <th *ngIf="days>=29">29</th>
+                                        <th *ngIf="days>=30">30</th>
+                                        <th *ngIf="days>=31">31</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of eMARDetails">
+                                        <td><b>{{item.GiveCodeText}}</b> ({{item.Direction}})
+                                            <br>
+                                            <b>Ordered By:</b> {{item.Prescriber}}
+                                            <br>
+                                            <b>Start Date:</b> {{item.StartDate| date :'MM/dd/yyyy'}}
+                                            <br>
+                                            <span *ngIf="item.EndDate.includes('D/C')"><b>D/C Date:</b>
+                                                {{item.EndDate | replace:'D/C Date:':''}}</span>
+                                            <span *ngIf="item.EndDate.includes('End')"><b>End Date:</b>
+                                                {{item.EndDate | replace:'End Date:':''}}</span>
+                                        </td>
+                                        <td>{{item.time}}</td>
+                                        <td [ngStyle]="{'color':item[1].includes(';') ?item[1].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[1] == 0 ? '#454545':item[1].includes(';')?(item[1].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[1] == 2 ? '#999999':item[1] == 0 ? '#454545':item[1].includes(';')?(item[1].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[1] == 0 ? '': (item[1] == 1 ? '':item[1] == 2 ?'': item[1])}}
+                                        </td>
+                                        <td [ngStyle]="{'color':item[2].includes(';') ?item[2].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[2] == 0 ? '#454545':item[2].includes(';')?(item[2].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[2] == 2 ? '#999999':item[2] == 0 ? '#454545':item[2].includes(';')?(item[2].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[2] == 0 ? '': (item[2] == 1 ? '':item[2] == 2
+                                            ?'':item[2].includes(';')?item[2].split(';')[1]:item[2])}}</td>
+                                        <td [ngStyle]="{'color':item[3].includes(';') ?item[3].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[3] == 0 ? '#454545':item[3].includes(';')?(item[3].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[3] == 2 ? '#999999':item[3] == 0 ? '#454545':item[3].includes(';')?(item[3].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[3] == 0 ? '': (item[3] == 1 ? '':item[3] == 2
+                                            ?'':item[3].includes(';')?item[3].split(';')[1]:item[3])}}</td>
+                                        <td [ngStyle]="{'color':item[4].includes(';') ?item[4].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[4] == 0 ? '#454545':item[4].includes(';')?(item[4].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[4] == 2 ? '#999999':item[4] == 0 ? '#454545':item[4].includes(';')?(item[4].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[4] == 0 ? '': (item[4] == 1 ? '':item[4] == 2
+                                            ?'':item[4].includes(';')?item[4].split(';')[1]:item[4])}}</td>
+                                        <td [ngStyle]="{'color':item[5].includes(';') ?item[5].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[5] == 0 ? '#454545':item[5].includes(';')?(item[5].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[5] == 2 ? '#999999':item[5] == 0 ? '#454545':item[5].includes(';')?(item[5].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[5] == 0 ? '': (item[5] == 1 ? '':item[5] == 2
+                                            ?'':item[5].includes(';')?item[5].split(';')[1]:item[5])}}</td>
+                                        <td [ngStyle]="{'color':item[6].includes(';') ?item[6].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[6] == 0 ? '#454545':item[6].includes(';')?(item[6].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[6] == 2 ? '#999999':item[6] == 0 ? '#454545':item[6].includes(';')?(item[6].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[6] == 0 ? '': (item[6] == 1 ? '':item[6] == 2
+                                            ?'':item[6].includes(';')?item[6].split(';')[1]:item[6])}}</td>
+                                        <td [ngStyle]="{'color':item[7].includes(';') ?item[7].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[7] == 0 ? '#454545':item[7].includes(';')?(item[7].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[7] == 2 ? '#999999':item[7] == 0 ? '#454545':item[7].includes(';')?(item[7].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[7] == 0 ? '': (item[7] == 1 ? '':item[7] == 2
+                                            ?'':item[7].includes(';')?item[7].split(';')[1]:item[7])}}</td>
+                                        <td [ngStyle]="{'color':item[8].includes(';') ?item[8].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[8] == 0 ? '#454545':item[8].includes(';')?(item[8].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[8] == 2 ? '#999999':item[8] == 0 ? '#454545':item[8].includes(';')?(item[8].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[8] == 0 ? '': (item[8] == 1 ? '':item[8] == 2
+                                            ?'':item[8].includes(';')?item[8].split(';')[1]:item[8])}}</td>
+                                        <td [ngStyle]="{'color':item[9].includes(';') ?item[9].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[9] == 0 ? '#454545':item[9].includes(';')?(item[9].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[9] == 2 ? '#999999':item[9] == 0 ? '#454545':item[9].includes(';')?(item[9].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[9] == 0 ? '': (item[9] == 1 ? '':item[9] == 2
+                                            ?'':item[9].includes(';')?item[9].split(';')[1]:item[9])}}</td>
+                                        <td [ngStyle]="{'color':item[10].includes(';') ?item[10].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[10] == 0 ? '#454545':item[10].includes(';')?(item[10].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[10] == 2 ? '#999999':item[10] == 0 ? '#454545':item[10].includes(';')?(item[10].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[10] == 0 ? '': (item[10] == 1 ? '':item[10] == 2
+                                            ?'':item[10].includes(';')?item[10].split(';')[1]:item[10])}}</td>
+                                        <td [ngStyle]="{'color':item[11].includes(';') ?item[11].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[11] == 0 ? '#454545':item[11].includes(';')?(item[11].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[11] == 2 ? '#999999':item[11] == 0 ? '#454545':item[11].includes(';')?(item[11].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[11] == 0 ? '': (item[11] == 1 ? '':item[11] == 2
+                                            ?'':item[11].includes(';')?item[11].split(';')[1]:item[11])}}</td>
+                                        <td [ngStyle]="{'color':item[12].includes(';') ?item[12].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[12] == 0 ? '#454545':item[12].includes(';')?(item[12].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[12] == 2 ? '#999999':item[12] == 0 ? '#454545':item[12].includes(';')?(item[12].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[12] == 0 ? '': (item[12] == 1 ? '':item[12] == 2
+                                            ?'':item[12].includes(';')?item[12].split(';')[1]:item[12])}}</td>
+                                        <td [ngStyle]="{'color':item[13].includes(';') ?item[13].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[13] == 0 ? '#454545':item[13].includes(';')?(item[13].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[13] == 2 ? '#999999':item[13] == 0 ? '#454545':item[13].includes(';')?(item[13].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[13] == 0 ? '': (item[13] == 1 ? '':item[13] == 2
+                                            ?'':item[13].includes(';')?item[13].split(';')[1]:item[13])}}</td>
+                                        <td [ngStyle]="{'color':item[14].includes(';') ?item[14].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[14] == 0 ? '#454545':item[14].includes(';')?(item[14].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[14] == 2 ? '#999999':item[14] == 0 ? '#454545':item[14].includes(';')?(item[14].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[14] == 0 ? '': (item[14] == 1 ? '':item[14] == 2
+                                            ?'':item[14].includes(';')?item[14].split(';')[1]:item[14])}}</td>
+                                        <td [ngStyle]="{'color':item[15].includes(';') ?item[15].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[15] == 0 ? '#454545':item[15].includes(';')?(item[15].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[15] == 2 ? '#999999':item[15] == 0 ? '#454545':item[15].includes(';')?(item[15].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[15] == 0 ? '': (item[15] == 1 ? '':item[15] == 2
+                                            ?'':item[15].includes(';')?item[15].split(';')[1]:item[15])}}</td>
+                                        <td [ngStyle]="{'color':item[16].includes(';') ?item[16].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[16] == 0 ? '#454545':item[16].includes(';')?(item[16].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[16] == 2 ? '#999999':item[16] == 0 ? '#454545':item[16].includes(';')?(item[16].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[16] == 0 ? '': (item[16] == 1 ? '':item[16] == 2
+                                            ?'':item[16].includes(';')?item[16].split(';')[1]:item[16])}}</td>
+                                        <td [ngStyle]="{'color':item[17].includes(';') ?item[17].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[17] == 0 ? '#454545':item[17].includes(';')?(item[17].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[17] == 2 ? '#999999':item[17] == 0 ? '#454545':item[17].includes(';')?(item[17].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[17] == 0 ? '': (item[17] == 1 ? '':item[17] == 2
+                                            ?'':item[17].includes(';')?item[17].split(';')[1]:item[17])}}</td>
+                                        <td [ngStyle]="{'color':item[18].includes(';') ?item[18].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[18] == 0 ? '#454545':item[18].includes(';')?(item[18].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[18] == 2 ? '#999999':item[18] == 0 ? '#454545':item[18].includes(';')?(item[18].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[18] == 0 ? '': (item[18] == 1 ? '':item[18] == 2
+                                            ?'':item[18].includes(';')?item[18].split(';')[1]:item[18])}}</td>
+                                        <td [ngStyle]="{'color':item[19].includes(';') ?item[19].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[19] == 0 ? '#454545':item[19].includes(';')?(item[19].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[19] == 2 ? '#999999':item[19] == 0 ? '#454545':item[19].includes(';')?(item[19].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[19] == 0 ? '': (item[19] == 1 ? '':item[19] == 2
+                                            ?'':item[19].includes(';')?item[19].split(';')[1]:item[19])}}</td>
+                                        <td [ngStyle]="{'color':item[20].includes(';') ?item[20].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[20] == 0 ? '#454545':item[20].includes(';')?(item[20].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[20] == 2 ? '#999999':item[20] == 0 ? '#454545':item[20].includes(';')?(item[20].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[20] == 0 ? '': (item[20] == 1 ? '':item[20] == 2
+                                            ?'':item[20].includes(';')?item[20].split(';')[1]:item[20])}}</td>
+                                        <td [ngStyle]="{'color':item[21].includes(';') ?item[21].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[21] == 0 ? '#454545':item[21].includes(';')?(item[21].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[21] == 2 ? '#999999':item[21] == 0 ? '#454545':item[21].includes(';')?(item[21].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[21] == 0 ? '': (item[21] == 1 ? '':item[21] == 2
+                                            ?'':item[21].includes(';')?item[21].split(';')[1]:item[21])}}</td>
+                                        <td [ngStyle]="{'color':item[22].includes(';') ?item[22].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[22] == 0 ? '#454545':item[22].includes(';')?(item[22].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[22] == 2 ? '#999999':item[22] == 0 ? '#454545':item[22].includes(';')?(item[22].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[22] == 0 ? '': (item[22] == 1 ? '':item[22] == 2
+                                            ?'':item[22].includes(';')?item[22].split(';')[1]:item[22])}}</td>
+                                        <td [ngStyle]="{'color':item[23].includes(';') ?item[23].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[23] == 0 ? '#454545':item[23].includes(';')?(item[23].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[23] == 2 ? '#999999':item[23] == 0 ? '#454545':item[23].includes(';')?(item[23].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[23] == 0 ? '': (item[23] == 1 ? '':item[23] == 2
+                                            ?'':item[23].includes(';')?item[23].split(';')[1]:item[23])}}</td>
+                                        <td [ngStyle]="{'color':item[24].includes(';') ?item[24].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[24] == 0 ? '#454545':item[24].includes(';')?(item[24].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[24] == 2 ? '#999999':item[24] == 0 ? '#454545':item[24].includes(';')?(item[24].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[24] == 0 ? '': (item[24] == 1 ? '':item[24] == 2
+                                            ?'':item[24].includes(';')?item[24].split(';')[1]:item[24])}}</td>
+                                        <td [ngStyle]="{'color':item[25].includes(';') ?item[25].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[25] == 0 ? '#454545':item[25].includes(';')?(item[25].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[25] == 2 ? '#999999':item[25] == 0 ? '#454545':item[25].includes(';')?(item[25].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[25] == 0 ? '': (item[25] == 1 ? '':item[25] == 2
+                                            ?'':item[25].includes(';')?item[25].split(';')[1]:item[25])}}</td>
+                                        <td [ngStyle]="{'color':item[26].includes(';') ?item[26].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[26] == 0 ? '#454545':item[26].includes(';')?(item[26].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[26] == 2 ? '#999999':item[26] == 0 ? '#454545':item[26].includes(';')?(item[26].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[26] == 0 ? '': (item[26] == 1 ? '':item[26] == 2
+                                            ?'':item[26].includes(';')?item[26].split(';')[1]:item[26])}}</td>
+                                        <td [ngStyle]="{'color':item[27].includes(';') ?item[27].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[27] == 0 ? '#454545':item[27].includes(';')?(item[27].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[27] == 2 ? '#999999':item[27] == 0 ? '#454545':item[27].includes(';')?(item[27].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[27] == 0 ? '': (item[27] == 1 ? '':item[27] == 2
+                                            ?'':item[27].includes(';')?item[27].split(';')[1]:item[27])}}</td>
+                                        <td [ngStyle]="{'color':item[28].includes(';') ?item[28].split(';')[0]==0?'white':'black' : 'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[28] == 0 ? '#454545':item[28].includes(';')?(item[28].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[28] == 2 ? '#999999':item[28] == 0 ? '#454545':item[28].includes(';')?(item[28].split(';')[0] == 0?'#454545':'#999999'):''">
+                                            {{item[28] == 0 ? '': (item[28] == 1 ? '':item[28] == 2
+                                            ?'':item[28].includes(';')?item[28].split(';')[1]:item[28])}}</td>
+                                        <td [ngStyle]="{'color':item[29] != undefined ?(item[29].includes(';') ?item[29].split(';')[0]==0?'white':'black' : 'black'):'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[29] == 0 ? '#454545':item[29] != undefined ?( item[29].includes(';')?(item[29].split(';')[0] == 0?'#454545':'#999999') :'white'): 'white'):item[29] == 2 ? '#999999':item[29] == 0 ? '#454545':item[29]!= undefined ? (item[29].includes(';')?(item[29].split(';')[0] == 0?'#454545':'#999999'):''):''">
+                                            <span *ngIf="item[29] != undefined">{{item[29] == 0 ? '': (item[29] == 1
+                                                ? '':item[29] == 2 ?'':
+                                                item[29].includes(';')?item[29].split(';')[1]:item[29])}}</span>
+                                        </td>
+                                        <td [ngStyle]="{'color':item[30] != undefined ?(item[30].includes(';') ?item[30].split(';')[0]==0?'white':'black' : 'black'):'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[30] == 0 ? '#454545':item[30] != undefined ?( item[30].includes(';')?(item[30].split(';')[0] == 0?'#454545':'#999999') :'white'): 'white'):item[30] == 2 ? '#999999':item[30] == 0 ? '#454545':item[30]!= undefined ? (item[30].includes(';')?(item[30].split(';')[0] == 0?'#454545':'#999999'):''):''">
+                                            <span *ngIf="item[30] != undefined">{{item[30] == 0 ? '': (item[30] == 1
+                                                ? '':item[30] == 2 ?'':
+                                                item[30].includes(';')?item[30].split(';')[1]:item[30])}}</span>
+                                        </td>
+                                        <td [ngStyle]="{'color':item[31] != undefined ?(item[31].includes(';') ?item[31].split(';')[0]==0?'white':'black' : 'black'):'black' }"
+                                            [style.background-color]="item.POrder_Status != 2 ? (item[31] == 0 ? '#454545':item[31] != undefined ?( item[31].includes(';')?(item[31].split(';')[0] == 0?'#454545':'#999999') :'white'): 'white'):item[31] == 2 ? '#999999':item[31] == 0 ? '#454545':item[31]!= undefined ? (item[31].includes(';')?(item[31].split(';')[0] == 0?'#454545':'#999999'):''):''">
+                                            <span *ngIf="item[31] != undefined">{{item[31] == 0 ? '': (item[31] == 1
+                                                ? '':item[31] == 2 ?'':
+                                                item[31].includes(';')?item[31].split(';')[1]:item[31])}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <div class="row col-md-12">
+                <div class="col-md-5">
+                    <p style="color: red;"><b>Note</b>: <b>V</b>-Vomited, <b>A</b>-Away, <b>H</b>-Hold, <b>N</b>-No
+                        Show, <b>R</b>-Refused, <b>O</b>-Other</p>
+                </div>
+
+                <div class="col-md-5 ">
+                    <p><b>Users</b>: {{legend}}</p>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger" (click)="closeModelEmarPrVIew()"
+                        style="margin-top: -9px !important; margin-left: 148px !important;">Close</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle16" id="mdlsideeffects" role="dialog"
+[ngStyle]="{'display': modalAdministerInsulinSiteIsOpen ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div #DemoHandle16 class="modal-header ">
+            <h5> Administration Sites</h5>
+            <button type="button" class="close" (click)="closeAdministerSitesModel()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="row" *ngIf="barcodeScanCheckbox==false">
+                <div class="col-sm-7">
+                    <img src="./assets/images/HumanBodySites.png" width="100%" height="100%">
+                </div>
+                <div class="col-sm-5" *ngIf="displayInsulinSites.length>0">
+                    <div class="row form-group" style="color: #4fb633;"><strong>{{sitesType}}</strong></div>
+                    <div *ngFor="let item of displayInsulinSites">
+                        <div class="row form-group">
+                            <input type="checkbox" id="{{'site'+item.item_id}}"
+                                (change)="insulinSiteCheck($event.target.checked?true:false,item.item_id)"> &nbsp;
+                            <strong> {{item.item_id}}. {{item.item_text}} </strong>&nbsp;
+                            <strong *ngIf="item.lastUsed==1" style="color: red;"> Last Site
+                                {{item.lastUsedDate}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="barcodeScanCheckbox==true">
+                <div class="col-sm-7">
+                    <img src="./assets/images/HumanBodySites.png" width="100%" height="100%">
+                </div>
+                <div class="col-sm-5" *ngIf="displayInsuliSitesForWS.length>0">
+                    <div class="row form-group" style="color: #4fb633;"><strong>{{sitesType}}</strong></div>
+                    <div *ngFor="let item of displayInsuliSitesForWS">
+                        <div class="row form-group">
+                            <input type="checkbox" id="{{'insulin'+item.item_id}}" [checked]="item.IsChacked"
+                                [disabled]="item.IsDisabled"
+                                (change)="insulinSiteCheckWS($event.target.checked?true:false,item.item_id)"> &nbsp;
+                            <strong> {{item.item_id}}. {{item.item_text}} </strong>&nbsp;
+                            <strong *ngIf="item.lastUsed==1" style="color: red;"> Last Site
+                                {{item.lastUsedDate}}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="barcodeScanCheckbox==false"
+                    [disabled]="insulinSites.length==0" (click)="insertInsulinSites()">Ok</button>
+                <button type="button" class="btn btn-primary" *ngIf="barcodeScanCheckbox==true"
+                    [disabled]="wsOrderInsulinSites.length==0" (click)="insertInsulinSitesForWS()">Ok</button>
+                <button type="button" class="btn btn-danger" (click)="closeAdministerSitesModel()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+[ngStyle]="{'display': barcodeAlertsPop? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog" style="max-width: 450px;">
+    <div class="modal-content">
+        <div #DemoHandle1 class="modal-header " style="height:max-content ">
+            <h5>Administration Alert</h5>
+            <button type="button" class="close" (click)="closeModelbarcodeAlertsPop()">&times;</button>
+        </div>
+        <div class="modal-body bodystyleHeight">
+            <p>{{barcodeAlert}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="closeModelbarcodeAlertsPop()">OK</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" id="exampleModal" tabindex="-1" role="dialog"
+[ngStyle]="{'display': modalekitAdLotQty ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div #DemoHandle17 class="modal-header" style="height: 50px ">
+            <h5 class="modal-title" id="exampleModalLabel" style="color:black">
+                {{barcodeEkitScanCheckboxValue ? 'Administer From eKit without Scanning' : 'Administer From eKit'}}
+                <span style="color: red;"> {{displayDrug}}</span>
+            </h5>
+
+            <button type="button" class="close" (click)="closeModalEkitAdLotQty()">&times;</button>
+
+            <!-- <button type="button" class="close" (click)="fileldsChangesDcOrder(0)">&times;</button> -->
+        </div>
+        <div class="modal-body bodystyle">
+            <div class="row form-group">
+                <div>
+                    <h6> <b>Drugname: {{selectedDrugName}}</b></h6>
+                </div>
+                <div class="table-responsive">
+                    <table id="tblAllResidents" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Lot# </th>
+                                <th>Expiration Date</th>
+                                <th>Qty Available</th>
+                                <!-- <th>Barcode</th> -->
+                                <th>Qty Removed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of lotsGrid; let i = index ">
+                                <td> {{item.Barcode}} </td>
+                                <td>
+                                    {{item.LotNumber}}
+                                </td>
+                                <td>
+                                    {{item.ExpiryDate|date:'MM/dd/yyyy'}}
+
+                                </td>
+                                <td>
+                                    <!-- {{item.Inhand}} -->
+                                    {{ replaceCommaWithPeriod(item.Inhand) }}
+                                </td>
+                                <!-- <td >
+                                       
+                                        <input  type="text" class="form-control" 
+                                         
+                                        [disabled]="item.BarcodeMatch == 1 || barcodeFlagKeys[item.Ekit_Id] == 1"
+                                          oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                                          (change)="onBarcodeCheck(i, $event, item.LotNumber, item.Ekit_Id)"
+                                          >
+                                      </td> -->
+
+                                <td>
+
+                                    <input type="number" class="form-control" pattern="^[0-9]+(\.[0-9]{1,2})?$"
+                                        min="0" onKeyPress="if(this.value.length==10) return false;" step=".01"
+                                        [id]="'InHandqty' + i" [(ngModel)]="inHandValues[i]"
+                                        (input)="onValueChange(i, $event, item.LotNumber,item.Ekit_Id, item.Inhand)"
+                                        (keyup)="Checkbarcodelot(item.BarcodeMatch)">
+                                </td>
+                                <!-- [disabled]="barcodeFlagKeys[item.Ekit_Id] !== 1" -->
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="modal-footer" style="
+        justify-content: space-between;
+    ">
+            <div style="
+            display: flex;">
+                <label>Total Qty to Remove:</label>
+                <input type="number" class="form-control" [value]="totalQtyval" pattern="^[0-9]+(\.[0-9]{1,2})?$"
+                    disabled />
+            </div>
+            <div style="
+            display: flex;
+            gap: 1em;
+        ">
+                <!-- <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="InsertLotDetails()">OK</button> -->
+                <!-- <button type="button" class="btn btn-primary" [disabled]="totalQtyval == 0 || !(totalQtyval == selectedQtyAdmin)" (click)="UpdateEkitDrugQuantity()">Ok</button> -->
+                <!-- <button type="button" class="btn btn-primary" [disabled]="totalQtyval == 0 " (click)="UpdateEkitDrugQuantity()">Ok</button> -->
+                <button type="button" class="btn btn-primary" [disabled]="totalQtyval == 0 || isQuantityExceeded"
+                    (click)="UpdateEkitDrugQuantity()">Ok</button>
+
+
+                <button type="button" class="btn btn-danger" (click)="closeModalEkitAdLotQty()">Cancel</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+[ngStyle]="{'display': barcodeExpAlert? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog" style="max-width: 450px;">
+    <div class="modal-content">
+        <div #DemoHandle1 class="modal-header " style="height:max-content ">
+            <h5>Administration Alert</h5>
+            <button type="button" class="close" (click)="closeModelbarcodeAlertsPop()">&times;</button>
+        </div>
+        <div class="modal-body bodystyleHeight">
+            <p>This package can be administered but there are others that expire sooner. Press Re-scan if you want
+                to use them first or Confirm to continue with this package</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="OpenEkitAlert()">Re-Scan</button>
+            <button type="button" class="btn btn-warning" (click)="ContinueNonExpLot()">Continue</button>
+        </div>
+    </div>
+</div>
+</div>

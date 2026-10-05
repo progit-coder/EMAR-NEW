@@ -1,0 +1,649 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
+        <div class="container-fluid">
+            <form [formGroup]="myform" autocomplete="off">
+                <div class="row form-group clearfix">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Facility</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities"
+                            [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities"
+                            [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)"
+                            (onDeSelect)="onFacilityDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label>Nursing Station</label>
+                        <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations"
+                            [data]="nurseStations" [(ngModel)]="selectednItems"
+                            [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'"
+                            (onSelect)="onNurseStationSelect($event)" (onDeSelect)="onNurseStationDeSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </form>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">E-kit Medication Check-In/Updates</h3>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-3">
+                            <button type="button" (click)="openExpDestructionModal()"
+                                class="btn btn-danger btn-xs">E-kit Meds Qty Updates</button>&nbsp;
+                        </div>
+                        <div class="col-sm-3 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm"
+                                [(ngModel)]="searchText" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-body">
+                    <div class="row form-group">
+                        <div class="table-responsive">
+                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Drug Name</th>
+                                        <th>Lot# (Optional)</th>
+                                        <th>Expiration Date</th>
+                                        <th>New Barcode (Optional)</th>
+                                        <th>Quantity Received</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of ekitObj |gridFilter:searchText:'EkitMedsCheckIn'| paginate: { itemsPerPage: gridPagination, currentPage: p };let i = index">
+                                        <td>{{item.DrugName}}</td>
+                                        <td>
+                                            <form [formGroup]="textform" autocomplete="off">
+                                                <input type="text" id="{{'lot'+item.Ekit_Id}}" [value]="item.LotNumber" formControlName="lotnumber">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form [formGroup]="textform1" autocomplete="off">
+                                                <input type="date" id="{{'exp'+item.Ekit_Id}}" style="height: 21px;" formControlName="expiryDate" [value]="item.ExpiryDate |date :'yyyy-MM-dd'">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form [formGroup]="textform2" autocomplete="off">
+                                                <input type="text" (change)="addBarcode(item.Ekit_Id , item.GPICode)" id="{{'br'+item.Ekit_Id}}" formControlName="barCode" [value]="item.Barcode" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');" formControlName="barcode">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form [formGroup]="textform3" autocomplete="off">
+                                                <input id="{{'hand'+item.Ekit_Id}}" type="number" pattern="^[0-9]+(\.[0-9]{1,2})?$" min="0" onKeyPress="if(this.value.length==10) return false;" step=".01" formControlName="InHand" [value]="item.InHand==null || item.InHand==''?'0':item.InHand">
+                                            </form>
+                                        </td>
+                                        <td><input type="button" id="btnsave" value="Check-in" (click)="insertEkitMedsInfo(item.Ekit_Id,item.DrugName)" class="btn btn-success" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event" *ngIf="ekitObj.length >0"></pagination-controls>
+                    </div>
+                </div> -->
+                <div class="card-body">
+                    <div class="row form-group">
+                        <div class="table-responsive">
+                            <table id="tblAllResidents" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Drug Name</th>
+                                        <th>Qty Available for Administration </th>
+                                        <th>Quantity Expired</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let item of ekitObj |gridFilter:searchText:'EkitMedsCheckIn'| paginate: { itemsPerPage: gridPagination, currentPage: p };let i = index">
+                                        <td>{{item.DrugName}}</td>
+                                        <td>
+                                            <input pattern="^[0-9]+(\.[0-9]{1,2})?$" min="0"
+                                                [value]="item.TotalNonExpiredInhand==null || item.TotalNonExpiredInhand==''?'0':replaceCommaWithPeriod(item.TotalNonExpiredInhand)"
+                                                disabled>
+
+                                            <!-- <form [formGroup]="textform3" autocomplete="off">
+                                                                     <input id="{{'hand'}}" type="number" pattern="^[0-9]+(\.[0-9]{1,2})?$" min="0" onKeyPress="if(this.value.length==10) return false;" step=".01" formControlName="TotalNonExpiredInhand" [value]="item.TotalNonExpiredInhand==null || item.TotalNonExpiredInhand==''?'0':item.TotalNonExpiredInhand">
+                                            </form> -->
+                                        </td>
+                                        <td>
+                                            <input pattern="^[0-9]+(\.[0-9]{1,2})?$" min="0"
+                                                [value]="replaceCommaWithPeriod(item.TotalExpiredInhand)" disabled>
+
+                                        </td>
+                                        <td><input type="button" id="btnsave" value="Check-in"
+                                                (click)="openEkitForm(item.DrugName , item.GpiCode,item.TotalNonExpiredInhand ,item.TotalExpiredInhand ,item.NurseStation_Id)"
+                                                class="btn btn-success" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event" *ngIf="ekitObj.length >0"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"
+            [zIndex]="99999999999999999"></ng4-loading-spinner>
+    </section>
+</div>
+<div class="modal fade modalstyle" ngDraggable id="exampleModal" tabindex="-1" role="dialog"
+    [ngStyle]="{'display': modalekitLotQty ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog" style="max-width: 80%;">
+        <div class="modal-content">
+            <div #DemoHandle17 class="modal-header" style="height: 50px ">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Quantity received in each LOT</h5>
+                <span>
+                    <h6 class="modal-title" id="exampleModalLabel" style="color:black"><span>&nbsp;({{ selectedDrug}})</span>
+                    </h6>
+                </span>
+
+                <button type="button" class="close" (click)="CloseModel()">&times;</button>
+
+                <!-- <button type="button" class="close" (click)="fileldsChangesDcOrder(0)">&times;</button> -->
+            </div>
+            <div class="modal-body bodystyle">
+                <div class="row form-group">
+                    <div class="table-responsive">
+                        <table id="tblAllResidents" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Barcode <span class="c1">*</span></th>
+                                    <th>Lot# <span class="c1">*</span></th>
+                                    <th>Expiration Date <span class="c1">*</span></th>
+                                    <th>Qty Received <span class="c1">*</span></th>
+                                    <th *ngIf="editReasonFlag">Reason</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <form [formGroup]="textform2" autocomplete="off">
+                                            <input type="text" class="form-control" formControlName="barcode"
+                                                #barcodeFocus
+                                                oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                                                (change)="addBarcodeLot();onBarcodeLotChange()"
+                                                [attr.disabled]="fetchflag? true : null" />
+                                        </form>
+                                        <!-- <div style="
+                                            display: flex;
+                                            /* gap: 1em; */
+                                            justify-content: space-between;">
+                                            <form [formGroup]="textform2" autocomplete="off" style="width: 100%;">
+                                                <input type="text" class="form-control"
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                                                    formControlName="barcode">
+
+                                            </form>
+                                            <a class="btn" (click)="addBarcodeLot()">
+                                                <i class="icon"></i>
+                                                <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;"
+                                                    title="Add Barcode"></span>
+                                            </a>
+                                        </div>
+
+                                        <div *ngIf="barcodear.length>0">
+                                            <span *ngFor="let item of barcodear;index as i"
+                                                style=" margin-right : 5px;">
+                                                <span
+                                                    style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                                                <a class="btn editicon" [ngStyle]="{'color':'red'}"
+                                                    (click)="removeBarcode(i)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-times " title="Delete"></span>
+                                                </a>
+                                            </span>
+                                        </div> -->
+                                    </td>
+                                    <td>
+                                        <form [formGroup]="textform" autocomplete="off">
+                                            <input type="text" class="form-control" formControlName="lotnumber"
+                                                (change)="areFormsValid();onBarcodeLotChange()"
+                                                [attr.disabled]="fetchflag? true : null" />
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form [formGroup]="textform1" autocomplete="off">
+                                            <input type="date" class="form-control" min="{{today|date:'yyyy-MM-dd'}}"
+                                                formControlName="expiryDate" (input)="onDateChange()"
+                                                (change)="areFormsValid(); onBarcodeLotChange()"
+                                                [attr.disabled]="fetchflag? true : null" />
+                                            <!-- comment because it was checking duplicate values but as per client it should accept duplicate. (input)="expDateChanged()" -->
+                                            <!-- <input type="date"  [min]="today" class="form-control" formControlName="expiryDate"
+                                                > -->
+                                        </form>
+
+                                    </td>
+                                    <!-- <td>
+                                        <div style="
+                                            display: flex;
+                                            /* gap: 1em; */
+                                            justify-content: space-between;">
+                                            <form [formGroup]="textform2" autocomplete="off" style="width: 100%;">
+                                                <input type="text" class="form-control"
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9 /]/g, '').replace(/(\..*)\./g, '$1');"
+                                                    formControlName="barcode">
+
+                                            </form>
+                                            <a class="btn" (click)="addBarcodeLot()">
+                                                <i class="icon"></i>
+                                                <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;"
+                                                    title="Add Barcode"></span>
+                                            </a>
+                                        </div>
+
+                                        <div *ngIf="barcodear.length>0">
+                                            <span *ngFor="let item of barcodear;index as i"
+                                                style=" margin-right : 5px;">
+                                                <span
+                                                    style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item}}</span>
+                                                <a class="btn editicon" [ngStyle]="{'color':'red'}"
+                                                    (click)="removeBarcode(i)">
+                                                    <i class="icon"></i>
+                                                    <span class=" fa fa-times " title="Delete"></span>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </td> -->
+                                    <td>
+                                        <form [formGroup]="textform3" autocomplete="off">
+                                            <input type="number" class="form-control" pattern="^[0-9]+(\.[0-9]{1,2})?$"
+                                                min="0" onKeyPress="if(this.value.length==10) return false;" step=".01"
+                                                formControlName="InHand" (change)="areFormsValid()">
+                                        </form>
+                                    </td>
+                                    <td *ngIf="editReasonFlag">
+                                        <form [formGroup]="textform4">
+                                            <input type="text" class="form-control" formControlName="reason" />
+                                        </form>
+                                    </td>
+                                    <td>
+
+                                        <div style="display: flex;width: 100%; justify-content: space-evenly;">
+                                            <button type="submit" id="btnsave" style="width: 85px;"
+                                                (click)="InsertLotDetails()" [disabled]="!areFormsValid()"
+                                                class="btn btn-success"> {{ekitUpdateId ==0 ? 'Received' :
+                                                'Save'}}</button>
+                                            <button type="submit" style="width: 85px;" id="btnsave"
+                                                (click)="CancelEkitDetails()" class="btn btn-warning"> Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div>
+                    <h5 style="color:black"><b>Medication received in the last 30 days</b></h5>
+
+                </div>
+                <div class="row form-group">
+                    <div class="table-responsive">
+                        <table id="tblAllResidents" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Barcode </th>
+                                    <th>Lot# </th>
+                                    <th>Expiration Date</th>
+                                    <th>Qty on Hand</th>
+                                    <th>Updated Date/Time</th>
+                                    <!-- <th>Destroy</th> -->
+                                    <!-- <th *ngIf="pageConfig['AccessWrite']"></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of ekitLotGrid"
+                                    style="z-index: 10;position: relative;">
+                                    <td>
+                                        {{item.barcodedetail}}
+
+                                    </td>
+                                    <td>
+                                        {{item.LotNumber}}
+                                    </td>
+                                    <td>
+                                        {{item.ExpiryDate |date :'MM/dd/yyyy'}}
+
+                                    </td>
+                                    <td>
+                                        {{replaceCommaWithPeriod(item.Inhand)}}
+
+                                    </td>
+                                    <td>
+                                        {{ item.Updated_date | date: 'MM/dd/yyyy HH:mm:ss' }}
+                                    </td>
+                                    <!-- <td> -->
+                                    <!-- *ngIf="isExpired(item.ExpiryDate)" -->
+                                    <!-- <div >
+                                                <input type="checkbox" class="largerCheckbox" 
+                                                style="padding: 3%" 
+                                                [checked]="isSelected(item.Ekit_Id)"
+                                                name="{{item.Ekit_Id}}" id="{{item.Ekit_Id}}"
+                                                (change)="onselectRecord($event.target.checked?true:false, item)"
+                                                />
+                                            </div> -->
+                                    <!-- <div>
+                                            <input type="text" class="DestroyQty"
+                                                (input)="destroyQtyonHand($event,item)" />
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn btn-warning"
+                                                (click)="OnDestroyModal(item.Ekit_Id)"
+                                                [disabled]="destroyFlagKeys[item.Ekit_Id] !==1"
+                                                style="float: right;">Destroy</button>
+                                        </div> -->
+
+
+                                    <!-- </td> -->
+                                    <!-- comment because user should not edit the record here.. as per client requirment -->
+                                    <!-- <td *ngIf="pageConfig['AccessWrite']" style="z-index: 12;">
+                                        <a class="btn editicon" (click)="getEkitDetailsById(item.Ekit_Id)"
+                                            style="font-size: 25px;z-index: 12;width: 100%;height: 27px;position: relative;border:0;box-shadow: none;">
+                                            <i class="icon"></i>
+                                            <span class="fa fa-edit (alias) iconColor"
+                                                (click)="getEkitDetailsById(item.Ekit_Id)"
+                                                style="z-index: 12;position: relative;" title="Edit"></span>
+                                        </a>
+
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- <div>
+                    <button type="button" class="btn btn-warning" (click)="OnDestroyModal()" [disabled]="selectedExpLot.size === 0" style="float: right;">Destroy</button>
+
+                </div> -->
+            </div>
+            <div class="modal-footer" style="
+            justify-content: space-between;
+        ">
+                <div style="
+                display: flex;">
+                    <label>Total Qty on Hand:</label>
+                    <input type="number" class="form-control" [value]="replaceCommaWithPeriod(totalQtyval)"
+                        pattern="^[0-9]+(\.[0-9]{1,2})?$" disabled />
+                </div>
+                <!-- <button type="button" class="btn btn-primary" *ngIf="pageConfig['AccessWrite']" (click)="InsertLotDetails()">OK</button> -->
+                <button type="button" class="btn btn-danger" (click)="CloseModel()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 126px" id="expiryModal"
+    role="dialog" [ngStyle]="{'display': expiryModal ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div #DemoHandle2 class="modal-header"
+                style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Destroy reason</h5>
+                <button type="button" class="close" (click)="CloseModel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-primary">
+                    <form [formGroup]="myExpform" autocomplete="off">
+                        <!-- <div class="card-header">
+                <h3 class="card-title">Favourites List</h3>
+              </div> -->
+                        <div class="card-body">
+                            Destroy reason
+                            <input type="text" #destroyFocus class="form-control" formControlName="destroy" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="OnDestroyExp()">Destroy</button>
+                <button type="button" class="btn btn-danger" (click)="CloseModel()">Close</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle3" id="isDestructionModal" role="dialog"
+    [ngStyle]="{'display': isDestructionModal ? 'block':'none','opacity': 1}">
+    <div class="modal-dialog" style="max-width: 90%;">
+        <div class="modal-content">
+            <div #DemoHandle3 class="modal-header" style="background-color:#cccccc;height: 35px;padding:7px !important">
+                <h5 style="color:#000000">E-kit/On-site Medication Quantity Updates</h5> &nbsp;
+                <span *ngIf="destroyGrid.length">
+                    <h6 class="modal-title" id="exampleModalLabel" style="color:black"><span>({{
+                            destroyGrid[0].nursestationname}})</span>
+                    </h6>
+                </span>
+                <button type="button" class="close" (click)="CloseModel()">&times;</button>
+            </div>
+            <div class="modal-body bodystyle">
+                <div class="row form-group">
+                    <div class="col-sm-1">
+                        <label>Search </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input style="padding:inherit" #orderFocus type="search" class="form-control input-sm"
+                            [(ngModel)]="DestructionOrderSearch" placeholder="Search">
+                    </div>
+                </div>
+                <div class="tableFixHead">
+                    <table id="tblAllResidents" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Drug Name</th>
+                                <th>Barcode</th>
+                                <th>Lot#</th>
+                                <!-- <th>Quantity Expired</th> -->
+                                <th>Expiry Date</th>
+                                <!-- <th>Expired Quantity to Destroy</th>
+                              <th>Quantity Not Expired</th> 
+                              <th>Not Expired Quantity to Destroy</th> 
+                              <th>Reason for destroy Not expired quantity</th> -->
+                                <th>Current Qty on Hand</th>
+                                <th>Updated Qty on Hand</th>
+                                <th>Reason for Update</th>
+                                <th>
+                                    <span>
+                                        <input type="checkbox" class="smallerCheckbox" [checked]="isAllChecked"
+                                            (change)="toggleCheckAll($event)" />
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let item of destroyGrid | gridFilter: DestructionOrderSearch:'EkitMedsCheckIn'; let i = index"
+                                style="cursor: pointer">
+                                <td>{{ item.Drugname }}</td>
+                                <td>{{ item.BarcodeDetail }}</td>
+                                <td>{{ item.LotNumber }}</td>
+                                <!-- <td>{{ replaceCommaWithPeriod(item.Inhand) }}</td> -->
+                                <td>{{ item.ExpiryDate | date: 'MM/dd/yyyy' }}</td>
+                                <!-- <td>{{ replaceCommaWithPeriod(item.NonExpiredQty) }}</td> -->
+                                <td>{{item.currentQuantity}}</td>
+                                <!-- <td>
+                                    <div>
+                                        <input type="text" [(ngModel)]="item.inputValue"
+                                            [ngClass]="{ 'input-error': item.validationError }"
+                                            (input)="validateInputValue(item, i, 'QuantityToDestroy')"
+                                            [disabled]="item.Inhand == '0' || item.Inhand == '0.00'" />
+                                        <small class="error" *ngIf="item.validationError">{{ item.validationError
+                                            }}</small>
+                                    </div>
+                                </td> -->
+                                <!-- <td>
+                                    <div>
+                                        <input type="text" [(ngModel)]="item.nonExpiredInputValue"
+                                            [ngClass]="{ 'input-error': item.nonExpiredValidationError }"
+                                            (input)="validateInputValue(item, i, 'NonExpiredQuantityToDestroy')"
+                                            [disabled]="item.NonExpiredQty == '0' || item.NonExpiredQty == '0.00'" />
+                                        <small class="error" *ngIf="item.nonExpiredValidationError">{{
+                                            item.nonExpiredValidationError }}</small>
+                                    </div>
+                                </td> -->
+                                <!-- <td>
+                                    <div>
+                                        <input type="text" [(ngModel)]="item.notExpiredQuantityToDestroyReason"
+                                            [disabled]="item.NonExpiredQty == '0' || item.NonExpiredQty == '0.00'" />
+                                    </div>
+                                </td> -->
+
+                                <td>
+                                    <div><input type="text" [ngClass]="{ 'input-error': item.validationError }"
+                                            [(ngModel)]="item.inputValue"
+                                            (input)="validateInputValue(item, i, 'updatedQtyInput')" />
+                                        <small class="error" *ngIf="item.validationError">{{
+                                            item.validationError}}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><input type="text" [ngClass]="{ 'input-error': item.reasonValidationError }"
+                                            [(ngModel)]="item.reason"
+                                            (input)="validateInputValue(item, i, 'updatedQtyReason')">
+                                        <small class="error" *ngIf="item.reasonValidationError">{{
+                                            item.reasonValidationError}}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="smallerCheckbox" [checked]="item.checkboxChecked"
+                                        (change)="onCheckboxChange(i, $event, item)" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" [disabled]="!isDestroyEnabled"
+                    (click)="signatureForDestroy()">
+                    Update Qty on Hand
+                </button>
+                <button type="button" class="btn btn-danger" (click)="closeDestruction()">Close</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle7" style="padding-top: 126px" id="modaldes"
+    role="dialog" [ngStyle]="{'display': modalDesIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div #DemoHandle7 class="modal-header"
+                style="background-color:#cccccc;height: 35px;padding:7px !important ">
+                <h5 style="color:#000000">Medication Quantity Updates</h5>
+                <button type="button" class="close" (click)="orderDestroyDetailsCancel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="destroyform">
+                    <h5>
+                        <b>Updated By</b>
+                    </h5>
+                    <div class="row form-group">
+                        <div class="col-sm-2">User Name</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="destroyerUsername"
+                                [ngClass]="{
+                'is-valid':destroyform.controls.destroyerUsername.valid,
+                'is-invalid':destroyform.controls.destroyerUsername.invalid && destroyform.controls.destroyerUsername.touched}" />
+                            <div *ngIf="destroyform.controls.destroyerUsername.errors && (destroyform.controls.destroyerUsername.touched)"
+                                class="errorMessage">
+                                <div *ngIf="destroyform.controls.destroyerUsername.errors.required">
+                                    User Name is required.
+                                </div>
+                                <div
+                                    *ngIf="destroyform.controls.destroyerUsername.errors.maxlength || destroyform.controls.destroyerUsername.errors.minlength">
+                                    User Name should contains min of 4 and max of 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerUsername.errors.pattern">
+                                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">Password</div>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" formControlName="destroyerPass"
+                                autocomplete="new-password"
+                                [ngClass]="{
+                'is-valid':destroyform.controls.destroyerPass.valid,
+                'is-invalid':destroyform.controls.destroyerPass.invalid && destroyform.controls.destroyerPass.touched}" />
+                            <div *ngIf="destroyform.controls.destroyerPass.errors && (destroyform.controls.destroyerPass.touched)"
+                                class="errorMessage">
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.maxlength">
+                                    Password cannot be more than 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.pattern">
+                                    Password {{config.alphaNumericFewSpecialCharactersMessage3}}
+                                </div>
+                                <div *ngIf="destroyform.controls.destroyerPass.errors.minlength ">
+                                    Password cannot be less than 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>
+                        <b>Witness</b>
+                    </h5>
+                    <div class="row form-group">
+                        <div class="col-sm-2">User Name</div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="approvalUsername"
+                                [ngClass]="{
+                'is-valid':destroyform.controls.approvalUsername.valid,
+                'is-invalid':destroyform.controls.approvalUsername.invalid && destroyform.controls.approvalUsername.touched}" />
+                            <div *ngIf="destroyform.controls.approvalUsername.errors && (destroyform.controls.approvalUsername.touched)"
+                                class="errorMessage">
+                                <div *ngIf="destroyform.controls.approvalUsername.errors.required">
+                                    User Name is required.
+                                </div>
+                                <div
+                                    *ngIf="destroyform.controls.approvalUsername.errors.maxlength || destroyform.controls.approvalUsername.errors.minlength ">
+                                    User Name should contains min of 4 and max of 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalUsername.errors.pattern">
+                                    {{config.alphaNumericFewSpecialCharactersMessage1}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">Password</div>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" formControlName="approvalPass"
+                                autocomplete="new-password"
+                                [ngClass]="{
+                'is-valid':destroyform.controls.approvalPass.valid,
+                'is-invalid':destroyform.controls.approvalPass.invalid && destroyform.controls.approvalPass.touched}" />
+                            <div *ngIf="destroyform.controls.approvalPass.errors && (destroyform.controls.approvalPass.touched)"
+                                class="errorMessage">
+                                <div *ngIf="destroyform.controls.approvalPass.errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalPass.errors.maxlength">
+                                    Password cannot be more than 20 characters long.
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalPass.errors.pattern">
+                                    Password {{config.alphaNumericFewSpecialCharactersMessage3}}
+                                </div>
+                                <div *ngIf="destroyform.controls.approvalPass.errors.minlength">
+                                    Password cannot be less than 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Save" data-dismiss="modal"
+                    [disabled]="destroyform.invalid" (click)="updateDestroyStatus()" class="btn btn-success" />
+                <input type="button" id="btnclose" value="Close" class="btn btn-danger"
+                    (click)="orderDestroyDetailsCancel()" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <form [formGroup]="dashboardForm" name="dashboardForm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-3">
+              <h3 class="card-title">Medication Check-in Report</h3>
+            </div>
+            <div class="col-sm-3">
+              <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="facilityName"
+                [data]="facilities" [settings]="dropdownSettings_FacID" [placeholder]="'Select facilities'"
+                (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-3">
+              <ng-multiselect-dropdown class="form-control" formControlName="nursestationName"
+                [data]="nurseStations" [settings]="dropdownSettings_ID"
+                [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+                (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+             <!--<div class="col-sm-2">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"
+                placeholder="Search">
+            </div> -->
+            <div class="col-sm-1">
+              <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;z-index: auto;cursor: pointer;">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" 
+                      (click)="showHideToggle('.test')">
+                      <i class="fa fa-filter"></i>
+                      <span class="badge badge-warning navbar-badge"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:999 !important">
+                      <span class="dropdown-item dropdown-header">Filters</span>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-divider" style="display: none"></div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        From Date
+                        <input type="date" class="form-control" formControlName="txtFromDate" />
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        To Date
+                        <input type="date" class="form-control" formControlName="txtToDate" />
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <div class="dropdown-item">
+                        <input type="button" class="btn btn-info1" value="OK" (click)="loadChart()">&nbsp;
+                        <input type="button" class="btn btn-danger1" value="Close" (click)="close('.test')">
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+              <div class="right" style=" display: table-cell;width: 10%; float:left; margin: 0px;">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="getReport()" title="Export To PDF">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+              <div class="right" style=" display: table-cell;width: 80%; float:left; margin: 0px;"></div>
+              <div class="right" style=" display: table-cell;width: 10%; float:right; margin: 0px;">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintExcel']" (click)="getExcel()" title="Export To Excel">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+              </div>
+          </div>
+        </div>
+        <div class="card-body">
+         
+          <div class=" table table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let cols of gridColumns">
+                    <th *ngIf="cols.display">{{ cols.displayName }}</th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of gridData | paginate: { itemsPerPage: gridPagination, currentPage: p,totalItems: totalRecords };">
+                  <td *ngFor="let col of gridColumns">
+                    {{item[col.name]}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="getGridDataOnPageChange($event)" *ngIf="gridData.length > 0"></pagination-controls>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section>

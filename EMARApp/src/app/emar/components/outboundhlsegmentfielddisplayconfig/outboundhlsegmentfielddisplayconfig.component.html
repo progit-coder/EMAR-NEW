@@ -1,0 +1,103 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">ADT Fields Display Configuration</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="myform">
+          <div class="row form-group">
+            <!-- <div class="col-sm-2 col-md-2 col-lg-2">Segment
+              <span class="c1">*</span>
+            </div> -->
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              Segment
+              <span class="c1">*</span>
+              <ng-multiselect-dropdown formControlName="ddlsegment"  class="form-control" 
+              [(ngModel)]="selectedOutboundHlItem" (onSelect)="GetOutboundDisplaySegmentConfigs()" (onDeSelect)="GetOutboundDisplaySegmentConfigs()" [data]="outboundHlsegmentconfigs" [settings]="dropdownSettings_OutboundHlSegmentdisplay"
+             >
+            </ng-multiselect-dropdown>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Permissions For 
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Permissions For 
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown formControlName="ddlcompany"  class="form-control" 
+                [(ngModel)]="selectedCompanyItem"   (onSelect)="onPermissionsSelect($event)" (onDeSelect)="onPermissionsDeSelect($event)" [data]="Companies" [settings]="dropdownSettings_Company"
+               >
+              </ng-multiselect-dropdown>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="text-align: right;margin-top: 1%;">
+                  <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+               </div>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <div class="card card-primary">
+
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3 class="card-title">ADT Fields Display Configuration View</h3>
+          </div>
+          <div class="col-sm-3 col-md-2 col-lg-3"></div>
+         <div class="col-sm-3 col-md-4 col-lg-3">
+                <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" 
+                  placeholder="Search">
+              </div> 
+        </div>
+      </div>
+
+      <div class="card-body">
+
+        <form [formGroup]="myform">
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table id="tblHlsegment" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Segment Detail Desc</th>
+
+                      <th>HL Seven Status</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of displaysegments">
+                      <td>{{item.OSegDetail_Desc}}</td>
+                      <td>
+                          <div class="iconed-input">
+                              <div class="switch-toggle switch-3 switch-candy" style="width: max-content; height:30px;border-radius: 38px;">
+                                  <input id="{{item.OSegDetail_Id}} && 0" style="cursor: pointer;width: max-content;padding-left: 30px;"  [checked]="item.DisplayConfigId == 0"  type="checkbox" (change)="onSelectionChange(item.OSegDetail_Id,0,item.OHLConfig_Id,item.HlSequence)" >
+                                                <label for="{{item.OSegDetail_Id}} && 0" style="cursor: pointer;width: max-content;padding-left: 30px;">Restricted</label>
+                    
+                                                <input id="{{item.OSegDetail_Id}} && 1"   style="cursor: pointer;width: max-content;padding-left: 30px;"  [checked]="item.DisplayConfigId == 1"   type="checkbox" (change)="onSelectionChange(item.OSegDetail_Id,1,item.OHLConfig_Id,item.HlSequence)">
+                                                <label for="{{item.OSegDetail_Id}} && 1" style="cursor: pointer;width: max-content;padding-left: 30px;" >Editable</label>
+                  
+                                                <input id="{{item.OSegDetail_Id}} && 2" style="cursor: pointer;width: max-content;padding-left: 30px;" [checked]="item.DisplayConfigId == 2"  type="checkbox" (change)="onSelectionChange(item.OSegDetail_Id,2,item.OHLConfig_Id,item.HlSequence)">
+                                                <label for="{{item.OSegDetail_Id}} && 2" style="cursor: pointer;width: max-content;padding-left: 30px" >Non-Editable</label>
+                    
+                                                <a></a>
+                                            </div>
+                             </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section>

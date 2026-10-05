@@ -1,0 +1,250 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <h1> Company DashBoard</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active" style="text-align: center">DashBoard</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title"> Dashboard</h3>
+        </div>
+        <div class="card-body">
+          <div #chartTarget>
+          </div>
+          <div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3">
+              <input type="button" class="btn btn-primary" *ngIf="drilldownLevel>0" value="Go Up" (click)="drillup()">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Dashboard Details</h3>
+        </div>
+        <div class="card-body">
+          <div style="text-align:right">
+            <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetCompanyReports()"  *ngIf="drilldownLevel==0 && companyMaster"/>
+          </div>
+
+          <div class="table-responsive">
+            <table id="tableCompany" class="table table-bordered table-hover" *ngIf="drilldownLevel==0 && companyMaster">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Address 1</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Contact Number</th>
+                  <th>Contact Person</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of companyMaster">
+                  <td>{{item.Company_Name}}</td>
+                  <td>{{item.Company_Addr1}}</td>
+                  <td>{{item.State_Name}}</td>
+                  <td>{{item.City_Name}}</td>
+                  <td>{{item.Com_ContactPhone}}</td>
+                  <td>{{item.Com_ContactPerson}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align:right">
+              <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetFacilityReports()" *ngIf="drilldownLevel==1 && facilities"/>
+            </div>
+         
+            <table id="tableFacilities" class="table table-bordered table-hover" *ngIf="drilldownLevel==1 && facilities">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Facility Name</th>
+                  <th>Address 1</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Zipcode</th>
+                  <th>Contact Number</th>
+                  <th>Contact Person</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of facilities">
+                  <td>{{item.Company_Name}}</td>
+                  <td>{{item.Facility_Name}}</td>
+                  <td>{{item.Facility_Addr1}}</td>
+                  <td>{{item.State_Name}}</td>
+                  <td>{{item.City_Name}}</td>
+                  <td>{{item.Facility_Zip}}</td>
+                  <td>{{item.Facility_ContactPhone}}</td>
+                  <td>{{item.Facility_ContactName}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align:right">
+              <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetNursestationReports()" *ngIf="drilldownLevel==2 && stations"/>
+            </div>
+          
+            <table id="tblNurseStations" class="table table-bordered table-hover" *ngIf="drilldownLevel==2 && stations">
+              <thead>
+                <tr>
+                  <!-- <th>Nursing Station External ID</th> -->
+                  <th>Nursing Station Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of stations">
+                  <!-- <td>{{item.NurseStation_Code}}</td> -->
+                  <td>{{item.NurseStation_Name}}</td>
+                  <td *ngIf="item.NurseStation_Status===1">Active</td>
+                  <td *ngIf="item.NurseStation_Status===0">Inactive</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align:right">
+                <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetFloorReport()" *ngIf="floors.length>0"/>
+              </div>
+            <table id="tblFloor" class="table table-bordered table-hover" *ngIf="floors.length>0">
+              <thead>
+                <tr>
+                  <th>Floor Number</th>
+                  <!-- <th>Facility Name</th> -->
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of floors">
+                  <td>{{item.Floor_Name}}</td>
+                  <!-- <td>{{item.Facility_Name}}</td> -->
+                  <td *ngIf="item.Floor_Status===1">Active</td>
+                  <td *ngIf="item.Floor_Status===0">Inactive</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align:right">
+                <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetWingReports()" *ngIf="wings.length>0"/>
+              </div>
+            <table id="tblWings" class="table table-bordered table-hover" *ngIf="wings.length>0">
+              <thead>
+                <tr>
+                  <th>Wing Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of wings">
+                  <td>{{item.Wing_Desc}}</td>
+                  <td *ngIf="item.Wing_Status===1">Active</td>
+                  <td *ngIf="item.Wing_Status===0">Inactive</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align:right">
+                <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetRoomReports()"  *ngIf="rooms.length>0"/>
+              </div>
+            <table id="tblRooms" class="table table-bordered table-hover" *ngIf="rooms.length>0">
+              <thead>
+                <tr>
+                  <th>Room Name</th>
+                  <th>Room Code</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of rooms">
+                  <td>{{item.Room_Name}}</td>
+                  <td>{{item.Room_Code}}</td>
+                  <td *ngIf="item.Room_Status===1">Active</td>
+                  <td *ngIf="item.Room_Status===0">Inactive</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align:right">
+                <input type="button" style="margin-bottom: 5px;" class="btn btn-danger" value="Report" (click)="GetBedReports()" *ngIf="beds.length>0"/>
+              </div>
+            <table id="tblBeds" class="table table-bordered table-hover" *ngIf="beds.length>0">
+              <thead>
+                <tr>
+                  <th>Bed Name</th>
+                  <th>Bed Code</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of beds">
+                  <td>{{item.Bed_Name}}</td>
+                  <td>{{item.Bed_Code}}</td>
+                  <td *ngIf="item.Bed_Status===1">Active</td>
+                  <td *ngIf="item.Bed_Status===0">Inactive</td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="tblCensus" class="table table-bordered table-hover" *ngIf="censusList.length>0">
+              <thead>
+                <tr>
+                  <th>Nursing Station Name</th>
+                  <th>Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of censusList">
+                  <td>{{item.NursingStation}}</td>
+                  <td>{{item.CensusType}}</td>
+                  <td>{{item.CensusCount}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="tblCensus" class="table table-bordered table-hover" *ngIf="residentsList.length>0">
+              <thead>
+                <tr>
+                  <th>Nursing Station Name</th>
+                  <th>Resident Name</th>
+                  <th>DOB</th>
+                  <th>Gender</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of residentsList| paginate: { itemsPerPage: gridPagination, currentPage: r };">
+                  <td>{{item.NurseStationName}}</td>
+                  <td>{{item.PatientLastName+", "+item.PatientFirstName+"
+                    "+(item.PatientMiddleInitial==null?'':item.PatientMiddleInitial)}}</td>
+                  <td>{{item.DOB|date :'MM/dd/yyyy'}}</td>
+                  <td>{{item.PatientGender}}</td>
+                  <td>
+                    <span *ngIf="censusType==1">Active</span>
+                    <span *ngIf="censusType==2">Discharged</span>
+                    <span *ngIf="censusType==3">Temporary Absent</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="r = $event" *ngIf="residentsList.length > 0"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+     <ng4-loading-spinner [timeout]="99000" [template]="template" [loadingText]="'Please wait...'"></ng4-loading-spinner>
+  </section>

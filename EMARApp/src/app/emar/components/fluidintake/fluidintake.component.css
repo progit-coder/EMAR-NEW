@@ -1,0 +1,95 @@
+/* .image--cover {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+ 
+  } */
+  .zoom {
+    transition: transform .2s !important;
+    margin: 0  !important; 
+    padding: 0  !important;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+      /* .zoom:hover {
+        -ms-transform: scale(1.5)!important; /* IE 9 */
+      /*  -webkit-transform: scale(1.5)!important;/* Safari 3-8 */
+        /* transform: scale(2.0) !important;  */
+      /* }   */ 
+  .errorMessage
+  {
+      color:red;
+  }
+  :host /deep/ .multiselect-dropdown .dropdown-btn {
+    border:none !important;
+    padding: 0px !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-down 
+ {
+    border-top: 5px solid black !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .dropdown-up 
+ {
+    border-bottom: 5px solid #adadad !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item
+  {
+     overflow: hidden !important; 
+     white-space: nowrap !important;
+     width: 86% !important;  
+     text-overflow: ellipsis !important;
+  }
+ .c1 {
+   color: red;
+ } 
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item 
+ {
+   border: 2px solid #ade39d !important;
+   background-color: #ade39d !important;
+   color: #000000 !important;
+ }
+ :host /deep/ .multiselect-item-checkbox input[type=checkbox]:checked + div:before
+ {
+   background-color: #ade39d !important;
+ }
+ :host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:before
+ {
+   border: 2px solid #ade39d !important;
+ }
+ :host /deep/ .multiselect-item-checkbox input[type=checkbox] + div:after
+ {
+   border-color: #000000 !important;
+ }
+ :host /deep/ .multiselect-dropdown .dropdown-btn .selected-item a
+ {
+   color: #000000 !important;
+   font-weight: bold !important;
+ }
+ ::ng-deep .tooltip-inner {
+  max-width: 500px;
+  overflow: hidden;
+  
+ 
+
+ 
+}
+::ng-deep .tooltip {
+  z-index: 9999;
+}
+.ImageAndWidthHeight
+{
+height: 300px;
+ width: 400px; 
+ z-index: 9999;
+}
+
+::ng-deep .tooltip.show {
+opacity: 1;
+z-index: 9999;
+}
+  

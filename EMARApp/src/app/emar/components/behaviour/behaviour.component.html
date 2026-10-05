@@ -1,0 +1,358 @@
+<ng-template #tipContent><img class="ImageAndWidthHeight" *ngIf="this.MyImages!=undefined" [src] ="sanitize(this.MyImages)"></ng-template>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>Behaviour</h1>
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+                    <li class="breadcrumb-item active">Behaviour</li>
+                  </ol>
+                </div> 
+        </div>
+      </div>
+    </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary sticky">
+        <div class="card-body" style="padding-bottom: inherit;padding-top: inherit;">
+          <div class="row form-group">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <h3 class="card-title">Behavior Status</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="facilities" [(ngModel)]="selectedfaItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <ng-multiselect-dropdown class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+              (onDeSelect)="onNurseStationDeSelect($event)">
+          </ng-multiselect-dropdown>
+            </div>
+        </div>
+            <div *ngIf="residentID!=0">
+                <div  *ngIf="demographicInfoData!={}">
+                    <div class="row form-group">
+                          <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: -webkit-center;cursor: pointer;">
+                            <a ><span class="info-box-icon">
+                              <img  container="body"  (mouseenter) ="mouseEnter(demographicInfoData.ImageLocation)"   (mouseleave) ="mouseLeave()" [ngbTooltip]="this.tipContent" *ngIf="demographicInfoData.ImageLocation!=undefined" [src]="sanitize(demographicInfoData.ImageLocation)" class="zoom">
+                            </span></a><br />
+                          </div>  
+                          <div class="col-sm-10 col-md-10 col-lg-10">
+                              <div class="row form-group">
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                      <strong>Residents</strong> 
+                                      <ng-multiselect-dropdown class="form-control"
+                                      [(ngModel)]="selectedResItem" [data]="residents" [settings]="dropdownSettings_Resident"
+                                      (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                  </div>
+                                  <div class="col-sm-5 col-md-4 col-lg-4">
+                                   <strong>Admit Date</strong> 
+                                      <select class="form-control" id="ddladmindate">
+                                          <option *ngFor="let item of adminDateDrop" value="{{item.PVisit_Id}}">{{item.AdmitDate|date
+                                            :'MM/dd/yyyy'}}</option>
+                                        </select>
+                                    </div>
+
+                                  </div>
+                                  <div class="row">
+                                      <!-- <div class="col-sm-2 col-6"><strong>MR#:</strong><span>{{demographicInfoData.PatientMRNumber}}</span></div> -->
+                                      <div class="col-sm-3 col-md-3 col-lg-3"><strong>DOB:&nbsp;</strong><span>{{demographicInfoData.DOB|date :'MM/dd/yyyy'}}</span></div>
+                                      <div class="col-sm-3 col-md-2 col-lg-2" ><strong>Gender:&nbsp;</strong><span>{{demographicInfoData.AdministrativeSex}}</span></div>
+                                      <div class="col-sm-6 col-md-5 col-lg-5"><strong>Nursing Station Name:&nbsp;</strong><span>{{nurseStationName}}</span></div>
+                                    </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+        </div>
+      </div>
+      <div class="card card-default">
+      <div class="card-body">
+      <div *ngIf="residentID!=0">
+        <form [formGroup]="myform" autocomplete="off">
+          <div class="row form-group">
+            <!-- <div class="col-sm-2">
+              Initials
+            </div> -->
+            <div class="col-sm-4 col-md-6 col-lg-6">
+              Initials
+              <input type="text" class="form-control" id="txtinitials" formControlName="Initials" readonly>
+            </div>
+            <!-- <div class="col-sm-2"></div> -->
+            <!-- <div class="col-sm-2">
+              Date
+            </div> -->
+            <div class="col-sm-4 col-md-6 col-lg-6">
+              Date
+              <input type="date" id="dabehaviour" class="form-control" formControlName="Date" readonly>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Hallucinations (perceptual experiences in the absence of real external sensory stimuli)
+            </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <input type="checkbox"  formControlName="Hallucinations">
+                    </span>
+                  </div>
+                  <span class="form-control"> Hallucinations</span>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                Delusions (misconceptions or beliefs that are firmly held, contrary to reality)
+              </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <input type="checkbox"  formControlName="Delusions">
+                      </span>
+                    </div>
+                    <span class="form-control"> Delusions</span>
+                  </div>
+                </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Physical behavioral symptoms directed towards others (e.g. hitting, kicking, pushing, scratching,
+              grabbing, abusing others sexually):
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="form-control" formControlName="PhysicalBehaviour" [ngClass]="{
+                          'is-valid':myform.controls.PhysicalBehaviour.valid,
+                          'is-invalid':myform.controls.PhysicalBehaviour.invalid && myform.controls.PhysicalBehaviour.touched
+                        }">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of behaviourDrop" value="{{item.BehavioralSym_ID}}">{{item.BehavioralSym_Desc}}</option>
+              </select>
+              <div *ngIf="myform.controls.PhysicalBehaviour.errors && (myform.controls.PhysicalBehaviour.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.PhysicalBehaviour.errors.required">
+                      PhysicalBehavior is required.
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Verbal behavioral symptoms directed towards others(e.g. threatening others, screaming at others,
+              cursing at others):
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="form-control" formControlName="VerbalBehaviour" [ngClass]="{
+                            'is-valid':myform.controls.VerbalBehaviour.valid,
+                            'is-invalid':myform.controls.VerbalBehaviour.invalid && myform.controls.VerbalBehaviour.touched
+                          }">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of behaviourDrop" value="{{item.BehavioralSym_ID}}">{{item.BehavioralSym_Desc}}</option>
+              </select>
+              <div *ngIf="myform.controls.VerbalBehaviour.errors && (myform.controls.VerbalBehaviour.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.VerbalBehaviour.errors.required">
+                      VerbalBehavior is required.
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Other behavioral symptoms not directed towards others (e.g. physical symptoms such as hitting or
+              scratching self, pacing, rummaging, public sexual acts, disrobing in public, throwing or smearing food
+              or bodily wastes, or verbal/vocal symptoms like screaming, disruptive sounds):
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="form-control" formControlName="OtherBehaviour" [ngClass]="{
+                              'is-valid':myform.controls.OtherBehaviour.valid,
+                              'is-invalid':myform.controls.OtherBehaviour.invalid && myform.controls.OtherBehaviour.touched
+                            }">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of behaviourDrop" value="{{item.BehavioralSym_ID}}">{{item.BehavioralSym_Desc}}</option>
+              </select>
+              <div *ngIf="myform.controls.OtherBehaviour.errors && (myform.controls.OtherBehaviour.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.OtherBehaviour.errors.required">
+                      OtherBehavior is required.
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <u><b>Did the resident reject evaluation or care (e.g. bloodwork ,taking medications,ADL assistance
+                  )that is necessary to achieve the resident's goals for health and well-being ?Do not include
+                  behaviors that have already been addressed(e.g. by discussion or care planning with the resident or
+                  family ),and determined to the consistent with resident values ,preferences,or goals .</b></u>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Did the resident reject evaluation or care:
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="form-control" formControlName="ResidentReject" [ngClass]="{
+                                'is-valid':myform.controls.ResidentReject.valid,
+                                'is-invalid':myform.controls.ResidentReject.invalid && myform.controls.ResidentReject.touched
+                              }">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of behaviourDrop" value="{{item.BehavioralSym_ID}}">{{item.BehavioralSym_Desc}}</option>
+              </select>
+              <div *ngIf="myform.controls.ResidentReject.errors && (myform.controls.ResidentReject.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.ResidentReject.errors.required">
+                      ResidentReject is required.
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Has the Resident wandered?
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <select class="form-control" formControlName="Residentwandered" [ngClass]="{
+                                  'is-valid':myform.controls.Residentwandered.valid,
+                                  'is-invalid':myform.controls.Residentwandered.invalid && myform.controls.Residentwandered.touched
+                                }">
+                <option value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of behaviourDrop" value="{{item.BehavioralSym_ID}}">{{item.BehavioralSym_Desc}}</option>
+              </select>
+              <div *ngIf="myform.controls.Residentwandered.errors && (myform.controls.Residentwandered.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.Residentwandered.errors.required">
+                      Residentwandered is required.
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              Other/Comments:
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <textarea rows="3" cols="20" class="form-control" formControlName="Comments"></textarea>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">WeeklyStatus</div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <div class="iconed-input">
+                <label class="switch">
+                  <input type="checkbox" id="chkstatus" formControlName="status">
+                  <div class="slider round">
+                    <!--ADDED HTML -->
+                    <span class="on">Active</span>
+                    <span class="off">Inactive</span>
+                    <!--END-->
+                  </div>
+                </label>
+
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: right">
+            <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']" class="btn btn-success"
+              [disabled]="myform.invalid" (click)="insertVisitBehaviour()" /> &nbsp;
+            <input type="button" id="btnreset" value="Reset" *ngIf="pageConfig['AccessWrite']" class="btn btn-danger"
+              (click)="resetScreen()" />
+          </div>
+        </form>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="card-title">Behavior View</h3>
+
+                </div>
+                <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                <div class="col-sm-3 col-md-4 col-lg-3">
+                  <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                    placeholder="Search">
+                </div>
+              </div>
+         
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+              <table id="tblvitalbehaviour" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+
+                    <!-- <th>Initials</th> -->
+                    <!-- <th>Date</th> -->
+                    <th>Hallucinations</th>
+                    <th>Delusions</th>
+                    <th>Physical</th>
+                    <th>Verbal</th>
+                    <th>others</th>
+                    <th>Reject</th>
+                    <th>Wandered</th>
+                    <th>Status</th>
+                    <th>Captured By</th>
+                    <th>Captured Date</th>
+                    <th *ngIf="pageConfig['AccessWrite']"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of allVisitBehaviour|gridFilter:searchText:'Behaviour' | paginate: { itemsPerPage: gridPagination, currentPage: p };">
+
+                    <!-- <td>{{item.Initials}}</td> -->
+                    <!-- <td>{{item.Date |date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+
+                    <td *ngIf="item.HallucinationsID===1">True</td>
+                    <td *ngIf="item.HallucinationsID===0">False</td>
+                    <td *ngIf="item.DelusionsID===1">True</td>
+                    <td *ngIf="item.DelusionsID===0">False</td>
+                    <td>{{item.PhysicalbehavioralDesc}}</td>
+                    <td>{{item.VerbalbehavioralDesc}}</td>
+                    <td>{{item.OtherbehavioralDesc}}</td>
+                    <td>{{item.rejectevaluationDesc}}</td>
+                    <td>{{item.ResisdentwanderedDesc}}</td>
+                    <td *ngIf="item.WeeklyStatus==1">Active</td>
+                    <td *ngIf="item.WeeklyStatus==0">InActive</td>
+                    <td>{{item.UserName}}</td>
+                    <td>{{item.VisitBehaviour_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                    <td *ngIf="pageConfig['AccessWrite']">
+                      <a class="btn editicon" (click)="getVisitBehaviourById(item.VisitBehaviour_ID,item.Date)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                      </a>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <pagination-controls (pageChange)="p = $event" *ngIf="allVisitBehaviour.length > 0"></pagination-controls>
+            
+          
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>

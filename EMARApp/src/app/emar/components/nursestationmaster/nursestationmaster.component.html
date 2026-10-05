@@ -1,0 +1,477 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Nurse Station Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Nurse Station Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>  -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Nursing Station Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Facility Name
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="facilityName"
+                  [(ngModel)]="selectedfacilityItems" [data]="facilities" [settings]="dropdownSettings_Facility"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                          'is-valid':myform.controls.facilityName.valid ,
+                          'is-invalid':myform.controls.facilityName.invalid && myform.controls.facilityName.touched
+                        }">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.facilityName.errors && (myform.controls.facilityName.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.facilityName.errors.required">
+                    Facility Name is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station External ID
+                <span class="c1" *ngIf="companyHlFlag===1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Nursing Station External ID
+                <span class="c1" *ngIf="companyHlFlag===1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtnursestationcode" formControlName="nursestationcode"
+                    (change)="checkNurseStationCode()" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.nursestationcode.valid,
+                    'is-invalid':myform.controls.nursestationcode.invalid && myform.controls.nursestationcode.touched
+                 }" />
+                  <div *ngIf="myform.controls.nursestationcode.errors && (myform.controls.nursestationcode.touched)"
+                    class="errorMessage">
+                    <!-- <div *ngIf="myform.controls.nursestationcode.errors.required">
+                      Nursing Station External ID is required.
+                    </div> -->
+                    <div *ngIf="myform.controls.nursestationcode.errors.maxlength">
+                      Nursing Station External ID cannot be more than 25 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.nursestationcode.errors.minlength">
+                      Nursing Station External ID cannot be less than 4 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.nursestationcode.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage4}}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Nursing Station Name
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtnursestationname" formControlName="nursestationname"
+                    (change)="checkNurseStationName()" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.nursestationname.valid,
+                        'is-invalid':myform.controls.nursestationname.invalid && myform.controls.nursestationname .touched
+                         }" />
+                  <div *ngIf="myform.controls.nursestationname.errors && (myform.controls.nursestationname.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.nursestationname.errors.required">
+                      Nursing Station Name is required.
+                    </div>
+                    <div *ngIf="myform.controls.nursestationname.errors.maxlength">
+                      Nursing Station Name cannot be more than 50 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.nursestationname.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage1}}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Add Nursing Station Shifts 
+              </div> -->
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                Add Nursing Station Shifts 
+                <a class="btn" (click)="shiftsopen()">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;"
+                    title="Add Nursing Station Shifts"></span>
+                </a>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+              <div *ngIf="shiftsArray.length>0">
+                <div class="row" *ngFor="let item of shiftsArray;index as i" style="margin-top : 5px;">
+                  <span>
+                    <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item.NurseShifts_Name}}
+                      {{item.FromHours}} - {{item.ToHours}}</span>
+                    <a class="btn editicon" style="color:red" (click)="removeShift(i)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-times " title="Delete"></span>
+                    </a></span>
+                </div>
+              </div>
+            </div>
+                <!-- <div class="col-sm-2 col-md-2 col-lg-2">Default Physicians
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Default Physician
+                  <ng-multiselect-dropdown formControlName="defaultphysician" class="form-control"
+                    [(ngModel)]="selectedPhtsicianItem" [data]="physiciansdrop" [settings]="dropdownSettings_Physician"
+                    [ngClass]="{
+                            'is-valid':myform.controls.defaultphysician.valid,
+                            'is-invalid':myform.controls.defaultphysician.invalid && myform.controls.defaultphysician.touched
+                          }">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="myform.controls.defaultphysician.errors && (myform.controls.defaultphysician.touched)"
+                    class="errorMessage">
+                    <!-- <div *ngIf="myform.controls.defaultphysician.errors.required">
+                        Default Physician is required.
+                      </div> -->
+                  </div>
+                </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']" (click)="insertNurseStation()" [disabled]="myform.invalid"
+                class="btn btn-success" />&nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Nursing Station View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: max-content">
+                <h5>Nursing Station History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class="table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" id="myModal" role="dialog"
+  [ngStyle]="{'display': modalAddComputerIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 80%;">
+    <div class="modal-content">
+      <div #DemoHandle2 class="modal-header " style="height: max-content ">
+        <h5>Add Computer ({{nursingStationName}})</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+      </div>
+      <div class="modal-body bodystyle">
+        <form [formGroup]="computerform">
+          <div class="row form-group">
+            <div class="col-sm-2 col-md-3 col-lg-2">Computer Name
+              <span class="c1">*</span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <input type="text" id="txtcomputername" formControlName="computername"
+                (blur)="checkComputerName()" class="form-control" [ngClass]="{
+                        'is-valid':computerform.controls.computername.valid,
+                        'is-invalid':computerform.controls.computername.invalid && computerform.controls.computername.touched
+                     }" />
+                     <div *ngIf="computerform.controls.computername.errors && (computerform.controls.computername.touched)"
+                     class="errorMessage">
+                     <div *ngIf="computerform.controls.computername.errors.required">
+                      Computer Name is required.
+                     </div>
+                     <div *ngIf="computerform.controls.computername.errors.minlength">
+                      Computer Name cannot be less than 3 characters long.
+                     </div>
+                     <div *ngIf="computerform.controls.computername.errors.pattern">
+                      Computer Name {{config.alphaNumericFewSpecialCharactersMessage1}}
+       
+                     </div>
+                   </div>
+            </div>
+            <div class="col-sm-1">
+              <input type="button" id="btnsave" value="Save" [disabled]="computerform.invalid"
+                (click)="saveComputerName()" class="btn btn-success" />
+            </div>
+          </div>
+        </form>
+        <div *ngIf="computers.length>0">
+          <div class="tableFixHead">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th><strong> Computer Name </strong></th>
+                <!-- <th>Download</th> -->
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of computers| paginate: { itemsPerPage: 10, currentPage:q , id:'computer'};index as i;">
+            <td style="width:50%">{{item.ComputerName}}</td>
+            <!-- <td>
+              <a class="btn editicon" style="height: 8px;"
+                (click)="downLoadFile(item.ComputerName,item.ProcessKey)">
+                <i class="icon"></i>
+                <span class=" fa fa-download (alias) iconColor" title="Download"></span>
+              </a>
+            </td> -->
+            <td class="align-middle" *ngIf="pageConfig['AccessWrite']">
+                <a class="btn editicon" style="color:red;" (click)="openRemoveComputerName(item.ProcessID)"><i
+                  class="icon"></i><span class=" fa fa-trash" title="Delete"></span> </a>
+          </td>
+            <!-- <td>
+              <a class="btn editicon" style="color:blue;cursor: pointer;" (click)="getComputerName(item.ComputerName,item.ProcessID)">
+                <i class="icon"></i>
+                <span class=" fa fa-edit (alias) " title="Edit"></span>
+              </a>
+            </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <pagination-controls id="computer" (pageChange)="q = $event" *ngIf="computers.length > 0"></pagination-controls>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <!-- <span class="col-sm-3">
+              <label class="checkbox-label"><input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                (change)="showInactiveRecords($event.target.checked?true:false)" ><b style="color: #4fb633">Show Inactive NurseStations</b></label>
+              </span>-->
+              <div class="col-sm-5 col-md-6 col-lg-5">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive Nursing
+                    Stations</b></label></span>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4" style="margin-top: 8px;"><span style="color: red; font-weight: bold;">Note: Click On Plus Icon In Grid To Add Computer Names.</span></div>
+            <div class="col-sm-2 col-md-2 col-lg-3">
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateNurseStationStatus()"
+                [disabled]="UpdateStatus" class="btn btn-danger" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table id="tblNurseStations" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                          (change)="onCheckAll($event.target.checked?true:false)"></th>
+                      <th>Facility Name </th>
+                      <th>Nursing Station Name</th>
+                      <th>Nursing Station External ID</th>
+                      <th>Nursing Station Shifts</th>
+                      <th>Physician Name</th>
+                      <!--<th>Status</th>
+                      <th>Created By</th>
+                      <th>Created Date</th> -->
+                      <th *ngIf="pageConfig['AccessWrite']"></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let item of nurseStationList|gridFilter:searchText:'NurseStation'| paginate: { itemsPerPage: gridPagination, currentPage: p, id:'nurseStation' };">
+                      <td> <input type="checkbox" [checked]="CheckAll" value="{{item.NurseStation_Id}}"
+                          name="{{ item.NurseStation_Id }}" id="{{item.NurseStation_Id}}"
+                          (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                      <td>{{item.FacilityName}}</td>
+                      <td>{{item.NurseStation_Name}}
+                        <a class="btn editicon" style=" cursor: pointer;" *ngIf="item.Biometric_Status!=0"
+                        (click)="addComputerName(item.NurseStation_Id,item.NurseStation_Name)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-plus-circle (alias) iconColor" title="Add Computer Name"></span>
+                      </a>
+                      </td>
+                      <td>{{item.NurseStation_Code}}</td>
+                      <td>{{item.NurseStationShifts}}</td>
+                      <td>{{item.PhysicianName}}</td>
+                      <!-- <td *ngIf="item.NurseStation_Status===1">Active</td>
+                      <td *ngIf="item.NurseStation_Status===0">Inactive</td>
+                     <td>{{item.UserName}}</td>
+                      <td>{{item.NurseStation_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+
+                      <td *ngIf="pageConfig['AccessWrite']">
+                        <a class="btn editicon" 
+                          (click)="getNurseStationDetailsByID(item.NurseStation_Id,item.Facility_Id,item.FacilityStatus,item.CompanyHlsevenFlag,item.PhysicianNPI)">
+                          <i class="icon"></i>
+                          <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                        </a>
+                        <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="getNurseStationDetailsByID(item.NurseStation_Id)" /> -->
+                      </td>
+                      <td>
+                        <a class="btn editicon"  (click)="getHistoryById(item.NurseStation_Id)">
+                          <i class="icon"></i>
+                          <span class=" fa fa-history iconColor" title="History"></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls id="nurseStation" (pageChange)="p = $event" *ngIf="nurseStations.length > 0"></pagination-controls>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+  <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle3" style="padding-top: 35px" id="modaldes" role="dialog"
+    [ngStyle]="{'display': modalShiftIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div #DemoHandle3 class="modal-header" style="height: 35px;padding:7px !important;">
+          <h5>Nurse Shifts</h5>
+          <button type="button" class="close" (click)="closeModel()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="shiftsform">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2">Shift Name </div> -->
+              <div class="col-sm-6">
+                Shift Name
+                <input type="text" id="txtshits" formControlName="shiftname" class="form-control" />
+              </div>
+              <!-- <div class="col-sm-2">From Time </div> -->
+              <div class="col-sm-6">
+                From Time
+                <ng-multiselect-dropdown formControlName="fromtime" [data]="hoursList"
+                  [settings]="dropdownSettings_FromTime" class="form-control">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2">To Time</div> -->
+              <div class="col-sm-6">
+                To Time
+                <ng-multiselect-dropdown formControlName="totime" [data]="hoursList"
+                  [settings]="dropdownSettings_ToTime" class="form-control">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-5" style="margin-top: 13px;">
+                <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <input type="checkbox" formControlName="nextDayTime">
+                  </span>
+                  </div>
+                  <span class="form-control">Next day time</span>
+                </div>
+                </div>
+              <div class="col-sm-1 col-md-1 col-lg-1" style="margin-top: 10px;">
+                <a class="btn" (click)="addShiftForm()">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Shift"></span>
+                </a>
+              </div>
+            </div>
+            <div *ngIf="shiftsArray.length>0">
+              <div class="row" *ngFor="let item of shiftsArray;index as i" style="margin-top : 5px;">
+                <span>
+                  <span style="font-family:'Times New Roman', Times, serif;font-size: 15px">{{item.NurseShifts_Name}}
+                    {{item.FromHours}} - {{item.ToHours}}</span>
+                  <a class="btn editicon" style="color:red" (click)="removeShift(i)">
+                    <i class="icon"></i>
+                    <span class=" fa fa-times " title="Delete"></span>
+                  </a></span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <input type="button" id="btnsave" value="Save"  data-dismiss="modal" *ngIf="shiftsArray.length>0"
+            (click)="shiftSave()" class="btn btn-success" /> &nbsp;
+          <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="closeModel()" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle4" style="padding-top: 35px;" id="exampleModal" role="dialog"
+  [ngStyle]="{'display': modalRemoveComputerName ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div #DemoHandle4 class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+        <button type="button" class="close" (click)="closeRemoveComputerModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <strong> Do you want to Delete?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="RemoveComputerName()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="closeRemoveComputerModel()">No</button>
+      </div>
+    </div>
+  </div>
+</div>

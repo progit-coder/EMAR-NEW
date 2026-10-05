@@ -1,0 +1,149 @@
+<br/>
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Company Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Company Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>    
+  </section>  -->
+
+
+    <section class="content">
+        <div class="container-fluid">
+
+
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">72 Hour Check</h3>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-3"></div>
+                        <div class="col-sm-3 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="ddlform">
+                        <div class="row form-group clearfix">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label>Facility</label>
+                                <ng-multiselect-dropdown class="form-control" formControlName="ddlfacilities" [data]="facilities" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label>Nursing Station</label>
+                                <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestations" [data]="nurseStations" [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)" (onSelectAll)="onNurseStationSelectAll($event)"
+                                    (onDeSelect)="onNurseStationDeSelect($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-sm-6 col-md-3 col-lg-3 form-group" [formGroup]="form" *ngFor="let field of fields">
+                                <label>{{field.label}}</label>
+                                <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data" [settings]="field.settings" [(ngModel)]="field.ngModel" [placeholder]="field.placeholder" (onSelect)="onCommonSelectItems($event)" (onSelectAll)="onCommonSelectAllItems($event)"
+                                    (onDeSelect)="onCommonDeSelectItems($event)" (onDeSelectAll)="onCommonDeSelectAllItems(field.name)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+                  <label>Floor</label>
+                  <ng-multiselect-dropdown class="form-control" formControlName="ddlfloors" [data]="floors" [settings]="dropdownSettings_Floors"
+                    [placeholder]="'Floors'" (onSelect)="onFloorSelect($event)" (onSelectAll)="onFloorSelectAll($event)"
+                    (onDeSelect)="onFloorDeSelect($event)" (onDeSelectAll)="onFloorDeSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div> -->
+                            <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+                  <label>Wing</label>
+                  <ng-multiselect-dropdown class="form-control" formControlName="ddlwings" [data]="wings" [settings]="dropdownSettings_Wings"
+                    [placeholder]="'Wings'" (onSelect)="onWingSelect($event)" (onSelectAll)="onWingSelectAll($event)"
+                    (onDeSelect)="onWingDeSelect($event)" (onDeSelectAll)="onWingDeSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div> -->
+                            <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+                  <label>Room</label>
+                  <ng-multiselect-dropdown class="form-control" class="form-control" formControlName="ddlrooms" [data]="rooms" [settings]="dropdownSettings_Rooms"
+                    [placeholder]="'Rooms'" (onSelect)="onRoomSelect($event)" (onSelectAll)="onRoomSelectAll($event)"
+                    (onDeSelect)="onRoomDeSelect($event)" (onDeSelectAll)="onRoomDeSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div> -->
+                            <!-- <div class="col-sm-6 col-lg-2" *ngIf="companyToBed===1">
+                  <label>Bed</label>
+                  <ng-multiselect-dropdown class="form-control" formControlName="ddlbeds" [data]="beds" [settings]="dropdownSettings_Beds"
+                    [placeholder]="'Beds'" (onSelect)="onBedSelect($event)" (onSelectAll)="onBedSelectAll($event)"
+                    (onDeSelect)="onBedDeSelect($event)" (onDeSelectAll)="onBedDeSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div> -->
+                        </div>
+                    </form>
+                    <div>
+                        <h4 class="text-center" style="font-size: 1.0rem;">It has been 72 hours since the first dose of these medications were given.</h4>
+                    </div>
+                    <div>
+                        <h4 class="text-center" style="font-size: 1.0rem;">Please document the effects.</h4>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <form [formGroup]="myform" name="seventytwohourcheckForm" autocomplete="off">
+                      <div class="table-responsive">
+                        <table id="tblFacilities" class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th>Drug Name</th>
+                            <th>Resident Name</th>
+                            <th>First Administered On</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of drugInfoData|gridFilter:searchText:'72hours'|paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                            <td><strong>{{item.GiveCodeText}}</strong></td>
+                            <td>{{item.ResidentName}}</td>
+                            <td>(first administered {{item.AdministerOn| date:'MM/dd/yyyy hh:mm:ss a'}})</td>
+                            <td><textarea formControlName="text" class="form-control" style="padding: .050rem .75rem;" (change)="UpdateArray(item.DrugAdminister_Id,$event.target.value)"></textarea></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                      <!-- <div *ngFor="let item of drugInfoData|gridFilter:searchText:'72hours'|paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                            <div class="row">
+                                <div class="col-sm-8 col-md-8 col-lg-8">
+                                    <div class="row">
+                                        <div class="col-sm-4"><strong>{{item.GiveCodeText}}</strong></div>
+                                        <div class="col-sm-4">{{item.ResidentName}}</div>
+                                        <div class="col-sm-4">(first administered {{item.AdministerOn| date:'MM/dd/yyyy hh:mm:ss a'}})</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    <textarea formControlName="text" class="form-control" style="padding: .050rem .75rem;" (change)="UpdateArray(item.DrugAdminister_Id,$event.target.value)"></textarea>
+                                </div>
+
+                            </div><br/>
+
+                        </div> -->
+                        <pagination-controls (pageChange)="p = $event" *ngIf="drugInfoData.length > 0"></pagination-controls>
+
+
+                        <div style="text-align: right">
+                            <input type="button" id="btnsave" value="Submit" [disabled]="myform.invalid" *ngIf="pageConfig['AccessWrite'] && drugInfoData.length > 0" (click)="insertChecks()" class="btn btn-success" />
+                            <!-- <input type="button" id="btnreset" value="Do Them Later" (click)="resetScreen()" class="btn btn-danger" /> -->
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+    </section>
+</div>

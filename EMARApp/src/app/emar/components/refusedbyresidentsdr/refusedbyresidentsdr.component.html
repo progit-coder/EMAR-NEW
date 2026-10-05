@@ -1,0 +1,237 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <form [formGroup]="dashboardForm" name="dashboardForm">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-3">
+                <h3 class="card-title">
+                  <span *ngIf="this.dashboardForm.value.martype==3">Medication Refusal Report Monthly</span>
+                </h3>
+              </div> 
+              <div class="col-sm-3">
+                <ng-multiselect-dropdown class="form-control multiselectdropdown" formControlName="facilityName"
+                  [data]="facilities" [settings]="dropdownSettings_FacID" [placeholder]="'Select facilities'"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-3">
+                <ng-multiselect-dropdown class="form-control" formControlName="nursestationName"
+                  [data]="nurseStations" [settings]="dropdownSettings_ID"
+                  [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                  (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+                  (onDeSelectAll)="onNurseStationDeSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+             <!--   <div class="col-sm-3">
+               <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                  [ngModelOptions]="{standalone: true}" placeholder="Search"> 
+              </div>-->
+              <div class="col-sm-1">
+                <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;z-index:auto;cursor: pointer;">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link" data-toggle="dropdown" 
+                        (click)="showHideToggle('.test')">
+                        <i class="fa fa-filter"></i>
+                        <span class="badge badge-warning navbar-badge"></span>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:99999 !important">
+                        <span class="dropdown-item dropdown-header">Filters</span>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider" style="display: none"></div>
+                        <div class="dropdown-divider"></div> 
+                        <div class="dropdown-item"  style="width:215px;">
+                          Type
+                           
+                            <select [(ngModel)]='selectedLevel' name="dropdownOption" id="ddltype" formControlName="RefType" class='form-control' (change)="RefTypeChange()">
+                              <option value="1" [selected]="1">Behavioral Health Medications</option>
+                              <option value="2" >Non Behavioral Health Medications</option>
+                              
+                              </select>
+                          </div>
+                          <div class="dropdown-item"  style="width:215px;" >
+                            Therapeutical Classification
+                            <ng-multiselect-dropdown class="form-control" formControlName="gpidata" [data]="gpilist" [settings]="dropdownSettings_gpiID"
+                              [placeholder]="'GPI'" (onSelect)="onGpiSelect($event)"
+                              (onSelectAll)="onGpiSelectAll($event)" (onDeSelect)="onGpiDeSelect($event)"
+                              (onDeSelectAll)="onGpiDeSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                          </div> 
+
+                          <div class="dropdown-item" *ngIf="isMRED" style="width:215px;">
+                              No Administration Reason
+                              <ng-multiselect-dropdown   class="form-control multiselectdropdown" formControlName="ddlNotestype"
+                              [data]="noteComments" [settings]="dropdownSettings_Note" [placeholder]="'Select Notes'"
+                              (onSelect)="onMedicationSelect($event)"
+                              (onSelectAll)="onMedicationSelectAll($event)" (onDeSelect)="onMedicationDeSelect($event)"
+                              (onDeSelectAll)="onMedicationDeSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                             </div>
+  
+                        <div class="dropdown-item"  style="width:215px;">
+                          Resident Type
+                          <select class="form-control" id="ddlresidenttype" formControlName="residentstatus"
+                            (change)="getResidentDropData()">
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                          </select>
+                        </div>
+                        <div class="dropdown-item"  style="width:215px;">
+                          Residents
+                          <ng-multiselect-dropdown class="form-control marResdients" formControlName="ddlresidents" [data]="residents" [(ngModel)]="selectedResItem"
+                            [settings]="dropdownSettings_ResID" [placeholder]="'Residents'" 
+                            (onSelect)="onResidentSelect($event)" (onSelectAll)="onResidentSelectAll($event)"
+                            (onDeSelect)="onResidentDeSelect($event)" (onDeSelectAll)="onResidentDeSelectAll($event)">
+                          </ng-multiselect-dropdown>
+                        </div>
+  
+                        <div class="dropdown-item"  style="width:215px;">
+                          Years
+                          <select id="years" formControlName="years" class="form-control ">
+                            <option value="0" disabled>select</option>
+                            <option *ngFor="let item of comparedropdownList" value="{{item.item_id}}">{{item.item_text}}
+                            </option>
+                          </select>
+                        </div>
+  
+                        <div class="dropdown-item"  style="width:215px;">
+                          Months
+                          <select id="months" formControlName="months" class="form-control ">
+                            <option value="0" disabled>select</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                          </select>
+                        </div>
+                       
+                     
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item">
+                          <input type="button" class="btn btn-info1" value="OK" (click)="loadChart()">&nbsp;
+                          <input type="button" class="btn btn-danger1" value="Close" (click)="close('.test')">
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-sm-1" style="text-align: right">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="getReport()" title="Export To PDF">
+                <!-- <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="getReport1()" title="Export To PDF"> -->
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+  <div class="row form-group">
+    <div class="col-sm-1 iconColor"><b>Year: {{dashboardForm.value.years}}</b></div>
+    <div class="col-sm-2 iconColor" *ngIf="dashboardForm.value.months==1"><b>Month: January</b></div>
+    <div class="col-sm-2 iconColor" *ngIf="dashboardForm.value.months==2"><b>Month: February</b></div>
+    <div class="col-sm-2 iconColor" *ngIf="dashboardForm.value.months==3"><b>Month: March</b></div>
+    <div class="col-sm-2 iconColor" *ngIf="dashboardForm.value.months==4"><b>Month: April</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==5"><b>Month: May</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==6"><b>Month: June</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==7"><b>Month: July</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==8"><b>Month: August</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==9"><b>Month: September</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==10"><b>Month: October</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==11"><b>Month: November</b></div>
+    <div class="col-sm-2 iconColor"  *ngIf="dashboardForm.value.months==12"><b>Month: December</b></div>
+    
+    <div *ngIf="this.dashboardForm.value.martype==3" class="Aliment"> 
+      <p class="foo Color1"></p> <b class="foo1">&#8594; Discontinued</b>
+  </div>
+  <div  *ngIf="this.dashboardForm.value.martype==3"  style="padding-right: 3px;"></div>
+  <div *ngIf="this.dashboardForm.value.martype==3" class="Aliment">
+      <p class="foo Color3"></p> <b class="foo1">&#8594; Order not scheduled</b>
+  </div>
+  <div  *ngIf="this.dashboardForm.value.martype==3" style="padding-right: 3px;"></div>
+  <div *ngIf="this.dashboardForm.value.martype==3" class="Aliment">
+      <p class="foo Color9"></p> <b class="foo1">&#8594; Order scheduled</b>
+  </div>
+  <div  *ngIf="this.dashboardForm.value.martype==3" style="padding-right: 3px;"></div>
+  <div *ngIf="this.dashboardForm.value.martype==3" class="Aliment">
+    <p class="foo Color9"  style="text-align: center;">&#9913;</p><b class="foo1">&#8594; Pending</b>
+  </div>
+  </div>
+  
+        <div *ngIf="this.dashboardForm.value.martype==3">
+          <div class="outer">
+            <div class="inner">
+              <drag-scroll #nav>
+                <div  drag-scroll-item>
+                  <table id="tbltable"  class="table table-bordered">
+                <thead>
+                  <tr>
+                    <ng-container *ngFor="let cols of gridColumns;let i = index">
+                      <th [ngClass]="[cols.name == 'PatientName'? 'fix1':cols.name=='Drug Name'?'fix2':cols.name=='time'?'fix3':cols.name=='Prescriber'?'fix4':cols.name=='Direction'?'fix4':'']" *ngIf="cols.display && i!=3 && i!=4 && i!=5 && i!=6 && i!=8 && i!=9 && cols.name !='OrderStatus'">{{ cols.displayName }}</th>
+                    </ng-container>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of gridData | paginate: { itemsPerPage: gridPagination, currentPage: p,totalItems: totalRecords };index as i" [class.highlighted]="(this.dashboardForm.value.martype ===3 && item[i].OrderStatus=== 'Inactive')" [style.color]="i>0?(gridData[i].PatientName!=gridData[i-1].PatientName?'red':'black'):'black'" >
+                   <ng-container *ngFor="let col of gridColumns;let i = index" >
+                    <td [ngClass]="[col.name == 'PatientName'? 'fix1':col.name=='Drug Name'?'fix2':col.name=='time'?'fix3':col.name=='Prescriber'?'fix4':col.name=='Direction'?'fix4':'']" *ngIf="item['OrderStatus'] != 'Inactive' && i!=3 && i!=4 && i!=5 && i!=6 && i!=8 && i!=9 && col.name != 'OrderStatus'"  [style.background-color]="col.name=='Direction'?'white': item[col.name] != 'Inactive' ? (col.name=='time'?'': item[col.name] == 0 ? '#454545':(item[col.name]!=null && item[col.name] .includes(';'))?(item[col.name].split(';')[0] == 0?'#454545':'#999999') : 'white'):item[col.name] == 2 ?'#999999': item[col.name] == 0 ? '#454545':(item[col.name]!=null && item[col.name] .includes(';'))?(item[col.name].split(';')[0] == 0?'#454545':'#999999'):''">
+                    <span *ngIf="item[col.name] != 0 && item[col.name] != 1 && item[col.name] != 2" style="white-space: normal;">
+                      <span [ngStyle]="{'color':(item[col.name]!=null && item[col.name] .includes(';')) ?item[col.name] .split(';')[0]==0?'white':'black' : 'black' }"  *ngIf="col.name =='time' || col.name =='Direction'">{{(item[col.name]!=null && item[col.name].includes(';')) ? item[col.name].split(';')[1]:item[col.name]}}</span>
+                      <span [ngStyle]="{'color':item[col.name] .includes('(V)')?'#553F2D':item[col.name] .includes('(A)')?'#077907':item[col.name] .includes('(H)')?'#9e0384':item[col.name] .includes('(N)')?'rgba(202, 173, 5)':item[col.name] .includes('(R)')?'red':item[col.name] .includes('(O)')?'#072aa0':'pink'}" *ngIf="col.name!='PatientName' && col.name!='Drug Name' && col.name!='time' && col.name!='Direction' && col.name!='Prescriber'">{{item[col.name]}}</span>
+                      <span *ngIf="col.name=='PatientName' && col.name!='Drug Name'">{{item[col.name]}} {{item['DOB']}}, {{item['Gender']}}</span>
+                      <span *ngIf="col.name=='Drug Name'">{{item[col.name]}} <br> <b>Start Date:</b> {{item['StartDate']}} <br><b>Ordered By:</b> {{item['Prescriber']}} <br>
+                        <span *ngIf="item['EndDate']!=null && item['EndDate'].includes('D/C')"><b>D/C Date:</b> {{item['EndDate'] | replace:'D/C Date:':''}}</span>
+                        <span *ngIf="item['EndDate']!=null && item['EndDate'].includes('End')"><b>End Date:</b>  {{item['EndDate'] | replace:'End Date:':''}}</span> 
+                      </span>
+                    </span>
+                    </td>
+                    <td [ngClass]="[col.name == 'PatientName'? 'fix1':col.name=='Drug Name'?'fix2':col.name=='time'?'fix3':col.name=='Direction'?'fix4':'']" *ngIf="item['OrderStatus'] == 'Inactive' && i!=3 && i!=4 && i!=5 && i!=6 && i!=8 && i!=9 && col.name != 'OrderStatus'"  [style.background-color]="col.name=='Direction'?'white': item[col.name] == 2 ?'#999999': item[col.name] == 0 ? '#454545':(item[col.name]!=null && item[col.name] .includes(';'))?(item[col.name].split(';')[0] == 0?'#454545':'#999999'):''">
+                        <span *ngIf="item[col.name] != 0 && item[col.name] != 1 && item[col.name] != 2" style="white-space: normal;">
+                          <span [ngStyle]="{'color':(item[col.name]!=null && item[col.name] .includes(';')) ?item[col.name] .split(';')[0]==0?'white':'black' : 'black' }" *ngIf="col.name =='time' || col.name =='Direction'">{{(item[col.name]!=null && item[col.name].includes(';')) ? item[col.name].split(';')[1]:item[col.name]}}</span>
+                      <span *ngIf="col.name=='PatientName' && col.name!='Drug Name'">{{item[col.name]}} {{item['DOB']}}, {{item['Gender']}}</span>
+                      <span [ngStyle]="{'color':item[col.name] .includes('(V)')?'#553F2D':item[col.name] .includes('(A)')?'#077907':item[col.name] .includes('(H)')?'#9e0384':item[col.name] .includes('(N)')?'rgba(202, 173, 5)':item[col.name] .includes('(R)')?'red':item[col.name] .includes('(O)')?'#072aa0':'pink'}" *ngIf="col.name!='PatientName' && col.name!='Drug Name' && col.name!='time' && col.name!='Direction' && col.name!='Prescriber'">{{item[col.name]}}</span>
+                      <span *ngIf="col.name=='Drug Name'">{{item[col.name]}} <br> <b>Start Date:</b> {{item['StartDate']}} <br><b>Ordered By:</b> {{item['Prescriber']}} <br>
+                        <span *ngIf="item['EndDate']!=null && item['EndDate'].includes('D/C')"><b>D/C Date:</b> {{item['EndDate'] | replace:'D/C Date:':''}}</span>
+                        <span *ngIf="item['EndDate']!=null && item['EndDate'].includes('End')"><b>End Date:</b>  {{item['EndDate'] | replace:'End Date:':''}}</span>
+                      </span>
+                        </span>
+                        </td>
+  
+                   </ng-container>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <ng-container *ngFor="let cols of gridColumns;let i = index">
+                      <th [ngClass]="[cols.name == 'PatientName'? 'fix1':cols.name=='Drug Name'?'fix2':cols.name=='time'?'fix3':cols.name=='Direction'?'fix4':'']" *ngIf="cols.display && i!=3 && i!=4 && i!=5 && i!=6 && i!=8 && i!=9 && cols.name !='OrderStatus'">{{ cols.displayName }}</th>
+                    </ng-container>
+                  </tr>
+                </tfoot>
+              </table>
+                </div>
+              </drag-scroll>
+            </div>
+          </div> 
+          </div>
+            <pagination-controls (pageChange)="getGridDataOnPageChange($event)" *ngIf="gridData.length > 0"></pagination-controls>
+          </div>
+          <div class="col-sm-12" *ngIf="this.dashboardForm.value.martype==3">
+            <p><b style="color: red;">Note</b>: <b style="color: #553F2D;">V-Vomited</b>, <b style="color: #077907;">A-Away</b>, <b style="color: #9e0384;">H-Hold</b>, <b style="color: 	rgba(202, 173, 5);">N-No Show</b>, <b style="color: red;">R-Refused</b>, <b style="color: #072aa0;">O-Other</b></p>
+          </div>
+          <div class="col-sm-12">
+              <p><b>Users</b>: {{legend}}</p>
+            </div>
+        </form>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section> 

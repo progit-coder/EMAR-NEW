@@ -1,0 +1,370 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Frequency Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Frequency Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Frequency Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="companyForm">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+                Frequency<span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Frequency<span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="frequency" [data]="frequencyList"
+                  [(ngModel)]="selectedfrequencyItems" [settings]="dropdownSettings_Frequency"  (onSelect)="onFrequencySelect()" (onDeSelect)="onFrequencySelect()"
+                  [ngClass]="{
+                        'is-valid':myform.controls.frequency.valid,
+                        'is-invalid':myform.controls.frequency.invalid && myform.controls.frequency.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.frequency.errors && (myform.controls.frequency.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.frequency.errors.required">
+                    Frequency is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Facility
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Facility
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="facilityname" [data]="facilities"
+                  [(ngModel)]="selectedfItems" [settings]="dropdownSettings_Facility"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" [ngClass]="{
+                          'is-valid':myform.controls.facilityname.valid,
+                          'is-invalid':myform.controls.facilityname.invalid && myform.controls.facilityname.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.facilityname.errors && (myform.controls.facilityname.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.facilityname.errors.required">
+                    Facility is required.
+                  </div>
+                </div>
+
+          
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Nursing Station
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="nursestationName"
+                  [data]="facilityNurseStations" [(ngModel)]="selectednItems" 
+                  [settings]="dropdownSettings_NurseStation" (onSelect)="onNurseStationSelect($event)"
+                  (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+                  (onDeSelectAll)="onNurseStationDeSelectAll($event)"
+                  [ngClass]="{
+                              'is-valid':myform.controls.nursestationName.valid,
+                              'is-invalid':myform.controls.nursestationName.invalid && myform.controls.nursestationName.touched}"></ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.nursestationName.errors && (myform.controls.nursestationName.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.nursestationName.errors.required">
+                    Nursing Station is required.
+                  </div>
+                </div>
+
+               
+              </div>
+            </div>
+            <div class="row form-group">
+               <!-- <div class="col-md-2 col-lg-2 col-sm-2">
+                Start Time
+                <span class="c1" *ngIf="frequencyId!=1 && frequencyId!=28  ">*</span>
+              </div> -->
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                No. of Times
+                <!-- <input type="text" class="form-control" formControlName="hours" [attr.disabled]="(isReadOnly ? '' : null)" [ngClass]="{
+                      'is-valid':myform.controls.hours.valid,
+                      'is-invalid':myform.controls.hours.invalid && myform.controls.hours.touched}" /> -->
+                      <input type="text" class="form-control" formControlName="hours" disabled="true" [ngClass]="{
+                        'is-valid':myform.controls.hours.valid,
+                        'is-invalid':myform.controls.hours.invalid && myform.controls.hours.touched}" />
+
+                <div *ngIf="myform.controls.hours.errors && (myform.controls.hours.touched)" class="errorMessage">
+                  <!-- <div *ngIf="myform.controls.hours.errors.required">
+                      Hours is required.
+                  </div> -->
+                  <div *ngIf="myform.controls.hours.errors.maxlength">
+                    No. of Times must be 2 characters long.
+                  </div>
+                  <div *ngIf="myform.controls.hours.errors.pattern">
+                    {{config.numericMessage}}
+                  </div>
+                  <!-- <div *ngIf="myform.controls.hours.errors.min">
+                   Hours allow 1 to 23 values only.
+                  </div>
+                  <div *ngIf="myform.controls.hours.errors.max">
+                    Hours allow 1 to 23 values only.
+                  </div> -->
+                </div>
+
+              
+              </div>
+              <div class="col-md-3 col-lg-3 col-sm-3">
+                Start Time
+                <span class="c1" *ngIf="frequencyId!=1 && frequencyId!=28  ">*</span>
+                  <ng-multiselect-dropdown formControlName="time" [disabled]="frequencyId == 28 " [data]="hoursList" [(ngModel)]="selectedstItems"
+                  [settings]="dropdownSettings_StartTime" (onSelect)="addstartTime()"
+                  (onDeSelect)="addstartTime()" class="form-control" [ngClass]="{
+                        'is-valid':myform.controls.time.valid ,
+                        'is-invalid':myform.controls.time.invalid && myform.controls.time.touched}">
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.time.errors && (myform.controls.time.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.time.errors.required">
+                    Time is required.
+                  </div>
+                </div>
+            
+              </div>
+              <div class="col-sm-1 col-md-1 col-lg-1" style="margin-top: 7px;">
+                  <a class="btn" (click)="timemodalopen()">
+                    <i class="icon"></i>
+                    <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Time"></span>
+                  </a>
+                </div>
+              <!-- <div class="col-md-2 col-lg-2 col-sm-2">
+                Hours
+              </div> -->
+              <!-- <div class="col-md-2 col-lg-2 col-sm-2">
+                Only administration on these days
+              </div> -->
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                Only administer on these days
+                <ng-multiselect-dropdown class="form-control" formControlName="weeksdata" [data]="dropdownList"
+                  [settings]="dropdownSettings" [(ngModel)]="selectedItems" [ngClass]="{
+                  'is-valid':myform.controls.weeksdata.valid ,
+                  'is-invalid':myform.controls.weeksdata.invalid && myform.controls.weeksdata.touched
+                }">
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="myform.controls.weeksdata.errors && (myform.controls.weeksdata.dirty || myform.controls.weeksdata.touched)"
+                  class="errorMessage">
+                  <!-- <div *ngIf="myform.controls.weeksdata.errors.required">
+                     Only administration on these days is required. 
+                </div> -->
+                </div>
+
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-md-2 col-lg-2 col-sm-2">
+                Month Filters Week
+              </div> -->
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                Month Filters Week
+                <select class="form-control" formControlName="week" [ngClass]="{
+                      'is-valid':myform.controls.week.valid,
+                      'is-invalid':myform.controls.week.invalid && myform.controls.week.touched}">
+                  <option value="" disabled selected>Select</option>
+                  <option *ngFor="let item of weeksList" value="{{item.Week_Id}}">{{item.Week_Desc}}</option>
+                </select>
+                <div *ngIf="myform.controls.week.errors && (myform.controls.week.touched)" class="errorMessage">
+                  <!-- <div *ngIf="myform.controls.week.errors.required">
+                        Month Filters Week is required.
+                    </div> -->
+                </div>
+              </div>
+              <!-- <div class="col-md-2 col-lg-2 col-sm-2">
+                  Active For Days
+                </div> -->
+                <div class="col-md-4 col-lg-4 col-sm-4">
+                  Active For Days
+                  <input type="text" class="form-control" formControlName="aDay" [ngClass]="{
+                            'is-valid':myform.controls.aDay.valid && myform.controls.aDay.dirty,
+                            'is-invalid':myform.controls.aDay.invalid && myform.controls.aDay.touched}" />
+                  <div *ngIf="myform.controls.aDay.errors && (myform.controls.aDay.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.aDay.errors.maxlength">
+                      Active For Days must be 3 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.aDay.errors.pattern">
+                      {{config.numericMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.aDay.errors.min">
+                     Minimum 1 Active for day allowed.
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-2 col-lg-2 col-sm-2">
+                  Hold For Days
+                </div> -->
+                <div class="col-md-4 col-lg-4 col-sm-4">
+                  Hold For Days
+                  <input type="text" class="form-control" formControlName="hDay" [ngClass]="{
+                          'is-valid':myform.controls.hDay.valid && myform.controls.hDay.dirty,
+                          'is-invalid':myform.controls.hDay.invalid && myform.controls.hDay.touched}" />
+                  <div *ngIf="myform.controls.hDay.errors && (myform.controls.hDay.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.hDay.errors.maxlength">
+                      Hold For Days must be 3 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.hDay.errors.pattern">
+                      {{config.numericMessage}}
+                    </div>
+                    <div *ngIf="myform.controls.hDay.errors.min">
+                      Minimum 1 Hold for day allowed.
+                     </div>
+                  </div>
+                </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Save" [disabled]="myform.invalid || savedisable==true"
+                (click)="insertNursingfrequencyConfigsData()" class="btn btn-success" /> &nbsp;
+              <input type="button" value="Reset" class="btn btn-danger" (click)="reSet()" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Frequency View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Nursing Frequency History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Facility</th>
+                  <th>Nursing Station </th>
+                  <th>Frequency</th>
+                  <th>Start Time</th>
+                  <th>Next Time</th>
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of frequencyConfigs|gridFilter:searchText:'FrequencyMaping' |paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                  <td>{{item.FacilityName}}</td>
+                  <td>{{item.NurseStationName}}</td>
+                  <td>{{item.Frequency}}</td>
+                  <td>{{item.Start_Time}}</td>
+                  <td>{{item.Hours}}</td>
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon" 
+                      (click)="getNursingFrequencyConfigDataByID(item.NursingFreq_Id,item.Facility_Status,item.NurseStation_Status)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                    <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="getCompanyDetailsByID(item.Company_Id)" /> -->
+                  </td>
+                  <td>
+                    <a class="btn editicon" (click)="getHistoryById(item.NursingFreq_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="frequencyConfigs.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>
+<div class="modal fade modalstyle" style="padding-top: 35px" id="modaldes" role="dialog" [ngStyle]="{'display': modalTimeIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 35px;padding:7px !important;">
+        <h5>Add Time</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body" style="height: 300px !important;overflow-x: scroll !important;">
+        <form [formGroup]="timeform">
+        <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">
+               Next Time
+              </div> -->
+              <div class="col-sm-6 col-md-6 col-lg-4">
+                Next Time
+                  <ng-multiselect-dropdown formControlName="starttime" [data]="hoursList" [(ngModel)]="selectedntItems"
+                  [settings]="dropdownSettings_NextTime"
+                 class="form-control" [ngClass]="{
+                        'is-valid':timeform.controls.starttime.valid ,
+                        'is-invalid':timeform.controls.starttime.invalid && timeform.controls.starttime.touched}">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-1 col-md-1 col-lg-1" style="margin-top: 7px;">
+                  <a class="btn" (click)="addTimes()">
+                    <i class="icon"></i>
+                    <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Time"></span>
+                  </a>
+                </div>
+            </div>
+            <div *ngIf="timesArray.length>0" >
+                <div class="row" *ngFor="let item of timesArray;index as i" style="margin-top : 5px;">
+                    <span>
+                      <span style="font-family:'Times New Roman', Times, serif;font-size: 15px" ><span *ngIf="i==0"><strong>Start Time - </strong></span>{{item.Hour_Desc}}</span>
+                      <a class="btn editicon" style="color:red" *ngIf="i!=0" (click)="removeTime(i)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-times " title="Delete"></span>
+                      </a></span>
+                  </div>
+                </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="button" id="btnclose" value="Close" class="btn btn-danger" (click)="closeModel()" />
+      </div>
+    </div>
+  </div>
+</div>

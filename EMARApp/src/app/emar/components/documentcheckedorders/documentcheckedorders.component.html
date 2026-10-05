@@ -1,0 +1,473 @@
+<section class="content">
+  <div class="container-fluid">
+    <form [formGroup]="myform" name="residentGridForm">
+      <div class="row form-group">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Facility</label>
+          <ng-multiselect-dropdown formControlName="ddlfacilities" class="form-control" [data]="facilities" [(ngModel)]="selectedFacItems"
+            [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'" (onSelect)="onFacilitySelect($event)"
+            (onDeSelect)="onFacilityDeSelect($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Nursing Station</label>
+          <ng-multiselect-dropdown formControlName="ddlnursestations" class="form-control" [data]="nurseStations" [(ngModel)]="selectednItems"
+            [settings]="dropdownSettings_NurseStations" [placeholder]="'Nursing Stations'"
+            (onSelect)="onNurseStationSelect($event)" (onDeSelect)="onNurseStationDeSelect($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Residents</label>
+          <ng-multiselect-dropdown formControlName="ddlresidents" class="form-control"
+            [data]="residents" (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)" [settings]="dropdownSettings_Resident">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <!-- <div class="row form-group">
+       
+      </div> -->
+
+
+
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6 col-md-5 col-lg-5">
+              <h3 class="card-title">Document Administered Orders</h3>
+            </div>
+            <div class="col-sm-2 col-md-3 col-lg-3">
+              <!-- <input type="button" *ngIf="OrderList.length>0 && withoutScannerDisplayVitals.length>0" value="User Inputs"  class="btn btn-success btn-xs" (click)="userInputsOpen()" /> -->
+            </div>
+            <div class="col-sm-4 col-lg-4 col-md-4">
+              <input type="button" id="btnRemove"
+                value="Click Here to Remove MAR Entries" [disabled]="RemoveStatus"
+                (click)="modalRemoveopen()" class="btn btn-danger btn-sm" />
+            </div>
+            <!-- <div class="col-sm-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm"
+                (input)="onSearchChange($event.target.value)" placeholder="Search"
+                [ngModelOptions]="{standalone: true}">
+            </div> -->
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group">
+            <div class="col-sm-2 col-md-3 col-lg-3">
+              <label>Date Administered</label>
+              <input type="date" class="form-control" formControlName="dateCheck" (change)="onDateChange()"/>
+              <div *ngIf="myform.controls.dateCheck.errors && (myform.controls.dateCheck.touched)"
+              class="errorMessage">
+              <div *ngIf="myform.controls.dateCheck.errors.required">
+                Date Administered is required.
+              </div>
+            </div>
+            </div>
+            <div class="col-sm-2 col-md-3 col-lg-3">
+              <label>Pass Time</label>
+              <ng-multiselect-dropdown [data]="timeDropList" class="form-control" formControlName="nurseSheduleTime"
+                [settings]="dropdownSettings_Time" (onSelect)="onTimeSelect($event)" (onSelectAll)="onTimeSelectAll($event)" (onDeSelect)="onTimeDeSelect($event)" (onDeSelectAll)="onTimeDeSelectAll($event)" [placeholder]="'Select Time'">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-2 col-md-3 col-lg-3">
+              <label>Orders Administered By </label>
+
+              <ng-multiselect-dropdown formControlName="user" class="form-control" [(ngModel)]="selecteduserItem"
+                [data]="userDrop" [settings]="dropdownSettings_User">
+              </ng-multiselect-dropdown>
+              <div *ngIf="myform.controls.user.errors && (myform.controls.user.touched)"
+              class="errorMessage">
+              <div *ngIf="myform.controls.user.errors.required">
+                Orders Administered By is required.
+              </div>
+            </div>
+            </div>
+            <div class="col-sm-2 col-md-3 col-lg-3">
+              <label>&nbsp;Time Administered</label>
+              <input type="time"  id="txtAdminDate" min="2010-01-
+                                                                        01T00:00:00" formControlName="AdminDate"
+                class="form-control" (change)="getOrders()" />
+                <!-- (change)="RefreshGrid()" [ngClass]="{
+                  'is-valid':myform.controls.AdminDate.valid  && myform.controls.AdminDate.dirty,
+                  'is-invalid':myform.controls.AdminDate.invalid && myform.controls.AdminDate.touched
+                }" -->
+                <!-- <div *ngIf="myform.controls.AdminDate.errors && myform.controls.AdminDate.touched" class="errorMessage">
+                <div *ngIf="myform.controls.AdminDate.errors.required  ">
+                  Enter valid Administered date & time.
+                </div>
+              </div> -->
+            </div>
+
+            <!-- <div style="padding-top: 20px !important;padding-left: 7px;">
+              <input type="button" style="border-radius: 34px;padding: 2px;" id="btnRemove"
+                value="Click Here to Remove MAR Entries" [disabled]="RemoveStatus"
+                (click)="modalRemoveopen()" class="btn btn-info" />
+                &nbsp;
+            </div>&nbsp; -->
+            <!-- <div class="col-sm-1 col-md-2 col-lg-2" *ngIf="OrderList.length>0 && withoutScannerDisplayVitals.length>0" style="margin-top: 23px;">
+              <input type="button" value="User Inputs"  class="btn btn-success btn-xs" (click)="userInputsOpen()" />
+            </div> -->
+          </div>
+          <br />
+          <drag-scroll #nav>
+          <div drag-scroll-item>
+          <div class="table-responsive" *ngIf="OrderList.length>0">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <span *ngIf="checkAllDisplay===1"><input type="checkbox" id="chkselectall" [(ngModel)]="CheckAll" *ngIf="CheckRecord==true && OrderList.length>0 && withoutScannerDisplayVitals.length==0 && wsDiscard==1"
+                      (change)="onCheckAll($event.target.checked?true:false)" [ngModelOptions]="{standalone: true}">
+                  </span>
+                    </th>
+                  <th>Drug Name</th>
+                  <th>Pass Time</th>
+                  <th>Qty/dose</th>
+                  <!-- <th>Route</th> -->
+                  <th style="white-space: pre-wrap;white-space: -moz-pre-wrap;">Total Administered/MaxPerDay</th>
+                  <th style="white-space: pre-wrap;white-space: -moz-pre-wrap;">New Package Open</th>
+                  <th style="white-space: pre-wrap;white-space: -moz-pre-wrap;">Manually Set Discard After Date</th>
+                  <th>Discard Date</th>
+                  <th style="white-space: pre-wrap;white-space: -moz-pre-wrap;">Administration Sites</th>
+                  <th style="white-space: pre-wrap;white-space: -moz-pre-wrap;">PRN Reason for Administration</th>                  
+                  <th>User Inputs</th>
+                  <th>No Administration</th>
+                  <th>Reason</th>
+                  <th></th>
+                
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of OrderList;index as i" id="{{'WSOrderRow'+i+item.DrugAdminister_Id}}" [style.background-color]="OrderList[i].Type==0?ordersGrid==1? checkDiscardDate(OrderList[i].DiscardDate,OrderList[i].DrugAdminister_Id,OrderList[i].DiscardDays,i)==1?'#ade39d':checkDiscardDate(OrderList[i].DiscardDate,OrderList[i].DrugAdminister_Id,OrderList[i].DiscardDays,i)==2?'#ffdf62':'white':getTextColorForDiscardDate(OrderList[i].DiscardDate,OrderList[i].DiscardDays):'white'">
+                  <td><span *ngIf="item.Type===0">
+                    <input type="checkbox" [checked]="CheckAll" value="{{item.Porder_Id}}"
+                      name="{{ item.Porder_Id }}" id="{{item.DrugAdminister_Id}}"
+                      (change)="onselectRecord($event.target.checked?true:false, item)" />
+                    </span></td>
+                  <td>{{item.Order}}<b *ngIf="item.ControlSubstanceBit==1 || item.ControlSubstanceBit==2" style="color: red;">(Controlled Substance)</b>
+                    <span *ngIf="item.PRNFlag == true" style="color:red">&nbsp;&nbsp;PRN</span>
+                  <!-- <b *ngIf="item.Type!=0" style="color: #4fb633;">&nbsp;&nbsp;Administered</b> -->
+                  </td>
+                    <td>{{item.Pass_Time}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <!-- <td>{{item.Route}}</td> -->
+                    <td><span *ngIf="item.PRNFlag == true">{{item.PRNAdministered}}/{{item.MaxPerdays}}</span></td>
+                    <td><span *ngIf="item.Type===0">
+                      <input type="checkbox" value="{{item.Porder_Id}}" *ngIf="item.DiscardDays!=null && item.DiscardDays!=0" name="{{ item.Porder_Id }}" id="{{'newpr'+item.DrugAdminister_Id}}"
+                      (change)="$event.stopPropagation();onselectNewProductOpenWS($event.target.checked?true:false, item,i)">
+                    </span>
+                    </td>
+                    <td>
+                      <span *ngIf="item.Type===0"><input type="checkbox"  value="{{item.Porder_Id}}" *ngIf="item.DiscardDays!=null && item.DiscardDays!=0" name="{{ item.POrder_Id }}" id="{{'manset'+item.DrugAdminister_Id}}"
+                      (change)="$event.stopPropagation();onselectManSetDiscardWS($event.target.checked?true:false, item,i)">
+                    </span>
+                    </td>
+                      <td>
+                      <form [formGroup]="WsDiscardDate">
+                       <input type="date" [min]="today" *ngIf="item.Type===0 && item.DiscardDays!=null && item.DiscardDays!=0" id="{{'disca'+item.DrugAdminister_Id}}" class="form-control" [value]="item.DiscardDate|date:'yyyy-MM-dd'" (blur)="$event.stopPropagation();changeDiscardDateWS($event.target.value,item)" formControlName="WSDiscard" style="height: 10px;" >
+                      </form>
+                      </td>
+                    <td><a class="btn editicon" style="font-size: 20px;color: #000000;" *ngIf=" item.Type===0 && (item.Route==='SC' || item.Route==='IM' || item.Route==='TD')" (click)="openInsulinSiteWithoutScannerModal(item.DrugAdminister_Id,item.Route,item.AdministerSites,i)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-eyedropper" title="Insulin Sites"></span>
+                    </a></td>
+                    <td>
+                    <form [formGroup]="WsPRN">
+                      <input *ngIf="item.PRNFlag == true && item.Type===0"  type="text" class="form-control" formControlName="WSPrnReason" id="{{'PRN'+item.DrugAdminister_Id}}" (change)="prnReasonUpdate(item.Porder_Id,item.PQuantity_Id,$event.target.value,item.DrugAdminister_Id)"/>
+                    </form>
+                  </td>
+                  <!-- <td>
+                    <a class="btn editicon" style="color: blue" (click)="getCompanyDetailsByID(item.Company_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias)" title="Edit"></span>
+                    </a>
+                  </td> -->                  
+                  <td><span id="{{item.PQuantity_Id+''+item.DrugAdminister_Id}}" style="color:red" [hidden]='clk' (click)="RowClickwithoutScannerVitals(item)"><i class="icon"><span class="fa fa-pencil-square-o aria-hidden=true" title="User Inputs"></span></i></span></td>
+                <td>
+                  <span *ngIf="item.Type===0 && item.PRNFlag == false" class="flagText">
+                    <span style="cursor:pointer; text-decoration: underline;color: #4fb633;"
+                    (click)="$event.stopPropagation();openNoShowAdministerModal(i,item)"
+                   >No Administration</span></span>
+                </td>
+                <td>{{item.Reason}}</td>
+                  <td>
+                    <a class="btn editicon" style="color: #000000;" (click)="GetOrderAuditData(item.DrugAdminister_Id)" >
+                      <i class="icon"></i>
+                      <span class=" fa fa-history" title="History"></span>
+                    </a>
+                  </td>
+
+                  <!-- <td>
+                    <input type="button" class="btn btn-primary" value="Add New Facility" (click)="addNewFacility(item.Company_Id)" />
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          </drag-scroll>
+          <div class="row form-group">
+            <div class="col-sm-4 col-md-6 col-lg-6">
+              <p *ngIf="OrderList.length>0"><b style="color: red;">Note</b>: <span class=" fa fa-square" style="color:#ffdf62;"></span><b>&nbsp; This drug package should no longer be used, open a new package</b> 
+              </p>
+            </div>
+              <div class="col-sm-4 col-md-6 col-lg-6">
+                <p *ngIf="OrderList.length>0">
+                <span class=" fa fa-square" style="color:#ade39d;"></span><b>&nbsp; Drug  must be discarded soon, reorder promptly </b>
+                </p>
+                </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-4 col-md-12 col-lg-12" style="text-align: right">
+            <input type="button" id="btnsave" value="DocumentCheckedOrders"
+              [disabled]="selectedRecords.length==0 " (click)="modalUnlockopen()"
+              class="btn btn-success" /> &nbsp;
+
+            <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+          </div>
+        </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle8" id="mdlundo" role="dialog" [ngStyle]="{'display': modalNoShowAdministerIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+        <form [formGroup]="medicationForm" name="Undo">
+            <div class="modal-content">
+                <div #DemoHandle8 class="modal-header ">
+                    <h5> Administration</h5>
+                    <button type="button" class="close" (click)="closeNoShowModel()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            Medication Reason <span class="c1">*</span></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <ng-multiselect-dropdown formControlName="medicationReason" [data]="medicationReasonList" [settings]="dropdownSettings_MedicationReason" (onSelect)="onMedicationReasonSelect($event)" (onDeSelect)="onMedicationReasonDeSelect($event)" [placeholder]="'Medication Reason'"
+                                class="form-control" [ngClass]="{
+                  'is-valid':medicationForm.controls.medicationReason.valid && medicationForm.controls.medicationReason.dirty,
+                  'is-invalid':medicationForm.controls.medicationReason.invalid && medicationForm.controls.medicationReason.touched
+                }"></ng-multiselect-dropdown>
+                            <div *ngIf="medicationForm.controls.medicationReason.errors && (medicationForm.controls.medicationReason.touched)" class="errorMessage">
+                                <div *ngIf="medicationForm.controls.medicationReason.errors.required">
+                                    Medication Reason is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-5 col-md-5 col-lg-5">
+                            Note <span *ngIf="notestatus == 1" class="c1">*</span></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" class="form-control" formControlName="note" [ngClass]="{
+                'is-valid':medicationForm.controls.note.valid && medicationForm.controls.note.dirty,
+                'is-invalid':medicationForm.controls.note.invalid && medicationForm.controls.note.touched
+              }" />
+                            <div *ngIf="medicationForm.controls.note.errors && (medicationForm.controls.note.touched)" class="errorMessage">
+                                <div *ngIf="medicationForm.controls.note.errors.required">
+                                    Note is required.
+                                </div>
+                                <div *ngIf="medicationForm.controls.note.errors.maxlength">
+                                    Note cannot be more than 50 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row form-group">
+            <div class="col-sm-5">Undo Drug Quantity  <span class="c1">*</span>
+            </div>
+            <div class="col-sm-5">
+              <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                class="form-control" pattern="[0-9.]+" class="form-control" pattern="[0-9.]+"
+                formControlName="undoQuantity" />
+              <div class="valid-feedback feedback-icon">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="invalid-feedback feedback-icon">
+                <i class="fa fa-times"></i>
+              </div>
+            </div>
+          </div> -->
+                </div>
+                <div class="modal-footer">
+                    <div style="text-align: right">
+                        <input type="button" value="Submit" *ngIf="pageConfig['AccessWrite']" class="btn btn-success btn-xs" [disabled]="medicationForm.invalid" (click)="orderGivenStatus(this.undoOrderDetails)"
+                        />&nbsp;
+                        <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeNoShowModel()">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+  
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="mdlvitals" role="dialog"
+  [ngStyle]="{'display': modalAdministerWithoutScannerVitalsIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+    <form [formGroup]="favouritesForm" name="Vitals" autocomplete="off">
+      <div class="modal-content">
+        <div #DemoHandle1 class="modal-header">
+          <h5>User Inputs</h5>
+          <button type="button" class="close" (click)="closeWithoutScannerVitalsModel()">&times;</button>
+        </div>
+        <div class="modal-body" style="height: 350px !important;overflow-x: scroll !important;">
+          <!-- <form [formGroup]="favouritesForm" style="padding-left: 10px"> -->
+            <div class="row" *ngFor="let order of withoutScannerOrderVitals">
+              <strong style="color: red;" >{{order.Drug}}</strong>
+              <br/>
+            </div> 
+          <div *ngFor="let list of withoutScannerDisplayVitals[0];let i=index">
+            <!-- <div class="row" *ngFor="let order of OrderList">
+              <strong *ngIf="(i==0 && withoutScannerDisplayVitals[i].PQuantity_Id==order.PQuantity_Id) || (i>0 && withoutScannerDisplayVitals[i].PQuantity_Id!=withoutScannerDisplayVitals[i-1].PQuantity_Id && list.PQuantity_Id==order.PQuantity_Id)" style="color: red;" >
+                {{order.Order}}
+              </strong>
+            </div> -->
+            <div class="row row-m-t" style="padding-right: 5px;">
+            <div class="col-sm-5">
+              <div class="row">
+                <div style="padding-left: 7px;">{{list.OrderFavDesc}}<span class="c1">*</span></div>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <input type="text" maxlength="50" id="{{'fav'+i+list.OrderFavMaster_ID}}" oninput="this.value = this.value.replace(/[^a-zA-Z0-9 _`@$/.,:]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" formControlName="comments"
+                [attr.disabled]="orderDueFlag == true?'':null"
+                (change)="checkVitalsComment(list.OrderFavMaster_ID,$event.target.value)" class="form-control"
+                  />
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="modal-footer">
+          <div style="text-align: right">
+            <!-- <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']"
+              class="btn btn-success btn-xs" (click)="withoutScannervitalsCheckSave()" /> -->
+            <input type="button" value="Save" *ngIf="pageConfig['AccessWrite']"  [disabled]="favouritesForm.invalid || (vitalsStatus ==1 && favouritesForm.value.comments=='')"
+              class="btn btn-success btn-xs" (click)="vitalsCheckSave(cllick)" />&nbsp;
+            <input type="button" value="Close" class="btn btn-danger btn-xs" (click)="closeWithoutScannerVitalsModel()">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+  <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle2" id="exampleModal" tabindex="-1" role="dialog"
+    [ngStyle]="{'display': modalUnlockIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div #DemoHandle2 class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+          <!-- <button type="button" class="close" (click)="closeUnlockModel()">&times;</button> -->
+        </div>
+        <div class="modal-body">
+          <strong>Do you want to forcibly pass all checked orders?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="unlockUser()">Yes</button>
+          <button type="button" class="btn btn-danger" (click)="closeUnlockModel()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle3" id="myModal" role="dialog"
+    [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+    <div class="modal-dialog" style="max-width: 80%;">
+      <div class="modal-content">
+        <div #DemoHandle3 class="modal-header " style="height: 50px ">
+          <h5>Document Administer History Details</h5>
+          <button type="button" class="close" (click)="closeModel()">&times;</button>
+        </div>
+        <div class="modal-body bodystyle">
+          <div class=" table table-responsive" style="overflow-x:hidden">
+            <!-- <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table> -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle4" id="mdlsideeffects" role="dialog"
+  [ngStyle]="{'display': modalAdministerInsulinSiteIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog modal-lg" style="max-width: 85%;">
+    <div class="modal-content">
+      <div #DemoHandle4 class="modal-header ">
+        <h5> Administration Sites</h5>
+        <button type="button" class="close" (click)="closeAdministerSitesModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-7 col-md-7 col-lg-7">
+          <img src="./assets/images/HumanBodySites.png" width="100%" height="100%">
+        </div>
+        <div class="col-sm-5 col-md-5 col-lg-5" *ngIf="displayInsuliSitesForWS.length>0">
+          <div class="row form-group" style="color: #4fb633;"><strong>{{sitesType}}</strong></div>
+          <div *ngFor="let item of displayInsuliSitesForWS">
+          <div class="row form-group">
+            <input type="checkbox" id="{{'insulin'+item.item_id}}" [checked]="item.IsChacked" [disabled]="item.IsDisabled" (change)="insulinSiteCheckWS($event.target.checked?true:false,item.item_id)"> &nbsp; <strong> {{item.item_id}}. {{item.item_text}} </strong>&nbsp;
+            <strong *ngIf="item.lastUsed==1" style="color: red;"> Last Site {{item.lastUsedDate}}</strong>
+          </div>
+        </div>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="wsOrderInsulinSites.length==0" (click)="insertInsulinSitesForWS()">Ok</button>
+        <button type="button" class="btn btn-danger"  (click)="closeAdministerSitesModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle5" id="exampleModal" role="dialog"
+  [ngStyle]="{'display': modalAudit ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 85%;">
+    <div class="modal-content">
+      <div #DemoHandle5 class="modal-header" style="height: 43px;">
+        <h5 class="modal-title" id="exampleModalLabel">Audit History</h5>
+        <button type="button" class="close" (click)="closeAudit()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <div class="tableFixHead">
+        <table id="tbltableAudit" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nursing Station Name</th>
+              <th>Resident Name</th>
+              <th>Drug Name</th>
+              <th>Change Description</th>
+              <th>Reason</th>
+              <th>Administered By</th>
+              <th>Entered By</th>
+              <th>Entered Date/Time</th>
+  
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of OrderAuditList">
+              <td>{{item.Nurse_Station_Name}}</td>
+              <td>{{item.Resident_Name}}</td>
+              <td>{{item.Drug_Name}}</td>
+              <td>{{item.Change_Description}}</td>
+              <td>{{item.Reason}}</td>
+              <td>{{item.Administered_By}}</td>
+              <td>{{item.Entered_By}}</td>
+              <td>{{item.Entered_Date|date:'MM/dd/yyyy hh:mm a'}}</td>
+    
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeAudit()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

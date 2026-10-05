@@ -1,0 +1,73 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <form [formGroup]="dashboardForm" name="dashboardForm">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-4">
+              <h3 class="card-title">List of Users Report</h3>
+            </div>
+            <div class="col-sm-2">
+             
+            </div>
+            <div class="col-sm-3">
+              <ng-multiselect-dropdown class="form-control" formControlName="companyName"
+                [data]="companies" [settings]="dropdownSettings_Company"
+                [placeholder]="'Companies'" (onSelect)="onCompanySelect($event)" (onSelectAll)="onCompanySelectAll($event)" 
+                 (onDeSelect)="onCompanyDeSelect($event)" (onDeSelectAll)="onCompanyDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+              <div class="right" style=" display: table-cell;width: 10%; float:left; margin: 0px;">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="getReport()" title="Export To PDF">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+              <div class="right" style=" display: table-cell;width: 80%; float:left; margin: 0px;"></div>
+              <div class="right" style=" display: table-cell;width: 10%; float:right; margin: 0px;">
+                <a class="btn" style="padding: 0%"  *ngIf="pageConfig['PrintExcel']" (click)="getExcel()" title="Export To Excel">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                </a>
+              </div>
+              </div>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class=" table table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Name</th>
+                  <th>User Name </th>
+                  <th>User Display Name</th>
+                  <th>Email Address</th>
+                  <th>Role Name</th>
+                  <th>User Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let item of gridData|paginate: { itemsPerPage: gridPagination, currentPage: p,totalItems: totalRecords   };">
+                  <td>{{item.company_Name }}</td>
+                  <td>{{item.Name}}</td>
+                  <td>{{item.UserName}}</td>
+                  <td>{{item.DisplayName}}</td>
+                  <td>{{item.EmailId}}</td>
+                  <td>{{item.RoleName}}</td>
+                  <td>{{item.userStatus}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="getGridDataOnPageChange($event)" *ngIf="gridData.length > 0"></pagination-controls>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+</section>

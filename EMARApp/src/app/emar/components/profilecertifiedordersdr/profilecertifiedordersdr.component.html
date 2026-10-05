@@ -1,0 +1,142 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <form [formGroup]="myform" name="residentGridForm">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-3">
+                <h3 class="card-title">Profile Certification Report</h3>
+              </div>
+              <div class="col-sm-3">
+                <ng-multiselect-dropdown formControlName="ddlfacilities" class="form-control" [data]="facilities"
+                  [(ngModel)]="selectedFacItems" [settings]="dropdownSettings_Facilities" [placeholder]="'Facilities'"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-3">
+                <ng-multiselect-dropdown formControlName="ddlnursestations" class="form-control" [data]="nurseStations"
+                  [(ngModel)]="selectednItems" [settings]="dropdownSettings_NurseStations"
+                  [placeholder]="'Nursing Stations'" (onSelect)="onNurseStationSelect($event)"
+                  (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelectAll)="onNurseStationDeSelectAll($event)"
+                  (onDeSelect)="onNurseStationDeSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-1">
+                <nav class=" navbar navbar-expand bg-#007bff navbar-light" style="height:28px;z-index: auto;cursor: ;">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link" data-toggle="dropdown" 
+                        (click)="showHideToggle('.test')">
+                        <i class="fa fa-filter"></i>
+                        <span class="badge badge-warning navbar-badge"></span>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right test" style="z-index:99999 !important">
+                        <span class="dropdown-item dropdown-header">Filters</span>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider" style="display: none"></div>
+                        <div class="dropdown-item" style="width:200px;display: none;">
+                          Physician
+                          <ng-multiselect-dropdown formControlName="physician" class="form-control dropWidthChange"
+                            [data]="physiciansdrop" [(ngModel)]="selectedphyItems" [settings]="dropdownSettings_Physician"
+                            (onSelect)="onPhysicianSelect($event)" (onDeSelect)="onPhysicianDeSelect($event)">
+                          </ng-multiselect-dropdown>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" style="width:200px">
+                          Residents
+                          <ng-multiselect-dropdown class="form-control dropWidthChange" formControlName="ddlresidents"
+                            [data]="residents" [(ngModel)]="selectedResItem" [settings]="dropdownSettings_ResID"
+                            [placeholder]="'Residents'" (onSelect)="onResidentSelect($event)"(onDeSelect)="onResidentDeSelect($event)">
+                          </ng-multiselect-dropdown>
+                        </div>
+                        <div class="dropdown-item" style="width:200px">
+                          Previous Certifications
+                          <ng-multiselect-dropdown [data]="certifiedDates" formControlName="certifiedDate" class="form-control dropWidthChange" [(ngModel)]="certDate"
+                            [settings]="dropdownSettings_Date" [placeholder]="'Previous Certifications'"(onSelect)="onDateSelect($event)"
+                            (onDeSelect)="onDateDeSelect($event)">
+                          </ng-multiselect-dropdown>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item">
+                          <input type="button" class="btn btn-info1" value="OK" (click)="loadChart()">&nbsp;
+                          <input type="button" class="btn btn-danger1" value="Close" (click)="close('.test')">
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- <div class="col-sm-1" style="text-align: right">
+                <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="exportCertifiedOrdersToPdf()"
+                  title="Export To PDF">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                </a>
+              </div> -->
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="right" style=" display: table-cell;width: 10%; float:left; margin: 0px;">
+                  <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)="exportCertifiedOrdersToPdf()"
+                  title="Export To PDF">
+                  <i class="icon"></i>
+                  <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                </a>
+                </div>
+                <div class="right" style=" display: table-cell;width: 80%; float:left; margin: 0px;"></div>
+                <div class="right" style=" display: table-cell;width: 10%; float:right; margin: 0px;">
+                  <a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintExcel']" (click)="getExcel()" title="Export To Excel">
+                    <i class="icon"></i>
+                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                  </a>
+                </div>
+                </div>
+            </div>
+          </div>
+        </form>
+        <div class="card-body">
+          <div class="row form-group" *ngIf="certDate.length>0 && certifiedOrdersList.length>0">
+            Resident Name: &nbsp;<strong style="color: red;">
+              {{certifiedOrdersList[0].Resident_Name}}{{certifiedOrdersList[0].DOB!=null?' ('+(certifiedOrdersList[0].DOB|date:'MM/dd/yyyy')+')':''}}{{certifiedOrdersList[0].Gender!=null?certifiedOrdersList[0].Gender=='M'?' (Male)':certifiedOrdersList[0].Gender=='F'?' (Female)':' (Unknown)':''}} </strong>
+            &nbsp;&nbsp;
+            <p *ngIf=" certifiedOrdersList[0].PhysicianNPI!=undefined && certifiedOrdersList[0].PhysicianNPI!=null&& certifiedOrdersList[0].PhysicianNPI!=''">Prescriber: &nbsp;<strong style="color: red;">
+              {{certifiedOrdersList[0].PhysicianName+(certifiedOrdersList[0].PhysicianCredentials!=null?", " + certifiedOrdersList[0].PhysicianCredentials:'')}}</strong>
+            &nbsp;&nbsp;</p>
+            <p *ngIf=" certifiedOrdersList[0].PhysicianNPI!=undefined && certifiedOrdersList[0].PhysicianNPI!=null&& certifiedOrdersList[0].PhysicianNPI!=''">Physician NPI: &nbsp;<strong style="color: red;">{{certifiedOrdersList[0].PhysicianNPI}}</strong>
+            &nbsp;&nbsp;</p>
+            <p *ngIf=" certifiedOrdersList[0].PhysicianNPI==undefined || certifiedOrdersList[0].PhysicianNPI==null || certifiedOrdersList[0].PhysicianNPI==''">Certified By: &nbsp;<strong style="color: red;">
+              {{certifiedOrdersList[0].PhysicianName}}</strong>
+            &nbsp;&nbsp;</p>
+            Date/Time: &nbsp;<strong
+              style="color: red;">{{certifiedOrdersList[0].CertifyDate|date:'MM/dd/yyyy hh:mm:ss a'}}</strong>
+          </div>
+          <div class="row">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <th>Drug Orders and Treatments </th>
+                      <th>Order Type</th>
+                      <th>Directions</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Administration Time</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of certifiedOrdersList|paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                        <td><b>{{item.DrugName}}</b></td>
+                        <td>{{item.OrderType}}</td>
+                        <td>{{item.Directions}}</td>
+                        <td>{{item.StartDate|date :'MM/dd/yyyy'}}</td>
+                        <td>{{item.EndDate|date :'MM/dd/yyyy'}}</td>
+                        <td>{{item.Schedule}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <pagination-controls (pageChange)="p = $event" *ngIf="certifiedOrdersList.length > 0"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>

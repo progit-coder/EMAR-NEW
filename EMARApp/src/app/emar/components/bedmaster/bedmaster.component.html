@@ -1,0 +1,222 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Bed Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Bed Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>  -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Bed Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform">
+            <div class="row form-group">
+
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Bed Name
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Bed Name
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtbednumber" formControlName="bedname" (change)="checkBedName()"
+                    class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.bedname.valid,
+                    'is-invalid':myform.controls.bedname.invalid && myform.controls.bedname.touched
+                  }" />
+                  <div *ngIf="myform.controls.bedname.errors && (myform.controls.bedname.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.bedname.errors.required">
+                      Bed Name is required.
+                    </div>
+                    <div *ngIf="myform.controls.bedname.errors.maxlength">
+                      Bed Name cannot be more than 50 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.bedname.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage1}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Bed Code
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Bed Code
+                <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtbedcode" formControlName="bedcode" class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.bedcode.valid,
+                    'is-invalid':myform.controls.bedcode.invalid && myform.controls.bedcode.touched
+                  }" />
+                  <div *ngIf="myform.controls.bedcode.errors && (myform.controls.bedcode.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.bedcode.errors.required">
+                      Bed Code is required.
+                    </div>
+                    <div *ngIf="myform.controls.bedcode.errors.maxlength">
+                      Bed Code cannot be more than 20 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.bedcode.errors.minlength">
+                      Bed Code cannot be less than 4 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.bedcode.errors.pattern">
+                      Bed Code {{config.alphaNumericFewSpecialCharactersMessage1}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']"  value="Save" (click)="insertBed()" [disabled]="myform.invalid"
+                class="btn btn-success" />&nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Bed View</h3>
+            </div>
+            <div class="col-sm-3 colmd-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Bed History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+                <div class="col-sm-5 col-md-6 col-lg-5">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive
+                    Beds</b></label></span>
+
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4"></div>
+                <div class="col-sm-2 col-md-2 col-lg-3">
+                        <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']"  value="Update Status" (click)="updateBedStatus()" [disabled]="UpdateStatus"
+                          class="btn btn-danger" />
+                      </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <div class="table table-responsive">
+                <table id="tblBeds" class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                        <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll'
+                          (change)="onCheckAll($event.target.checked?true:false)"></th>
+                      <th>Bed Name</th>
+                      <th>Bed Code</th>
+                      <!--  <th>Status</th>
+                       <th>Created By</th>
+                      <th>Created Date</th> -->
+                      <th  *ngIf="pageConfig['AccessWrite']"></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let item of bedList|gridFilter:searchText:'Bed'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                      <td> <input type="checkbox" [checked]="CheckAll" value="{{item.Bed_Id}}"
+                        name="{{ item.Bed_Id }}" id="{{item.Bed_Id}}"
+                        (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                      <td>{{item.Bed_Name}}</td>
+                      <td>{{item.Bed_Code}}</td>
+                      <!--  <td *ngIf="item.Bed_Status===1">Active</td>
+                      <td *ngIf="item.Bed_Status===0">Inactive</td>
+                     <td>{{item.User.User_DisplayName}}</td>
+                      <td>{{item.Bed_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                      <td  *ngIf="pageConfig['AccessWrite']">
+                        <a class="btn editicon"  (click)="getBedDetailsByID(item.Bed_Id)">
+                          <i class="icon"></i>
+                          <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                        </a>
+                        <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="getBedDetailsByID(item.Bed_Id)"
+                        /> -->
+                      </td>
+                      <td>
+                        <a class="btn editicon" (click)="getHistoryById(item.Bed_Id)">
+                          <i class="icon"></i>
+                          <span class=" fa fa-history iconColor" title="History"></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls (pageChange)="p = $event" *ngIf="beds.length > 0"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>

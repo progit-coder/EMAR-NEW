@@ -1,0 +1,295 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>ICD10 Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">ICD10 Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">ICD10 Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-default">
+                <div class="card-header d-flex p-0" style="background: white; border: 1px solid lightgray">
+                  <ul class="nav nav-pills p-2">
+                    <li class="nav-item"><a class="nav-link active" style="color: black" href="#tab_1"
+                        data-toggle="tab">ICD
+                        10</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: black" href="#tab_2" data-toggle="tab">ICD
+                        10 Import</a></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                      <form [formGroup]="icdform">
+                        <div class="row form-group">
+                          <!-- <div class="col-sm-2">Raw Format
+                            <span class="c1">*</span>
+                          </div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Raw Format
+                            <span class="c1">*</span>
+                            <input type="text" class="form-control" formControlName="rawFormat" [ngClass]="{
+                            'is-valid':icdform.controls.rawFormat.valid && icdform.controls.rawFormat.dirty,
+                            'is-invalid':icdform.controls.rawFormat.invalid && icdform.controls.rawFormat.touched
+                          }" />
+                            <div *ngIf="icdform.controls.rawFormat.errors && (icdform.controls.rawFormat.touched)"
+                              class="errorMessage">
+                              <div *ngIf="icdform.controls.rawFormat.errors.required">
+                                Raw Format is required.
+                              </div>
+                              <div *ngIf="icdform.controls.rawFormat.errors.pattern">
+                                {{config.alphaNumericMessage}}
+                              </div>
+                              <div *ngIf="icdform.controls.rawFormat.errors.maxlength">
+                                Raw Format Must be 10 characters long.
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="col-sm-2">Formatted
+                            <span class="c1">*</span>
+                          </div> -->
+                          <div class="col-sm-4 colmd-4 col-lg-4">
+                            Formatted
+                            <span class="c1">*</span>
+                            <input type="text" class="form-control" formControlName="formatted" [ngClass]="{
+                            'is-valid':icdform.controls.formatted.valid && icdform.controls.formatted.dirty,
+                            'is-invalid':icdform.controls.formatted.invalid && icdform.controls.formatted.touched
+                          }" />
+                            <div *ngIf="icdform.controls.formatted.errors && (icdform.controls.formatted.touched)"
+                              class="errorMessage">
+                              <div *ngIf="icdform.controls.formatted.errors.required">
+                                Formatted is required.
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="col-sm-2">Description
+                            <span class="c1">*</span>
+                          </div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Description
+                            <span class="c1">*</span>
+                            <input type="text" class="form-control" formControlName="description" [ngClass]="{
+                            'is-valid':icdform.controls.description.valid && icdform.controls.description.dirty,
+                            'is-invalid':icdform.controls.description.invalid && icdform.controls.description.touched
+                          }" />
+                            <div *ngIf="icdform.controls.description.errors && (icdform.controls.description.touched)"
+                              class="errorMessage">
+                              <div *ngIf="icdform.controls.description.errors.required">
+                                Description is required.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <!-- <div class="col-sm-2">Status
+
+                          </div> -->
+                          <div class="col-sm-4">
+                            Status
+                            <div class="iconed-input">
+                            <label class="switch">
+                              <input type="checkbox" formControlName="status">
+                              <div class="slider round">
+                                <span class="on">Active</span>
+                                <span class="off">Inactive</span>
+                              </div>
+                            </label>
+                          </div>
+                          </div>
+                        </div>
+                        <div style="width: 100%; text-align: right">
+                          <input type="button" class="btn btn-success" *ngIf="pageConfig['AccessWrite']" [disabled]="icdform.invalid || savedisable==true"
+                            (click)="InsertICD10()" value="Save" />
+                        </div>
+                        <br />
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <div class="row">
+                              <div class="col-sm-10 col-md-10 col-lg-10">
+                                <h3 class="card-title">ICD10 Data</h3>
+                              </div>
+                              <div class="col-sm-2 col-md-2 col-lg-2">
+                                <div class="right" style=" display: table-cell;width: 40%; float:left; margin: 0px;">
+                                <span><a class="btn" style="padding: 0%" *ngIf="pageConfig['PrintPdf']" (click)=" exportICD10ToPdf()"
+                                    title="Export to PDF">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                                  </a></span>
+                                </div>
+                                <div class="right" style=" display: table-cell;width: 60%; float:right; margin: 0px;">
+                                  <span><a class="btn" *ngIf="pageConfig['PrintExcel']" style="padding: 0%"
+                                    (click)=" downloadExcelForAllergyDrug()" title="Export to Excel">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                                  </a></span>
+                                </div>
+                                </div>
+                                <!-- <div class="col-sm-1" style="text-align: right">
+                                  <span><a class="btn" *ngIf="pageConfig['PrintExcel']" style="padding: 0%"
+                                    (click)=" downloadExcelForAllergyDrug()" title="Export to Excel">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                                  </a></span>
+                              </div> -->
+                            </div>
+                          </div>
+
+                          <div class="card-body">
+                            <div class="row form-group">
+                              <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="right" style=" display: table-cell;width: 85%; float:left; margin: 0px;">
+                                <input type="text" class="form-control" formControlName="searchText"
+                                  (keydown)="SearchEmpty($event)" placeholder="Search" maxlength="10" />
+                                </div>
+                                <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                                  <a class="btn searchicon" (click)="searchICD10()"
+                                  title="Search">
+                                  <i class="icon"></i>
+                                  <span class="   fa fa-search (alias) fa-lg iconColor"></span>
+                                </a>
+                                </div>
+                              </div>
+                              <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                              <!-- <div class="col-sm-2 col-md-1 col-lg-2">
+                                  <a class="btn searchicon" style="color: blue;" (click)="searchICD10()"
+                                  title="Search">
+                                  <i class="icon"></i>
+                                  <span class="   fa fa-search (alias) fa-lg"></span>
+                                </a>
+                              </div> -->
+                              <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div class="right" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                                  <input type="checkbox" id="chkInactive" class="largerCheckbox"
+                                    [(ngModel)]='inactivecheckbox'
+                                    (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%"
+                                    [ngModelOptions]="{standalone: true}" /> 
+                                  </div>
+                                  <div  class="left" style=" display: table-cell;width: 85%; float:left; margin: 0px;">
+                                  <label class="checkbox-label" style="padding-left:15px"><b style="color: #000000">Show
+                                      Inactive ICD10</b></label>
+                                    </div>
+
+                              </div>
+                              <div class="col-sm-1 col-md-1 col-lg-1">
+                                  <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateICDStatus()" [disabled]="UpdateStatus"
+                                    class="btn btn-danger" />
+                                </div> 
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-3 erorMessage" *ngIf="errorMessage">
+                                {{errorMessage}}
+                              </div>
+                            </div>
+                            <div class="table table-responsive">
+                              <table class="table table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                      <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAll' (change)="onCheckAll($event.target.checked?true:false)"  [ngModelOptions]="{standalone: true}"></th>
+                                    <th>ICD10 RawFormat</th>
+                                    <th>ICD10 Formatted</th>
+                                    <th>ICD10 Description</th>
+                                     <!-- <th>Status</th>
+                                   <th>Created Date</th>
+                                    <th>Created By</th> -->
+                                    <th *ngIf="pageConfig['AccessWrite']"></th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    *ngFor="let item of icdList| paginate: { itemsPerPage: gridPagination, currentPage: p, totalItems: totalRecords  };">
+                                    
+                                    <td> <input type="checkbox" [checked]="CheckAll" value="{{item.ICD10_Id}}" name="{{ item.ICD10_Id }}"
+                                     id="{{item.ICD10_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                                    <td>{{item.ICD10_RawFormat}}</td>
+                                    <td>{{item.ICD10_Formatted}}</td>
+                                    <td>{{item.ICD10_Description}}</td>
+                                    <!-- <td *ngIf="item.ICD10_Status==1">Active</td>
+                                    <td *ngIf="item.ICD10_Status==0">In-Active</td> -->
+                                    <!-- <td>{{item.Status}}</td> -->
+                                    <!-- <td>{{item.ICD10_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                    <td>{{item.CreatedBy}}</td> -->
+                                    <td *ngIf="pageConfig['AccessWrite']">
+                                      <a class="btn editicon"
+                                        (click)="GetICD10Edit(item.ICD10_Id,item.ICD10_RawFormat,item.ICD10_Formatted,item.ICD10_Description,item.ICD10_Status)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                                      </a>
+                                      <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="GetICD10Edit(item.ICD10_Id,item.ICD10_RawFormat,item.ICD10_Formatted,item.ICD10_Description,item.ICD10_Status)"/> -->
+                                    </td>
+                                    <td>
+                                      <a class="btn editicon" (click)="getHistoryById(item.ICD10_Id)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-history iconColor" title="History"></span>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <pagination-controls (pageChange)="GetICD10ByRawFormat($event,1,1)" *ngIf="icdList.length > 0">
+                            </pagination-controls>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                      <form [formGroup]="icdImport">
+                        <div class="row form-group">
+                          <div class="col-sm-6">
+                            <input type="file" name="excel" formControlName="ICDfile"
+                              (change)="fileUploadChange($event)" accept=".xls" />
+                          </div>
+                          <div class="col-sm-6">
+                            <input type="button" class="btn btn-success" *ngIf="pageConfig['AccessWrite']" [disabled]="icdImport.invalid"
+                              (click)="importICDData()" value="Save" />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+  <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+  [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog" style="max-width: 80%;">
+    <div class="modal-content">
+      <div #DemoHandle1 class="modal-header " style="height: 50px ">
+        <h5>ICD10 History Details</h5>
+        <button type="button" class="close" (click)="closeModel()">&times;</button>
+      </div>
+      <div class="modal-body bodystyle">
+        <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+          <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

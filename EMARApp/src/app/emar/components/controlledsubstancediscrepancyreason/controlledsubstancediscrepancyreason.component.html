@@ -1,0 +1,17 @@
+<app-commonmodal title="Discrepancy has been identified. Please explain" (Result)="cancelClick()">
+    <div class="modal-body">
+        <form [formGroup]="myform" autocomplete="off">
+          <div class="row form-group">
+            <div class="col-sm-4">{{residentDrugData}}</div>                      
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="reason" />
+            </div>
+          </div>
+        </form>
+      </div>
+    <div class="modal-footer">
+        <input type="button" id="btnsave" value="Save" [disabled]="myform.invalid" (click)="addReason()"
+        class="btn btn-success" /> &nbsp;
+        <input type="button" id="btncancel" value="Cancel" (click)="cancelClick()" class="btn btn-danger" />
+      </div>
+</app-commonmodal>

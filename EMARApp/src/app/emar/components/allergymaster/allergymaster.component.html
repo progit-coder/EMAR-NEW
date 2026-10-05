@@ -1,0 +1,468 @@
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!--  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Allergy Master</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Allergy Master</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Allergy Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-default">
+                <div class="card-header d-flex p-0" style="background: white; border: 1px solid lightgray">
+                  <ul class="nav nav-pills p-2">
+                    <li class="nav-item"><a class="nav-link active" style="color: black" href="#tab_1"
+                        (click)="reSetClass()" data-toggle="tab">Allergy
+                        By Class</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: black" href="#tab_2" data-toggle="tab"
+                        (click)="reSetDrug()">Allergy
+                        By Drug</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: black" href="#tab_3"
+                        data-toggle="tab">Allergy
+                        Import</a></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                      <form [formGroup]="classform" autocomplete="off">
+                        <div class="row form-group">
+                          <!-- <div class="col-sm-2">Class ID</div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Class ID
+                            <input type="text" id="classID" formControlName="classID" 
+                              (change)=" checkAllergyClassID()" class="form-control" [ngClass]="{
+                              'is-valid':classform.controls.classID.valid,
+                              'is-invalid':classform.controls.classID.invalid && classform.controls.classID.touched, 'errmsg' : 'validmsg'
+                            }" />
+                            <div *ngIf="classform.controls.classID.errors && (classform.controls.classID.touched)"
+                            class="errorMessage">
+                            <div *ngIf="classform.controls.classID.errors.required">
+                              Class ID is required.
+                            </div>
+                            <div *ngIf="classform.controls.classID.errors.pattern">
+                              {{config.numericMessage}}
+                             </div>
+                            </div>
+                          </div>
+                          <!-- <div class="col-sm-2">Class Name</div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Class Name
+                            <input type="text" formControlName="className" class="form-control" [ngClass]="{
+                              'is-valid':classform.controls.className.valid,
+                              'is-invalid':classform.controls.className.invalid && classform.controls.className.touched
+                            }" />
+                          </div>
+                          <!-- <div class="col-sm-2">Status</div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Status
+                            <div class="iconed-input">
+                            <label class="switch">
+                              <input type="checkbox" formControlName="status">
+                              <div class="slider round">
+                                <span class="on">Active</span>
+                                <span class="off">Inactive</span>
+                              </div>
+                            </label>
+                          </div>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-sm-11 col-md-11 col-lg-11"></div>
+                          <div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right">
+                            <input type="button" *ngIf="pageConfig['AccessWrite']" class="btn btn-success" (click)="insertClassAllegry()"
+                              [disabled]="classform.invalid" value="Save" />
+                          </div>
+                        </div>
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <div class="row">
+                              <div class="col-sm-10 col-md-10 col-lg-10">
+                                <h3 class="card-title">Allergy By Class Data</h3>
+                              </div>
+                              <div class="col-sm-2 col-md-2 col-lg-2" >
+                                <div class="right" style=" display: table-cell;width: 40%; float:left; margin: 0px;">
+                                <span><a class="btn" *ngIf="pageConfig['PrintPdf']" style="padding: 0%" (click)="exportAllergyClassToPdf()"
+                                    title="Export to PDF">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                                  </a></span>
+                                </div>
+                                <div class="right" style=" display: table-cell;width: 60%; float:right; margin: 0px;">
+                                  <span><a class="btn" *ngIf="pageConfig['PrintExcel']" style="padding: 0%"
+                                    (click)="downloadExcelForAllergyClass()" title="Export to Excel">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                                  </a></span>
+                                </div>
+                                </div>
+                                  <!-- <div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right">
+                                  <span><a class="btn" *ngIf="pageConfig['PrintExcel']" style="padding: 0%"
+                                    (click)="downloadExcelForAllergyClass()" title="Export to Excel">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                                  </a></span>
+                              </div> -->
+                            </div>
+                            <!-- <h3 class="card-title">Allergy By Class Data</h3> -->
+                          </div>
+                          <div class="card-body">
+                            <div class="row form-group clearfix">
+                              <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="right" style=" display: table-cell;width: 90%; float:left; margin: 0px;">
+                                <input  type="text" class="form-control" formControlName="searchTextClass"
+                                  (keydown)="SearchEmpty($event)" placeholder="Search" maxlength="10" />
+                                </div>
+                                <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                                  <a class="btn searchicon" (click)="GetAllergyByClassByName()"
+                                  title="Search">
+                                  <i class="icon"></i>
+                                  <span class="   fa fa-search (alias) fa-lg iconColor"></span>
+                                </a>
+                              </div>
+                              </div>
+                              <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                              <!-- <div class="col-sm-1 col-md-1 col-lg-1">
+                                <a class="btn searchicon" style="color: blue;" (click)="GetAllergyByClassByName()"
+                                  title="Search">
+                                  <i class="icon"></i>
+                                  <span class="   fa fa-search (alias) fa-lg"></span>
+                                </a>
+                              </div> -->
+                              <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div class="right" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                                  <input type="checkbox" id="chkInactive" class="largerCheckbox"
+                                    [(ngModel)]='inactivecheckbox'
+                                    (change)="showInactiveClassRecords($event.target.checked?true:false)"
+                                    style="padding: 3%" [ngModelOptions]="{standalone: true}" />
+                                </div>
+                                  <div class="left" style=" display: table-cell;width: 90%; float:left; margin: 0px;">
+                                  <label class="checkbox-label" style="padding-left:15px"><b style="color: #000000">Show
+                                      Inactive Allergy By Class</b></label>
+                                    </div>
+                              </div>
+                              <div class="col-sm-1 col-md-1 col-lg-1">
+                                  <input type="button" *ngIf="pageConfig['AccessWrite']" id="btnsave" value="Update Status" (click)="updateClassStatus()" [disabled]="UpdateStatusClass"
+                                    class="btn btn-danger" />
+                                </div> 
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-3 erorMessage" *ngIf="errorMessage">
+                                {{errorMessage}}
+                              </div>
+                            </div>
+                            <div calss="table table-responsive" style="overflow-x: auto;">
+                              <table class="table table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                    <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAllClass' (change)="onCheckAllClass($event.target.checked?true:false)" [ngModelOptions]="{standalone: true}"></th>
+                                    <th>Allergy Class ID</th>
+                                    <th>Allergy Class Name</th>
+                                    <!-- <th>Status</th>
+                                   <th>Created Date</th>
+                                    <th>Created By</th> -->
+                                    <th *ngIf="pageConfig['AccessWrite']"></th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr
+                                    *ngFor="let item of classList | paginate: {id: 'class',  itemsPerPage: gridPagination, currentPage: pc };">
+                                    <td> <input type="checkbox" [checked]="CheckAllClass" value="{{item.Allergy_Id}}" name="{{ item.Allergy_Id }}"
+                                      id="{{item.Allergy_Id}}" (change)="onselectClassRecord($event.target.checked?true:false, item)" /></td>
+                                    <td>{{item.AllergyDesc_Id}}</td>
+                                    <td>{{item.AllergyDesc}}</td>
+                                    <!--  <td *ngIf="item.Allergy_Status==1">Active</td>
+                                    <td *ngIf="item.Allergy_Status==0">In-Active</td>
+                                    <td>{{item.Allergy_CreatedOn | date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                    <td>{{item.CreatedBy}}</td> -->
+                                    <td *ngIf="pageConfig['AccessWrite']">
+                                      <a class="btn editicon" 
+                                        (click)="GetAllergyByClassByNameEdit(item.Allergy_Id,item.AllergyDesc_Id,item.AllergyDesc,item.Allergy_Status)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                                      </a>
+                                      <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="GetAllergyByClassByNameEdit(item.CAllergy_Id,item.AllergyClassId,item.AllergyClassName,item.CAllergy_Status)" /> -->
+                                    </td>
+                                    <td>
+                                      <a class="btn editicon" 
+                                        (click)="getHistoryById(item.Allergy_Id)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-history iconColor" title="History"></span>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <pagination-controls (pageChange)="pc = $event" id="class" *ngIf="classMaster.length > 0">
+                            </pagination-controls>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                      <form [formGroup]="drugform">
+                        <div class="row form-group">
+                          <!-- <div class="col-sm-2">Drug ID</div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Drug ID
+                            <input type="text" formControlName="drugID" class="form-control" 
+                              (change)=" checkAllergyDrugID()" [ngClass]="{
+                              'is-valid':drugform.controls.drugID.valid,
+                              'is-invalid':drugform.controls.drugID.invalid && drugform.controls.drugID.touched,'errmsg' : 'validmsg'
+                            }" />
+                            <div *ngIf="drugform.controls.drugID.errors && (drugform.controls.drugID.touched)"
+                            class="errorMessage">
+                            <div *ngIf="drugform.controls.drugID.errors.required">
+                              Drug ID is required.
+                            </div>
+                            <div *ngIf="drugform.controls.drugID.errors.pattern">
+                              {{config.numericMessage}}
+                             </div>
+                            </div>
+                          </div>
+                          <!-- <div class="col-sm-2">Drug Name</div> -->
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Drug Name
+                            <input type="text" formControlName="drugName" class="form-control" [ngClass]="{
+                              'is-valid':drugform.controls.drugName.valid,
+                              'is-invalid':drugform.controls.drugName.invalid && drugform.controls.drugName.touched
+                            }" />
+                          </div>
+                          <div class="col-sm-4 col-md-4 col-lg-4">
+                            Status
+                            <div class="iconed-input">
+                            <label class="switch">
+                              <input type="checkbox" formControlName="status">
+                              <div class="slider round">
+                                <span class="on">Active</span>
+                                <span class="off">Inactive</span>
+                              </div>
+                            </label>
+                          </div>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col-sm-11 col-md-11 col-lg-11"></div>
+                          <div class="col-sm-1 col-md-1 col-lg-1" style="text-align: right">
+                            <input type="button" class="btn btn-success" (click)="insertDrugAllegry()"
+                              [disabled]="drugform.invalid" *ngIf="pageConfig['AccessWrite']" value="Save" />
+                          </div>
+                        </div>
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <div class="row">
+                              <div class="col-sm-10 col-md-10 col-lg-10">
+                                <h3 class="card-title">Allergy By Drug Data</h3>
+                              </div>
+                              <div class="col-sm-2 col-md-2 col-lg-2">
+                                <div class="right" style=" display: table-cell;width: 40%; float:left; margin: 0px;">
+                                <span><a class="btn" *ngIf="pageConfig['PrintPdf']" style="padding: 0%" (click)="exportAllergyDrugToPdf()"
+                                    title="Export to PDF">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-pdf-o (alias) iconfontsize"></span>
+                                  </a></span>
+                                </div>
+                                <div class="right" style=" display: table-cell;width: 60%; float: right; margin: 0px;">
+                                  <span><a class="btn" *ngIf="pageConfig['PrintExcel']" style="padding: 0%"
+                                    (click)="downloadExcelForAllergyDrug()" title="Export to Excel">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                                  </a></span>
+                                </div>
+                                  </div>
+                                  <!-- <div class="col-sm-1" style="text-align: right">
+                                  <span><a class="btn" *ngIf="pageConfig['PrintExcel']" style="padding: 0%"
+                                    (click)="downloadExcelForAllergyDrug()" title="Export to Excel">
+                                    <i class="icon"></i>
+                                    <span class=" fa fa-file-excel-o (alias) iconfontsize"></span>
+                                  </a></span>
+                              </div> -->
+                            </div>
+                            <!-- <h3 class="card-title">Allergy By Drug Data</h3> -->
+                          </div>
+                          <div class="card-body">
+                            <div class="row form-group clearfix">
+                              <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="right" style=" display: table-cell;width: 90%; float:left; margin: 0px;">
+                                <input type="text" class="form-control" formControlName="searchTextDrug"
+                                  placeholder="Search" (keydown)="SearchEmpty1($event)" maxlength="10" />
+                                  </div>
+                                  <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                                    <a class="btn searchicon"  (click)="GetAllergyByDrugByName()"
+                                    title="Search">
+                                    <i class="icon"></i>
+                                    <span class="   fa fa-search (alias) fa-lg iconColor"></span>
+                                  </a>
+                                  </div>
+                              </div>
+                              <div class="col-sm-1 colmd-1 col-lg-1"></div>
+                              <!-- <div class="col-sm-1 col-md-1 col-lg-1">
+                                
+                                <a class="btn searchicon" style="color: blue;" (click)="GetAllergyByDrugByName()"
+                                  title="Search">
+                                  <i class="icon"></i>
+                                  <span class="   fa fa-search (alias) fa-lg"></span>
+                                </a>
+                              </div> -->
+                              <div class="col-sm-5 col-md-5 col-lg-5">
+                                <div class="right" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                                  <span>
+                                  <input type="checkbox" id="chkInactive" class="largerCheckbox"
+                                    [(ngModel)]='inactivedrugcheckbox'
+                                    (change)="showInactiveDrugRecords($event.target.checked?true:false)"
+                                    style="padding: 3%" [ngModelOptions]="{standalone: true}" /> 
+                                  </span>
+                                    </div>
+                                    <div class="left" style=" display: table-cell;width: 90%; float:left; margin: 0px;">
+                                      <span>
+                                        <label class="checkbox-label" style="padding-left:15px"><b style="color: #000000">Show
+                                            Inactive Allergy By Drug</b></label>
+                                      </span>
+                                    </div>
+                              </div>
+                              <div class="col-sm-1 col-md-1 col-lg-1">
+                                  <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateDrugStatus()" [disabled]="UpdateStatusDrug"
+                                    class="btn btn-danger" />
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-3 erorMessage" *ngIf="drugErrorMessage">
+                                {{drugErrorMessage}}
+                              </div>
+                            </div>
+                            <div class="table table-responsive">
+                              <table class="table table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                      <th><input type="checkbox" id="chkselectall" [(ngModel)]='CheckAllDrug' (change)="onCheckAllDrug($event.target.checked?true:false)" [ngModelOptions]="{standalone: true}"></th>
+                                    <th>Allergy Drug ID</th>
+                                    <th>Allergy Drug Name</th>
+                                    <!-- <th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Created By</th> -->
+                                    <th *ngIf="pageConfig['AccessWrite']"></th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <!-- <tr *ngFor="let item of getSearchByDrugData| paginate: { itemsPerPage: gridPagination, currentPage: pd };">
+                                  <td>{{item.AllergyDrugId}}</td>
+                                  <td>{{item.AllergyDrugName}}</td>
+                                  <td *ngIf="item.DAllergy_Status==1">Active</td>
+                                  <td *ngIf="item.DAllergy_Status==0">In-Active</td>
+                                  <td>{{item.DAllergy_CreatedDate | date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                  <td>{{item.CreatedBy}}</td>
+                                  <td>
+                                      <a class="btn editicon" style="color: blue;" (click)="GetAllergyByDrugByNameEdit(item.DAllergy_Id,item.AllergyDrugId,item.AllergyDrugName,item.DAllergy_Status)">
+                                          <i class="icon"></i>
+                                          <span class=" fa fa-edit (alias)"></span>
+                                        </a>
+                                    <input type="button" class="btn btn-primary" value="Edit" (click)="GetAllergyByDrugByNameEdit(item.DAllergy_Id,item.AllergyDrugId,item.AllergyDrugName,item.DAllergy_Status)" /> -->
+                                  <!-- </td>
+                                </tr>  -->
+                                  <tr
+                                    *ngFor="let item of drugList| paginate: {id: 'drug', itemsPerPage: gridPagination, currentPage: pd };">
+                                    <td> <input type="checkbox" [checked]="CheckAllDrug" value="{{item.Allergy_Id}}" name="{{ item.Allergy_Id }}"
+                                      id="{{item.Allergy_Id}}" (change)="onselectDrugRecord($event.target.checked?true:false, item)" /></td>
+                                    <td>{{ item.AllergyDesc_Id}}</td>
+                                    <td>{{item.AllergyDesc}}</td>
+                                    <!-- <td *ngIf="item.Allergy_Status==1">Active</td>
+                                    <td *ngIf="item.Allergy_Status==0">In-Active</td>
+                                    <td>{{item.Allergy_CreatedOn | date:'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                    <td>{{item.CreatedBy}}</td> -->
+                                    <td *ngIf="pageConfig['AccessWrite']">
+                                      <a class="btn editicon"
+                                        (click)="GetAllergyByDrugByNameEdit(item.Allergy_Id,item.AllergyDesc_Id,item.AllergyDesc,item.Allergy_Status)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                                      </a>
+                                      <!-- <input type="button" class="btn btn-primary" value="Edit" (click)="GetAllergyByDrugByNameEdit(item.DAllergy_Id,item.AllergyDrugId,item.AllergyDrugName,item.DAllergy_Status)" /> -->
+                                    </td>
+                                    <td>
+                                      <a class="btn editicon"
+                                        (click)="getHistoryById(item.Allergy_Id)">
+                                        <i class="icon"></i>
+                                        <span class=" fa fa-history iconColor" title="History"></span>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <pagination-controls (pageChange)="pd = $event" id="drug" *ngIf="drugMaster.length > 0">
+                            </pagination-controls>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                      <form [formGroup]="importform">
+                        <div class="row form-group">
+                          <div class="col-sm-4">
+                            <input type="file" accept=".xls" formControlName="impFile"
+                              (change)="fileUploadChange($event)" />
+                          </div>
+                          <div class="col-sm-4">
+                            <label class="switch">
+                              <input type="checkbox" formControlName="impType">
+                              <div class="slider round">
+                                <span class="on">Class</span>
+                                <span class="off">Drug</span>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input type="button" class="btn btn-success" *ngIf="pageConfig['AccessWrite']" [disabled]="importform.invalid" value="Import"
+                              (click)="InsertAllergyFromFile()" />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+      [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+      <div class="modal-dialog" style="max-width: 80%;">
+        <div class="modal-content">
+          <div #DemoHandle1 class="modal-header " style="height: max-content ">
+            <h5> Allergy Master History Details</h5>
+            <button type="button" class="close" (click)="closeModel()">&times;</button>
+          </div>
+          <div class="modal-body bodystyle">
+            <!-- <div class="table-responsive" style="overflow-x:hidden"> -->
+              <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+            <!-- </div> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>

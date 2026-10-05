@@ -1,0 +1,53 @@
+<app-commonmodal title="Add/Remove Default Screen">
+  <div class="modal-body bodystyle">
+    <form [formGroup]="defaultScreenform">
+      <div class="row form-group">
+        <!-- <div class="col-sm-2 col-md-2 col-lg-2">Screen<span class="errorMessage">*</span></div> -->
+        <div class="col-sm-4 col-md-7 col-lg-6">
+          Screen<span class="errorMessage">*</span>
+          <div class="iconed-input">
+            <ng-multiselect-dropdown class="form-control" formControlName="defaultScreen" [data]="defaulrScreensList"
+              [(ngModel)]="selecteddItems" [settings]="dropdownSettings_DefaultScreen"
+              [ngClass]="{
+                          'is-valid':defaultScreenform.controls.defaultScreen.valid,
+                          'is-invalid':defaultScreenform.controls.defaultScreen.invalid && defaultScreenform.controls.defaultScreen.touched}">
+            </ng-multiselect-dropdown>
+            <div
+              *ngIf="defaultScreenform.controls.defaultScreen.errors && (defaultScreenform.controls.defaultScreen.touched)"
+              class="errorMessage">
+              <div *ngIf="defaultScreenform.controls.defaultScreen.errors.required">
+                Screen is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <input type="button" style="margin-top: 10px;" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']" [disabled]="defaultScreenform.invalid"
+            (click)="addDefaultScreen(null)" class="btn btn-success" />
+        </div>
+      </div>
+    </form>
+    <div class="tableFixHead">
+      <table id="tblRoleMaster" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Screen Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of screens">
+            <td>{{item.Screen_Desc}}</td>
+            <td>
+                <a class="btn editicon" *ngIf="pageConfig['AccessWrite']" style="color:red;" (click)="addDefaultScreen(item)"><i
+                  class="icon"></i><span class=" fa fa-trash" title="Remove"></span> </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button"class="btn btn-danger"  (click)="activeDefaultModal.close('Close click')">Close</button>
+  </div>
+</app-commonmodal>

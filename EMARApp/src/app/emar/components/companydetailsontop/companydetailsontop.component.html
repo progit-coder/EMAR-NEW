@@ -1,0 +1,20 @@
+<div style="border: 2px solid lightgray; padding: 5px; margin-bottom: 10px; border-radius: 10px">
+<div class="row" >
+    <div class="col-sm-1">      
+          <img *ngIf="companyObj != undefined" src="data:image/jpeg;base64,{{companyObj.Company_Logo}}" height="50px" width="50px" alt="">
+    </div>
+    {{count}}
+  <div class="col-sm-2">Company Name : </div>
+  <div class="col-sm-2">
+    <select class="form-control" [(ngModel)]="companyselected" (change)="sendvalue()">
+      <option value="0">--Select--</option>
+      <option *ngFor="let cm of newcompanies" value="{{cm.Company_Id}}">{{cm.Company_Name}}</option>
+     
+    </select>
+  </div>
+  <div class="col-sm-2">Contact Person : </div>
+  <div class="col-sm-2"><label>{{companyObj.Com_ContactPerson}}</label></div>
+  <div class="col-sm-1">Fax : </div>
+  <div class="col-sm-2"><label>{{companyObj.Company_Fax}}</label></div>
+</div>
+</div>

@@ -1,0 +1,573 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Users Details</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" autocomplete="off">
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2 ">Suffix </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <!-- Suffix -->
+                 Prefix
+                <select id="ddlsuffix" class="form-control" formControlName="suffix">
+                  <option value="" disabled selected>Select</option>
+                  <option *ngFor="let item of suffixes" value="{{item.Suffix_Id}}">{{item.Suffix_Desc}}</option>
+                </select>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">First Name <span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                First Name <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtfname" class="form-control" formControlName="fname" [ngClass]="{
+                    'is-valid':myform.controls.fname.valid,
+                    'is-invalid':myform.controls.fname.invalid && myform.controls.fname.touched
+                  }" />
+                  <div *ngIf="myform.controls.fname.errors && (myform.controls.fname.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.fname.errors.required">
+                      First Name is required.
+                    </div>
+                    <div *ngIf="myform.controls.fname.errors.maxlength">
+                      First Name cannot be more than 25 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.fname.errors.pattern">
+                     {{config.alphaNumericFewSpecialCharactersMessage3}}
+                    </div>
+                  </div>
+               
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Middle Name </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Middle Name
+                <div class="iconed-input">
+                  <input type="text" id="txtmname" class="form-control" formControlName="mname" [ngClass]="{
+                    'is-valid':myform.controls.mname.valid && myform.controls.mname.dirty,
+                    'is-invalid':myform.controls.mname.invalid && myform.controls.mname.touched
+                  }" />
+                  <div *ngIf="myform.controls.mname.errors && (myform.controls.mname.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.mname.errors.maxlength">
+                      Middle Name cannot be more than 25 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.mname.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage3}}
+                    </div>
+                  </div>
+               
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Last Name <span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Last Name <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtlname" class="form-control" formControlName="lname" [ngClass]="{
+                    'is-valid':myform.controls.lname.valid,
+                    'is-invalid':myform.controls.lname.invalid && myform.controls.lname.touched
+                  }" />
+                  <div *ngIf="myform.controls.lname.errors && (myform.controls.lname.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.lname.errors.required">
+                      Last Name is required.
+                    </div>
+                    <div *ngIf="myform.controls.lname.errors.maxlength">
+                      Last Name cannot be more than 25 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.lname.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage3}}
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Display Name <span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Display Name <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtdisplayname" formControlName="displayname" class="form-control"
+                    [ngClass]="{
+                    'is-valid':myform.controls.displayname.valid,
+                    'is-invalid':myform.controls.displayname.invalid && myform.controls.displayname.touched
+                  }" />
+                  <div *ngIf="myform.controls.displayname.errors && (myform.controls.displayname.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.displayname.errors.required">
+                      Display Name is required.
+                    </div>
+                    <div *ngIf="myform.controls.displayname.errors.maxlength">
+                      Display Name must be 50 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.displayname.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage9}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Email ID <span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Email address<span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtemailid" placeholder="test@mail.com" formControlName="email"
+                    class="form-control" [ngClass]="{
+                    'is-valid':myform.controls.email.valid,
+                    'is-invalid':myform.controls.email.invalid && myform.controls.email.touched
+                  }" />
+                  <div *ngIf="myform.controls.email.errors && (myform.controls.email.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.email.errors.required">
+                      Email address is required
+                    </div>
+                    <div *ngIf="myform.controls.email.errors.pattern">
+                      {{config.emailMessage}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Phone Number </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Phone Number 
+                <div class="iconed-input">
+                  <input type="text" id="txtphoneno" class="form-control" formControlName="phone"
+                    placeholder="(000)-000-0000" [textMask]="{mask: mobileNumberMask, guide: false}" [ngClass]="{
+                    'is-valid':myform.controls.phone.valid && myform.controls.phone.dirty,
+                    'is-invalid':myform.controls.phone.invalid && myform.controls.phone.touched
+                  }" />
+                  <div *ngIf="myform.controls.phone.errors && (myform.controls.phone.touched)" class="errorMessage">
+                    <div *ngIf="myform.controls.phone.errors.pattern">
+                      Invalid Phone Number
+                    </div>
+                    <div *ngIf="myform.controls.phone.errors.maxlength">
+                      Phone must be 10 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.phone.errors.minlength">
+                      Phone must be 10 characters long.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Stock Report
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Stock Report
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <input type="checkbox" id="chkstockreq" formControlName="stockreq">
+                    </span>
+                  </div>
+                  <span class="form-control">Stock Report Required?</span>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">User Name <span class="c1">*</span></div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                User Name <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtusername" class="form-control"  [attr.disabled]="isReadOnly ? '' : null" formControlName="username" [ngClass]="{
+                      'is-valid':myform.controls.username.valid,
+                      'is-invalid':myform.controls.username.invalid && myform.controls.username.touched
+                    }" />
+                  <div *ngIf="myform.controls.username.errors && (myform.controls.username.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.username.errors.required">
+                      User Name is required.
+                    </div>
+                    <div *ngIf="myform.controls.username.errors.pattern">
+                      {{config.alphaNumericFewSpecialCharactersMessage1}}
+                    </div>
+                    <div *ngIf="myform.controls.username.errors.maxlength || myform.controls.username.errors.minlength">
+                      User Name should contains min of 4 and max of 20 characters long.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2" *ngIf="userId==0">Temporary Password <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="userId==0">
+                Temporary Password <span class="c1">*</span>
+                <div class="iconed-input">
+                  <input type="text" id="txtdpassword" *ngIf="userId==0" class="form-control" formControlName="password"
+                    [ngClass]="{
+                      'is-valid':myform.controls.password.valid,
+                      'is-invalid':myform.controls.password.invalid && myform.controls.password.touched
+                    }" />
+                  <div *ngIf="myform.controls.password.errors && (myform.controls.password.touched)"
+                    class="errorMessage">
+                    <div *ngIf="myform.controls.password.errors.required">
+                      Temporary Password is required.
+                    </div>
+                    <div *ngIf="myform.controls.password.errors.pattern">
+                      Temporary Password {{config.alphaNumericFewSpecialCharactersMessage3}}
+                    </div>
+                    <div *ngIf="myform.controls.password.errors.minlength">
+                      Temporary Password cannot be less than 4 characters long.
+                    </div>
+                    <div *ngIf="myform.controls.password.errors.maxlength">
+                      Temporary Password cannot be more than 20 characters long.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Role
+                  <span class="c1">*</span>
+                </div> [disabled]="isRoleReadonly" -->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  Role
+                  <span class="c1">*</span>
+                  <div class="iconed-input">
+                    <ng-multiselect-dropdown formControlName="roleDesc" [data]="roleDrop" [(ngModel)]="selectedrItems"
+                      [settings]="dropdownSettings_Roles" (onSelect)="onRoleSelect($event)" (onDeSelect)="onRoleDeSelect($event)"
+                      class="form-control" [ngClass]="{
+                            'is-valid':myform.controls.roleDesc.valid ,
+                            'is-invalid':myform.controls.roleDesc.invalid && myform.controls.roleDesc.touched}">
+                    </ng-multiselect-dropdown>
+                    <div *ngIf="myform.controls.roleDesc.errors && (myform.controls.roleDesc.touched)"
+                      class="errorMessage">
+                      <div *ngIf="myform.controls.roleDesc.errors.required">
+                        Role is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                <!-- <div class="col-sm-2 col-md-3 col-lg-3" style="margin-top: 2%;">Facility-Nursing Station Permission
+                    <span class="c1">*</span>
+                  </div> -->
+                  <div class="col-sm-6 col-md-12 col-lg-9">
+                    Company/Facility/Nursing Station
+                    <span class="c1">*</span>
+                    <a class="btn" (click)="modalfcilitypemissionopen()">
+                      <i class="icon"></i>
+                      <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Facility/Nursing Station Permission"></span>
+                    </a>
+                  </div>
+                </div>
+            </div>
+            <div class="row form-group">
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2" *ngIf="isRolePhysician==true">
+                Physician NPI
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="isRolePhysician==true">
+                <div *ngIf="RoleNPIlag == false">
+                Physician NPI  <span class="c1">*</span>
+              </div>
+              <div *ngIf = "RoleNPIlag == true">
+                Prescriber NPI <span class="c1">*</span>
+              </div>
+              
+               
+                <input type="text" class="form-control" formControlName="phynpi" [ngClass]="{
+                      'is-valid':myform.controls.phynpi.valid,
+                      'is-invalid':myform.controls.phynpi.invalid && myform.controls.phynpi.touched
+                    }">
+                <div *ngIf="myform.controls.phynpi.errors && (myform.controls.phynpi.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.phynpi.errors.required">
+                    <div *ngIf="RoleNPIlag == true">
+                      Prescriber NPI is required. 
+                    </div>
+                    <div *ngIf="RoleNPIlag == false">
+                      Physician NPI is required. 
+                    </div>
+                    
+                  </div>
+                  <div *ngIf="myform.controls.phynpi.errors.maxlength">
+                    <div *ngIf="RoleNPIlag == false">
+                    Physician NPI should not exceed more than 10 characters long.
+                    </div>
+                    <div *ngIf = "RoleNPIlag == true">
+                      Prescriber NPI should not exceed more than 10 characters long.
+                    </div> 
+                   
+                  </div>
+                  <div *ngIf="myform.controls.phynpi.errors.minlength">
+                    <div *ngIf = "RoleNPIlag == true">
+                      Prescriber NPI must be 10 characters long. 
+                    </div>
+                    <div *ngIf = "RoleNPIlag == false">
+                      Physician NPI must be 10 characters long. 
+                    </div>
+                  
+                  </div>
+                  <div *ngIf="myform.controls.phynpi.errors.pattern">
+                    {{config.numericMessage}}
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Past Due Alerts
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Past Due Alerts
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <input type="checkbox" id="pastDueAlert" formControlName="pastDueAlert">
+                    </span>
+                  </div>
+                  <span class="form-control">Receive Past Due Alerts</span>
+                </div>
+              </div>
+               <!-- <div class="col-sm-2 col-md-2 col-lg-2">Status
+              </div> -->
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                Status
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" [attr.disabled]="statusbutton == 1? '':null" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+                </div>
+                </div>
+            </div>
+              <!-- <div class="row form-group"> -->
+            <!-- </div> -->
+            <div style="text-align: right">
+              <input type="button" id="btnsave" value="Save" *ngIf="pageConfig['AccessWrite']" (click)="insertUser()" [disabled]="myform.invalid||facilityNurseStationarray.length==0"
+                class="btn btn-success" />&nbsp;
+              <input type="button" id="btnreset" value="Reset" (click)="resetScreen()" class="btn btn-danger" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="card card-primary">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Users View</h3>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-3"></div>
+            <div class="col-sm-3 col-md-4 col-lg-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText"
+                placeholder="Search">
+            </div>
+          </div>
+        </div>
+        <div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog"
+          [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>User History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+              </div>
+              <div class="modal-body bodystyle">
+                <!-- <div class="table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-5">
+              <span>
+                <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                  (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+              <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive
+                    Users</b></label></span>
+
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-4"></div>
+                <div class="col-sm-2 col-md-2 col-lg-3">
+              <input type="button" id="btnsave" *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateUserStatus()"
+                [disabled]="UpdateStatus" class="btn btn-danger" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="table-responsive">
+              <table id="tblUsersList" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th style="width:50px;"><input type="checkbox" [(ngModel)]='CheckAll' id="chkselectall"
+                        (change)="onCheckAll($event.target.checked?true:false)"></th>
+                    <th style="width:80px;">User Name</th>
+                    <th style="width:100px;">Display Name</th>
+                    <th style="width:100px;">Initials</th>
+                    <th style="width:60px;">Role</th>
+                    <th style="width:500px;">Company/Facility/Nursing Station</th>
+                    <th style="width:80px;">Email address</th>
+                    <th style="width:80px;">Phone No</th>
+                    <th style="width:50px;" *ngIf="isUserAdmin==true && unlockFlag===true"></th>
+                    <th style="width:50px;" *ngIf="isUserAdmin==true"></th>
+                    <th style="width:50px;" *ngIf="pageConfig['AccessWrite']"></th>
+                    <th style="width:50px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let item of users|gridFilter:searchText:'Users'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                    <td> <input type="checkbox" *ngIf="item.User_Id!= loginUserId && item.RoleName != 'SuperAdmin'" [checked]="CheckAll" value="{{item.User_Id}}" name="{{ item.User_Id }}"
+                        id="{{item.User_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                    <td>{{item.UserName}}</td>
+                    <td>{{item.DisplayName}}</td>
+                    <td>{{item.User_ShortName}}</td>
+                    <td>{{item.RoleName}}</td>
+                    <td><div *ngFor="let comfacnurse of item.Company_Facility_Nursestation.split('|')" class="row-m-b"><span>{{comfacnurse}}</span></div></td>
+                    <td>{{item.EmailId}}</td>
+                    <td>{{item.PhoneNumber}}</td>
+                    <td class="align-middle" *ngIf="isUserAdmin==true && unlockFlag===true">
+                        <a class="btn editicon" *ngIf="item.User_Lock==1" (click)="modalUnlockopen(item.User_Id)">
+                            <i class="icon"></i>
+                            <span class=" fa fa-unlock fa-lg iconColor" title="Unlock"></span>
+                          </a>
+                    </td>
+                    <td class="align-middle" *ngIf="isUserAdmin==true">
+                        <a class="btn editicon" style="color: red;" (click)="changeUserPassword(item.User_Id)" title="Reset Password">
+                          <i class="icon"></i>
+                          <span class="fa-passwd-reset fa-stack">
+                              <i class="fa fa-undo fa-stack-lg"></i>
+                              <i class="fa fa-lock fa-stack-1x"></i>
+                            </span> 
+                        </a>
+                      </td>
+                    <td class="align-middle" *ngIf="pageConfig['AccessWrite']">
+                      <a class="btn editicon"(click)="getUserDetailsByID(item.User_Id,item.Role_Status)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                      </a>
+
+                    </td>
+                    <td class="align-middle">
+                      <a class="btn editicon" (click)="getHistoryById(item.User_Id)">
+                        <i class="icon"></i>
+                        <span class=" fa fa-history iconColor" title="History"></span>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="p = $event" *ngIf="usersList.length > 0"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+  </section>
+</div>
+<div class="modal fade  modalstyle" ngDraggable [handle]="DemoHandle2" style="padding-top: 35px;" id="modaldes" role="dialog"
+[ngStyle]="{'display': modalfcilitypemission ? 'block' : 'none', 'opacity': 1}">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div #DemoHandle2 class="modal-header "  style="height: max-content;padding:7px !important;">
+      <h5>Facility/Nursing Station Permission to User</h5>
+      <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+    </div>
+    <div class="modal-body" style="height: 300px !important;overflow-x: scroll !important;">
+      <form [formGroup]="myform" >
+          <div class="row form-group">
+              <!-- <div class="col-sm-1 col-md-1 col-lg-1">Facility
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-5 col-md-5 col-lg-5">
+                Facility
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlfacility" [data]="roleFacilty"
+                  [(ngModel)]="selectedfItems" [settings]="dropdownSettings_Facility"
+                  (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)" #inputFocus>
+                </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlfacility.errors && (myform.controls.ddlfacility.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlfacility.errors.required">
+                    Facility is required.
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station
+                <span class="c1">*</span>
+              </div> -->
+              <div class="col-sm-4 col-md-6 col-lg-6">
+                Nursing Station
+                <span class="c1">*</span>
+                <ng-multiselect-dropdown class="form-control" formControlName="ddlnursestation"
+                  [data]="roleNurseStation" [(ngModel)]="selectednItems" 
+                  [settings]="dropdownSettings_NurseStation" (onSelect)="onNurseStationSelect($event)"
+                  (onSelectAll)="onNurseStationSelectAll($event)" (onDeSelect)="onNurseStationDeSelect($event)"
+                  (onDeSelectAll)="onNurseStationDeSelectAll($event)"></ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.ddlnursestation.errors && (myform.controls.ddlnursestation.touched)"
+                  class="errorMessage">
+                  <div *ngIf="myform.controls.ddlnursestation.errors.required">
+                    Nursing Station is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-1 col-md-1 col-lg-1">
+                  <a class="btn" (click)="addFacilityNurseStation()" style="margin-top: 5px;">
+                    <i class="icon"></i>
+                    <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Facility/Nursing Station"></span>
+                  </a>
+                </div>
+            </div>
+            <div class="table-responsive" *ngIf="facilityNurseStationarray.length>0">
+              <table class="table table-bordered table-hover">
+                <tbody>
+                  <tr *ngFor="let item of facilityNurseStationarray;index as i"  style="cursor:pointer" (click)="getNurseStationByFacilityID(item.FacilityId,item.NurseStationIds)">
+                <td style="max-width: max-content;"><strong>{{item.FacilityName}}</strong></td>
+                <td>{{item.NurseStatioNames}}</td>
+                <td style="max-width:8%">
+                  <a class="btn editicon" style="color:red" (click)="removeFacNursestation(i)">
+                    <i class="icon"></i>
+                    <span class=" fa fa-times " title="Delete"></span>
+                  </a>
+                </td>
+                  </tr>
+                </tbody>
+              </table>
+                </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="facilityNurseStationarray.length>0">
+        <div style="text-align:center">
+          <b style="color: red;">Note:</b>&nbsp;<label>Click on the row to update record</label>
+        </div>
+  
+      </div>
+      <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle3" id="exampleModal" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': modalUnlockIsOpen ? 'block' : 'none', 'opacity': 1}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div #DemoHandle3 class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:red">Warning!</h5>
+        <button type="button" class="close" (click)="closeUnlockModel()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <strong> Do you want to unlock this User?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="unlockUser()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="closeUnlockModel()">No</button>
+      </div>
+    </div>
+  </div>
+</div>

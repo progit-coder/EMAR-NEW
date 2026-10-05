@@ -1,0 +1,122 @@
+<app-commonmodal title="Drugs List">
+    <div class="modal-body">
+        <form [formGroup]="myform" autocomplete="off">
+            <div class="row clearfix">
+                <!-- <div class="col-sm-3 col-md-3 col-lg-2">
+                    <label>Search Drug</label>
+                </div> -->
+                <div class="col-sm-4 col-md-7 col-lg-6">
+                    <div class="right"style=" display: table-cell;width: 90%; float:left; margin: 0px;">
+                        <label>Search Drug</label>
+                    <input type="search" *ngIf="isAllStockClicked==true" class="form-control" ngbAutofocus formControlName="drug" [(ngModel)]="searchStockText" placeholder="Search">
+                    <input type="text" id="txtdrug" *ngIf="isAllStockClicked==false" formControlName="drug" ngbAutofocus class="form-control" />
+                    <!-- (keyup)="searchDrug(DrugName)" /> -->
+                    </div>
+                    <div class="right"style=" display: table-cell;width: 5%; float:left; margin: 0px;padding-left: 5%;margin-top:10px">
+                        <a class="btn" style="padding: 0px !important;" (click)="searchDrugNames()">
+                            <i title="Search Drug Names" class="fa fa-search iconColor" style="font-size: 20px;padding-top: 14px;"></i>
+                        </a>
+                     </div>   
+                </div>
+                <!-- <div class="col-sm-1 col-md-1 col-lg-1" style="vertical-align: middle;">
+                    <a class="btn" style="padding: 0px !important;" (click)="searchDrugNames()">
+                        <i title="Search Drug Names" class="fa fa-search" style="color: blue;font-size: 20px;padding-top: 14px;
+        padding-left: 8%;"></i>
+                    </a>
+                </div> -->
+                <div class="col-sm-4 col-md-4 col-lg-3" style="vertical-align: middle;margin-top: 20px;" *ngIf="orderType == 'stock'">
+                    <a class="btn" style="padding: 0px !important;" (click)="GetAllStockData()" style="cursor: pointer;">
+                        <u style="color: red;">All Stock</u>
+                    </a>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-3" style="margin-top: 20px;">
+                    <label class="switch">
+            <input type="checkbox" formControlName="type" [attr.disabled]="true">
+            <div class="slider round">
+              <span class="on">Order</span>
+              <span class="off">Stock</span>
+            </div>
+          </label>
+                </div>
+            </div>
+        </form>
+
+        <br />
+        <div class="table-responsive" *ngIf="drugDataForOrders.length > 0">
+            <table id="tblDrugOrders" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Drug Name</th>
+                        <th>Strength</th>
+                        <!-- <th>Route</th> -->
+                        <th>Dosage Form</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of drugDataForOrders | paginate: { itemsPerPage: gridPagination, currentPage: p,id:'Order' };index as i" [ngClass]="{'highlight' : (selectedDrugId == item.Drug_Id) }" (click)="getSelectedDrug(item)" style="cursor: pointer">
+                        <td>{{i+1}}</td>
+                        <td>{{item.DrugName}}</td>
+                        <td>{{item.Strength}}</td>
+                        <!-- <td>{{item.Route}}</td> -->
+                        <td>{{item.DosageForm}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls id="Order" (pageChange)="p = $event" *ngIf="drugDataForOrders.length > gridPagination">
+        </pagination-controls>
+        <div class="table-responsive" *ngIf="drugDataForStock.length > 0 && isAllStockClicked==false">
+            <table id="tblOrdersEnd" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Drug Name</th>
+                        <th>Qty On Hand</th>
+                        <th>Barcodes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of drugDataForStock | paginate: { itemsPerPage: gridPagination, currentPage: p,id:'Stock' };index as i" [ngClass]="{'highlight' : (selectedStockId == item.Stock_Id) }" (click)="getSelectedStock(item)" style="cursor: pointer">
+                        <td>{{i+1}}</td>
+                        <td>{{item.DrugName}}</td>
+                        <td>{{item.InHand}}</td>
+                        <td>{{item.Barcode}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls id="Stock" (pageChange)="p = $event" *ngIf="drugDataForStock.length > gridPagination">
+        </pagination-controls>
+        <!-- All Stock Records Display-->
+        <div class="table-responsive" *ngIf="allStockData.length > 0 && isAllStockClicked==true">
+            <table id="tblOrdersEnd" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Drug Name</th>
+                        <th>Qty On Hand</th>
+                        <th>Barcodes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of allStockData|gridFilter:searchStockText:'searchAllStock'| paginate: { itemsPerPage: gridPagination, currentPage: p ,id:'allStock'};index as i" [ngClass]="{'highlight' : (selectedStockId == item.Stock_Id) }" (click)="getSelectedStock(item)"
+                        style="cursor: pointer">
+                        <td>{{i+1}}</td>
+                        <td>{{item.DrugName}}</td>
+                        <td>{{item.InHand}}</td>
+                        <td>{{item.Barcode}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls id="allStock" (pageChange)="p = $event" *ngIf="allStockData.length > gridPagination">
+        </pagination-controls>
+    </div>
+    <div class="modal-footer">
+        <span class="errorMessage">{{errorMessage}}</span>&nbsp;&nbsp;&nbsp;
+        <input type="button" id="btnsave" value="OK" (click)="okClick()" class="btn btn-success" />
+        <input type="button" id="btncancel" value="Cancel" (click)="cancelClick()" class="btn btn-danger" />
+    </div>
+</app-commonmodal>

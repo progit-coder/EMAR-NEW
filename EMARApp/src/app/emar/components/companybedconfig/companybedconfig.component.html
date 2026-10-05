@@ -1,0 +1,501 @@
+<style>
+  .c1 {
+    color: red;
+  }
+
+  .valid-feedback.feedback-icon,
+  .invalid-feedback.feedback-icon {
+    bottom: 21px;
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+  <!-- Content Header (Page header) -->
+  <!-- <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Company Bed Config</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Company Bed Config</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Company to Bed Configuration Details</h3>
+        </div>
+        <div class="modal fade  modalstyle header" ngDraggable [handle]="DemoHandle1" id="myModal" role="dialog" [ngStyle]="{'display': modalHistoryIsOpen ? 'block' : 'none', 'opacity': 1}">
+          <div class="modal-dialog" style="max-width: 80%;">
+            <div class="modal-content">
+              <div #DemoHandle1 class="modal-header " style="height: 50px ">
+                <h5>Company Bed Configuration History Details</h5>
+                <button type="button" class="close" (click)="closeModel()">&times;</button>
+
+              </div>
+              <div class="modal-body bodystyle body">
+                <!-- <div class=" table table-responsive" style="overflow-x:hidden"> -->
+                  <app-table *ngIf="auditTable" [AuditTable]="auditTable"></app-table>
+                <!-- </div> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="myform" name="companyBedconfig">
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Company Name
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="left" style=" display: table-cell;width: 75%; float:left; margin: 0px;">
+                <ng-multiselect-dropdown formControlName="companyName" class="form-control"
+                [(ngModel)]="selectedCompanyItem" [data]="companies" [settings]="dropdownSettings_Company" 
+                (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)">
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.companyName.errors && (myform.controls.companyName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.companyName.errors.required">
+                    Company Name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                <a class="btn" style="padding-top: 1px;" data-toggle="modal" *ngIf="CompanypageConfig['AccessRead']" data-dismiss="modal" data-cache="false" (click)="sendNotification()">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle iconColor"  style="cursor: pointer;" title="Add Company"></span>
+                </a>
+              </div>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Facility Name
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="left" style=" display: table-cell;width: 75%; float:left; margin: 0px;">
+                <ng-multiselect-dropdown formControlName="facilityName" class="form-control"
+                [(ngModel)]="selectedFacilityItem" [data]="facilities" [settings]="dropdownSettings_Facility" 
+                (onSelect)="onFacilitySelect($event)" (onDeSelect)="onFacilityDeSelect($event)">
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.facilityName.errors && (myform.controls.facilityName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.facilityName.errors.required">
+                    Facility Name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                <a class="btn" style="padding-top: 1px;" data-toggle="modal" *ngIf="FacilitypageConfig['AccessRead']" (click)="openFacMaster()">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer; " title="Add Facility"></span>
+                </a>
+              </div>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Nursing Station Name
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="left" style=" display: table-cell;width: 75%; float:left; margin: 0px;">
+                <ng-multiselect-dropdown formControlName="nursestationName" class="form-control"
+                [(ngModel)]="selectedNurseStationItem" [data]="nurseStations" [settings]="dropdownSettings_Nurse" 
+                (onSelect)="onNurseStationSelect($event)"  (onDeSelect)="onNurseStationDeSelect($event)" 
+                >
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.nursestationName.errors && (myform.controls.nursestationName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.nursestationName.errors.required">
+                    Nurse Station Name is required.
+                  </div>
+                </div>
+                </div>
+                <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;">
+                  <a class="btn" style="padding-top: 1px;" *ngIf="NursepageConfig['AccessRead']"  data-toggle="modal" (click)="openNsMaster()">
+                    <i class="icon"></i>
+                    <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Nursing Station"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Floor Name
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown formControlName="floorName" class="form-control"
+                [(ngModel)]="selectedFloorItem" [data]="floorMaster" [settings]="dropdownSettings_Floor" 
+                (onSelect)="onFloorSelect($event)" (onDeSelect)="onFloorDeSelect($event)">
+              </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <a class="btn" *ngIf="FloorpageConfig['AccessRead']"  data-toggle="modal" data-target="#floormaster">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle" style="cursor: pointer; color: blue" title="Add Floor"></span>
+                </a>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Wing Name
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown formControlName="wingName" class="form-control"
+                [(ngModel)]="selectedWingItem" [data]="wings" [settings]="dropdownSettings_Wing" 
+                (onSelect)="onWingSelect($event)" (onDeSelect)="onWingDeSelect($event)">
+              </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <a class="btn" *ngIf="WingpageConfig['AccessRead']"  data-toggle="modal" data-target="#wingmaster">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle" style="cursor: pointer; color: blue" title="Add Wing"></span>
+                </a>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Room Name
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown formControlName="roomName" class="form-control"
+                [(ngModel)]="selectedRoomItem" [data]="rooms" [settings]="dropdownSettings_Room" 
+                (onSelect)="onRoomSelect($event)" (onDeSelect)="onRoomDeSelect($event)">
+              </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <a class="btn" *ngIf="RoompageConfig['AccessRead']" data-toggle="modal" data-target="#roommaster">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle" style="cursor: pointer; color: blue" title="Add Room"></span>
+                </a>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Bed Name
+                <span class="c1">*</span>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <ng-multiselect-dropdown formControlName="bedName" class="form-control"
+                [(ngModel)]="selectedBedItem" [data]="beds" [settings]="dropdownSettings_Bed" 
+                (onSelect)="onBedSelect($event)" (onDeSelect)="onBedDeSelect($event)">
+              </ng-multiselect-dropdown>
+                <div *ngIf="myform.controls.bedName.errors && (myform.controls.bedName.touched)" class="errorMessage">
+                  <div *ngIf="myform.controls.bedName.errors.required">
+                    Bed Name is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <a class="btn" *ngIf="BedpageConfig['AccessRead']" data-toggle="modal" data-target="#bedmaster">
+                  <i class="icon"></i>
+                  <span class="fa fa-2x fa-plus-circle" style="cursor: pointer; color: blue" title="Add Bed"></span>
+                </a>
+              </div>
+            </div> -->
+            <div class="form-group" [formGroup]="form" *ngFor="let field of fields">
+              <div class="row form-group" >
+                  <div class="col-sm-2 col-md-2 col-lg-2">{{field.label}}<span class="c1">*</span></div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="left" style=" display: table-cell;width: 75%; float:left; margin: 0px;">
+                   <ng-multiselect-dropdown class="form-control" [formControlName]="field.name" [data]="field.data" [settings]="field.settings"
+                    [(ngModel)]="field.ngModel" [placeholder]="field.placeholder">
+                  </ng-multiselect-dropdown>
+                </div>
+                <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;" *ngIf="field.name==='floorName'">
+                  <a class="btn" style="padding-top: 1px;" *ngIf="FloorpageConfig['AccessRead']"  data-toggle="modal" (click)="openFloorMaster()">
+                    <i class="icon"></i>
+                    <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Floor"></span>
+                  </a>
+                </div>
+                <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;" *ngIf="field.name==='wingName'">
+                    <a class="btn" style="padding-top: 1px;" *ngIf="WingpageConfig['AccessRead']"  data-toggle="modal" (click)="openWingMaster()">
+                      <i class="icon"></i>
+                      <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer;" title="Add Wing"></span>
+                    </a>
+                  </div>
+                  <div class="left" style=" display: table-cell;width: 5%; float:left; margin: 0px;" *ngIf="field.name==='roomName'">
+                      <a class="btn" style="padding-top: 1px;" *ngIf="RoompageConfig['AccessRead']" data-toggle="modal" (click)="openRoomMaster()">
+                        <i class="icon"></i>
+                        <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer; " title="Add Room"></span>
+                      </a>
+                    </div>
+                    <div class="left" style="display: table-cell;width: 5%; float:left; margin: 0px;" *ngIf="field.name==='bedName'">
+                        <a class="btn" style="padding-top: 1px;" *ngIf="BedpageConfig['AccessRead']" data-toggle="modal" (click)="openBedMaster()">
+                          <i class="icon"></i>
+                          <span class="fa fa-2x fa-plus-circle iconColor" style="cursor: pointer; " title="Add Bed"></span>
+                        </a>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-sm-2 col-md-2 col-lg-2">Status
+                
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="iconed-input">
+                  <label class="switch">
+                    <input type="checkbox" id="chkstatus" formControlName="status">
+                    <div class="slider round">
+                      <!--ADDED HTML -->
+                      <span class="on">Active</span>
+                      <span class="off">Inactive</span>
+                      <!--END-->
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+            </div>
+            <div style="text-align: right">
+              <input type="button" id="btnsave" value="Save"  *ngIf="pageConfig['AccessWrite']" [disabled]="myform.invalid || form.invalid" (click)="insertCompanyBedConfig()" class="btn btn-success"
+              />&nbsp;
+              <input type="button" id="btnreset" value="Reset" class="btn btn-danger" (click)="resetScreen()" />
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="card card-primary">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3 class="card-title">Company to Bed Configuration View</h3>
+            </div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+              <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+            </div>
+          </div>
+
+        </div>
+        <div class="card-body">
+          <div class="row form-group clearfix">
+            <div class="col-sm-5 col-md-6 col-lg-5" *ngIf="companybedconfigs.length>0">
+                  <span>
+                    <input type="checkbox" id="chkInactive" class="largerCheckbox" [(ngModel)]='inactivecheckbox'
+                      (change)="showInactiveRecords($event.target.checked?true:false)" style="padding: 3%" /> </span>
+                  <span><label class="checkbox-label" style="padding:3%"><b style="color: #000000">Show Inactive Bed Configuration</b></label></span>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-4"></div>
+                <div class="col-sm-2 col-md-2 col-lg-3" *ngIf="companybedconfigsList.length>0">
+                <input type="button" id="btnsave"  *ngIf="pageConfig['AccessWrite']" value="Update Status" (click)="updateComapnyBedConfigStatus()" [disabled]="UpdateStatus"
+                  class="btn btn-danger" />
+              </div> 
+            </div>
+          <div class="table-responsive">
+            <table id="tbltable" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" *ngIf="companybedconfigsList.length>0" id="chkselectall" [(ngModel)]='CheckAll' (change)="onCheckAll($event.target.checked?true:false)"></th>
+                  <th>Company Name</th>
+                  <th>Facility Name</th>
+                  <th>Nursing Station Name</th>
+                  <th>Floor Name<span style="color: #4fb633;">{{floorIndex ==1?' - First':floorIndex ==2?' - Second':floorIndex ==3?' - Third':floorIndex ==4?' - Fourth':''}}</span></th>
+                  <th>Wing Name<span style="color: #4fb633;">{{wingIndex ==1?'- First':wingIndex ==2?' - Second':wingIndex ==3?' - Third':wingIndex ==4?' - Fourth':''}}</span></th>
+                  <th>Room Name<span style="color: #4fb633;">{{roomIndex ==1?' - First':roomIndex ==2?' - Second':roomIndex ==3?' - Third':roomIndex ==4?' - Fourth':''}}</span></th>
+                  <th>Bed Name<span style="color: #4fb633;">{{bedIndex ==1?' - First':bedIndex ==2?' - Second':bedIndex ==3?' - Third':bedIndex ==4?' - Fourth':''}}</span></th>
+                  <!-- <th>Status</th> -->
+                  <!-- <th>Created By</th>
+                  <th>Created Date</th> -->
+                  <th *ngIf="pageConfig['AccessWrite']"></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of companybedconfigsList|gridFilter:searchText:'CompanyBedConf'| paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                    <td> <input type="checkbox" [checked]="CheckAll" value="{{item.BedConfig_Id}}" name="{{ item.BedConfig_Id }}"
+                      id="{{item.BedConfig_Id}}" (change)="onselectRecord($event.target.checked?true:false, item)" /></td>
+                  <td>{{item.Company_Name}}</td>
+                  <td>{{item.Facility_Name}}</td>
+                  <td>{{item.NurseStation_Name}}</td>
+                  <td>{{item.Floor_Name}}</td>
+                  <td>{{item.Wing_Name}}</td>
+                  <td>{{item.Room_Name}}</td>
+                  <td>{{item.Bed_Name}}</td>
+                  <!-- <td *ngIf="item.BedConfig_Status==1">Active</td>
+                  <td *ngIf="item.BedConfig_Status==0">Inactive</td> -->
+                  <!-- <td>{{item.UserName}}</td>
+                  <td>{{item.BedConfig_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td> -->
+                  <td *ngIf="pageConfig['AccessWrite']">
+                    <a class="btn editicon" (click)="getCompanyBedCogfigDetailsByID(item.BedConfig_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-edit (alias) iconColor" title="Edit"></span>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="btn editicon"  (click)="getHistoryById(item.BedConfig_Id)">
+                      <i class="icon"></i>
+                      <span class=" fa fa-history iconColor" title="History"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls (pageChange)="p = $event" *ngIf="companybedconfigs.length > 0"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>
+
+    <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="companymaster" role="dialog"
+    [ngStyle]="{'display': companymastermodal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 80%;">
+            <app-bedconfigcompanymaster #companybedconfig  (NewCompany)=closeCompanyMaster()></app-bedconfigcompanymaster>
+          </div>
+    </div>
+
+    <!-- <div class="modal fade modalstyle" id="companymaster" role="dialog">
+      <div class="modal-dialog" style="max-width: 60%;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body bodystyle">
+            <app-bedconfigcompanymaster>
+            </app-bedconfigcompanymaster>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="facilitymaster" role="dialog"
+    [ngStyle]="{'display': facilitymastermodal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 80%;">
+            <app-bedconfigfacility (NewFacility)="closeFacilityMaster()"></app-bedconfigfacility>
+          </div>
+    </div>
+    <!-- <div class="modal fade modalstyle" id="facilitymaster" role="dialog">
+      <div class="modal-dialog" style="max-width: 60%;">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body bodystyle">
+            <app-bedconfigfacility></app-bedconfigfacility>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div> -->
+       <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="floormaster" role="dialog"
+       [ngStyle]="{'display': floormastermodal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 80%;">
+            <app-bedconfigfloor (NeWFloor)="closeFloorMaster()"></app-bedconfigfloor>
+          </div>
+       </div>
+    <!-- <div class="modal fade modalstyle" id="floormaster" role="dialog">
+      <div class="modal-dialog" style="max-width: 60%;">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body body2style">
+            <app-bedconfigfloor></app-bedconfigfloor>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="nursestationmaster" role="dialog"
+    [ngStyle]="{'display': nursestationmastermodal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 80%;">
+            <app-bedconfignursestation (NewNurseStation)="closeNsMaster()"></app-bedconfignursestation>
+          </div>
+        </div>
+    <!-- <div class="modal fade modalstyle" id="nursestationmaster" role="dialog">
+      <div class="modal-dialog" style="max-width: 60%;">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body body2style">
+            <app-bedconfignursestation></app-bedconfignursestation>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="wingmaster" role="dialog"
+    [ngStyle]="{'display': wingmastermodal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width:80%;">
+            <app-bedconfigwing (NewWing)="closeWingMaster()"></app-bedconfigwing>
+            </div>
+    </div>
+    <!-- <div class="modal fade modalstyle" id="wingmaster" role="dialog">
+      <div class="modal-dialog" style="max-width:60%;">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body body2style">
+            <app-bedconfigwing></app-bedconfigwing>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+   
+     <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="roommaster" role="dialog"
+     [ngStyle]="{'display': roommastermodal ? 'block' : 'none', 'opacity': 1}">
+     <div class="modal-dialog" style="max-width: 80%;">
+        <app-bedconfigroom (NewRoom)="closeRoomMaster()"></app-bedconfigroom>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div> -->
+      </div>
+    </div>
+    <div class="modal fade modalstyle" data-backdrop="static" data-keyboard="false" id="bedmaster" role="dialog"
+    [ngStyle]="{'display': bedmastermodal ? 'block' : 'none', 'opacity': 1}">
+        <div class="modal-dialog" style="max-width: 80%;">
+        <app-bedconfigbedmaster (NewBed)="closeBedMaster()"></app-bedconfigbedmaster>
+        </div>
+       
+      </div>
+    <!-- <div class="modal fade modalstyle" id="bedmaster" role="dialog">
+      <div class="modal-dialog" style="max-width: 60%;">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body body2style">
+            <app-bedconfigbedmaster></app-bedconfigbedmaster>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>  -->
+  </section>
+</div>
+<ng4-loading-spinner [template]="template" [loadingText]="'Please wait...'" [timeout]="99000"></ng4-loading-spinner>

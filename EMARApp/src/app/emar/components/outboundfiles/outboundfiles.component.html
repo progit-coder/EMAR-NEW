@@ -1,0 +1,327 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!-- <h1>Outbound Files</h1> -->
+                </div>
+                <!-- <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="javascript:void(0)" [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Outbound Files</li>
+          </ol>
+        </div> -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getOutboundFilesStatus(2)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Total</b></h6></span>
+                            <span class="info-box-number">
+                      <h6>{{total}}</h6>
+                  </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3 id="totalgenerated">{{total}}</h3>
+              <p>Total</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getOutboundFilesStatus(2)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getOutboundFilesStatus(0)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success elevation-1">AA</span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Application Accept</b></h6></span>
+                            <span class="info-box-number">
+                    <h6>{{success}}</h6>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3 id="totalsuccess">{{success}}</h3>
+              <p>Success</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getOutboundFilesStatus(0)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getOutboundFilesStatus(1)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger elevation-1">AE</span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Application Error</b></h6></span>
+                            <span class="info-box-number">
+                    <h6>{{error}}</h6>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3 id="totalsuccess">{{error}}</h3>
+              <p>Error</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getOutboundFilesStatus(1)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+                <div class="col-sm-6 col-md-6 col-lg-3" (click)="getOutboundFilesStatus(3)" style="cursor: pointer;">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning elevation-1">AW</span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text"><h6><b>Awaiting</b></h6></span>
+                            <span class="info-box-number">
+                    <h6>{{await}}</h6>
+                </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-6">
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3 id="totalAwait">{{await}}</h3>
+              <p>Awaiting</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="javascript:void(0);" (click)="getOutboundFilesStatus(3)" class="small-box-footer"
+              id="btntotal">More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div> -->
+            </div>
+            <div #livechart style="height: 150px;">
+            </div>
+            <div><label style="color: red">Last Transaction - {{lastAccess}}</label></div>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <h3 class="card-title">Outbound Details</h3>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-3"></div>
+                        <div class="col-sm-4 col-md-4 col-lg-3">
+                            <input style="padding:inherit" type="search" class="form-control input-sm" [(ngModel)]="searchText" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="myform">
+                        <div class=" row form-group clearfix">
+                            <div class="col-sm-6 col-md-6 col-lg-4">
+                                <div class="right">
+                                    <label>Company</label>
+                                </div>
+                                <div class="right">
+                                    <ng-multiselect-dropdown class="form-control" [(ngModel)]="selectedComItem" formControlName="company" [data]="companyMaster" [settings]="dropdownSettings_Company" (onSelect)="onCompanySelect($event)" (onDeSelect)="onCompanyDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                <div class="right">
+                                    <label>Residents</label>
+                                </div>
+                                <div class="right">
+                                    <ng-multiselect-dropdown class="form-control" [(ngModel)]="selectedResItem" formControlName="resident" [data]="residents" [settings]="dropdownSettings_Resident" (onSelect)="onResidentSelect($event)" (onDeSelect)="onResidentDeSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-2">
+                                <div class="right">
+                                    <label>From Date</label>
+                                </div>
+                                <div class="right">
+                                    <input type="date" class="form-control" [(ngModel)]="fromDate" maxlength="10" [max]="maxSelectDate" (change)="loadGridData()" [ngModelOptions]="{standalone: true}" />
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-2">
+                                <div class="right">
+                                    <label>To Date</label>
+                                </div>
+                                <div class="right">
+                                    <input type="date" class="form-control" [(ngModel)]="toDate" maxlength="10" [max]="maxSelectDate" (change)="loadGridData()" [ngModelOptions]="{standalone: true}" />
+                                </div>
+                            </div>
+                            <div class="col-sm-1 col-md-1 col-lg-1" style="padding-top: 28px; text-align: right;cursor: pointer;">
+                                <div class="right">
+                                    <a  (click)="loadGridData()" class="small-box-footer" id="btntotal" data-toggle="tooltip" title="Refresh">
+                                        <i class="fa fa-refresh iconColor" style="font-size:24px"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <div class="col-sm-4"></div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-1">
+              <a href="javascript:void(0);" (click)="getOutboundRefreshFiles()" class="small-box-footer" id="btntotal"
+                data-toggle="tooltip" title="Refresh">
+                <i class="fa fa-refresh" style="font-size:24px"></i></a>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1"><label>Company</label></div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+              <select [(ngModel)]="companyselected" class="form-control" (change)="changeCompany($event.target.value)">
+                <option *ngFor="let item of companyMaster" value="{{item.Company_Id}}">{{item.Company_Name}}</option>
+              </select>
+            </div>
+          </div> -->
+                    <label style="display:none">Outbound Files Grid</label>
+                    <div class="table-responsive" style="display:none">
+                        <table id="tbloutboundGrid" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="chkselectall" (change)="onCheckAll($event.target.checked?true:false)">
+                                    </th>
+                                    <th>SNo</th>
+                                    <th>Resident Name</th>
+                                    <th>Category</th>
+                                    <th>FileUploaded By</th>
+                                    <th>FileApproved By</th>
+                                    <th>FileApproved On</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of outboundList;index as i">
+                                    <td>
+                                        <input type="checkbox" value="{{i}}" [checked]="CheckAll" name="{{i}}" id="{{i}}" (change)="onOutboundSelect($event, item)">
+                                    </td>
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.Patient_Name}}</td>
+                                    <td>{{item.Category}}</td>
+                                    <td *ngIf="item.UploadedBy===1">Admin</td>
+                                    <td *ngIf="item.ApprovedBy===1">Admin</td>
+                                    <td>{{item.ApprovedOn | date: 'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div style="text-align: right; display:none">
+            <input type="button" value="Generate" class="btn btn-success" (click)="generateOutboundFiles()" />
+            <input type="button" value="Reset" class="btn btn-danger" />
+          </div> -->
+                    <label style="display:none">Outbound Files Generator</label>
+                    <div class="table-responsive">
+                        <table id="tbloutboundGenerator" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- <th>
+                    <input type="checkbox" id="chkselectall">
+                  </th> -->
+                                    <th>File Name</th>
+                                    <th>Event</th>
+                                    <th>Status</th>
+                                    <th>Date Time</th>
+                                    <th>ET Date Time</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of savedFiles|gridFilter:searchText:'Outbound'  | paginate: { itemsPerPage: gridPagination, currentPage: p };">
+                                    <!-- <td>
+                    <input type="checkbox" id="chkselect">
+                  </td> -->
+                                    <td style="cursor:pointer;font-weight:bold; text-decoration: underline" (click)="downLoadFile(item.File_Id,item.File_Name)">{{item.File_Name}}</td>
+                                    <td>{{item.Event}}</td>
+                                    <td>{{item.File_ErrorDesc}}</td>
+                                    <!-- <td *ngIf="item.File_Error==1">Error</td>
+                  <td *ngIf="item.File_Error==0">Success</td> -->
+                                    <td>{{item.File_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                    <td>{{item.ETConvertedFile_CreatedDate |date :'MM/dd/yyyy hh:mm:ss a'}}</td>
+                                    <td><span *ngIf="item.File_Status==1">Active</span>
+                                        <span *ngIf="item.File_Status==0">In-Active</span></td>
+                                    <!-- <td *ngIf="item.File_Status==0">In-Active</td> -->
+                                    <!-- <td><a href="javscript:void(0)" class="iconColor" (click)="GetFileAckDataForOutbound(item.File_Id,item.File_Name)"><u>View</u></a></td> -->
+                                    <td><input type="button" class="btn btn-primary" value="View" (click)="GetFileAckDataForOutbound(item.File_Id,item.File_Name)"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls (pageChange)="p = $event" *ngIf="savedFiles.length > 0"></pagination-controls>
+                    <div style="text-align: right; display: none">
+                        <input type="button" value="Send" class="btn btn-success" />
+                        <input type="button" value="Reset" class="btn btn-danger" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modalstyle" ngDraggable [handle]="DemoHandle1" role="dialog" id="modalview" [ngStyle]="{'display': modalEditIsOpen ? 'block' : 'none', 'opacity': 1}">
+            <div class="modal-dialog" style="max-width: 95%;">
+                <div class="modal-content">
+                    <div #DemoHandle1 class="modal-header" style="height: max-content; ">
+                        <h5 class="modal-title" >File Information ({{viewTitle}})</h5>
+                        <button type="button" class="close" data-dismiss="modal" (click)="Modalclose()">&times;</button>
+                    </div>
+                    <div class="modal-body bodystyle">
+                        <h3>File Data</h3>
+                        <div class="row form-group" *ngIf="fileViewData">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" cols="10" rows="6">{{fileViewData.FileData}}</textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <h3>File ACK</h3>
+                                <textarea class="form-control" cols="10" rows="3">{{fileViewData.FileAckData}}</textarea>
+                            </div>
+                            <!-- <div style="width: 100%" *ngFor="let item of hlFieldsinfo">
+                <div *ngIf="item.IsMandatory==1">
+                <label class="col-sm-4 control-label">{{item.FieldName}} </label>
+                <div class="col-sm-5">
+                <input  type="text" value="{{item.FieldValue=='NULL'?'':item.FieldValue}}" readonly placeholder="" class="form-control">                
+                </div>
+              </div>
+              </div> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="Modalclose()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng4-loading-spinner [template]="template" [timeout]="99000" [loadingText]="'Please wait...'"></ng4-loading-spinner>
+    </section>
